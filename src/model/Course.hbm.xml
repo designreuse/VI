@@ -26,12 +26,6 @@
    </key>
    <one-to-many class="model.Result"/>
   </set>
-  <set lazy="true" name="schedules" sort="unsorted" table="SCHEDULE">
-   <key>
-    <column name="COURSEID"/>
-   </key>
-   <one-to-many class="model.Schedule"/>
-  </set>
   <many-to-one class="model.Teacher" fetch="join" name="teacher">
    <column name="TEACHERID"/>
   </many-to-one>

@@ -4,13 +4,12 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
-public class Schedule {
-	private long scheduleId;
+public class Attendance {
+	private long attendaceId;
 	private Date planStartDate;
 	private String location;
 	private Date actualStartDate;
 	
-	private Teacher teacher;
 	private Course course;
 	private Student student;
 	
@@ -18,31 +17,30 @@ public class Schedule {
 	private Date createDate;
 	private String remark;
 	
-	public Schedule(){}
+	public Attendance(){}
 	
-	public Schedule(Date planStartDate, Date planEndDate, String location,
+	public Attendance(Date planStartDate, Date planEndDate, String location,
 			Date actualStartDate, Date actualEndDate, Teacher teacher,
 			Course course, Student student) {
 		super();
 		this.planStartDate = planStartDate;
 		this.location = location;
 		this.actualStartDate = actualStartDate;
-		this.teacher = teacher;
 		this.course = course;
 		this.student = student;
 	}
 
 	/**
-	 * @return the scheduleId
+	 * @return the attendaceId
 	 */
 	public long getScheduleId() {
-		return scheduleId;
+		return attendaceId;
 	}
 	/**
-	 * @param scheduleId the scheduleId to set
+	 * @param attendaceId the attendaceId to set
 	 */
-	public void setScheduleId(long scheduleId) {
-		this.scheduleId = scheduleId;
+	public void setScheduleId(long attendaceId) {
+		this.attendaceId = attendaceId;
 	}
 	/**
 	 * @return the planStartDate
@@ -79,18 +77,6 @@ public class Schedule {
 	 */
 	public void setActualStartDate(Date actualStartDate) {
 		this.actualStartDate = actualStartDate;
-	}
-	/**
-	 * @return the teacher
-	 */
-	public Teacher getTeacher() {
-		return teacher;
-	}
-	/**
-	 * @param teacher the teacher to set
-	 */
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
 	}
 	/**
 	 * @return the course

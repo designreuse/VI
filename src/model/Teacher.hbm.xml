@@ -41,12 +41,6 @@
    </key>
    <one-to-many class="model.Course"/>
   </set>
-  <set lazy="true" name="schedules" sort="unsorted" table="SCHEDULE">
-   <key>
-    <column name="TEACHERID"/>
-   </key>
-   <one-to-many class="model.Schedule"/>
-  </set>
   <set lazy="true" name="salaries" sort="unsorted" table="SALARY">
    <key>
     <column name="TEACHERID"/>

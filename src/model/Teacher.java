@@ -21,7 +21,6 @@ public class Teacher {
 	private String remark;
 	
 	private Set<Course> courses;
-	private Set<Schedule> schedules;
 	private Set<Salary> salaries;
 	
 	public Teacher(){}
@@ -169,18 +168,6 @@ public class Teacher {
 	 */
 	public void setCourses(Set<Course> courses) {
 		this.courses = courses;
-	}
-	/**
-	 * @return the schedules
-	 */
-	public Set<Schedule> getSchedules() {
-		return schedules;
-	}
-	/**
-	 * @param schedules the schedules to set
-	 */
-	public void setSchedules(Set<Schedule> schedules) {
-		this.schedules = schedules;
 	}
 	/**
 	 * @return the salaries
