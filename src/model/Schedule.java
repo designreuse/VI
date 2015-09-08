@@ -7,10 +7,8 @@ import org.json.simple.JSONObject;
 public class Schedule {
 	private long scheduleId;
 	private Date planStartDate;
-	private Date planEndDate;
 	private String location;
 	private Date actualStartDate;
-	private Date actualEndDate;
 	
 	private Teacher teacher;
 	private Course course;
@@ -27,10 +25,8 @@ public class Schedule {
 			Course course, Student student) {
 		super();
 		this.planStartDate = planStartDate;
-		this.planEndDate = planEndDate;
 		this.location = location;
 		this.actualStartDate = actualStartDate;
-		this.actualEndDate = actualEndDate;
 		this.teacher = teacher;
 		this.course = course;
 		this.student = student;
@@ -61,18 +57,6 @@ public class Schedule {
 		this.planStartDate = planStartDate;
 	}
 	/**
-	 * @return the planEndDate
-	 */
-	public Date getPlanEndDate() {
-		return planEndDate;
-	}
-	/**
-	 * @param planEndDate the planEndDate to set
-	 */
-	public void setPlanEndDate(Date planEndDate) {
-		this.planEndDate = planEndDate;
-	}
-	/**
 	 * @return the location
 	 */
 	public String getLocation() {
@@ -95,18 +79,6 @@ public class Schedule {
 	 */
 	public void setActualStartDate(Date actualStartDate) {
 		this.actualStartDate = actualStartDate;
-	}
-	/**
-	 * @return the actualEndDate
-	 */
-	public Date getActualEndDate() {
-		return actualEndDate;
-	}
-	/**
-	 * @param actualEndDate the actualEndDate to set
-	 */
-	public void setActualEndDate(Date actualEndDate) {
-		this.actualEndDate = actualEndDate;
 	}
 	/**
 	 * @return the teacher
