@@ -7,31 +7,37 @@ import org.json.simple.JSONObject;
 
 import system.Config;
 import system.Key;
+import system.Value;
 
 public class Branch {
 	private long branchId;
 	private String name;
 	private String location;
 	private String postalcode;
+	private String contactnumber;
 	
 	private Admin admin;
 	private Set<Attendance> attendances;
 	private Set<Student> students;
 	private Set<Teacher> teachers;
 	private Set<BranchManager> branchManagers;
-	
+	private Set<Classroom> classrooms;
+
 	private long objStatus;
 	private Date createDate;
 	private String remark;
 	
 	public Branch(){}
 
-	public Branch(String name, String location, String postalcode, Admin admin) {
+	public Branch(String name, String location, String postalcode, Admin admin, String contactnumber) {
 		super();
 		this.name = name;
 		this.location = location;
 		this.postalcode = postalcode;
 		this.admin = admin;
+		this.setCreateDate(new Date());
+		this.setObjStatus(Value.ACTIVED);
+		this.contactnumber = contactnumber;
 	}
 
 	/**
@@ -200,6 +206,22 @@ public class Branch {
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	
+	public String getContactnumber() {
+		return contactnumber;
+	}
+
+	public void setContactnumber(String contactnumber) {
+		this.contactnumber = contactnumber;
+	}
+
+	public Set<Classroom> getClassrooms() {
+		return classrooms;
+	}
+
+	public void setClassrooms(Set<Classroom> classrooms) {
+		this.classrooms = classrooms;
 	}
 	
 	public JSONObject toJson(){

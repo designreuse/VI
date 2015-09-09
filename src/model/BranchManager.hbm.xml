@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 8, 2015 2:06:45 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Sep 9, 2015 1:16:07 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="model.BranchManager" table="BRANCHMANAGER">
   <id name="branchManagerId" type="long">
@@ -16,6 +16,10 @@
   </property>
   <property generated="never" lazy="false" name="passwordHash" type="java.lang.String">
    <column name="PASSWORDHASH"/>
+  </property>
+  <property access="field" generated="never" lazy="false"
+   name="contactNumber" type="java.lang.String">
+   <column name="CONTACTNUMBER"/>
   </property>
   <many-to-one class="model.Branch" fetch="join" name="branch">
    <column name="BRANCHID"/>

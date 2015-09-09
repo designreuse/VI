@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import system.Value;
+
 public class Attendance {
 	private long attendaceId;
 	private Date planStartDate;
@@ -12,6 +14,7 @@ public class Attendance {
 	
 	private Course course;
 	private Student student;
+	private Classroom classroom;
 	
 	private long objStatus;
 	private Date createDate;
@@ -28,6 +31,8 @@ public class Attendance {
 		this.actualStartDate = actualStartDate;
 		this.course = course;
 		this.student = student;
+		this.setCreateDate(new Date());
+		this.setObjStatus(Value.ACTIVED);
 	}
 
 	/**
@@ -139,6 +144,14 @@ public class Attendance {
 		this.remark = remark;
 	}
 	
+	public Classroom getClassroom() {
+		return classroom;
+	}
+
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
+
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		

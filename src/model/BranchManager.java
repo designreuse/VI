@@ -4,11 +4,14 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import system.Value;
+
 public class BranchManager {
 	private long branchManagerId;
 	private String email;
 	private String passwordSalt;
 	private String passwordHash;
+	private String contactNumber;
 	
 	private Branch branch;
 	
@@ -20,12 +23,15 @@ public class BranchManager {
 		
 	}
 	
-	public BranchManager(String email, String passwordSalt, String passwordHash, Branch branch) {
+	public BranchManager(String email, String passwordSalt, String passwordHash, Branch branch, String contactNumber) {
 		super();
 		this.email = email;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
 		this.branch = branch;
+		this.setCreateDate(new Date());
+		this.setObjStatus(Value.ACTIVED);
+		this.contactNumber = contactNumber;
 	}
 
 	public long getBranchManagerId() {
@@ -92,6 +98,14 @@ public class BranchManager {
 		this.remark = remark;
 	}
 	
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactnumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		

@@ -12,7 +12,7 @@ public class Course {
 	private String name;
 	private String courseLevel;
 	private String courseCost;
-	private long capacity;
+	private long courseCapacity;
 	
 	private Set<Result> results;
 	private Set<Attendance> schedules;
@@ -24,13 +24,13 @@ public class Course {
 	
 	public Course(){}
 	
-	public Course(String name, String courseLevel, String courseCost,long capacity,
+	public Course(String name, String courseLevel, String courseCost,long courseCapacity,
 			Teacher teacher) {
 		super();
 		this.name = name;
 		this.courseLevel = courseLevel;
 		this.courseCost = courseCost;
-		this.capacity = capacity;
+		this.courseCapacity = courseCapacity;
 		this.teacher = teacher;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
@@ -88,15 +88,15 @@ public class Course {
 	/**
 	 * @return the capacity
 	 */
-	public long getCapacity() {
-		return capacity;
+	public long getCourseCapacity() {
+		return courseCapacity;
 	}
 
 	/**
 	 * @param capacity the capacity to set
 	 */
-	public void setCapacity(long capacity) {
-		this.capacity = capacity;
+	public void setCourseCapacity(long courseCapacity) {
+		this.courseCapacity = courseCapacity;
 	}
 
 	/**

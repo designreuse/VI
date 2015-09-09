@@ -24,5 +24,6 @@
   <mapping resource="model/Salary.hbm.xml"/>
   <mapping resource="model/Student.hbm.xml"/>
   <mapping resource="model/Teacher.hbm.xml"/>
+  <mapping resource="model/Classroom.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>
