@@ -12,5 +12,16 @@ public class Message {
 	
 	public static final String ADMINNOTEXIST = "The admin does not exist.";
 	public static final String STUDENTNOTEXIST = "The student does not exist.";
+	public static final String BRANCHNOTEXIST = "The branch does not exist.";
+	public static final String PARENTNOTEXIST = "The parent does not exist.";
+	public static final String TEACHERNOTEXIST = "The teacher does not exist.";
+	public static final String SALARYNOTEXIST = "The salary does not exist.";
+	public static final String BILLNOTEXIST = "The bill does not exist.";
+	public static final String COURSENOTEXIST = "The course does not exist.";
+	public static final String RESULTNOTEXIST = "The result does not exist.";
+	public static final String CLASSROOMNOTEXIST = "The classroom does not exist.";
+	
+	public static final String WRONGADMINPASSWORD = "The Admin password is incorrect.";
+	public static final String ADMINALREADYEXIST = "The Admin email has already been used.";
 
 }

@@ -8,7 +8,7 @@ import system.Value;
 
 public class Bill {
 	private long billId;
-	private double totalAmount;
+	private double billAmount;
 	private Date dueDate;
 	
 	private Student student;
@@ -19,9 +19,9 @@ public class Bill {
 	
 	public Bill(){}
 	
-	public Bill(double totalAmount, Date dueDate, Student student) {
+	public Bill(double billAmount, Date dueDate, Student student) {
 		super();
-		this.totalAmount = totalAmount;
+		this.billAmount = billAmount;
 		this.dueDate = dueDate;
 		this.student = student;
 		this.setObjStatus(Value.ACTIVED);
@@ -41,16 +41,16 @@ public class Bill {
 		this.billId = billId;
 	}
 	/**
-	 * @return the totalAmount
+	 * @return the billAmount
 	 */
-	public double getTotalAmount() {
-		return totalAmount;
+	public double getBillAmount() {
+		return billAmount;
 	}
 	/**
-	 * @param totalAmount the totalAmount to set
+	 * @param billAmount the billAmount to set
 	 */
-	public void setTotalAmount(double totalAmount) {
-		this.totalAmount = totalAmount;
+	public void setBillAmount(double billAmount) {
+		this.billAmount = billAmount;
 	}
 	/**
 	 * @return the dueDate

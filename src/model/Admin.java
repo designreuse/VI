@@ -24,8 +24,7 @@ public class Admin {
 	
 	public Admin(){}
 
-	public Admin(String name, String email, String userName,
-			String passwordSalt, String passwordHash) {
+	public Admin(String name, String email, String passwordSalt, String passwordHash) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -34,71 +33,118 @@ public class Admin {
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
-
+	/**
+	 * @return the adminId
+	 */
 	public long getAdminId() {
 		return adminId;
 	}
 
+	/**
+	 * @param adminId the adminId to set
+	 */
 	public void setAdminId(long adminId) {
 		this.adminId = adminId;
 	}
 
+	/**
+	 * @return the name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name the name to set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return the passwordSalt
+	 */
 	public String getPasswordSalt() {
 		return passwordSalt;
 	}
 
+	/**
+	 * @param passwordSalt the passwordSalt to set
+	 */
 	public void setPasswordSalt(String passwordSalt) {
 		this.passwordSalt = passwordSalt;
 	}
 
+	/**
+	 * @return the passwordHash
+	 */
 	public String getPasswordHash() {
 		return passwordHash;
 	}
 
+	/**
+	 * @param passwordHash the passwordHash to set
+	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
 
+	/**
+	 * @return the objStatus
+	 */
 	public long getObjStatus() {
 		return objStatus;
 	}
 
+	/**
+	 * @param objStatus the objStatus to set
+	 */
 	public void setObjStatus(long objStatus) {
 		this.objStatus = objStatus;
 	}
 
+	/**
+	 * @return the createDate
+	 */
 	public Date getCreateDate() {
 		return createDate;
 	}
 
+	/**
+	 * @param createDate the createDate to set
+	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
 
+	/**
+	 * @return the remark
+	 */
 	public String getRemark() {
 		return remark;
 	}
 
+	/**
+	 * @param remark the remark to set
+	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
+
 	/**
 	 * @return the branches
 	 */

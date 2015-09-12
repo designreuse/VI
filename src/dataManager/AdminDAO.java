@@ -44,13 +44,9 @@ public class AdminDAO {
 	public static Admin getAdminByName(String name){
 		Admin admin = null;
 		Admin tempAdmin = null;
-		
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
-		
 		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
-		
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		
 		for(Object o : list){
 			tempAdmin = (Admin)o;
 			if(tempAdmin.getName().equals(name)){
@@ -64,13 +60,9 @@ public class AdminDAO {
 	public static Admin getAdminByEmail(String email){
 		Admin admin = null;
 		Admin tempAdmin = null;
-		
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
-		
 		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
-		
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		
 		for(Object o : list){
 			tempAdmin = (Admin)o;
 			if(tempAdmin.getEmail().equals(email)){

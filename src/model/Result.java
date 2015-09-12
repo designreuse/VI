@@ -8,7 +8,8 @@ import system.Value;
 
 public class Result {
 	private long resultId;
-	private double resultValue; 
+	private double resultValue;
+	private Date resultDate;
 
 	private long objStatus;
 	private Date createDate;
@@ -124,6 +125,20 @@ public class Result {
 	 */
 	public void setStudent(Student student) {
 		this.student = student;
+	}
+	
+
+	/**
+	 * @return the resultDate
+	 */
+	public Date getResultDate() {
+		return resultDate;
+	}
+	/**
+	 * @param resultDate the resultDate to set
+	 */
+	public void setResultDate(Date resultDate) {
+		this.resultDate = resultDate;
 	}
 
 	public JSONObject toJson(){

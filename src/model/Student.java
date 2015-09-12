@@ -10,10 +10,12 @@ import system.Value;
 public class Student {
 	private long studentId;
 	private String name;
+	private String email;
 	private String contact;
 	private String address;
 	private String studentLevel;
 	
+	private Branch branch;
 	private Parent parent;
 	private Set<Result> results;
 	private Set<Bill> bills;
@@ -24,12 +26,14 @@ public class Student {
 	
 	public Student (){}
 	
-	public Student(String name, String contact, String address, String studentLevel, Parent parent) {
+	public Student(String name, String email, String contact, String address, String studentLevel, Parent parent, Branch branch) {
 		super();
 		this.name = name;
+		this.email = email;
 		this.contact = contact;
 		this.address = address;
 		this.studentLevel = studentLevel;
+		this.branch = branch;
 		this.parent = parent;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
@@ -168,10 +172,36 @@ public class Student {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
+	}
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
 		return returnJson;
 	}
+
+	
 }

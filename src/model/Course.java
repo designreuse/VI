@@ -15,7 +15,7 @@ public class Course {
 	private long courseCapacity;
 	
 	private Set<Result> results;
-	private Set<Attendance> schedules;
+	private Set<Attendance> attendances;
 	private Teacher teacher;
 	
 	private long objStatus;
@@ -112,16 +112,16 @@ public class Course {
 		this.results = results;
 	}
 	/**
-	 * @return the schedules
+	 * @return the attendances
 	 */
 	public Set<Attendance> getSchedules() {
-		return schedules;
+		return attendances;
 	}
 	/**
-	 * @param schedules the schedules to set
+	 * @param attendances the attendances to set
 	 */
-	public void setSchedules(Set<Attendance> schedules) {
-		this.schedules = schedules;
+	public void setSchedules(Set<Attendance> attendances) {
+		this.attendances = attendances;
 	}
 	/**
 	 * @return the teacher

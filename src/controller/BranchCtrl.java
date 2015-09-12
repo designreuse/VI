@@ -27,9 +27,9 @@ public class BranchCtrl {
 				String name = (String) inputJson.get(Key.NAME);
 				String location = (String) inputJson.get(Key.LOCATION);
 				String postalCode = (String) inputJson.get(Key.POSTALCODE);
-				String contactNo = (String) inputJson.get(Key.CONTACTNO);
+				String contactnumber = (String) inputJson.get(Key.CONTACTNUMBER);
 				
-				Branch branch = new Branch(name, location, postalCode, admin);
+				Branch branch = new Branch(name, location, postalCode, admin, contactnumber);
 				BranchDAO.addBranch(branch);
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
@@ -97,12 +97,12 @@ public class BranchCtrl {
 				String name = (String) inputJson.get(Key.NAME);
 				String location = (String) inputJson.get(Key.LOCATION);
 				String postalCode = (String) inputJson.get(Key.POSTALCODE);
-				String contactNo = (String) inputJson.get(Key.CONTACTNO);
+				String contactnumber = (String) inputJson.get(Key.CONTACTNUMBER);
 				
 				branch.setName(name);
 				branch.setLocation(location);
-				branch.setPostalcode(postalcode);
-				branch.setContactNo(contactNo);
+				branch.setPostalcode(postalCode);
+				branch.setContactnumber(contactnumber);
 				
 				BranchDAO.modifyBranch(branch);
 				

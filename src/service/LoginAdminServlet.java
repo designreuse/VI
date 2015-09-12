@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import system.Config;
 import system.Key;
 import system.Value;
 import controller.AdminCtrl;
@@ -17,13 +18,13 @@ import controller.AdminCtrl;
 /**
  * @author RaySong
  */
-public class InstallServlet extends HttpServlet {
+public class LoginAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InstallServlet() {
+    public LoginAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,7 +32,7 @@ public class InstallServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -48,20 +49,16 @@ public class InstallServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8"); 
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		JSONObject returnJson = new JSONObject();
 		
 		try{
-			//String inputStr = request.getParameter(Key.INPUT);
-			JSONObject inputJson = new JSONObject();
-			inputJson.put(Key.NAME, "test");
-			inputJson.put(Key.USERNAME, "test");
-			inputJson.put(Key.PASSWORD, "test");
-			
+			String inputStr = request.getParameter(Key.INPUT);
+			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = AdminCtrl.createAdmin(inputJson);
+			returnJson = AdminCtrl.loginAdmin(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

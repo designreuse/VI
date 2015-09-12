@@ -4,7 +4,7 @@
 <hibernate-configuration>
  <session-factory name="VI">
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost:3307/VI</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/VI</property>
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.show_sql">false</property>
@@ -18,12 +18,12 @@
   <mapping resource="model/Bill.hbm.xml"/>
   <mapping resource="model/Branch.hbm.xml"/>
   <mapping resource="model/BranchManager.hbm.xml"/>
+  <mapping resource="model/Classroom.hbm.xml"/>
   <mapping resource="model/Course.hbm.xml"/>
   <mapping resource="model/Parent.hbm.xml"/>
   <mapping resource="model/Result.hbm.xml"/>
   <mapping resource="model/Salary.hbm.xml"/>
   <mapping resource="model/Student.hbm.xml"/>
   <mapping resource="model/Teacher.hbm.xml"/>
-  <mapping resource="model/Classroom.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

@@ -17,7 +17,6 @@ public class Branch {
 	private String contactnumber;
 	
 	private Admin admin;
-	private Set<Attendance> attendances;
 	private Set<Student> students;
 	private Set<Teacher> teachers;
 	private Set<BranchManager> branchManagers;
@@ -108,20 +107,6 @@ public class Branch {
 	 */
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
-	}
-
-	/**
-	 * @return the attendances
-	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
-	}
-
-	/**
-	 * @param attendances the attendances to set
-	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
 	}
 
 	/**
