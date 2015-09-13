@@ -7,31 +7,36 @@ import org.json.simple.JSONObject;
 
 import system.Config;
 import system.Key;
+import system.Value;
 
 public class Branch {
 	private long branchId;
 	private String name;
 	private String location;
 	private String postalcode;
+	private String contactnumber;
 	
 	private Admin admin;
-	private Set<Attendance> attendances;
 	private Set<Student> students;
 	private Set<Teacher> teachers;
 	private Set<BranchManager> branchManagers;
-	
+	private Set<Classroom> classrooms;
+
 	private long objStatus;
 	private Date createDate;
 	private String remark;
 	
 	public Branch(){}
 
-	public Branch(String name, String location, String postalcode, Admin admin) {
+	public Branch(String name, String location, String postalcode, Admin admin, String contactnumber) {
 		super();
 		this.name = name;
 		this.location = location;
 		this.postalcode = postalcode;
 		this.admin = admin;
+		this.setCreateDate(new Date());
+		this.setObjStatus(Value.ACTIVED);
+		this.contactnumber = contactnumber;
 	}
 
 	/**
@@ -102,20 +107,6 @@ public class Branch {
 	 */
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
-	}
-
-	/**
-	 * @return the attendances
-	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
-	}
-
-	/**
-	 * @param attendances the attendances to set
-	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
 	}
 
 	/**
@@ -202,9 +193,36 @@ public class Branch {
 		this.remark = remark;
 	}
 	
+	public String getContactnumber() {
+		return contactnumber;
+	}
+
+	public void setContactnumber(String contactnumber) {
+		this.contactnumber = contactnumber;
+	}
+
+	public Set<Classroom> getClassrooms() {
+		return classrooms;
+	}
+
+	public void setClassrooms(Set<Classroom> classrooms) {
+		this.classrooms = classrooms;
+	}
+	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
+		returnJson.put(Key.BRANCHID, this.branchId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.LOCATION, this.location);
+		returnJson.put(Key.POSTALCODE, this.postalcode);
+		returnJson.put(Key.CONTACTNUMBER, this.contactnumber);
+		
+		returnJson.put(Key.ADMIN, this.admin.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

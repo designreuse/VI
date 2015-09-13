@@ -10,6 +10,7 @@ import system.Value;
 public class Teacher {
 	private long teacherId;
 	private String name;
+	private String email;
 	private String contact;
 	private String address;
 	private Date dateOfBirth;
@@ -21,19 +22,21 @@ public class Teacher {
 	private String remark;
 	
 	private Set<Course> courses;
-	private Set<Schedule> schedules;
 	private Set<Salary> salaries;
+	private Branch branch;
 	
 	public Teacher(){}
 	
-	public Teacher(String name, String contact, String address, Date dateOfBirth, long age, String qualification) {
+	public Teacher(String name, String email, String contact, String address, Date dateOfBirth, long age, String qualification, Branch branch) {
 		super();
 		this.name = name;
+		this.email = email;
 		this.contact = contact;
 		this.address = address;
 		this.dateOfBirth = dateOfBirth;
 		this.age = age;
 		this.qualification = qualification;
+		this.branch = branch;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -171,18 +174,6 @@ public class Teacher {
 		this.courses = courses;
 	}
 	/**
-	 * @return the schedules
-	 */
-	public Set<Schedule> getSchedules() {
-		return schedules;
-	}
-	/**
-	 * @param schedules the schedules to set
-	 */
-	public void setSchedules(Set<Schedule> schedules) {
-		this.schedules = schedules;
-	}
-	/**
 	 * @return the salaries
 	 */
 	public Set<Salary> getSalaries() {
@@ -194,10 +185,35 @@ public class Teacher {
 	public void setSalaries(Set<Salary> salaries) {
 		this.salaries = salaries;
 	}
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
+	}
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
 		return returnJson;
 	}
+
 }

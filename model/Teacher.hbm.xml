@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Aug 30, 2015 1:01:38 AM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Sep 10, 2015 8:32:12 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="model.Teacher" table="TEACHER">
   <id name="teacherId" type="long">
@@ -10,6 +10,9 @@
   </id>
   <property generated="never" lazy="false" name="name" type="java.lang.String">
    <column name="NAME"/>
+  </property>
+  <property generated="never" lazy="false" name="email" type="java.lang.String">
+   <column name="EMAIL"/>
   </property>
   <property generated="never" lazy="false" name="contact" type="java.lang.String">
    <column name="CONTACT"/>
@@ -40,12 +43,6 @@
     <column name="TEACHERID"/>
    </key>
    <one-to-many class="model.Course"/>
-  </set>
-  <set lazy="true" name="schedules" sort="unsorted" table="SCHEDULE">
-   <key>
-    <column name="TEACHERID"/>
-   </key>
-   <one-to-many class="model.Schedule"/>
   </set>
   <set lazy="true" name="salaries" sort="unsorted" table="SALARY">
    <key>

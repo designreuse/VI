@@ -4,11 +4,14 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Result {
 	private long resultId;
-	private double resultValue; 
+	private double resultValue;
+	private Date resultDate;
 
 	private long objStatus;
 	private Date createDate;
@@ -125,9 +128,34 @@ public class Result {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	
+
+	/**
+	 * @return the resultDate
+	 */
+	public Date getResultDate() {
+		return resultDate;
+	}
+	/**
+	 * @param resultDate the resultDate to set
+	 */
+	public void setResultDate(Date resultDate) {
+		this.resultDate = resultDate;
+	}
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.RESULT, this.resultId);
+		returnJson.put(Key.RESULTVALUE, this.resultValue);
+		returnJson.put(Key.RESULTDATE, this.resultDate);
+		
+		returnJson.put(Key.COURSE, this.course.toJson());//need to implement
+		returnJson.put(Key.STUDENT, this.student.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

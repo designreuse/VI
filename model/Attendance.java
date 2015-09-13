@@ -4,45 +4,48 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
-public class Schedule {
-	private long scheduleId;
+import system.Value;
+
+public class Attendance {
+	private long attendaceId;
 	private Date planStartDate;
 	private String location;
 	private Date actualStartDate;
 	
-	private Teacher teacher;
 	private Course course;
 	private Student student;
+	private Classroom classroom;
 	
 	private long objStatus;
 	private Date createDate;
 	private String remark;
 	
-	public Schedule(){}
+	public Attendance(){}
 	
-	public Schedule(Date planStartDate, Date planEndDate, String location,
+	public Attendance(Date planStartDate, Date planEndDate, String location,
 			Date actualStartDate, Date actualEndDate, Teacher teacher,
 			Course course, Student student) {
 		super();
 		this.planStartDate = planStartDate;
 		this.location = location;
 		this.actualStartDate = actualStartDate;
-		this.teacher = teacher;
 		this.course = course;
 		this.student = student;
+		this.setCreateDate(new Date());
+		this.setObjStatus(Value.ACTIVED);
 	}
 
 	/**
-	 * @return the scheduleId
+	 * @return the attendaceId
 	 */
 	public long getScheduleId() {
-		return scheduleId;
+		return attendaceId;
 	}
 	/**
-	 * @param scheduleId the scheduleId to set
+	 * @param attendaceId the attendaceId to set
 	 */
-	public void setScheduleId(long scheduleId) {
-		this.scheduleId = scheduleId;
+	public void setScheduleId(long attendaceId) {
+		this.attendaceId = attendaceId;
 	}
 	/**
 	 * @return the planStartDate
@@ -79,18 +82,6 @@ public class Schedule {
 	 */
 	public void setActualStartDate(Date actualStartDate) {
 		this.actualStartDate = actualStartDate;
-	}
-	/**
-	 * @return the teacher
-	 */
-	public Teacher getTeacher() {
-		return teacher;
-	}
-	/**
-	 * @param teacher the teacher to set
-	 */
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
 	}
 	/**
 	 * @return the course
@@ -153,6 +144,14 @@ public class Schedule {
 		this.remark = remark;
 	}
 	
+	public Classroom getClassroom() {
+		return classroom;
+	}
+
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
+
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		

@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.json.simple.JSONObject;
 
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Parent {
@@ -14,6 +16,7 @@ public class Parent {
 	private String passwordHash;
 	private String contact;
 	private String address;
+	private String email;
 	
 	private Set<Student> students;
 	
@@ -23,7 +26,7 @@ public class Parent {
 	
 	public Parent(){}
 	
-	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address) {
+	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address, String email) {
 		this.name = name;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
@@ -31,6 +34,7 @@ public class Parent {
 		this.address = address;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
+		this.email = email;
 	}
 
 	/**
@@ -154,8 +158,26 @@ public class Parent {
 		this.remark = remark;
 	}
 	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.PARENTID, this.parentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.EMAIL, this.email);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

@@ -3,17 +3,24 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.ResultDAO;
+import dataManager.BillDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Student {
 	private long studentId;
 	private String name;
+	private String email;
 	private String contact;
 	private String address;
 	private String studentLevel;
 	
+	private Branch branch;
 	private Parent parent;
 	private Set<Result> results;
 	private Set<Bill> bills;
@@ -24,12 +31,14 @@ public class Student {
 	
 	public Student (){}
 	
-	public Student(String name, String contact, String address, String studentLevel, Parent parent) {
+	public Student(String name, String email, String contact, String address, String studentLevel, Parent parent, Branch branch) {
 		super();
 		this.name = name;
+		this.email = email;
 		this.contact = contact;
 		this.address = address;
 		this.studentLevel = studentLevel;
+		this.branch = branch;
 		this.parent = parent;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
@@ -168,10 +177,81 @@ public class Student {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
+	}
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
+		returnJson.put(Key.STUDENTID, this.studentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.STUDENTLEVEL, this.studentLevel);
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		returnJson.put(Key.PARENT, this.parent.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
 		return returnJson;
 	}
+
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.STUDENTID, this.studentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.STUDENTLEVEL, this.studentLevel);
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());
+		returnJson.put(Key.PARENT, this.parent.toJson());
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		JSONArray resultArr = new JSONArray();
+		for(Result r : ResultDAO.getResultsByStudent(this)){
+			resultArr.add(r.toJson());
+		}
+		returnJson.put(Key.RESULTS, resultArr);
+		
+		JSONArray billArr = new JSONArray();
+		for(Bill k : BillDAO.getBillsByStudent(this)){
+			billArr.add(k.toJson());
+		}
+		returnJson.put(Key.BILLS, billArr);
+		
+		return returnJson;
+	}
+	
 }

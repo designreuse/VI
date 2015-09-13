@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.json.simple.JSONObject;
 
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Course {
@@ -12,10 +14,10 @@ public class Course {
 	private String name;
 	private String courseLevel;
 	private String courseCost;
-	private long capacity;
+	private long courseCapacity;
 	
 	private Set<Result> results;
-	private Set<Schedule> schedules;
+	private Set<Attendance> attendances;
 	private Teacher teacher;
 	
 	private long objStatus;
@@ -24,13 +26,13 @@ public class Course {
 	
 	public Course(){}
 	
-	public Course(String name, String courseLevel, String courseCost,long capacity,
+	public Course(String name, String courseLevel, String courseCost,long courseCapacity,
 			Teacher teacher) {
 		super();
 		this.name = name;
 		this.courseLevel = courseLevel;
 		this.courseCost = courseCost;
-		this.capacity = capacity;
+		this.courseCapacity = courseCapacity;
 		this.teacher = teacher;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
@@ -88,15 +90,15 @@ public class Course {
 	/**
 	 * @return the capacity
 	 */
-	public long getCapacity() {
-		return capacity;
+	public long getCourseCapacity() {
+		return courseCapacity;
 	}
 
 	/**
 	 * @param capacity the capacity to set
 	 */
-	public void setCapacity(long capacity) {
-		this.capacity = capacity;
+	public void setCourseCapacity(long courseCapacity) {
+		this.courseCapacity = courseCapacity;
 	}
 
 	/**
@@ -112,16 +114,16 @@ public class Course {
 		this.results = results;
 	}
 	/**
-	 * @return the schedules
+	 * @return the attendances
 	 */
-	public Set<Schedule> getSchedules() {
-		return schedules;
+	public Set<Attendance> getSchedules() {
+		return attendances;
 	}
 	/**
-	 * @param schedules the schedules to set
+	 * @param attendances the attendances to set
 	 */
-	public void setSchedules(Set<Schedule> schedules) {
-		this.schedules = schedules;
+	public void setSchedules(Set<Attendance> attendances) {
+		this.attendances = attendances;
 	}
 	/**
 	 * @return the teacher
@@ -174,6 +176,18 @@ public class Course {
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.COURSEID, this.courseId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.COURSECOST, this.courseCost);
+		returnJson.put(Key.COURSECAPACITY, this.courseCapacity);
+		
+		returnJson.put(Key.TEACHER, this.teacher.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

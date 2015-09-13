@@ -9,42 +9,40 @@ import system.Config;
 import system.Key;
 import system.Value;
 
-public class Admin {
-	private long adminId;
+public class Classroom {
+	private long classroomId;
 	private String name;
-	private String email;
-	private String passwordSalt;
-	private String passwordHash;
+	private long roomCapacity;
 	
 	private long objStatus;
 	private Date createDate;
 	private String remark;
 	
-	private Set<Branch> branches;
+	private Branch branch;
+	private Set<Attendance> attendances;
 	
-	public Admin(){}
-
-	public Admin(String name, String email, String passwordSalt, String passwordHash) {
+	public Classroom(){}
+	
+	public Classroom(String name, long roomCapacity, Branch branch) {
 		super();
 		this.name = name;
-		this.email = email;
-		this.passwordSalt = passwordSalt;
-		this.passwordHash = passwordHash;
-		this.setObjStatus(Value.ACTIVED);
+		this.roomCapacity = roomCapacity;
+		this.branch = branch;
 		this.setCreateDate(new Date());
+		this.setObjStatus(Value.ACTIVED);
 	}
 	/**
-	 * @return the adminId
+	 * @return the classroomId
 	 */
-	public long getAdminId() {
-		return adminId;
+	public long getClassroomId() {
+		return classroomId;
 	}
 
 	/**
-	 * @param adminId the adminId to set
+	 * @param classroomId the classroomId to set
 	 */
-	public void setAdminId(long adminId) {
-		this.adminId = adminId;
+	public void setClassroomId(long classroomId) {
+		this.classroomId = classroomId;
 	}
 
 	/**
@@ -62,45 +60,17 @@ public class Admin {
 	}
 
 	/**
-	 * @return the email
+	 * @return the roomCapacity
 	 */
-	public String getEmail() {
-		return email;
+	public long getRoomCapacity() {
+		return roomCapacity;
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param roomCapacity the roomCapacity to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the passwordSalt
-	 */
-	public String getPasswordSalt() {
-		return passwordSalt;
-	}
-
-	/**
-	 * @param passwordSalt the passwordSalt to set
-	 */
-	public void setPasswordSalt(String passwordSalt) {
-		this.passwordSalt = passwordSalt;
-	}
-
-	/**
-	 * @return the passwordHash
-	 */
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	/**
-	 * @param passwordHash the passwordHash to set
-	 */
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setRoomCapacity(long roomCapacity) {
+		this.roomCapacity = roomCapacity;
 	}
 
 	/**
@@ -146,25 +116,41 @@ public class Admin {
 	}
 
 	/**
-	 * @return the branches
+	 * @return the branch
 	 */
-	public Set<Branch> getBranches() {
-		return branches;
+	public Branch getBranch() {
+		return branch;
 	}
 
 	/**
-	 * @param branches the branches to set
+	 * @param branch the branch to set
 	 */
-	public void setBranches(Set<Branch> branches) {
-		this.branches = branches;
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+
+	/**
+	 * @return the attendances
+	 */
+	public Set<Attendance> getAttendances() {
+		return attendances;
+	}
+
+	/**
+	 * @param attendances the attendances to set
+	 */
+	public void setAttendances(Set<Attendance> attendances) {
+		this.attendances = attendances;
 	}
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
-		returnJson.put(Key.ADMINID, this.adminId);
+		returnJson.put(Key.CLASSROOMID, this.classroomId);
 		returnJson.put(Key.NAME, this.name);
-		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.ROOMCAPACITY, this.roomCapacity);
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
