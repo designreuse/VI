@@ -183,8 +183,9 @@ public class ParentCtrl {
 	public static JSONObject registerParent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		returnJson = getParentByEmail(inputJson);
-		if ((int) returnJson.get(Key.STATUS) == 0) {
-			createParent(inputJson);
+		Long statusTest = (long) returnJson.get(Key.STATUS); 
+		if (statusTest.intValue() == 0) {
+			returnJson = createParent(inputJson);
 		} else {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);

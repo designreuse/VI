@@ -30,10 +30,6 @@ public class Key {
 	public static final String POSTALCODE = "postalCode";
 	public static final String CONTACTNUMBER = "contactnumber";
 	
-	public static final String BRANCHMANAGER = "branchManager";
-	public static final String BRANCHMANAGERS = "branchManagers";
-	public static final String BRANCHMANAGERID = "branchManagerId";
-	
 	public static final String PARENT = "parent";
 	public static final String PARENTS = "parents";
 	public static final String PARENTID = "parentId";
@@ -67,7 +63,6 @@ public class Key {
 	public static final String RESULTS = "results";
 	public static final String RESULTID = "resultId";
 	public static final String RESULTVALUE = "resultValue";
-	public static final String RESULTDATE = "resultDate";
 	
 	public static final String COURSE = "course";
 	public static final String COURSES = "courses";

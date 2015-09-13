@@ -174,7 +174,7 @@ public class AdminCtrl {
 			createAdmin(inputJson);
 		}else{
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
-			returnJson.put(Key.MESSAGE, Message.ADMINALREADYEXIST);
+			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
 		}
 		return returnJson;	
 	}

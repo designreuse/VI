@@ -8,11 +8,11 @@
 			</a></li>
 			
 			<li class="sub-menu"><a href="javascript:;" class=""> <i
-					class="icon_document_alt"></i> <span>Students</span> <span
+					class="icon_document_alt"></i> <span>Parents</span> <span
 					class="menu-arrow arrow_carrot-right"></span>
 			</a>
 				<ul class="sub">
-					<li><a class="" href="studentRegistration.jsp">Registration</a></li>
+					<li><a class="" href="parentsRegistration.jsp">Registration</a></li>
 					<li><a class="" href="form_validation.html">Profile Search</a></li>
 				</ul></li>
 				
