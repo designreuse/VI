@@ -22,6 +22,7 @@ public class Message {
 	public static final String CLASSROOMNOTEXIST = "The classroom does not exist.";
 	
 	public static final String WRONGADMINPASSWORD = "The Admin password is incorrect.";
-	public static final String ADMINALREADYEXIST = "The Admin email has already been used.";
+	public static final String EMAILALREADYEXIST = "The email has already been used.";
+	public static final String WRONGPARENTPASSWORD = "The Parent password is incorrect.";
 
 }

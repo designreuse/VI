@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Parent;
+import model.Parent;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -41,4 +42,19 @@ public class ParentDAO {
 	}
 	
 	//features
+	public static Parent getParentByEmail(String email){
+		Parent parent = null;
+		Parent tempParent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
+		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempParent = (Parent)o;
+			if(tempParent.getEmail().equals(email)){
+				parent = tempParent;
+				break;
+			}
+		}
+		return parent;
+	}
 }
