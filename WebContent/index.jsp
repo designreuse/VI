@@ -33,7 +33,7 @@
 
 <body class="login-img3-body">
 	<div class="container">
-		<form class="login-form" action="LoginServlet" method="post">
+		<form class="login-form" action="adminMain.jsp" method="get">
 			<div class="login-wrap">
 				<p class="login-img">
 					<i class="icon_lock_alt"></i>

@@ -33,36 +33,37 @@
 
 <body>
 
-	<!-- ----------------------JS section------------------------- -->
+	<!-- javascripts -->
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+	<!-- nice scroll -->
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-	<script src="assets/jquery-knob/js/jquery.knob.js"></script>
-	
+	<!--custome script for all page-->
 	<script src="js/scripts.js"></script>
-
-<!-- 	<script> -->
-// 		knob
-// 		$(".knob").knob();
-<!-- 	</script> -->
 
 	<!------- container section start------------ -->
 	<section id="container" class="">
+	
 		<!--------- including navBar & sideBar------------ -->
 		<%@include file="navBar.jsp"%>
 		<%@include file="sideBar.jsp"%>
-
+		
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
-
 				<div class="row">
 					<div class="col-lg-12">
-						<h3 class="page-header"><i class="fa fa-user-md"></i> Main Page</h3>
+						<h3 class="page-header">
+							<i class="fa fa fa-bars"></i> Pages
+						</h3>
+						<ol class="breadcrumb">
+							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Home</a></li>
+						</ol>
 					</div>
 				</div>
+				<!-- page start-->
+				Page content goes here
 				<!-- page end-->
 			</section>
 		</section>

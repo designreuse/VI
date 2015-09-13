@@ -6,19 +6,11 @@
 	</div>
 
 	<!--logo start-->
-	<a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
+	<a href="adminMain.jsp" class="logo"> <span class="lite">Explore</span>and<span class="lite">Learn</span></a>
 	<!--logo end-->
-
-	<div class="nav search-row" id="top_menu">
-		<!--  search form start -->
-		<ul class="nav top-menu">
-			<li>
-				<form class="navbar-form">
-					<input class="form-control" placeholder="Search" type="text">
-				</form>
-			</li>
-		</ul>
-		<!--  search form end -->
+	
+	<div class="top-nav notification-row"> 
+		<a href="adminMain.jsp" class="logo"> <span class="lite">Welcome,</span> Xin Ying</a>
 	</div>
 </header>
 <!--header end-->
