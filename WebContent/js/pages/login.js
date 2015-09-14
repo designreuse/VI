@@ -11,6 +11,7 @@ function login() {
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
 		url : '../VI/LoginAdminServlet?input=' + inputStr, //this part sends to the servlet
+//		url : '../testtest/LoginAdminServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {

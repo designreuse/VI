@@ -4,8 +4,9 @@
 <hibernate-configuration>
  <session-factory name="VI">
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/VI</property>
-  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.connection.url">jdbc:mysql://127.8.99.2:3306/is480</property>
+  <!--   <property name="hibernate.connection.username">root</property> 
+   <property name="hibernate.connection.username">root</property> -->
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.show_sql">false</property>
   <property name="hibernate.format_sql">true</property>
@@ -13,6 +14,9 @@
   <property name="hibernate.connection.autocommit">false</property>
   <property name="hibernate.connection.characterEncoding">UTF-8</property>
   <property name="hibernate.connection.useUnicode">true</property>
+  <property name="hibernate.connection.password">II36p_tN8iPg</property>
+  <property name="hibernate.connection.username">adminRFvfsZP</property>
+  <property name="hibernate.connection.password">c9lYy3bR5zte</property>
   <mapping resource="model/Admin.hbm.xml"/>
   <mapping resource="model/Attendance.hbm.xml"/>
   <mapping resource="model/Bill.hbm.xml"/>
