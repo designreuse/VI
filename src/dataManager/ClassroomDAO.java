@@ -5,12 +5,15 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Branch;
 import model.Classroom;
+import model.Teacher;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
+import system.Value;
 
 public class ClassroomDAO {
 	// a. Classroom class method: C R U D
@@ -41,4 +44,15 @@ public class ClassroomDAO {
 	}
 	
 	//features
+	public static ArrayList<Classroom> getClassroomsByBranch(Branch branch){
+		ArrayList<Classroom> classrooms = new ArrayList<Classroom>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Classroom.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			classrooms.add((Classroom) o);
+		}
+		return classrooms;
+	}
 }

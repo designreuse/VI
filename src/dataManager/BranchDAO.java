@@ -5,12 +5,16 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Admin;
 import model.Branch;
+import model.Result;
+import model.Student;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
+import system.Value;
 
 public class BranchDAO {
 	// a. Branch class method: C R U D
@@ -41,4 +45,15 @@ public class BranchDAO {
 	}
 	
 	//features
+	public static ArrayList<Branch> getBranchByAdmin(Admin admin){
+		ArrayList<Branch> branches = new ArrayList<Branch>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Branch.class);
+		detachedCriteria.add(Restrictions.eq(Key.ADMIN, admin));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			branches.add((Branch) o);
+		}
+		return branches;
+	}
 }

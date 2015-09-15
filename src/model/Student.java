@@ -19,6 +19,8 @@ public class Student {
 	private String contact;
 	private String address;
 	private String studentLevel;
+	private String passwordSalt;
+	private String passwordHash;
 	
 	private Branch branch;
 	private Parent parent;
@@ -202,6 +204,23 @@ public class Student {
 		this.email = email;
 	}
 	
+	
+	public String getPasswordSalt() {
+		return passwordSalt;
+	}
+
+	public void setPasswordSalt(String passwordSalt) {
+		this.passwordSalt = passwordSalt;
+	}
+
+	public String getPasswordHash() {
+		return passwordHash;
+	}
+
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
+	}
+
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		

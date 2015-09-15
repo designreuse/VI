@@ -6,11 +6,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Course;
+import model.Salary;
+import model.Teacher;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
+import system.Value;
 
 public class CourseDAO {
 	// a. Course class method: C R U D
@@ -41,4 +44,15 @@ public class CourseDAO {
 	}
 	
 	//features
+	public static ArrayList<Course> getCourseByTeacher(Teacher teacher){
+		ArrayList<Course> courses = new ArrayList<Course>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Course.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			courses.add((Course) o);
+		}
+		return courses;
+	}
 }

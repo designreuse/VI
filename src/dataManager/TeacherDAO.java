@@ -5,12 +5,16 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Branch;
+import model.BranchManager;
+import model.Student;
 import model.Teacher;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
+import system.Value;
 
 public class TeacherDAO {
 	// a. Teacher class method: C R U D
@@ -41,4 +45,30 @@ public class TeacherDAO {
 	}
 	
 	//features
+	public static ArrayList<Teacher> getTeachersByBranch(Branch branch){
+		ArrayList<Teacher> teachers = new ArrayList<Teacher>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			teachers.add((Teacher) o);
+		}
+		return teachers;
+	}
+	public static Teacher getTeacherByEmail(String email){
+		Teacher teacher = null;
+		Teacher tempTeacher = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
+		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempTeacher = (Teacher)o;
+			if(tempTeacher.getEmail().equals(email)){
+				teacher = tempTeacher;
+				break;
+			}
+		}
+		return teacher;
+	}
 }

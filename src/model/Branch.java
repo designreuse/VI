@@ -3,8 +3,16 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.AttendanceDAO;
+import dataManager.BillDAO;
+import dataManager.BranchManagerDAO;
+import dataManager.ClassroomDAO;
+import dataManager.ResultDAO;
+import dataManager.StudentDAO;
+import dataManager.TeacherDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -212,8 +220,67 @@ public class Branch {
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
+		returnJson.put(Key.BRANCHID, this.branchId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.LOCATION, this.location);
+		returnJson.put(Key.POSTALCODE, this.postalcode);
+		returnJson.put(Key.CONTACTNUMBER, this.contactnumber);
+		
+		returnJson.put(Key.ADMIN, this.admin.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}
-	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.BRANCHID, this.branchId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.LOCATION, this.location);
+		returnJson.put(Key.POSTALCODE, this.postalcode);
+		returnJson.put(Key.CONTACTNUMBER, this.contactnumber);
+		
+		returnJson.put(Key.ADMIN, this.admin.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		//branch manager, teacher, attendance, classroom, student
+		
+		JSONArray branchManagerArr = new JSONArray();
+		for(BranchManager bm : BranchManagerDAO.getBranchManagersByBranch(this)){
+			branchManagerArr.add(bm.toJson());
+		}
+		returnJson.put(Key.BRANCHMANAGERS, branchManagerArr);
+		
+		JSONArray teacherArr = new JSONArray();
+		for(Teacher t : TeacherDAO.getTeachersByBranch(this)){
+			teacherArr.add(t.toJson());
+		}
+		returnJson.put(Key.TEACHERS, teacherArr);
+		
+//		JSONArray attendanceArr = new JSONArray();
+//		for(Attendance a : AttendanceDAO.getBillsByStudent(this)){
+//			attendanceArr.add(a.toJson());
+//		}
+//		returnJson.put(Key.ATTENDANCE, attendanceArr);
+		
+		JSONArray classroomArr = new JSONArray();
+		for(Classroom c : ClassroomDAO.getClassroomsByBranch(this)){
+			classroomArr.add(c.toJson());
+		}
+		returnJson.put(Key.CLASSROOMS, classroomArr);
+		
+		JSONArray studentArr = new JSONArray();
+		for(Student s : StudentDAO.getStudentsByBranch(this)){
+			studentArr.add(s.toJson());
+		}
+		returnJson.put(Key.STUDENTS, studentArr);
+		
+		return returnJson;
+	}
 }

@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Date;
 
+import model.Admin;
 import model.Branch;
 import model.Parent;
 import model.Student;
@@ -9,9 +10,11 @@ import model.Student;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.AdminDAO;
 import dataManager.BranchDAO;
 import dataManager.ParentDAO;
 import dataManager.StudentDAO;
+import system.Encrypt;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -172,9 +175,59 @@ public class StudentCtrl {
 			createStudent(inputJson);
 		}else{
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
-			returnJson.put(Key.MESSAGE, Message.ADMINALREADYEXIST);
+			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
 		}
 		return returnJson;	
 	}
+	
+	//Get student by email
+		public static JSONObject getStudentByEmail (JSONObject inputJson){
+			JSONObject returnJson = new JSONObject();
+			try{
+				String email = (String)inputJson.get(Key.EMAIL);
+				Student student = StudentDAO.getStudentByEmail(email);
+				if(student != null){
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, student.toJson());
+				}else{
+					returnJson.put(Key.STATUS, Value.FAIL)  ;
+					returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL)  ;
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
+		//login student
+		public static JSONObject loginStudent(JSONObject inputJson){
+			JSONObject returnJson = new JSONObject();
+			try{
+				String email = (String)inputJson.get(Key.EMAIL);
+				Student student = StudentDAO.getStudentByEmail(email);
+				if(student != null){
+					String password = (String)inputJson.get(Key.PASSWORD);
+					String passwordSalt = student.getPasswordSalt();
+					String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+					String checkHash = student.getPasswordHash();
+					if(checkHash.equals(passwordHash)){
+						returnJson.put(Key.STATUS, Value.SUCCESS);
+						returnJson.put(Key.MESSAGE, student.toJson());
+					}else{
+						returnJson.put(Key.STATUS, Value.FAIL);
+						returnJson.put(Key.MESSAGE, Message.WRONGADMINPASSWORD);
+					}
+				}else{
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL)  ;
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
 	
 }

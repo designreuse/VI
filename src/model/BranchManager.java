@@ -2,8 +2,13 @@ package model;
 
 import java.util.Date;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.BillDAO;
+import dataManager.ResultDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class BranchManager {
@@ -109,6 +114,15 @@ public class BranchManager {
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
+		returnJson.put(Key.BRANCHMANAGERID, this.branchManagerId);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.CONTACTNUMBER, this.contactNumber);
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

@@ -3,8 +3,13 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.BranchManagerDAO;
+import dataManager.ClassroomDAO;
+import dataManager.StudentDAO;
+import dataManager.TeacherDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -145,6 +150,38 @@ public class Classroom {
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.CLASSROOMID, this.classroomId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.ROOMCAPACITY, this.roomCapacity);
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.CLASSROOMID, this.classroomId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.ROOMCAPACITY, this.roomCapacity);
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+//		JSONArray attendanceArr = new JSONArray();
+//		for(Attendance a : AttendanceDAO.getBranchManagersByBranch(this)){
+//			attendanceArr.add(a.toJson());
+//		}
+//		returnJson.put(Key.ATTENDANCES, attendanceArr);
 		
 		return returnJson;
 	}

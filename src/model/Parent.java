@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.json.simple.JSONObject;
 
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Parent {
@@ -166,6 +168,16 @@ public class Parent {
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.PARENTID, this.parentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.EMAIL, this.email);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

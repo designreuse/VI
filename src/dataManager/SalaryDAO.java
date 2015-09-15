@@ -5,12 +5,15 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Branch;
 import model.Salary;
+import model.Teacher;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
+import system.Value;
 
 public class SalaryDAO {
 	// a. Salary class method: C R U D
@@ -41,4 +44,15 @@ public class SalaryDAO {
 	}
 	
 	//features
+	public static ArrayList<Salary> getSalaryByTeacher(Teacher teacher){
+		ArrayList<Salary> salaries = new ArrayList<Salary>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Salary.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			salaries.add((Salary) o);
+		}
+		return salaries;
+	}
 }

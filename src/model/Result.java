@@ -2,8 +2,13 @@ package model;
 
 import java.util.Date;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.CourseDAO;
+import dataManager.SalaryDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Result {
@@ -143,6 +148,17 @@ public class Result {
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.RESULT, this.resultId);
+		returnJson.put(Key.RESULTVALUE, this.resultValue);
+		returnJson.put(Key.RESULTDATE, this.resultDate);
+		
+		returnJson.put(Key.COURSE, this.course.toJson());//need to implement
+		returnJson.put(Key.STUDENT, this.student.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

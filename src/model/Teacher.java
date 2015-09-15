@@ -3,8 +3,13 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.CourseDAO;
+import dataManager.SalaryDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Teacher {
@@ -212,6 +217,55 @@ public class Teacher {
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.TEACHERID, this.teacherId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.DATEOFBIRTH, this.dateOfBirth);
+		returnJson.put(Key.AGE, this.age);
+		returnJson.put(Key.QUALIFICATION, this.qualification);
+		
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.TEACHERID, this.teacherId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.DATEOFBIRTH, this.dateOfBirth);
+		returnJson.put(Key.AGE, this.age);
+		returnJson.put(Key.QUALIFICATION, this.qualification);
+		
+		
+		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		JSONArray salaryArr = new JSONArray();
+		for(Salary s : SalaryDAO.getSalaryByTeacher(this)){
+			salaryArr.add(s.toJson());
+		}
+		returnJson.put(Key.SALARYS, salaryArr);
+		
+		JSONArray courseArr = new JSONArray();
+		for(Course c : CourseDAO.getCourseByTeacher(this)){
+			courseArr.add(c.toJson());
+		}
+		returnJson.put(Key.COURSES, courseArr);
 		
 		return returnJson;
 	}

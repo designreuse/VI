@@ -3,8 +3,14 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.CourseDAO;
+import dataManager.ResultDAO;
+import dataManager.SalaryDAO;
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Course {
@@ -174,6 +180,48 @@ public class Course {
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.COURSEID, this.courseId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.COURSECOST, this.courseCost);
+		returnJson.put(Key.COURSECAPACITY, this.courseCapacity);
+		
+		returnJson.put(Key.TEACHER, this.teacher.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.COURSEID, this.courseId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.COURSECOST, this.courseCost);
+		returnJson.put(Key.COURSECAPACITY, this.courseCapacity);
+		
+		
+		returnJson.put(Key.TEACHER, this.teacher.toJson());//need to implement
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		JSONArray resultArr = new JSONArray();
+		for(Result r : ResultDAO.getResultsByCourse(this)){
+			resultArr.add(r.toJson());
+		}
+		returnJson.put(Key.RESULTS, resultArr);
+		
+//		JSONArray attendanceArr = new JSONArray();
+//		for(Attendance a : AttendanceDAO.getBillsByStudent(this)){
+//			attendanceArr.add(a.toJson());
+//		}
+//		returnJson.put(Key.ATTENDANCE, attendanceArr);
 		
 		return returnJson;
 	}

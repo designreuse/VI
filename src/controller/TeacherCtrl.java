@@ -3,12 +3,14 @@ package controller;
 import java.util.Date;
 
 import model.Branch;
+import model.Student;
 import model.Teacher;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
+import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
 import system.Config;
 import system.Key;
@@ -158,5 +160,36 @@ public class TeacherCtrl {
 	}
 	
 	//features
-	
+	//Register a new Teacher
+		public static JSONObject registerTeacher(JSONObject inputJson){
+			JSONObject returnJson = new JSONObject();
+			returnJson = getTeacherByEmail(inputJson);
+			if((int)returnJson.get(Key.STATUS) == 0){
+				createTeacher(inputJson);
+			}else{
+				returnJson.put(Key.STATUS, Value.FAIL)  ;
+				returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
+			}
+			return returnJson;	
+		}
+		//Get teacher by email
+				public static JSONObject getTeacherByEmail (JSONObject inputJson){
+					JSONObject returnJson = new JSONObject();
+					try{
+						String email = (String)inputJson.get(Key.EMAIL);
+						Teacher teacher = TeacherDAO.getTeacherByEmail(email);
+						if(teacher != null){
+							returnJson.put(Key.STATUS, Value.SUCCESS);
+							returnJson.put(Key.MESSAGE, teacher.toJson());
+						}else{
+							returnJson.put(Key.STATUS, Value.FAIL)  ;
+							returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+						}
+					}catch(Exception e){
+						e.printStackTrace();
+						returnJson.put(Key.STATUS, Value.FAIL)  ;
+						returnJson.put(Key.MESSAGE, e);
+					}
+					return returnJson;
+				}
 }

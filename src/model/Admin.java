@@ -3,8 +3,12 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.BillDAO;
+import dataManager.BranchDAO;
+import dataManager.ResultDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -169,6 +173,26 @@ public class Admin {
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key. ADMINID, this.adminId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.EMAIL, this.email);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		JSONArray branchArr = new JSONArray();
+		for(Branch b : BranchDAO.getBranchByAdmin(this)){
+			branchArr.add(b.toJson());
+		}
+		returnJson.put(Key.BRANCHS, branchArr);
 		
 		return returnJson;
 	}
