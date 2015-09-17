@@ -13,6 +13,7 @@ import dataManager.BranchDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
 import system.Config;
+import system.Encrypt;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -182,6 +183,36 @@ public class TeacherCtrl {
 			if (teacher != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacher.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
+	// login Teacher
+	public static JSONObject loginTeacher(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			String email = (String) inputJson.get(Key.EMAIL);
+			Teacher teacher = TeacherDAO.getTeacherByEmail(email);
+			if (teacher != null) {
+				String password = (String) inputJson.get(Key.PASSWORD);
+				String passwordSalt = teacher.getPasswordSalt();
+				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+				String checkHash = teacher.getPasswordHash();
+				if (checkHash.equals(passwordHash)) {
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, teacher.toJson());
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.WRONGTEACHERPASSWORD);
+				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);

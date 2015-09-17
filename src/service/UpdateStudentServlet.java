@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.AdminCtrl;
 import controller.StudentCtrl;
 import system.Config;
 import system.Key;
@@ -20,13 +19,13 @@ import system.Value;
 /**
  * 
  */
-public class LoginStudentServlet extends HttpServlet {
+public class UpdateStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginStudentServlet() {
+    public UpdateStudentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,7 +33,7 @@ public class LoginStudentServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -46,9 +45,8 @@ public class LoginStudentServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
-
+	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -60,7 +58,7 @@ public class LoginStudentServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = StudentCtrl.loginStudent(inputJson);
+			returnJson = StudentCtrl.updateStudent(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -68,6 +66,4 @@ public class LoginStudentServlet extends HttpServlet {
 		}
 		out.println(returnJson.toJSONString());
 	}
-
-	
 }

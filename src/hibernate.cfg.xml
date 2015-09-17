@@ -2,32 +2,34 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
                                          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
- <session-factory name="VI">
-  <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-  <property name="hibernate.connection.url">jdbc:mysql://127.8.99.2:3306/is480</property>
-  <!--   <property name="hibernate.connection.username">root</property> 
-   <property name="hibernate.connection.username">root</property> -->
-  <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-  <property name="hibernate.show_sql">false</property>
-  <property name="hibernate.format_sql">true</property>
-  <property name="hibernate.hbm2ddl.auto">update</property>
-  <property name="hibernate.connection.autocommit">false</property>
-  <property name="hibernate.connection.characterEncoding">UTF-8</property>
-  <property name="hibernate.connection.useUnicode">true</property>
-  <property name="hibernate.connection.password">II36p_tN8iPg</property>
-  <property name="hibernate.connection.username">adminRFvfsZP</property>
-  <property name="hibernate.connection.password">c9lYy3bR5zte</property>
-  <mapping resource="model/Admin.hbm.xml"/>
-  <mapping resource="model/Attendance.hbm.xml"/>
-  <mapping resource="model/Bill.hbm.xml"/>
-  <mapping resource="model/Branch.hbm.xml"/>
-  <mapping resource="model/BranchManager.hbm.xml"/>
-  <mapping resource="model/Classroom.hbm.xml"/>
-  <mapping resource="model/Course.hbm.xml"/>
-  <mapping resource="model/Parent.hbm.xml"/>
-  <mapping resource="model/Result.hbm.xml"/>
-  <mapping resource="model/Salary.hbm.xml"/>
-  <mapping resource="model/Student.hbm.xml"/>
-  <mapping resource="model/Teacher.hbm.xml"/>
- </session-factory>
+	<session-factory name="VI">
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+<!-- 		<property name="hibernate.connection.url">jdbc:mysql://127.8.99.2:3306/is480</property> -->
+<!-- 		<property name="hibernate.connection.username">adminRFvfsZP</property> -->
+<!-- 		<property name="hibernate.connection.password">c9lYy3bR5zte</property> -->
+
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3307/VI</property>
+		<property name="hibernate.connection.username">root</property>
+
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">true</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.connection.autocommit">false</property>
+		<property name="hibernate.connection.characterEncoding">UTF-8</property>
+		<property name="hibernate.connection.useUnicode">true</property>
+
+		<mapping resource="model/Admin.hbm.xml" />
+		<mapping resource="model/Attendance.hbm.xml" />
+		<mapping resource="model/Bill.hbm.xml" />
+		<mapping resource="model/Branch.hbm.xml" />
+		<mapping resource="model/BranchManager.hbm.xml" />
+		<mapping resource="model/Classroom.hbm.xml" />
+		<mapping resource="model/Course.hbm.xml" />
+		<mapping resource="model/Parent.hbm.xml" />
+		<mapping resource="model/Result.hbm.xml" />
+		<mapping resource="model/Salary.hbm.xml" />
+		<mapping resource="model/Student.hbm.xml" />
+		<mapping resource="model/Teacher.hbm.xml" />
+	</session-factory>
 </hibernate-configuration>

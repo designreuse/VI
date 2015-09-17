@@ -61,6 +61,7 @@ public class StudentDAO {
 		Student tempStudent = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
 		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
 			tempStudent = (Student)o;
