@@ -171,8 +171,8 @@ public class StudentCtrl {
 	public static JSONObject registerStudent(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		returnJson = getStudentByEmail(inputJson);
-		if((int)returnJson.get(Key.STATUS) == 0){
-			createStudent(inputJson);
+		if((long)returnJson.get(Key.STATUS) == 0){
+			returnJson = createStudent(inputJson);
 		}else{
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
 			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);

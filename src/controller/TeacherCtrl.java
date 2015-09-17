@@ -18,97 +18,97 @@ import system.Message;
 import system.Value;
 
 public class TeacherCtrl {
-	
+
 	/**
 	 * CRUD
-	 * */
-	public static JSONObject createTeacher(JSONObject inputJson){
+	 */
+	public static JSONObject createTeacher(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-		
-		try{
+
+		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-			if(branch != null){
+			if (branch != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				String email = (String) inputJson.get(Key.EMAIL);
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
-				Date dateOfBirth = Config.SDF.parse((String)inputJson.get(Key.DATEOFBIRTH));
+				Date dateOfBirth = Config.SDF.parse((String) inputJson.get(Key.DATEOFBIRTH));
 				long age = (long) inputJson.get(Key.AGE);
 				String qualification = (String) inputJson.get(Key.QUALIFICATION);
-				
+
 				Teacher teacher = new Teacher(name, email, contact, address, dateOfBirth, age, qualification, branch);
 				TeacherDAO.addTeacher(teacher);
-				
-				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
+
+				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacher.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-		
+
 		return returnJson;
 	}
-	
-	//Get teacher by id
-	public static JSONObject getTeacherById (JSONObject inputJson){
+
+	// Get teacher by id
+	public static JSONObject getTeacherById(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-		try{
-			long teacherId = (long)inputJson.get(Key.TEACHERID);
+		try {
+			long teacherId = (long) inputJson.get(Key.TEACHERID);
 			Teacher teacher = TeacherDAO.getTeacherById(teacherId);
-			if(teacher != null){
+			if (teacher != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacher.toJson());
-			}else{
-				returnJson.put(Key.STATUS, Value.FAIL)  ;
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
-			
-		}catch(Exception e){
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
 		return returnJson;
 	}
-	
-	//Get all teacher
-	public static JSONObject getAllTeachers(){
+
+	// Get all teacher
+	public static JSONObject getAllTeachers() {
 		JSONObject returnJson = new JSONObject();
-		try{
+		try {
 			JSONArray teacherJArr = new JSONArray();
-			for(Teacher a: TeacherDAO.getAllTeachers()){
+			for (Teacher a : TeacherDAO.getAllTeachers()) {
 				teacherJArr.add(a.toJson());
 			}
-			returnJson.put(Key.STATUS, Value.SUCCESS)  ;
+			returnJson.put(Key.STATUS, Value.SUCCESS);
 			returnJson.put(Key.MESSAGE, teacherJArr);
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
 		return returnJson;
 	}
-	
-	public static JSONObject updateTeacher(JSONObject inputJson){
+
+	public static JSONObject updateTeacher(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-		
-		try{
+
+		try {
 			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
-			
-			if(teacher != null){
+
+			if (teacher != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				String email = (String) inputJson.get(Key.EMAIL);
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
-				Date dateOfBirth = Config.SDF.parse((String)inputJson.get(Key.DATEOFBIRTH));
+				Date dateOfBirth = Config.SDF.parse((String) inputJson.get(Key.DATEOFBIRTH));
 				long age = (long) inputJson.get(Key.AGE);
 				String qualification = (String) inputJson.get(Key.QUALIFICATION);
-				
+
 				teacher.setName(name);
 				teacher.setEmail(email);
 				teacher.setContact(contact);
@@ -116,80 +116,81 @@ public class TeacherCtrl {
 				teacher.setDateOfBirth(dateOfBirth);
 				teacher.setAge(age);
 				teacher.setQualification(qualification);
-				
+
 				TeacherDAO.modifyTeacher(teacher);
-				
-				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
+
+				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacher.toJson());
-			}else{
-				returnJson.put(Key.STATUS, Value.FAIL)  ;
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-		
+
 		return returnJson;
 	}
-	
-	public static JSONObject deleteTeacher(JSONObject inputJson){
+
+	public static JSONObject deleteTeacher(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-		
-		try{
+
+		try {
 			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
-			
-			if(teacher != null){
+
+			if (teacher != null) {
 				teacher.setObjStatus(Value.DELETED);
 				TeacherDAO.modifyTeacher(teacher);
-				
-				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
+
+				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacher.toJson());
-			}else{
-				returnJson.put(Key.STATUS, Value.FAIL)  ;
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-		
+
 		return returnJson;
 	}
-	
-	//features
-	//Register a new Teacher
-		public static JSONObject registerTeacher(JSONObject inputJson){
-			JSONObject returnJson = new JSONObject();
-			returnJson = getTeacherByEmail(inputJson);
-			if((int)returnJson.get(Key.STATUS) == 0){
-				createTeacher(inputJson);
-			}else{
-				returnJson.put(Key.STATUS, Value.FAIL)  ;
-				returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
-			}
-			return returnJson;	
+
+	// features
+	// Register a new Teacher
+	public static JSONObject registerTeacher(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		returnJson = getTeacherByEmail(inputJson);
+		if ((long) returnJson.get(Key.STATUS) == 0) {
+			returnJson = createTeacher(inputJson);
+		} else {
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
 		}
-		//Get teacher by email
-				public static JSONObject getTeacherByEmail (JSONObject inputJson){
-					JSONObject returnJson = new JSONObject();
-					try{
-						String email = (String)inputJson.get(Key.EMAIL);
-						Teacher teacher = TeacherDAO.getTeacherByEmail(email);
-						if(teacher != null){
-							returnJson.put(Key.STATUS, Value.SUCCESS);
-							returnJson.put(Key.MESSAGE, teacher.toJson());
-						}else{
-							returnJson.put(Key.STATUS, Value.FAIL)  ;
-							returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
-						}
-					}catch(Exception e){
-						e.printStackTrace();
-						returnJson.put(Key.STATUS, Value.FAIL)  ;
-						returnJson.put(Key.MESSAGE, e);
-					}
-					return returnJson;
-				}
+		return returnJson;
+	}
+
+	// Get teacher by email
+	public static JSONObject getTeacherByEmail(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			String email = (String) inputJson.get(Key.EMAIL);
+			Teacher teacher = TeacherDAO.getTeacherByEmail(email);
+			if (teacher != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacher.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 }
