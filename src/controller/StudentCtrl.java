@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import model.Admin;
@@ -230,5 +231,27 @@ public class StudentCtrl {
 		}
 		return returnJson;
 	}
+	
+	// Get student by branch
+	public static JSONObject getStudentByBranch(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Branch branch = (Branch) inputJson.get(Key.BRANCH);
+			Parent parent = ParentDAO.getParentByBranch(branch);
+			if (parent != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, parent.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
 
 }

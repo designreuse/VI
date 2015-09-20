@@ -1,12 +1,12 @@
 package controller;
 
-import model.Parent;
+import model.Branch;
 import model.Parent;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.ParentDAO;
+import dataManager.BranchDAO;
 import dataManager.ParentDAO;
 import system.Encrypt;
 import system.Key;
@@ -22,6 +22,8 @@ public class ParentCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			if (branch != null) {
 			String name = (String) inputJson.get(Key.NAME);
 			String email = (String) inputJson.get(Key.EMAIL);
 			String contact = (String) inputJson.get(Key.CONTACT);
@@ -33,11 +35,15 @@ public class ParentCtrl {
 					passwordSalt);
 
 			Parent parent = new Parent(name, passwordSalt, passwordHash,
-					contact, address, email);
+					contact, address, email, branch);
 			ParentDAO.addParent(parent);
 
 			returnJson.put(Key.STATUS, Value.SUCCESS);
 			returnJson.put(Key.MESSAGE, parent.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -214,4 +220,24 @@ public class ParentCtrl {
 		return returnJson;
 	}
 
+	// Get parent by branch
+	public static JSONObject getParentByBranch(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Branch branch = (Branch) inputJson.get(Key.BRANCH);
+			Parent parent = ParentDAO.getParentByBranch(branch);
+			if (parent != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, parent.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 }

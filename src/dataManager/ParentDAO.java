@@ -5,13 +5,16 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Branch;
 import model.Parent;
+import model.Student;
 import model.Parent;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
+import system.Value;
 
 public class ParentDAO {
 	// a. Parent class method: C R U D
@@ -56,5 +59,33 @@ public class ParentDAO {
 			}
 		}
 		return parent;
+	}
+	
+	public static Parent getParentByBranch(Branch branch){
+		Parent parent = null;
+		Parent tempParent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempParent = (Parent)o;
+			if(tempParent.getBranch().equals(branch)){
+				parent = tempParent;
+				break;
+			}
+		}
+		return parent;
+	}
+	
+	public static ArrayList<Parent> getParentsByBranch(Branch branch){
+		ArrayList<Parent> parents = new ArrayList<Parent>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			parents.add((Parent) o);
+		}
+		return parents;
 	}
 }

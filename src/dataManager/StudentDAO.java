@@ -72,4 +72,20 @@ public class StudentDAO {
 		}
 		return student;
 	}
+	public static Student getStudentByBranch(Branch branch){
+		Student student = null;
+		Student tempStudent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempStudent = (Student)o;
+			if(tempStudent.getBranch().equals(branch)){
+				student = tempStudent;
+				break;
+			}
+		}
+		return student;
+	}
 }

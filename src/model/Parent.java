@@ -19,6 +19,7 @@ public class Parent {
 	private String email;
 	
 	private Set<Student> students;
+	private Branch branch;
 	
 	private long objStatus;
 	private Date createDate;
@@ -26,7 +27,7 @@ public class Parent {
 	
 	public Parent(){}
 	
-	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address, String email) {
+	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address, String email, Branch branch) {
 		this.name = name;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
@@ -35,6 +36,7 @@ public class Parent {
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 		this.email = email;
+		this.branch= branch;
 	}
 
 	/**
@@ -164,6 +166,14 @@ public class Parent {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Branch getBranch() {
+		return branch;
+	}
+
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 
 	public JSONObject toJson(){
