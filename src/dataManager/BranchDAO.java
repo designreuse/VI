@@ -45,7 +45,7 @@ public class BranchDAO {
 	}
 	
 	//features
-	public static ArrayList<Branch> getBranchByAdmin(Admin admin){
+	public static ArrayList<Branch> getBranchesByAdmin(Admin admin){
 		ArrayList<Branch> branches = new ArrayList<Branch>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Branch.class);
 		detachedCriteria.add(Restrictions.eq(Key.ADMIN, admin));

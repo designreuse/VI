@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.json.simple.JSONObject;
 
+import system.Config;
+import system.Key;
 import system.Value;
 
 public class Attendance {
@@ -22,13 +24,25 @@ public class Attendance {
 	
 	public Attendance(){}
 	
-	public Attendance(Date planStartDate, Date planEndDate, String location,
-			Date actualStartDate, Date actualEndDate, Teacher teacher,
+//hmm?	
+//	public Attendance(Date planStartDate, Date planEndDate, String location,
+//			Date actualStartDate, Date actualEndDate,
+//			Course course, Student student) {
+//		super();
+//		this.planStartDate = planStartDate;
+//		this.location = location;
+//		this.actualStartDate = actualStartDate;
+//		this.course = course;
+//		this.student = student;
+//		this.setCreateDate(new Date());
+//		this.setObjStatus(Value.ACTIVED);
+//	}
+	
+	public Attendance(Date planStartDate, String location,
 			Course course, Student student) {
 		super();
 		this.planStartDate = planStartDate;
 		this.location = location;
-		this.actualStartDate = actualStartDate;
 		this.course = course;
 		this.student = student;
 		this.setCreateDate(new Date());
@@ -154,6 +168,19 @@ public class Attendance {
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
+				
+		returnJson.put(Key.STUDENTID, this.attendaceId);
+		returnJson.put(Key.PLANNEDSTARTDATE, this.planStartDate);
+		returnJson.put(Key.LOCATION, this.location);
+		returnJson.put(Key.ACTUALSTARTDATE, this.actualStartDate);
+
+		returnJson.put(Key.COURSE, this.course.toJson());// need to implement
+		returnJson.put(Key.STUDENT, this.student.toJson());// need to implement
+		returnJson.put(Key.CLASSROOM, this.classroom.toJson());// need to implement
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
 		
 		return returnJson;
 	}

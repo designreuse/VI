@@ -1,13 +1,17 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
+import model.Course;
+import model.Result;
 import model.Salary;
 import model.Teacher;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.ResultDAO;
 import dataManager.SalaryDAO;
 import dataManager.TeacherDAO;
 import system.Config;
@@ -143,5 +147,29 @@ public class SalaryCtrl {
 	}
 	
 	//features
-	
+	// Get salaries by teacher
+			public static JSONObject getSalariesByTeacher(JSONObject inputJson) {
+				JSONObject returnJson = new JSONObject();
+				try {
+					Teacher teacher = (Teacher) inputJson.get(Key.COURSE);
+					ArrayList<Salary> salaries = SalaryDAO.getSalariesByTeacher(teacher);
+					if (salaries != null) {
+						// iterate through the list of salaries & add into jsonobject
+						for (Salary salary : salaries) {
+							//add 1 time or many times
+							returnJson.put(Key.STATUS, Value.SUCCESS);
+							
+							returnJson.put(Key.MESSAGE, salary.toJson());
+						}
+					} else {
+						returnJson.put(Key.STATUS, Value.FAIL);
+						returnJson.put(Key.MESSAGE, Message.SALARYNOTEXIST);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, e);
+				}
+				return returnJson;
+			}
 }

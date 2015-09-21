@@ -189,7 +189,7 @@ public class Admin {
 		returnJson.put(Key.REMARK, this.remark);
 		
 		JSONArray branchArr = new JSONArray();
-		for(Branch b : BranchDAO.getBranchByAdmin(this)){
+		for(Branch b : BranchDAO.getBranchesByAdmin(this)){
 			branchArr.add(b.toJson());
 		}
 		returnJson.put(Key.BRANCHS, branchArr);

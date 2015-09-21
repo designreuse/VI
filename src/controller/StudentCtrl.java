@@ -3,7 +3,6 @@ package controller;
 import java.util.ArrayList;
 import java.util.Date;
 
-import model.Admin;
 import model.Branch;
 import model.Parent;
 import model.Student;
@@ -11,7 +10,6 @@ import model.Student;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AdminDAO;
 import dataManager.BranchDAO;
 import dataManager.ParentDAO;
 import dataManager.StudentDAO;
@@ -231,19 +229,24 @@ public class StudentCtrl {
 		}
 		return returnJson;
 	}
-	
-	// Get student by branch
-	public static JSONObject getStudentByBranch(JSONObject inputJson) {
+
+	// Get students by branch
+	public static JSONObject getStudentsByBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
 			Branch branch = (Branch) inputJson.get(Key.BRANCH);
-			Parent parent = ParentDAO.getParentByBranch(branch);
-			if (parent != null) {
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, parent.toJson());
+			ArrayList<Student> students = StudentDAO.getStudentsByBranch(branch);
+			if (students != null) {
+				// iterate through the list of students & add into jsonobject
+				for (Student student : students) {
+					//add 1 time or many times
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					
+					returnJson.put(Key.MESSAGE, student.toJson());
+				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -252,6 +255,32 @@ public class StudentCtrl {
 		}
 		return returnJson;
 	}
-
+	
+	// Get students by parent
+	public static JSONObject getStudentsByParent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Parent parent = (Parent) inputJson.get(Key.PARENT);
+			ArrayList<Student> students = StudentDAO.getStudentsByParent(parent);
+			if (students != null) {
+				// iterate through the list of students & add into jsonobject
+				for (Student student : students) {
+					//add 1 time or many times
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					
+					returnJson.put(Key.MESSAGE, student.toJson());
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 
 }

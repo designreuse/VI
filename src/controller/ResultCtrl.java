@@ -2,8 +2,11 @@ package controller;
 
 import model.Admin;
 import model.Course;
+import model.Parent;
 import model.Result;
 import model.Student;
+
+import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -150,4 +153,54 @@ public class ResultCtrl {
 	}
 	
 	//features
+	// Get results by student
+	public static JSONObject getResultsByStudent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Student student = (Student) inputJson.get(Key.STUDENT);
+			ArrayList<Result> results = ResultDAO.getResultsByStudent(student);
+			if (results != null) {
+				// iterate through the list of students & add into jsonobject
+				for (Result result : results) {
+					//add 1 time or many times
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					
+					returnJson.put(Key.MESSAGE, result.toJson());
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.RESULTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	// Get results by course
+		public static JSONObject getResultsByCourse(JSONObject inputJson) {
+			JSONObject returnJson = new JSONObject();
+			try {
+				Course course = (Course) inputJson.get(Key.COURSE);
+				ArrayList<Result> results = ResultDAO.getResultsByCourse(course);
+				if (results != null) {
+					// iterate through the list of students & add into jsonobject
+					for (Result result : results) {
+						//add 1 time or many times
+						returnJson.put(Key.STATUS, Value.SUCCESS);
+						
+						returnJson.put(Key.MESSAGE, result.toJson());
+					}
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.RESULTNOTEXIST);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
 }

@@ -315,13 +315,13 @@ public class Teacher {
 		returnJson.put(Key.REMARK, this.remark);
 
 		JSONArray salaryArr = new JSONArray();
-		for (Salary s : SalaryDAO.getSalaryByTeacher(this)) {
+		for (Salary s : SalaryDAO.getSalariesByTeacher(this)) {
 			salaryArr.add(s.toJson());
 		}
 		returnJson.put(Key.SALARYS, salaryArr);
 
 		JSONArray courseArr = new JSONArray();
-		for (Course c : CourseDAO.getCourseByTeacher(this)) {
+		for (Course c : CourseDAO.getCoursesByTeacher(this)) {
 			courseArr.add(c.toJson());
 		}
 		returnJson.put(Key.COURSES, courseArr);

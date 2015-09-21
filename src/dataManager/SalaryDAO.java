@@ -44,7 +44,7 @@ public class SalaryDAO {
 	}
 	
 	//features
-	public static ArrayList<Salary> getSalaryByTeacher(Teacher teacher){
+	public static ArrayList<Salary> getSalariesByTeacher(Teacher teacher){
 		ArrayList<Salary> salaries = new ArrayList<Salary>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Salary.class);
 		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));

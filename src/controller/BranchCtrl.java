@@ -2,13 +2,17 @@ package controller;
 
 import model.Admin;
 import model.Branch;
+import model.Parent;
+import model.Student;
+
+import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.AdminDAO;
 import dataManager.BranchDAO;
-import system.Encrypt;
+import dataManager.StudentDAO;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -147,4 +151,29 @@ public class BranchCtrl {
 	}
 	
 	//features
+	// Get branches by admin
+		public static JSONObject getBranchesByAdmin(JSONObject inputJson) {
+			JSONObject returnJson = new JSONObject();
+			try {
+				Admin admin = (Admin) inputJson.get(Key.ADMIN);
+				ArrayList<Branch> branches = BranchDAO.getBranchesByAdmin(admin);
+				if (branches != null) {
+					// iterate through the list of branches & add into jsonobject
+					for (Branch branch : branches) {
+						//add 1 time or many times
+						returnJson.put(Key.STATUS, Value.SUCCESS);
+						
+						returnJson.put(Key.MESSAGE, branch.toJson());
+					}
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
 }

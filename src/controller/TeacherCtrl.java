@@ -1,16 +1,17 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import model.Branch;
-import model.Student;
+import model.Classroom;
 import model.Teacher;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
-import dataManager.StudentDAO;
+import dataManager.ClassroomDAO;
 import dataManager.TeacherDAO;
 import system.Config;
 import system.Encrypt;
@@ -224,4 +225,30 @@ public class TeacherCtrl {
 		}
 		return returnJson;
 	}
+	// Get teachers by branch
+		public static JSONObject getTeachersByBranch(JSONObject inputJson) {
+			JSONObject returnJson = new JSONObject();
+			try {
+				Branch branch = (Branch) inputJson.get(Key.BRANCH);
+				ArrayList<Teacher> teachers = TeacherDAO.getTeachersByBranch(branch);
+				if (teachers != null) {
+					// iterate through the list of teachers & add into
+					// jsonobject
+					for (Teacher teacher : teachers) {
+						// add 1 time or many times
+						returnJson.put(Key.STATUS, Value.SUCCESS);
+
+						returnJson.put(Key.MESSAGE, teacher.toJson());
+					}
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
 }

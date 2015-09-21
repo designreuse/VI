@@ -5,6 +5,8 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Attendance;
+import model.Classroom;
 import model.Course;
 import model.Salary;
 import model.Teacher;
@@ -44,7 +46,7 @@ public class CourseDAO {
 	}
 	
 	//features
-	public static ArrayList<Course> getCourseByTeacher(Teacher teacher){
+	public static ArrayList<Course> getCoursesByTeacher(Teacher teacher){
 		ArrayList<Course> courses = new ArrayList<Course>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Course.class);
 		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
@@ -55,4 +57,5 @@ public class CourseDAO {
 		}
 		return courses;
 	}
+	
 }

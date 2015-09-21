@@ -8,6 +8,7 @@ import java.util.List;
 import model.Admin;
 import model.Branch;
 import model.Classroom;
+import model.Parent;
 import model.Student;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -72,20 +73,15 @@ public class StudentDAO {
 		}
 		return student;
 	}
-	public static Student getStudentByBranch(Branch branch){
-		Student student = null;
-		Student tempStudent = null;
+	public static ArrayList<Student> getStudentsByParent(Parent parent){
+		ArrayList<Student> students = new ArrayList<Student>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
-		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		detachedCriteria.add(Restrictions.eq(Key.PARENT, parent));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
-			tempStudent = (Student)o;
-			if(tempStudent.getBranch().equals(branch)){
-				student = tempStudent;
-				break;
-			}
+			students.add((Student) o);
 		}
-		return student;
+		return students;
 	}
 }

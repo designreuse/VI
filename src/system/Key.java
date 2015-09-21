@@ -81,7 +81,11 @@ public class Key {
 	public static final String CLASSROOMID = "classroomId";
 	public static final String ROOMCAPACITY = "roomCapacity";
 	
-	
+	public static final String ATTENDANCE = "attendance";
+	public static final String ATTENDANCES = "attendances";
+	public static final String ATTENDANCEID = "attendaceId";
+	public static final String PLANNEDSTARTDATE = "planStartDate";
+	public static final String ACTUALSTARTDATE = "actualStartDate";	
 	
 	
 	

@@ -5,8 +5,10 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Attendance;
 import model.Branch;
 import model.Classroom;
+import model.Student;
 import model.Teacher;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -55,4 +57,5 @@ public class ClassroomDAO {
 		}
 		return classrooms;
 	}
+	
 }
