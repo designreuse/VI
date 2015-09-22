@@ -3,9 +3,11 @@ package controller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.Attendance;
 import model.Branch;
 import model.BranchManager;
 import model.Classroom;
+import model.Course;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,6 +15,7 @@ import org.json.simple.JSONObject;
 import dataManager.BranchDAO;
 import dataManager.BranchManagerDAO;
 import dataManager.ClassroomDAO;
+import dataManager.CourseDAO;
 import system.Config;
 import system.Key;
 import system.Message;
@@ -162,6 +165,27 @@ public class ClassroomCtrl {
 
 					returnJson.put(Key.MESSAGE, classroom.toJson());
 				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
+	// Get classroom by attendance
+	public static JSONObject getClassroomByAttendance(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Attendance attendance = (Attendance) inputJson.get(Key.ATTENDANCE);
+			Classroom classroom = ClassroomDAO.getClassroomByAttendance(attendance);
+			if (classroom != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, classroom.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);

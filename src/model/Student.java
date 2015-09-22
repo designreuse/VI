@@ -26,6 +26,7 @@ public class Student {
 	private Parent parent;
 	private Set<Result> results;
 	private Set<Bill> bills;
+	private Set<Attendance> attendances;
 
 	private long objStatus;
 	private Date createDate;
@@ -257,6 +258,14 @@ public class Student {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+
+	public Set<Attendance> getAttendances() {
+		return attendances;
+	}
+
+	public void setAttendances(Set<Attendance> attendances) {
+		this.attendances = attendances;
 	}
 
 	public JSONObject toJson() {

@@ -88,4 +88,20 @@ public class ParentDAO {
 		}
 		return parents;
 	}
+	public static Parent getParentByStudent(Student student){
+		Parent parent = null;
+		Parent tempParent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
+		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempParent = (Parent)o;
+			//would this work? need to iterate through?
+			if(tempParent.getStudents().equals(student)){
+				parent = tempParent;
+				break;
+			}
+		}
+		return parent;
+	}
 }

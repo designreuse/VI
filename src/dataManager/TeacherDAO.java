@@ -7,6 +7,8 @@ import java.util.List;
 
 import model.Branch;
 import model.BranchManager;
+import model.Course;
+import model.Salary;
 import model.Student;
 import model.Teacher;
 
@@ -65,6 +67,38 @@ public class TeacherDAO {
 		for(Object o : list){
 			tempTeacher = (Teacher)o;
 			if(tempTeacher.getEmail().equals(email)){
+				teacher = tempTeacher;
+				break;
+			}
+		}
+		return teacher;
+	}
+	public static Teacher getTeacherByCourse(Course course){
+		Teacher teacher = null;
+		Teacher tempTeacher = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
+		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempTeacher = (Teacher)o;
+			//would this work? need to iterate through?
+			if(tempTeacher.getCourses().equals(course)){
+				teacher = tempTeacher;
+				break;
+			}
+		}
+		return teacher;
+	}
+	public static Teacher getTeacherBySalary(Salary salary){
+		Teacher teacher = null;
+		Teacher tempTeacher = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
+		detachedCriteria.add(Restrictions.eq(Key.SALARY, salary));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempTeacher = (Teacher)o;
+			//would this work? need to iterate through?
+			if(tempTeacher.getSalaries().equals(salary)){
 				teacher = tempTeacher;
 				break;
 			}

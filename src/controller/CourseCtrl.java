@@ -5,6 +5,7 @@ import java.util.Date;
 
 import model.Attendance;
 import model.Course;
+import model.Result;
 import model.Student;
 import model.Teacher;
 
@@ -179,4 +180,44 @@ public class CourseCtrl {
 		}
 		return returnJson;
 	}
+	// Get course by attendance
+		public static JSONObject getCourseByAttendance(JSONObject inputJson) {
+			JSONObject returnJson = new JSONObject();
+			try {
+				Attendance attendance = (Attendance) inputJson.get(Key.ATTENDANCE);
+				Course course = CourseDAO.getCourseByAttendance(attendance);
+				if (course != null) {
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, course.toJson());
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
+		// Get course by result
+				public static JSONObject getCourseByResult(JSONObject inputJson) {
+					JSONObject returnJson = new JSONObject();
+					try {
+						Result result = (Result) inputJson.get(Key.RESULT);
+						Course course = CourseDAO.getCourseByResult(result);
+						if (course != null) {
+							returnJson.put(Key.STATUS, Value.SUCCESS);
+							returnJson.put(Key.MESSAGE, course.toJson());
+						} else {
+							returnJson.put(Key.STATUS, Value.FAIL);
+							returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						returnJson.put(Key.STATUS, Value.FAIL);
+						returnJson.put(Key.MESSAGE, e);
+					}
+					return returnJson;
+				}
 }

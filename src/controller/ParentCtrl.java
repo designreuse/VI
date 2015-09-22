@@ -2,6 +2,7 @@ package controller;
 
 import model.Branch;
 import model.Parent;
+import model.Student;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -17,29 +18,27 @@ public class ParentCtrl {
 
 	/**
 	 * CRUD
-	 * */
+	 */
 	public static JSONObject createParent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			if (branch != null) {
-			String name = (String) inputJson.get(Key.NAME);
-			String email = (String) inputJson.get(Key.EMAIL);
-			String contact = (String) inputJson.get(Key.CONTACT);
-			String address = (String) inputJson.get(Key.ADDRESS);
-			String password = (String) inputJson.get(Key.PASSWORD);
+				String name = (String) inputJson.get(Key.NAME);
+				String email = (String) inputJson.get(Key.EMAIL);
+				String contact = (String) inputJson.get(Key.CONTACT);
+				String address = (String) inputJson.get(Key.ADDRESS);
+				String password = (String) inputJson.get(Key.PASSWORD);
 
-			String passwordSalt = Encrypt.nextSalt();
-			String passwordHash = Encrypt.generateSaltedHash(password,
-					passwordSalt);
+				String passwordSalt = Encrypt.nextSalt();
+				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 
-			Parent parent = new Parent(name, passwordSalt, passwordHash,
-					contact, address, email, branch);
-			ParentDAO.addParent(parent);
+				Parent parent = new Parent(name, passwordSalt, passwordHash, contact, address, email, branch);
+				ParentDAO.addParent(parent);
 
-			returnJson.put(Key.STATUS, Value.SUCCESS);
-			returnJson.put(Key.MESSAGE, parent.toJson());
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, parent.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
@@ -97,8 +96,7 @@ public class ParentCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
-			Parent parent = ParentDAO.getParentById((long) inputJson
-					.get(Key.PARENTID));
+			Parent parent = ParentDAO.getParentById((long) inputJson.get(Key.PARENTID));
 
 			if (parent != null) {
 				String name = (String) inputJson.get(Key.NAME);
@@ -132,8 +130,7 @@ public class ParentCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
-			Parent parent = ParentDAO.getParentById((long) inputJson
-					.get(Key.PARENTID));
+			Parent parent = ParentDAO.getParentById((long) inputJson.get(Key.PARENTID));
 
 			if (parent != null) {
 				parent.setObjStatus(Value.DELETED);
@@ -164,7 +161,7 @@ public class ParentCtrl {
 			if (parent != null) {
 				String password = (String) inputJson.get(Key.PASSWORD);
 				String passwordSalt = parent.getPasswordSalt();
-				String passwordHash = Encrypt.generateSaltedHash(password,passwordSalt);
+				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 				String checkHash = parent.getPasswordHash();
 				if (checkHash.equals(passwordHash)) {
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -189,7 +186,7 @@ public class ParentCtrl {
 	public static JSONObject registerParent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		returnJson = getParentByEmail(inputJson);
-		Long statusTest = (long) returnJson.get(Key.STATUS); 
+		Long statusTest = (long) returnJson.get(Key.STATUS);
 		if (statusTest.intValue() == 0) {
 			returnJson = createParent(inputJson);
 		} else {
@@ -220,12 +217,33 @@ public class ParentCtrl {
 		return returnJson;
 	}
 
-	// Get parent by branch
+	// Get parent by branch ??
 	public static JSONObject getParentByBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
 			Branch branch = (Branch) inputJson.get(Key.BRANCH);
 			Parent parent = ParentDAO.getParentByBranch(branch);
+			if (parent != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, parent.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
+	// Get parent by student
+	public static JSONObject getParentByStudent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Student student = (Student) inputJson.get(Key.STUDENT);
+			Parent parent = ParentDAO.getParentByStudent(student);
 			if (parent != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, parent.toJson());

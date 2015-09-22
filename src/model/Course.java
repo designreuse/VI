@@ -120,13 +120,13 @@ public class Course {
 	/**
 	 * @return the attendances
 	 */
-	public Set<Attendance> getSchedules() {
+	public Set<Attendance> getAttendances() {
 		return attendances;
 	}
 	/**
 	 * @param attendances the attendances to set
 	 */
-	public void setSchedules(Set<Attendance> attendances) {
+	public void setAttendances(Set<Attendance> attendances) {
 		this.attendances = attendances;
 	}
 	/**

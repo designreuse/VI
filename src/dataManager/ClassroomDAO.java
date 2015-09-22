@@ -8,6 +8,7 @@ import java.util.List;
 import model.Attendance;
 import model.Branch;
 import model.Classroom;
+import model.Course;
 import model.Student;
 import model.Teacher;
 
@@ -56,6 +57,22 @@ public class ClassroomDAO {
 			classrooms.add((Classroom) o);
 		}
 		return classrooms;
+	}
+	public static Classroom getClassroomByAttendance(Attendance attendance){
+		Classroom classroom = null;
+		Classroom tempClassroom = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Classroom.class);
+		detachedCriteria.add(Restrictions.eq(Key.ATTENDANCE, attendance));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempClassroom = (Classroom)o;
+			//would this work? need to iterate through?
+			if(tempClassroom.getAttendances().equals(attendance)){
+				classroom = tempClassroom;
+				break;
+			}
+		}
+		return classroom;
 	}
 	
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Admin;
+import model.Branch;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -66,6 +67,21 @@ public class AdminDAO {
 		for(Object o : list){
 			tempAdmin = (Admin)o;
 			if(tempAdmin.getEmail().equals(email)){
+				admin = tempAdmin;
+				break;
+			}
+		}
+		return admin;
+	}
+	public static Admin getAdminByBranch(Branch branch){
+		Admin admin = null;
+		Admin tempAdmin = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempAdmin = (Admin)o;
+			if(tempAdmin.getBranches().equals(branch)){
 				admin = tempAdmin;
 				break;
 			}

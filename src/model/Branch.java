@@ -249,7 +249,7 @@ public class Branch {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-		//branch manager, teacher, attendance, classroom, student
+		//branch manager, teacher, classroom, student
 		
 		JSONArray branchManagerArr = new JSONArray();
 		for(BranchManager bm : BranchManagerDAO.getBranchManagersByBranch(this)){
@@ -262,12 +262,6 @@ public class Branch {
 			teacherArr.add(t.toJson());
 		}
 		returnJson.put(Key.TEACHERS, teacherArr);
-		
-//		JSONArray attendanceArr = new JSONArray();
-//		for(Attendance a : AttendanceDAO.getBillsByStudent(this)){
-//			attendanceArr.add(a.toJson());
-//		}
-//		returnJson.put(Key.ATTENDANCE, attendanceArr);
 		
 		JSONArray classroomArr = new JSONArray();
 		for(Classroom c : ClassroomDAO.getClassroomsByBranch(this)){

@@ -5,6 +5,8 @@ import java.util.Date;
 
 import model.Branch;
 import model.Classroom;
+import model.Course;
+import model.Salary;
 import model.Teacher;
 
 import org.json.simple.JSONArray;
@@ -225,30 +227,73 @@ public class TeacherCtrl {
 		}
 		return returnJson;
 	}
-	// Get teachers by branch
-		public static JSONObject getTeachersByBranch(JSONObject inputJson) {
-			JSONObject returnJson = new JSONObject();
-			try {
-				Branch branch = (Branch) inputJson.get(Key.BRANCH);
-				ArrayList<Teacher> teachers = TeacherDAO.getTeachersByBranch(branch);
-				if (teachers != null) {
-					// iterate through the list of teachers & add into
-					// jsonobject
-					for (Teacher teacher : teachers) {
-						// add 1 time or many times
-						returnJson.put(Key.STATUS, Value.SUCCESS);
 
-						returnJson.put(Key.MESSAGE, teacher.toJson());
-					}
-				} else {
-					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+	// Get teachers by branch
+	public static JSONObject getTeachersByBranch(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Branch branch = (Branch) inputJson.get(Key.BRANCH);
+			ArrayList<Teacher> teachers = TeacherDAO.getTeachersByBranch(branch);
+			if (teachers != null) {
+				// iterate through the list of teachers & add into
+				// jsonobject
+				for (Teacher teacher : teachers) {
+					// add 1 time or many times
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+
+					returnJson.put(Key.MESSAGE, teacher.toJson());
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
-			return returnJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
 		}
+		return returnJson;
+	}
+
+	// Get teacher by course
+	public static JSONObject getTeacherByCourse(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Course course = (Course) inputJson.get(Key.COURSE);
+			Teacher teacher = TeacherDAO.getTeacherByCourse(course);
+			if (teacher != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacher.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get teacher by salary
+	public static JSONObject getTeacherBySalary(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Salary salary = (Salary) inputJson.get(Key.SALARY);
+			Teacher teacher = TeacherDAO.getTeacherBySalary(salary);
+			if (teacher != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacher.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 }

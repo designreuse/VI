@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Admin;
+import model.Attendance;
+import model.Bill;
 import model.Branch;
 import model.Classroom;
 import model.Parent;
+import model.Result;
 import model.Student;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -83,5 +86,57 @@ public class StudentDAO {
 			students.add((Student) o);
 		}
 		return students;
+	}
+	public static Student getStudentByBill(Bill bill){
+		Student student = null;
+		Student tempStudent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
+		detachedCriteria.add(Restrictions.eq(Key.BILL, bill));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempStudent = (Student)o;
+			//would this work? need to iterate through?
+			if(tempStudent.getBills().equals(bill)){
+				student = tempStudent;
+				break;
+			}
+		}
+		return student;
+	}
+	public static Student getStudentByResult(Result result){
+		Student student = null;
+		Student tempStudent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
+		detachedCriteria.add(Restrictions.eq(Key.RESULT, result));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempStudent = (Student)o;
+			//would this work? need to iterate through?
+			if(tempStudent.getResults().equals(result)){
+				student = tempStudent;
+				break;
+			}
+		}
+		return student;
+	}
+	
+	public static Student getStudentByAttendance(Attendance attendance){
+		Student student = null;
+		Student tempStudent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
+		detachedCriteria.add(Restrictions.eq(Key.ATTENDANCE, attendance));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempStudent = (Student)o;
+			//would this work? need to iterate through?
+			if(tempStudent.getAttendances().equals(attendance)){
+				student = tempStudent;
+				break;
+			}
+		}
+		return student;
 	}
 }

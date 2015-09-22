@@ -1,6 +1,7 @@
 package controller;
 
 import model.Admin;
+import model.Branch;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -199,4 +200,24 @@ public class AdminCtrl {
 		}
 		return returnJson;
 	}
+	//Get admin by branch
+		public static JSONObject getAdminByBranch (JSONObject inputJson){
+			JSONObject returnJson = new JSONObject();
+			try{
+				Branch branch = (Branch)inputJson.get(Key.BRANCH);
+				Admin admin = AdminDAO.getAdminByBranch(branch);
+				if(admin != null){
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, admin.toJson());
+				}else{
+					returnJson.put(Key.STATUS, Value.FAIL)  ;
+					returnJson.put(Key.MESSAGE, Message.ADMINNOTEXIST);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL)  ;
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
 }

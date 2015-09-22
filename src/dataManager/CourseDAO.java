@@ -8,6 +8,7 @@ import java.util.List;
 import model.Attendance;
 import model.Classroom;
 import model.Course;
+import model.Result;
 import model.Salary;
 import model.Teacher;
 
@@ -56,6 +57,39 @@ public class CourseDAO {
 			courses.add((Course) o);
 		}
 		return courses;
+	}
+	public static Course getCourseByAttendance(Attendance attendance){
+		Course course = null;
+		Course tempCourse = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Course.class);
+		detachedCriteria.add(Restrictions.eq(Key.ATTENDANCE, attendance));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempCourse = (Course)o;
+			//would this work? need to iterate through?
+			if(tempCourse.getAttendances().equals(attendance)){
+				course = tempCourse;
+				break;
+			}
+		}
+		return course;
+	}
+	
+	public static Course getCourseByResult(Result result){
+		Course course = null;
+		Course tempCourse = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Course.class);
+		detachedCriteria.add(Restrictions.eq(Key.RESULT, result));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempCourse = (Course)o;
+			//would this work? need to iterate through?
+			if(tempCourse.getResults().equals(result)){
+				course = tempCourse;
+				break;
+			}
+		}
+		return course;
 	}
 	
 }
