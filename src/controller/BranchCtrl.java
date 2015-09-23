@@ -78,11 +78,11 @@ public class BranchCtrl {
 	}
 
 	// Get all branch
-	public static JSONObject getAllBranchs() {
+	public static JSONObject getAllBranches() {
 		JSONObject returnJson = new JSONObject();
 		try {
 			JSONArray branchJArr = new JSONArray();
-			for (Branch a : BranchDAO.getAllBranchs()) {
+			for (Branch a : BranchDAO.getAllBranches()) {
 				branchJArr.add(a.toJson());
 			}
 			returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -185,12 +185,9 @@ public class BranchCtrl {
 	public static JSONObject getBranchByStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			
-			System.out.print((long)inputJson.get(Key.STUDENTID));
 			Student student = StudentDAO.getStudentById((long)inputJson.get(Key.STUDENTID));
-			System.out.print(student);
 			if (student != null) {
-				Branch branch = BranchDAO.getBranchByStudent(student);
+				Branch branch = student.getBranch();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, branch.toJson());
 			} else {
@@ -266,4 +263,5 @@ public class BranchCtrl {
 		}
 		return returnJson;
 	}
+
 }

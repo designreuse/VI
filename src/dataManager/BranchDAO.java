@@ -22,7 +22,7 @@ import system.Value;
 
 public class BranchDAO {
 	// a. Branch class method: C R U D
-	public static ArrayList<Branch> getAllBranchs() {
+	public static ArrayList<Branch> getAllBranches() {
 		ArrayList<Branch> branchs = new ArrayList<Branch>();
 		DetachedCriteria dc = DetachedCriteria.forClass(Branch.class);
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(dc);
@@ -61,16 +61,16 @@ public class BranchDAO {
 		return branches;
 	}
 	
-	public static Branch getBranchByStudent(Student student){
+	public static Branch getBranchByStudent(long studentId){
 		Branch branch = null;
 		Branch tempBranch = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Branch.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.STUDENTID, studentId));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
 			tempBranch = (Branch)o;
 			//would this work? need to iterate through?
-			if(tempBranch.getStudents().equals(student)){
+			if(tempBranch != null){
 				branch = tempBranch;
 				break;
 			}
