@@ -4,6 +4,7 @@ import hibernate.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import model.Admin;
 import model.Branch;
@@ -40,50 +41,56 @@ public class AdminDAO {
 	public static void deleteAdmin(Admin admin) {
 		HibernateUtil.delete(admin);
 	}
-	
-	//features
-	public static Admin getAdminByName(String name){
+
+	// features
+	public static Admin getAdminByName(String name) {
 		Admin admin = null;
 		Admin tempAdmin = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
 		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempAdmin = (Admin)o;
-			if(tempAdmin.getName().equals(name)){
+		for (Object o : list) {
+			tempAdmin = (Admin) o;
+			if (tempAdmin.getName().equals(name)) {
 				admin = tempAdmin;
 				break;
 			}
 		}
 		return admin;
 	}
-	
-	public static Admin getAdminByEmail(String email){
+
+	public static Admin getAdminByEmail(String email) {
 		Admin admin = null;
 		Admin tempAdmin = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
 		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempAdmin = (Admin)o;
-			if(tempAdmin.getEmail().equals(email)){
+		for (Object o : list) {
+			tempAdmin = (Admin) o;
+			if (tempAdmin.getEmail().equals(email)) {
 				admin = tempAdmin;
 				break;
 			}
 		}
 		return admin;
 	}
-	public static Admin getAdminByBranch(Branch branch){
+
+	public static Admin getAdminByBranch(Branch branch) {
 		Admin admin = null;
 		Admin tempAdmin = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
 		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempAdmin = (Admin)o;
-			if(tempAdmin.getBranches().equals(branch)){
-				admin = tempAdmin;
-				break;
+		for (Object o : list) {
+			tempAdmin = (Admin) o;
+			// need to iterate through?
+			//Set<Branch> branches = tempAdmin.getBranches();
+			Set<Branch> branches = tempAdmin.getBranches();
+			for (Branch b : branches) {
+				if (b.equals(branch)) {
+					admin = tempAdmin;
+					break;
+				}
 			}
 		}
 		return admin;

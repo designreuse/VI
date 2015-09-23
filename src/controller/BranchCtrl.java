@@ -185,14 +185,17 @@ public class BranchCtrl {
 	public static JSONObject getBranchByStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Student student = (Student) inputJson.get(Key.STUDENT);
-			Branch branch = BranchDAO.getBranchByStudent(student);
-			if (branch != null) {
+			
+			System.out.print((long)inputJson.get(Key.STUDENTID));
+			Student student = StudentDAO.getStudentById((long)inputJson.get(Key.STUDENTID));
+			System.out.print(student);
+			if (student != null) {
+				Branch branch = BranchDAO.getBranchByStudent(student);
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, branch.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -237,19 +237,25 @@ public class StudentCtrl {
 	public static JSONObject getStudentsByBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Branch branch = (Branch) inputJson.get(Key.BRANCH);
-			ArrayList<Student> students = StudentDAO.getStudentsByBranch(branch);
-			if (students != null) {
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			//ArrayList<Student> students = StudentDAO.getStudentsByBranch(branch);
+			if (branch != null) {
 				// iterate through the list of students & add into jsonobject
-				for (Student student : students) {
-					// add 1 time or many times
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-
-					returnJson.put(Key.MESSAGE, student.toJson());
+//				for (Student student : students) {
+//					// add 1 time or many times
+//					returnJson.put(Key.STATUS, Value.SUCCESS);
+//
+//					returnJson.put(Key.MESSAGE, student.toJson());
+//				}
+				JSONArray studentArr = new JSONArray();
+				for(Student s: StudentDAO.getStudentsByBranch(branch)){
+					studentArr.add(s.toJson());
 				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, studentArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

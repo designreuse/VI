@@ -26,7 +26,7 @@
    </key>
    <one-to-many class="model.Result"/>
   </set>
-  <set lazy="true" name="schedules" sort="unsorted" table="ATTENDANCE">
+  <set lazy="true" name="attendances" sort="unsorted" table="ATTENDANCE">
    <key>
     <column name="COURSEID"/>
    </key>

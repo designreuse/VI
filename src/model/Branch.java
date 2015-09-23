@@ -6,11 +6,8 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AttendanceDAO;
-import dataManager.BillDAO;
 import dataManager.BranchManagerDAO;
 import dataManager.ClassroomDAO;
-import dataManager.ResultDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
 import system.Config;
