@@ -7,6 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.AdminDAO;
+import dataManager.BranchDAO;
 import system.Encrypt;
 import system.Key;
 import system.Message;
@@ -204,14 +205,14 @@ public class AdminCtrl {
 		public static JSONObject getAdminByBranch (JSONObject inputJson){
 			JSONObject returnJson = new JSONObject();
 			try{
-				Branch branch = (Branch)inputJson.get(Key.BRANCH);
-				Admin admin = AdminDAO.getAdminByBranch(branch);
-				if(admin != null){
+				Branch branch = BranchDAO.getBranchById((long)inputJson.get(Key.BRANCHID));
+				if(branch != null){
+					Admin admin = branch.getAdmin();
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, admin.toJson());
 				}else{
 					returnJson.put(Key.STATUS, Value.FAIL)  ;
-					returnJson.put(Key.MESSAGE, Message.ADMINNOTEXIST);
+					returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 				}
 			}catch(Exception e){
 				e.printStackTrace();

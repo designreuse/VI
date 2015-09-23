@@ -15,6 +15,8 @@ import org.json.simple.JSONObject;
 
 import dataManager.AdminDAO;
 import dataManager.BranchDAO;
+import dataManager.BranchManagerDAO;
+import dataManager.ClassroomDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
 import system.Key;
@@ -206,14 +208,14 @@ public class BranchCtrl {
 	public static JSONObject getBranchByBranchManager(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			BranchManager branchManager = (BranchManager) inputJson.get(Key.BRANCHMANAGER);
-			Branch branch = BranchDAO.getBranchByBranchManager(branchManager);
-			if (branch != null) {
+			BranchManager branchManager = BranchManagerDAO.getBranchManagerById((long)inputJson.get(Key.BRANCHMANAGERID));
+			if (branchManager != null) {
+				Branch branch = branchManager.getBranch();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, branch.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.BRANCHMANAGERNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -227,14 +229,14 @@ public class BranchCtrl {
 	public static JSONObject getBranchByClassroom(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Classroom classroom = (Classroom) inputJson.get(Key.CLASSROOM);
-			Branch branch = BranchDAO.getBranchByClassroom(classroom);
-			if (branch != null) {
+			Classroom classroom = ClassroomDAO.getClassroomById((long)inputJson.get(Key.CLASSROOMID));
+			if (classroom != null) {
+				Branch branch = classroom.getBranch();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, branch.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -247,14 +249,14 @@ public class BranchCtrl {
 	public static JSONObject getBranchByTeacher(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Teacher teacher = (Teacher) inputJson.get(Key.TEACHER);
-			Branch branch = BranchDAO.getBranchByTeacher(teacher);
-			if (branch != null) {
+			Teacher teacher = TeacherDAO.getTeacherById((long)inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				Branch branch = teacher.getBranch();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, branch.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

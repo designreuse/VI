@@ -12,6 +12,7 @@ import model.Course;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.AttendanceDAO;
 import dataManager.BranchDAO;
 import dataManager.BranchManagerDAO;
 import dataManager.ClassroomDAO;
@@ -181,14 +182,14 @@ public class ClassroomCtrl {
 	public static JSONObject getClassroomByAttendance(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Attendance attendance = (Attendance) inputJson.get(Key.ATTENDANCE);
-			Classroom classroom = ClassroomDAO.getClassroomByAttendance(attendance);
-			if (classroom != null) {
+			Attendance attendance = AttendanceDAO.getAttendanceById((long)inputJson.get(Key.ATTENDANCEID));
+			if (attendance != null) {
+				Classroom classroom = attendance.getClassroom();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, classroom.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

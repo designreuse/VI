@@ -14,6 +14,8 @@ import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
 import dataManager.ClassroomDAO;
+import dataManager.CourseDAO;
+import dataManager.SalaryDAO;
 import dataManager.TeacherDAO;
 import system.Config;
 import system.Encrypt;
@@ -259,14 +261,14 @@ public class TeacherCtrl {
 	public static JSONObject getTeacherByCourse(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Course course = (Course) inputJson.get(Key.COURSE);
-			Teacher teacher = TeacherDAO.getTeacherByCourse(course);
-			if (teacher != null) {
+			Course course = CourseDAO.getCourseById((long)inputJson.get(Key.COURSEID));
+			if (course != null) {
+				Teacher teacher = course.getTeacher();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacher.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -280,14 +282,14 @@ public class TeacherCtrl {
 	public static JSONObject getTeacherBySalary(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Salary salary = (Salary) inputJson.get(Key.SALARY);
-			Teacher teacher = TeacherDAO.getTeacherBySalary(salary);
-			if (teacher != null) {
+			Salary salary = SalaryDAO.getSalaryById((long)inputJson.get(Key.SALARYID));
+			if (salary != null) {
+				Teacher teacher = salary.getTeacher();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacher.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.SALARYNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

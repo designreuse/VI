@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.AttendanceDAO;
 import dataManager.CourseDAO;
+import dataManager.ResultDAO;
 import dataManager.TeacherDAO;
 import system.Config;
 import system.Encrypt;
@@ -184,14 +185,14 @@ public class CourseCtrl {
 		public static JSONObject getCourseByAttendance(JSONObject inputJson) {
 			JSONObject returnJson = new JSONObject();
 			try {
-				Attendance attendance = (Attendance) inputJson.get(Key.ATTENDANCE);
-				Course course = CourseDAO.getCourseByAttendance(attendance);
-				if (course != null) {
+				Attendance attendance = AttendanceDAO.getAttendanceById((long)inputJson.get(Key.ATTENDANCEID));
+				if (attendance != null) {
+					Course course = attendance.getCourse();
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, course.toJson());
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+					returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -204,14 +205,14 @@ public class CourseCtrl {
 				public static JSONObject getCourseByResult(JSONObject inputJson) {
 					JSONObject returnJson = new JSONObject();
 					try {
-						Result result = (Result) inputJson.get(Key.RESULT);
-						Course course = CourseDAO.getCourseByResult(result);
-						if (course != null) {
+						Result result = ResultDAO.getResultById((long)inputJson.get(Key.RESULTID));
+						if (result != null) {
+							Course course = result.getCourse();
 							returnJson.put(Key.STATUS, Value.SUCCESS);
 							returnJson.put(Key.MESSAGE, course.toJson());
 						} else {
 							returnJson.put(Key.STATUS, Value.FAIL);
-							returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+							returnJson.put(Key.MESSAGE, Message.RESULTNOTEXIST);
 						}
 					} catch (Exception e) {
 						e.printStackTrace();

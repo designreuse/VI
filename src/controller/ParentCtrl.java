@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
 import dataManager.ParentDAO;
+import dataManager.StudentDAO;
 import system.Encrypt;
 import system.Key;
 import system.Message;
@@ -242,14 +243,14 @@ public class ParentCtrl {
 	public static JSONObject getParentByStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Student student = (Student) inputJson.get(Key.STUDENT);
-			Parent parent = ParentDAO.getParentByStudent(student);
-			if (parent != null) {
+			Student student = StudentDAO.getStudentById((long)inputJson.get(Key.STUDENTID));
+			if (student != null) {
+				Parent parent = student.getParent();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, parent.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
