@@ -51,16 +51,26 @@ function registerParent() {
 function getParents() {
 	$.ajax({
        url: '../VI/GetAllParentsServlet?input={}',
-//       method: 'GET',
-//       dataType: 'json',
-        success: function(data) {
-                console.log(data);
-                $('#parentTable').dynatable({
-                	dataset:{
-                		records: data,
-                	},
-                });    
-        }
+       method: 'GET',
+       dataType: 'json',
+       success: function(data) {
+                console.log(JSON.stringify(data));
+                console.log(data.status);
+                if (data.status == 1){
+	                $('#parentTable').dynatable({
+	                	dataset:{
+	                		records: data.message
+	                	}
+	                }); 
+                }
+                
+                else{
+                	console.log(status);
+                }
+        },
+		error : function(err) {
+			console.log(err);
+		}
     });
    
 }	
