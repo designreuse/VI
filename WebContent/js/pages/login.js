@@ -1,17 +1,14 @@
 function login() {
 	// console.log("enter");
 	var email = $("#email").val();
-	console.log(email);
 	var password = $("#password").val();
-	console.log(password);
 	var input = {};
 	input.email = email;
 	input.password = password;
 	var inputStr = JSON.stringify(input);
-	inputStr = encodeURIComponent(inputStr);
+	inputStr = encodeURIComponent(inputStr);							//BUNNY LOVES YOU ^^ :D     JIAYOUSIES 
 	$.ajax({
 		url : '../VI/LoginAdminServlet?input=' + inputStr, //this part sends to the servlet
-//		url : '../testtest/LoginAdminServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {
@@ -29,7 +26,6 @@ function login() {
 				window.location = "adminMain.jsp";
 			} else {
 				$("#message").html("Invalid Email/Password");
-				console.log(message);
 			}
 		}
 	});

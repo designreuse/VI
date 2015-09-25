@@ -13,7 +13,7 @@
 			</a>
 				<ul class="sub">
 					<li><a class="" href="parentsRegistration.jsp">Registration</a></li>
-					<li><a class="" href="parentsProfile.jsp">Profile List</a></li>
+					<li><a class="" href="parentProfile.jsp">Profile List</a></li>
 				</ul></li>
 				
 <!-- 			<li class="sub-menu"><a href="javascript:;" class=""> <i -->
