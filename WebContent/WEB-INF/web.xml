@@ -67,14 +67,6 @@
     <url-pattern>/GetAllParentsServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetAllBranchesServlet</servlet-name>
-    <servlet-class>service.GetAllBranchesServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetAllBranchesServlet</servlet-name>
-    <url-pattern>/GetAllBranchesServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>GetAllStudentsServlet</servlet-name>
     <servlet-class>service.GetAllStudentsServlet</servlet-class>
   </servlet>
@@ -330,14 +322,15 @@
     <servlet-name>GetStudentById</servlet-name>
     <url-pattern>/GetStudentById</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>GetParentByStudent</servlet-name>
-    <servlet-class>service.GetParentByStudent</servlet-class>
+    <servlet>
+    <servlet-name>CreateAttendanceServlet</servlet-name>
+    <servlet-class>service.CreateAttendanceServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetParentByStudent</servlet-name>
-    <url-pattern>/GetParentByStudent</url-pattern>
+    <servlet-name>CreateAttendanceServlet</servlet-name>
+    <url-pattern>/CreateAttendanceServlet</url-pattern>
   </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
