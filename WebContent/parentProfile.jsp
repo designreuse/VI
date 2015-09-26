@@ -41,6 +41,7 @@
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.dynatable.js"></script>
+	<script src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
 	<!-- nice scroll -->
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
@@ -78,16 +79,26 @@
 									<thead>
 										<tr>
 											<th>Parent ID</th>
+											<th>Remark</th>
 											<th>Name</th>
 											<th>Contact</th>
 											<th>Email</th>
 											<th>Address</th>
-											<th>Join Date</th>
-											<th>Options</th>
+											<th>Create Date</th>
+											<th>ObjStatus</th>
 										</tr>
 									</thead>
-									<tbody id='parents'>
-									</tbody>
+<!-- 									<tbody id='parents'> -->
+<!-- 										<tr class="prototype"> -->
+<!-- 											<td><label for="parentId"></label></td> -->
+<!-- 											<td><label for="name"></label></td> -->
+<!-- 											<td><label for="contact"></label></td> -->
+<!-- 											<td><label for="email"></label></td> -->
+<!-- 											<td><label for="address"></label></td> -->
+<!-- 											<td><label for="createDate"></label></td> -->
+<!-- 											<td><label for="options">pls work!</label></td> -->
+<!-- 										</tr> -->
+<!-- 									</tbody> -->
 								</table>
 							</div>
 						</div>
