@@ -6,8 +6,11 @@ import java.util.Date;
 import model.Branch;
 import model.Classroom;
 import model.Course;
+import model.PointEvent;
 import model.Salary;
+import model.Student;
 import model.Teacher;
+import model.TeacherCourse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +18,9 @@ import org.json.simple.JSONObject;
 import dataManager.BranchDAO;
 import dataManager.ClassroomDAO;
 import dataManager.CourseDAO;
+import dataManager.PointEventDAO;
 import dataManager.SalaryDAO;
+import dataManager.TeacherCourseDAO;
 import dataManager.TeacherDAO;
 import system.Config;
 import system.Encrypt;
@@ -298,4 +303,45 @@ public class TeacherCtrl {
 		}
 		return returnJson;
 	}
+	// Get teacher by pointEvent
+	public static JSONObject getTeacherByPointEvent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			PointEvent pointEvent = PointEventDAO.getPointEventById((long)inputJson.get(Key.POINTEVENTID));
+			if (pointEvent != null) {
+				Teacher teacher = pointEvent.getTeacher();
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacher.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.POINTEVENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	// Get teacher by teachercourse
+		public static JSONObject getTeacherByTeacherCourse(JSONObject inputJson) {
+			JSONObject returnJson = new JSONObject();
+			try {
+				TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
+				if (teacherCourse != null) {
+					long teacherId = teacherCourse.getTeacherId();
+					Teacher teacher = TeacherDAO.getTeacherById(teacherId);
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, teacher.toJson());
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
 }

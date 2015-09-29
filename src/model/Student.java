@@ -21,12 +21,14 @@ public class Student {
 	private String studentLevel;
 	private String passwordSalt;
 	private String passwordHash;
+	private long points; 
 
 	private Branch branch;
 	private Parent parent;
 	private Set<Result> results;
 	private Set<Bill> bills;
 	private Set<Attendance> attendances;
+	private Set<PointEvent> pointEvents;
 
 	private long objStatus;
 	private Date createDate;
@@ -47,6 +49,7 @@ public class Student {
 		this.parent = parent;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
+		this.points = 0;
 	}
 
 	/**
@@ -268,6 +271,22 @@ public class Student {
 		this.attendances = attendances;
 	}
 
+	
+	public Set<PointEvent> getPointEvents() {
+		return pointEvents;
+	}
+
+	public void setPointEvents(Set<PointEvent> pointEvents) {
+		this.pointEvents = pointEvents;
+	}
+	public long getPoints() {
+		return points;
+	}
+
+	public void setPoints(long points) {
+		this.points = points;
+	}
+
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 
@@ -277,6 +296,7 @@ public class Student {
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.STUDENTLEVEL, this.studentLevel);
+		returnJson.put(Key.POINTS, this.points);
 
 		returnJson.put(Key.BRANCH, this.branch.toJson());// need to implement
 		returnJson.put(Key.PARENT, this.parent.toJson());// need to implement

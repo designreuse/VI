@@ -57,6 +57,7 @@ public class Key {
 	public static final String STUDENTS = "students";
 	public static final String STUDENTID = "studentId";
 	public static final String STUDENTLEVEL = "studentLevel";
+	public static final String POINTS = "points";	
 	
 	public static final String BILL = "bill";
 	public static final String BILLS = "bills";
@@ -85,7 +86,13 @@ public class Key {
 	public static final String ATTENDANCES = "attendances";
 	public static final String ATTENDANCEID = "attendaceId";
 	public static final String PLANNEDSTARTDATE = "planStartDate";
-	public static final String ACTUALSTARTDATE = "actualStartDate";	
+	public static final String ACTUALSTARTDATE = "actualStartDate";
+	
+	public static final String POINTAMOUNT = "pointAmount";
+	public static final String DESCRIPTION = "description";
+	public static final String POINTEVENTID = "pointEventId";
+	public static final String TEACHERCOURSEID = "teacherCourseId";
+
 	
 	
 	

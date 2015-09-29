@@ -22,11 +22,15 @@ public class Message {
 	public static final String RESULTNOTEXIST = "The result does not exist.";
 	public static final String CLASSROOMNOTEXIST = "The classroom does not exist.";
 	public static final String ATTENDANCENOTEXIST = "The attendance does not exist.";
+	public static final String POINTEVENTNOTEXIST = "The point event does not exist.";
+	public static final String TEACHERCOURSENOTEXIST = "The teacher course does not exist.";
 	
 	public static final String WRONGADMINPASSWORD = "The Admin password is incorrect.";
 	public static final String WRONGSTUDENTPASSWORD = "The Student password is incorrect.";
 	public static final String WRONGTEACHERPASSWORD = "The Teacher password is incorrect.";
 	public static final String EMAILALREADYEXIST = "The email has already been used.";
 	public static final String WRONGPARENTPASSWORD = "The Parent password is incorrect.";
+	
+
 
 }

@@ -7,6 +7,7 @@ import model.Attendance;
 import model.Bill;
 import model.Branch;
 import model.Parent;
+import model.PointEvent;
 import model.Result;
 import model.Student;
 
@@ -17,6 +18,7 @@ import dataManager.AttendanceDAO;
 import dataManager.BillDAO;
 import dataManager.BranchDAO;
 import dataManager.ParentDAO;
+import dataManager.PointEventDAO;
 import dataManager.ResultDAO;
 import dataManager.StudentDAO;
 import system.Encrypt;
@@ -241,17 +243,18 @@ public class StudentCtrl {
 		JSONObject returnJson = new JSONObject();
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-			//ArrayList<Student> students = StudentDAO.getStudentsByBranch(branch);
+			// ArrayList<Student> students =
+			// StudentDAO.getStudentsByBranch(branch);
 			if (branch != null) {
 				// iterate through the list of students & add into jsonobject
-//				for (Student student : students) {
-//					// add 1 time or many times
-//					returnJson.put(Key.STATUS, Value.SUCCESS);
-//
-//					returnJson.put(Key.MESSAGE, student.toJson());
-//				}
+				// for (Student student : students) {
+				// // add 1 time or many times
+				// returnJson.put(Key.STATUS, Value.SUCCESS);
+				//
+				// returnJson.put(Key.MESSAGE, student.toJson());
+				// }
 				JSONArray studentArr = new JSONArray();
-				for(Student s: StudentDAO.getStudentsByBranch(branch)){
+				for (Student s : StudentDAO.getStudentsByBranch(branch)) {
 					studentArr.add(s.toJson());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -298,7 +301,7 @@ public class StudentCtrl {
 	public static JSONObject getStudentByBill(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Bill bill = BillDAO.getBillById((long)inputJson.get(Key.BILLID));
+			Bill bill = BillDAO.getBillById((long) inputJson.get(Key.BILLID));
 			if (bill != null) {
 				Student student = bill.getStudent();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -314,44 +317,67 @@ public class StudentCtrl {
 		}
 		return returnJson;
 	}
+
 	// Get student by result
-		public static JSONObject getStudentByResult(JSONObject inputJson) {
-			JSONObject returnJson = new JSONObject();
-			try {
-				Result result = ResultDAO.getResultById((long)inputJson.get(Key.RESULTID));
-				if (result != null) {
-					Student student = result.getStudent();
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, student.toJson());
-				} else {
-					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.RESULTNOTEXIST);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+	public static JSONObject getStudentByResult(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Result result = ResultDAO.getResultById((long) inputJson.get(Key.RESULTID));
+			if (result != null) {
+				Student student = result.getStudent();
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, student.toJson());
+			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.RESULTNOTEXIST);
 			}
-			return returnJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
 		}
-		// Get student by attendance
-		public static JSONObject getStudentByAttendance(JSONObject inputJson) {
-			JSONObject returnJson = new JSONObject();
-			try {
-				Attendance attendance = AttendanceDAO.getAttendanceById((long)inputJson.get(Key.ATTENDANCEID));
-				if (attendance != null) {
-					Student student = attendance.getStudent();
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, student.toJson());
-				} else {
-					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
+		return returnJson;
+	}
+
+	// Get student by attendance
+	public static JSONObject getStudentByAttendance(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Attendance attendance = AttendanceDAO.getAttendanceById((long) inputJson.get(Key.ATTENDANCEID));
+			if (attendance != null) {
+				Student student = attendance.getStudent();
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, student.toJson());
+			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
 			}
-			return returnJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
 		}
+		return returnJson;
+	}
+
+	// Get student by pointEvent
+	public static JSONObject getStudentByPointEvent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			PointEvent pointEvent = PointEventDAO.getPointEventById((long) inputJson.get(Key.POINTEVENTID));
+			if (pointEvent != null) {
+				Student student = pointEvent.getStudent();
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, student.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.POINTEVENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 }

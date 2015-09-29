@@ -30,7 +30,9 @@ public class Teacher {
 
 	private Set<Course> courses;
 	private Set<Salary> salaries;
+	private Set<TeacherCourse> teacherCourses;
 	private Branch branch;
+	private Set<PointEvent> pointEvents;
 
 	public Teacher() {
 	}
@@ -274,6 +276,24 @@ public class Teacher {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+	
+
+	public Set<TeacherCourse> getTeacherCourses() {
+		return teacherCourses;
+	}
+
+	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
+		this.teacherCourses = teacherCourses;
+	}
+
+	
+	public Set<PointEvent> getPointEvents() {
+		return pointEvents;
+	}
+
+	public void setPointEvents(Set<PointEvent> pointEvents) {
+		this.pointEvents = pointEvents;
 	}
 
 	public JSONObject toJson() {

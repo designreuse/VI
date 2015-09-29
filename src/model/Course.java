@@ -22,6 +22,7 @@ public class Course {
 	
 	private Set<Result> results;
 	private Set<Attendance> attendances;
+	private Set<TeacherCourse> teacherCourses;
 	private Teacher teacher;
 	
 	private long objStatus;
@@ -178,6 +179,14 @@ public class Course {
 		this.remark = remark;
 	}
 	
+	public Set<TeacherCourse> getTeacherCourses() {
+		return teacherCourses;
+	}
+
+	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
+		this.teacherCourses = teacherCourses;
+	}
+
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
