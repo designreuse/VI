@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 28, 2015 2:57:38 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Oct 5, 2015 5:37:30 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="model.Parent" table="PARENT">
   <id name="parentId" type="long">
@@ -25,6 +25,9 @@
   </property>
   <property generated="never" lazy="false" name="email" type="java.lang.String">
    <column name="EMAIL"/>
+  </property>
+  <property generated="never" lazy="false" name="parentNric" type="java.lang.String">
+   <column name="PARENTNRIC"/>
   </property>
   <set lazy="true" name="students" sort="unsorted" table="STUDENT">
    <key>

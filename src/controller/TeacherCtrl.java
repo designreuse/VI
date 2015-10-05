@@ -46,8 +46,9 @@ public class TeacherCtrl {
 				Date dateOfBirth = Config.SDF.parse((String) inputJson.get(Key.DATEOFBIRTH));
 				long age = (long) inputJson.get(Key.AGE);
 				String qualification = (String) inputJson.get(Key.QUALIFICATION);
+				String teacherNric = (String) inputJson.get(Key.TEACHERNRIC);
 
-				Teacher teacher = new Teacher(name, email, contact, address, dateOfBirth, age, qualification, branch);
+				Teacher teacher = new Teacher(name, email, contact, address, dateOfBirth, age, qualification, teacherNric, branch);
 				TeacherDAO.addTeacher(teacher);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);

@@ -55,4 +55,19 @@ public class BranchManagerDAO {
 		}
 		return branchemanagers;
 	}
+	public static BranchManager getBranchManagerByEmail(String email) {
+		BranchManager branchManager = null;
+		BranchManager tempBranchManager = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BranchManager.class);
+		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for (Object o : list) {
+			tempBranchManager = (BranchManager) o;
+			if (tempBranchManager.getEmail().equals(email)) {
+				branchManager = tempBranchManager;
+				break;
+			}
+		}
+		return branchManager;
+	}
 }

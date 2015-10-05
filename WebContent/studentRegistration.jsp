@@ -31,7 +31,7 @@
 
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="./js/pages/student.js"></script>
+<script src="./js/branchmanager/student.js"></script>
 
 </head>
 
@@ -123,7 +123,7 @@
 												<span class="required">*</span>
 											</label>
 											<div class="col-lg-10">
-												<input class="form-control" id="sNric" name="sNric"
+												<input class="form-control" id="studentNric" name="sNric"
 													type="text" required />
 											</div>
 										</div>
@@ -159,7 +159,7 @@
 												<span class="required">*</span>
 											</label>
 											<div class="col-lg-10">
-												<input class="form-control" id="pNric" name="pNric"
+												<input class="form-control" id="parentNric" name="pNric"
 													type="text" required />
 											</div>
 										</div>

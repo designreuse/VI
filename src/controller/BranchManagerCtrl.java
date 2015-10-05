@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.AdminDAO;
 import dataManager.BranchDAO;
 import dataManager.BranchManagerDAO;
 import model.Admin;
@@ -20,7 +21,7 @@ public class BranchManagerCtrl {
 	/**
 	 * CRUD
 	 */
-	public static JSONObject createBranch(JSONObject inputJson) {
+	public static JSONObject createBranchManager(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 
 		try {
@@ -29,19 +30,20 @@ public class BranchManagerCtrl {
 				String email = (String) inputJson.get(Key.EMAIL);
 				String password = (String) inputJson.get(Key.PASSWORD);
 				String contactNumber = (String) inputJson.get(Key.CONTACTNUMBER);
+				String branchManagerNric = (String) inputJson.get(Key.BRANCHMANAGERNRIC);
 
 				String passwordSalt = Encrypt.nextSalt();
 				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 
 				BranchManager branchManager = new BranchManager(email, passwordSalt, passwordHash, branch,
-						contactNumber);
+						contactNumber, branchManagerNric);
 				BranchManagerDAO.addBranchManager(branchManager);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, branch.toJson());
+				returnJson.put(Key.MESSAGE, branchManager.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.ADMINNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -175,6 +177,35 @@ public class BranchManagerCtrl {
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	//login
+	public static JSONObject loginBranchManager(JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			String email = (String)inputJson.get(Key.EMAIL);
+			BranchManager branchManager = BranchManagerDAO.getBranchManagerByEmail(email);
+			if(branchManager != null){
+				String password = (String)inputJson.get(Key.PASSWORD);
+				String passwordSalt = branchManager.getPasswordSalt();
+				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+				String checkHash = branchManager.getPasswordHash();
+				if(checkHash.equals(passwordHash)){
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, branchManager.toJson());
+				}else{
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.WRONGBRANCHMANAGERPASSWORD);
+				}
+			}else{
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.BRANCHMANAGERNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
 			returnJson.put(Key.MESSAGE, e);
 		}
 		return returnJson;

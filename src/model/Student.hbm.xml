@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 29, 2015 2:16:25 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Oct 5, 2015 5:37:30 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="model.Student" table="STUDENT">
   <id name="studentId" type="long">
@@ -31,6 +31,9 @@
   </property>
   <property generated="never" lazy="false" name="points" type="long">
    <column name="POINTS"/>
+  </property>
+  <property generated="never" lazy="false" name="studentNric" type="java.lang.String">
+   <column name="STUDENTNRIC"/>
   </property>
   <many-to-one class="model.Branch" fetch="join" name="branch">
    <column name="BRANCHID"/>

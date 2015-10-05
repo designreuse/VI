@@ -33,6 +33,7 @@ public class Key {
 	public static final String BRANCHMANAGER = "branchManager";
 	public static final String BRANCHMANAGERS = "branchManagers";
 	public static final String BRANCHMANAGERID = "branchManagerId";
+	public static final String BRANCHMANAGERNRIC = "branchManagerNric";
 	
 	public static final String PARENT = "parent";
 	public static final String PARENTS = "parents";

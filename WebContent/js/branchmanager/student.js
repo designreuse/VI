@@ -13,16 +13,26 @@ function registerStudent() {
 	var studentEmail = $("#studentEmail").val();
 	var studentPassword = $("#studentPassword").val();
 	var studentName = $("#studentName").val();
+	var studentNric = $("#studentNric").val();
 	var contactNumber = $("#contactNumber").val();
 	var studentAddress = $("#studentAddress").val();
+	
+	var parentNric = $("#parentNric").val();
 
+	var branchId = localStorage.get("branchId");
+	
 	var input = {};
 	input.email = studentEmail;
 	input.password = studentPassword;
 	input.name = studentName;
 	input.contact = contactNumber;
 	input.address = studentAddress;
+	input.studentNric = studentNric;
+	input.parentNric = parentNric;
+	input.branchId = branchId;
 	var inputStr = JSON.stringify(input);
+	
+	
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
 		url : '../VI/RegisterStudentServlet?input=' + inputStr, //this part sends to the servlet

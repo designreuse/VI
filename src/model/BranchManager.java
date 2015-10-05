@@ -2,11 +2,8 @@ package model;
 
 import java.util.Date;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.BillDAO;
-import dataManager.ResultDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -17,6 +14,7 @@ public class BranchManager {
 	private String passwordSalt;
 	private String passwordHash;
 	private String contactNumber;
+	private String branchMangerNric;
 	
 	private Branch branch;
 	
@@ -28,7 +26,7 @@ public class BranchManager {
 		
 	}
 	
-	public BranchManager(String email, String passwordSalt, String passwordHash, Branch branch, String contactNumber) {
+	public BranchManager(String email, String passwordSalt, String passwordHash, Branch branch, String contactNumber, String branchManagerNric) {
 		super();
 		this.email = email;
 		this.passwordSalt = passwordSalt;
@@ -37,6 +35,7 @@ public class BranchManager {
 		this.setCreateDate(new Date());
 		this.setObjStatus(Value.ACTIVED);
 		this.contactNumber = contactNumber;
+		this.branchMangerNric = branchManagerNric;
 	}
 
 	public long getBranchManagerId() {
@@ -111,6 +110,20 @@ public class BranchManager {
 		this.contactNumber = contactNumber;
 	}
 
+	/**
+	 * @return the branchMangerNric
+	 */
+	public String getBranchMangerNric() {
+		return branchMangerNric;
+	}
+
+	/**
+	 * @param branchMangerNric the branchMangerNric to set
+	 */
+	public void setBranchMangerNric(String branchMangerNric) {
+		this.branchMangerNric = branchMangerNric;
+	}
+	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
@@ -126,5 +139,6 @@ public class BranchManager {
 		
 		return returnJson;
 	}
+
 
 }

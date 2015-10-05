@@ -4,26 +4,29 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import controller.BranchManagerCtrl;
+import system.Config;
 import system.Key;
 import system.Value;
-import controller.BranchManagerCtrl;
 
 /**
- * @author RaySong
+ * 
  */
-public class InstallServlet extends HttpServlet {
+
+public class LoginBranchManagerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InstallServlet() {
+    public LoginBranchManagerServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,21 +51,16 @@ public class InstallServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8"); 
+		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		JSONObject returnJson = new JSONObject();
 		
 		try{
-			//String inputStr = request.getParameter(Key.INPUT);
-			JSONObject inputJson = new JSONObject();
-			inputJson.put(Key.EMAIL, "bm@email.com");
-			inputJson.put(Key.PASSWORD, "bm");
-			long branchId = (long)1;
-			inputJson.put(Key.BRANCHID, branchId);
-			
+			String inputStr = request.getParameter(Key.INPUT);
+			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = BranchManagerCtrl.createBranchManager(inputJson);
+			returnJson = BranchManagerCtrl.loginBranchManager(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -70,5 +68,4 @@ public class InstallServlet extends HttpServlet {
 		}
 		out.println(returnJson.toJSONString());
 	}
-
 }

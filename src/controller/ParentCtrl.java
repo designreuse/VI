@@ -31,11 +31,12 @@ public class ParentCtrl {
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
 				String password = (String) inputJson.get(Key.PASSWORD);
+				String parentNric = (String) inputJson.get(Key.TEACHERNRIC);
 
 				String passwordSalt = Encrypt.nextSalt();
 				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 
-				Parent parent = new Parent(name, passwordSalt, passwordHash, contact, address, email, branch);
+				Parent parent = new Parent(name, passwordSalt, passwordHash, contact, address, email, parentNric, branch);
 				ParentDAO.addParent(parent);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
