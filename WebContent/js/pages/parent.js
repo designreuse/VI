@@ -87,7 +87,19 @@ function loadDataTable(){
 }
 
 function test(){
-	console.log("success!");
+	bootbox.dialog({
+		message: "modal popup example!",
+		title: "Modal Pop-up Example",
+		onEscape: function() {},
+		buttons: {
+			success:{
+				label: "Success!",
+				className: "btn-success",
+				callback: function(){}
+			}
+		}	
+	});
+
 }
 
 
