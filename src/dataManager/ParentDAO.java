@@ -45,6 +45,22 @@ public class ParentDAO {
 	}
 	
 	//features
+	public static Parent getParentByNric(String parentNric) {
+		Parent parent = null;
+		Parent tempParent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
+		detachedCriteria.add(Restrictions.eq(Key.PARENTNRIC, parentNric));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempParent = (Parent)o;
+			if(tempParent.getParentNric().equals(parentNric)){
+				parent = tempParent;
+				break;
+			}
+		}
+		return parent;
+	}
+	
 	public static Parent getParentByEmail(String email){
 		Parent parent = null;
 		Parent tempParent = null;

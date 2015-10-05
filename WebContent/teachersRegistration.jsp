@@ -31,7 +31,7 @@
 
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="./js/pages/student.js"></script>
+<script src="./js/pages/parent.js"></script>
 
 </head>
 
@@ -62,8 +62,8 @@
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Home</a></li>
-							<li><i class="icon_document_alt"></i>Student</li>
-							<li><i class="fa fa-files-o"></i>New Student Registration</li>
+							<li><i class="icon_document_alt"></i>Teacher</li>
+							<li><i class="fa fa-files-o"></i>New Teacher Registration</li>
 						</ol>
 					</div>
 				</div>
@@ -73,33 +73,33 @@
 						<section class="panel">
 							<div class="form">
 								<form class="form-validate form-horizontal" id="feedback_form"
-									method="post" action="studentSuccess.jsp"
-									onsubmit="registerStudent();return false;">
+									method="post" action="teacherSuccess.jsp"
+									onsubmit="registerTeacher();return false;">
 									<div>
 										<font color="red" id="message"></font>
 									</div>
 									<header class="panel-heading"> Account Details </header>
 									<div class="panel-body">
 										<div class="form-group ">
-											<label for="sEmail" class="control-label col-lg-2">Email<span
+											<label for="tEmail" class="control-label col-lg-2">Email<span
 												class="required">*</span>
 											</label>
 											<div class="col-lg-10">
-												<input class="form-control" id="studentEmail" name="email"
+												<input class="form-control" id="teacherEmail" name="email"
 													type="email" required />
 											</div>
 										</div>
 										<div class="form-group ">
-											<label for="sPassword" class="control-label col-lg-2">Password
+											<label for="tPassword" class="control-label col-lg-2">Password
 												<span class="required">*</span>
 											</label>
 											<div class="col-lg-10">
-												<input class="form-control " id="studentPassword"
+												<input class="form-control " id="teacherPassword"
 													type="password" name="password" required />
 											</div>
 										</div>
 										<div class="form-group ">
-											<label for="sVerifyPassword" class="control-label col-lg-2">Verify
+											<label for="tVerifyPassword" class="control-label col-lg-2">Verify
 												Password <span class="required">*</span>
 											</label>
 											<div class="col-lg-10">
@@ -109,22 +109,13 @@
 										</div>
 									</div>
 
-									<header class="panel-heading"> Student Details </header>
+									<header class="panel-heading"> Teacher Details </header>
 									<div class="panel-body">
 										<div class="form-group ">
-											<label for="sName" class="control-label col-lg-2">Name</label>
+											<label for="tName" class="control-label col-lg-2">Name</label>
 											<div class="col-lg-10">
-												<input class="form-control " id="studentName" type="text"
-													name="sName" />
-											</div>
-										</div>
-										<div class="form-group ">
-											<label for="sNric" class="control-label col-lg-2">NRIC
-												<span class="required">*</span>
-											</label>
-											<div class="col-lg-10">
-												<input class="form-control" id="sNric" name="sNric"
-													type="text" required />
+												<input class="form-control " id="teacherName" type="text"
+													name="tName" />
 											</div>
 										</div>
 										<div class="form-group ">
@@ -139,28 +130,15 @@
 										<div class="form-group ">
 											<label for="address" class="control-label col-lg-2">Address</label>
 											<div class="col-lg-10">
-												<textarea class="form-control" rows="4" id="studentAddress"
+												<textarea class="form-control" rows="4" id="teacherAddress"
 													name="address" required></textarea>
 											</div>
 										</div>
-
-									</div>
-									<header class="panel-heading"> Parent Details </header>
-									<div class="panel-body">
 										<div class="form-group ">
-											<label for="pName" class="control-label col-lg-2">Name</label>
+											<label for="education" class="control-label col-lg-2">Education</label>
 											<div class="col-lg-10">
-												<input class="form-control " id="parentName" type="text"
-													name="pName" />
-											</div>
-										</div>
-										<div class="form-group ">
-											<label for="pNric" class="control-label col-lg-2">NRIC
-												<span class="required">*</span>
-											</label>
-											<div class="col-lg-10">
-												<input class="form-control" id="pNric" name="pNric"
-													type="text" required />
+												<input class="form-control" id="teacherEducation"
+													name="education" required></textarea>
 											</div>
 										</div>
 
@@ -170,7 +148,6 @@
 												<button class="btn btn-default pull-right" type="button">Back</button>
 											</div>
 										</div>
-
 									</div>
 								</form>
 							</div>

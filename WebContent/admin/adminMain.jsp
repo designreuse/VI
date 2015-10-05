@@ -17,30 +17,30 @@
     <![endif]-->
 
 <!-- ----------------------Bootstrap CSS & Theme----------------------------- -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
-<link href="css/bootstrap-theme.css" rel="stylesheet">
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/bootstrap-theme.css" rel="stylesheet">
 
 <!-- ---------------------External CSS: Fonts and Icons ----------------------- -->
 <!-- Fonts and Icons -->
-<link href="css/elegant-icons-style.css" rel="stylesheet" />
-<link href="css/font-awesome.min.css" rel="stylesheet" />
+<link href="../css/elegant-icons-style.css" rel="stylesheet" />
+<link href="../css/font-awesome.min.css" rel="stylesheet" />
 
 <!-- -------------------External CSS: Custom styles----------------------------- -->
-<link href="css/style.css" rel="stylesheet">
-<link href="css/style-responsive.css" rel="stylesheet" />
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/style-responsive.css" rel="stylesheet" />
 
 </head>
 
 <body>
 
 	<!-- javascripts -->
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
+	<script src="../js/jquery.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 	<!-- nice scroll -->
-	<script src="js/jquery.scrollTo.min.js"></script>
-	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+	<script src="../js/jquery.scrollTo.min.js"></script>
+	<script src="../js/jquery.nicescroll.js" type="text/javascript"></script>
 	<!--custome script for all page-->
-	<script src="js/scripts.js"></script>
+	<script src="../js/scripts.js"></script>
 
 	<!------- container section start------------ -->
 	<section id="container" class="">

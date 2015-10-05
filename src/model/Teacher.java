@@ -23,6 +23,7 @@ public class Teacher {
 	private String qualification;
 	private String passwordSalt;
 	private String passwordHash;
+	private String teacherNric;
 
 	private long objStatus;
 	private Date createDate;
@@ -38,7 +39,7 @@ public class Teacher {
 	}
 
 	public Teacher(String name, String email, String contact, String address, Date dateOfBirth, long age,
-			String qualification, Branch branch) {
+			String qualification, String teacherNric, Branch branch) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -48,6 +49,7 @@ public class Teacher {
 		this.age = age;
 		this.qualification = qualification;
 		this.branch = branch;
+		this.teacherNric = teacherNric;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -294,6 +296,14 @@ public class Teacher {
 
 	public void setPointEvents(Set<PointEvent> pointEvents) {
 		this.pointEvents = pointEvents;
+	}
+
+	public String getTeacherNric() {
+		return teacherNric;
+	}
+
+	public void setTeacherNric(String teacherNric) {
+		this.teacherNric = teacherNric;
 	}
 
 	public JSONObject toJson() {

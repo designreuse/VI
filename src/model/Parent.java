@@ -17,17 +17,20 @@ public class Parent {
 	private String contact;
 	private String address;
 	private String email;
-	
+	private String parentNric;
+
 	private Set<Student> students;
 	private Branch branch;
-	
+
 	private long objStatus;
 	private Date createDate;
 	private String remark;
-	
-	public Parent(){}
-	
-	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address, String email, Branch branch) {
+
+	public Parent() {
+	}
+
+	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address, String email,
+			String parentNric, Branch branch) {
 		this.name = name;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
@@ -36,7 +39,8 @@ public class Parent {
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 		this.email = email;
-		this.branch= branch;
+		this.branch = branch;
+		this.parentNric = parentNric;
 	}
 
 	/**
@@ -45,121 +49,150 @@ public class Parent {
 	public long getParentId() {
 		return parentId;
 	}
+
 	/**
-	 * @param parentId the parentId to set
+	 * @param parentId
+	 *            the parentId to set
 	 */
 	public void setParentId(long parentId) {
 		this.parentId = parentId;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * @return the passwordSalt
 	 */
 	public String getPasswordSalt() {
 		return passwordSalt;
 	}
+
 	/**
-	 * @param passwordSalt the passwordSalt to set
+	 * @param passwordSalt
+	 *            the passwordSalt to set
 	 */
 	public void setPasswordSalt(String passwordSalt) {
 		this.passwordSalt = passwordSalt;
 	}
+
 	/**
 	 * @return the passwordHash
 	 */
 	public String getPasswordHash() {
 		return passwordHash;
 	}
+
 	/**
-	 * @param passwordHash the passwordHash to set
+	 * @param passwordHash
+	 *            the passwordHash to set
 	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
+
 	/**
 	 * @return the contact
 	 */
 	public String getContact() {
 		return contact;
 	}
+
 	/**
-	 * @param contact the contact to set
+	 * @param contact
+	 *            the contact to set
 	 */
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+
 	/**
 	 * @return the address
 	 */
 	public String getAddress() {
 		return address;
 	}
+
 	/**
-	 * @param address the address to set
+	 * @param address
+	 *            the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	/**
 	 * @return the students
 	 */
 	public Set<Student> getStudents() {
 		return students;
 	}
+
 	/**
-	 * @param students the students to set
+	 * @param students
+	 *            the students to set
 	 */
 	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
+
 	/**
 	 * @return the objStatus
 	 */
 	public long getObjStatus() {
 		return objStatus;
 	}
+
 	/**
-	 * @param objStatus the objStatus to set
+	 * @param objStatus
+	 *            the objStatus to set
 	 */
 	public void setObjStatus(long objStatus) {
 		this.objStatus = objStatus;
 	}
+
 	/**
 	 * @return the createDate
 	 */
 	public Date getCreateDate() {
 		return createDate;
 	}
+
 	/**
-	 * @param createDate the createDate to set
+	 * @param createDate
+	 *            the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
 	/**
 	 * @return the remark
 	 */
 	public String getRemark() {
 		return remark;
 	}
+
 	/**
-	 * @param remark the remark to set
+	 * @param remark
+	 *            the remark to set
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
@@ -176,19 +209,27 @@ public class Parent {
 		this.branch = branch;
 	}
 
-	public JSONObject toJson(){
+	public String getParentNric() {
+		return parentNric;
+	}
+
+	public void setParentNric(String parentNric) {
+		this.parentNric = parentNric;
+	}
+
+	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
-		
+
 		returnJson.put(Key.PARENTID, this.parentId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.EMAIL, this.email);
-		
+
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
-		
+
 		return returnJson;
 	}
 }

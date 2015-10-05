@@ -22,6 +22,7 @@ public class Student {
 	private String passwordSalt;
 	private String passwordHash;
 	private long points; 
+	private String studentNric;
 
 	private Branch branch;
 	private Parent parent;
@@ -37,7 +38,7 @@ public class Student {
 	public Student() {
 	}
 
-	public Student(String name, String email, String contact, String address, String studentLevel, Parent parent,
+	public Student(String name, String email, String contact, String address, String studentLevel, String nric, Parent parent,
 			Branch branch) {
 		super();
 		this.name = name;
@@ -45,6 +46,7 @@ public class Student {
 		this.contact = contact;
 		this.address = address;
 		this.studentLevel = studentLevel;
+		this.studentNric = nric;
 		this.branch = branch;
 		this.parent = parent;
 		this.setObjStatus(Value.ACTIVED);
@@ -285,6 +287,14 @@ public class Student {
 
 	public void setPoints(long points) {
 		this.points = points;
+	}
+
+	public String getStudentNric() {
+		return studentNric;
+	}
+
+	public void setStudentNric(String nric) {
+		this.studentNric = nric;
 	}
 
 	public JSONObject toJson() {

@@ -6,7 +6,7 @@ function login() {
 	input.email = email;
 	input.password = password;
 	var inputStr = JSON.stringify(input);
-	inputStr = encodeURIComponent(inputStr);							//BUNNY LOVES YOU ^^ :D     JIAYOUSIES 
+	inputStr = encodeURIComponent(inputStr);							
 	$.ajax({
 		url : '../VI/LoginAdminServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',

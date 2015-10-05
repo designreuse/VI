@@ -39,6 +39,7 @@ public class Key {
 	public static final String PARENTID = "parentId";
 	public static final String CONTACT = "contact";
 	public static final String ADDRESS = "address";
+	public static final String PARENTNRIC = "parentNric";
 	
 	public static final String TEACHER = "teacher";
 	public static final String TEACHERS = "teachers";
@@ -46,6 +47,7 @@ public class Key {
 	public static final String DATEOFBIRTH = "dateOfBirth";
 	public static final String AGE = "age";
 	public static final String QUALIFICATION = "qualification";
+	public static final String TEACHERNRIC = "teacherNric";
 	
 	public static final String SALARY = "salary";
 	public static final String SALARYS = "salarys";
@@ -57,7 +59,8 @@ public class Key {
 	public static final String STUDENTS = "students";
 	public static final String STUDENTID = "studentId";
 	public static final String STUDENTLEVEL = "studentLevel";
-	public static final String POINTS = "points";	
+	public static final String POINTS = "points";
+	public static final String STUDENTNRIC = "studentNric";
 	
 	public static final String BILL = "bill";
 	public static final String BILLS = "bills";
@@ -92,6 +95,8 @@ public class Key {
 	public static final String DESCRIPTION = "description";
 	public static final String POINTEVENTID = "pointEventId";
 	public static final String TEACHERCOURSEID = "teacherCourseId";
+	
+	
 
 	
 	

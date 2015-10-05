@@ -35,8 +35,9 @@ public class StudentCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
+			//get from session branch manager --> branchID
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-			Parent parent = ParentDAO.getParentById((long) inputJson.get(Key.PARENTID));
+			Parent parent = ParentDAO.getParentByNric((String) inputJson.get(Key.PARENTNRIC));
 			if (branch != null) {
 				if (parent != null) {
 					String name = (String) inputJson.get(Key.NAME);
@@ -44,8 +45,9 @@ public class StudentCtrl {
 					String contact = (String) inputJson.get(Key.CONTACT);
 					String address = (String) inputJson.get(Key.ADDRESS);
 					String studentLevel = (String) inputJson.get(Key.STUDENTLEVEL);
+					String parentNric = (String) inputJson.get(Key.PARENTNRIC);
 
-					Student student = new Student(name, email, contact, address, studentLevel, parent, branch);
+					Student student = new Student(name, email, contact, address, studentLevel, parentNric, parent, branch);
 					StudentDAO.addStudent(student);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);
