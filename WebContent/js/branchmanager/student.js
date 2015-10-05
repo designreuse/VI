@@ -49,7 +49,6 @@ function registerStudent() {
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
-				window.location = "studentSuccess.jsp";
 				alert("Created successfully");	
 			} else {
 				$("#message").html("Something's wrong, please try again!");

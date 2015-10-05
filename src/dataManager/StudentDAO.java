@@ -38,6 +38,7 @@ public class StudentDAO {
 
 	public static void addStudent(Student student) {
 		HibernateUtil.save(student);
+		System.out.println("SAVED");
 	}
 
 	public static void modifyStudent(Student modifiedStudent) {

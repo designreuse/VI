@@ -73,7 +73,7 @@
 						<section class="panel">
 							<div class="form">
 								<form class="form-validate form-horizontal" id="feedback_form"
-									method="post" action="studentSuccess.jsp"
+									method="post" 
 									onsubmit="registerStudent();return false;">
 									<div>
 										<font color="red" id="message"></font>
