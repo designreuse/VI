@@ -2,9 +2,9 @@
 //if (adminId == null) {
 //    window.location.replace('../pages/login.html');;
 //} else {
-    $(document).ready(function() {
+    //$(document).ready(function() {
     	//getStudents();
-    });
+  //  });
 //}
 
 var STUDENTS = [];
@@ -18,8 +18,9 @@ function registerStudent() {
 	var studentAddress = $("#studentAddress").val();
 	
 	var parentNric = $("#parentNric").val();
-
-	var branchId = localStorage.get("branchId");
+	
+	var branchId = localStorage.getItem("branchId");
+	console.log(branchId);
 	
 	var input = {};
 	input.email = studentEmail;
@@ -48,9 +49,8 @@ function registerStudent() {
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
-				var parentMessage = message;
-				localStorage.setItem("studentMessage", studentMessage);
 				window.location = "studentSuccess.jsp";
+				alert("Created successfully");	
 			} else {
 				$("#message").html("Something's wrong, please try again!");
 			}

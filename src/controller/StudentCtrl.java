@@ -35,8 +35,8 @@ public class StudentCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
-			//get from session branch manager --> branchID
-			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			long branchId = Long.parseLong((String)inputJson.get(Key.BRANCHID));
+			Branch branch = BranchDAO.getBranchById(branchId);
 			Parent parent = ParentDAO.getParentByNric((String) inputJson.get(Key.PARENTNRIC));
 			if (branch != null) {
 				if (parent != null) {

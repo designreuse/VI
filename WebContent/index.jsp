@@ -35,7 +35,7 @@
 
 <body class="login-img3-body">
 	<div class="container">
-		<form class="login-form" action="adminMain.jsp" method="post"
+		<form class="login-form" action="studentRegistration.jsp" method="post"
 			onsubmit="login();return false;">
 			<div class="login-wrap">
 				<p class="login-img">
