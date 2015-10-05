@@ -28,10 +28,13 @@
 <!-- -------------------External CSS: Custom styles----------------------------- -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
-<link href="css/jquery.dynatable.css" rel="stylesheet" />
 
+<!-- -----------------------DataTables CSS---------------------------------------- -->
+<link href="js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+<!-- ----------------------DataTables Responsive CSS---------------------- -->
+<link href="js/datatables/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 <!-- -------------------------------javascripts----------------------- -->
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
 <script src="./js/pages/parent.js"></script>
 	
 </head>
@@ -40,13 +43,23 @@
 <!-- -----------------javascripts------------------ -->
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dynatable.js"></script>
 	<script src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-	<!-- nice scroll -->
+	
+	<!-- ------------------nice scroll----------------------- -->
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-	<!--custome script for all page-->
+	
+	
+	<!-- -------custome script for all page----------- -->
 	<script src="js/scripts.js"></script>
+	
+		<!-- --------DataTables JavaScript----------- -->
+	<script src="./js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+	<script src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
+	
+	<!-- --------DataTables JavaScript----------- -->
+	<script src="./js/bootbox.min.js"></script>
 
 	<!------- container section start------------ -->
 	<section id="container" class="">
@@ -75,31 +88,24 @@
 						<div class="panel panel-default">
 						<div class="panel-heading">View All Parents</div>
 							<div class="panel-body">
-								<table id="parentTable" class="table table-bordered">
-									<thead>
-										<tr>
-											<th>Parent ID</th>
-											<th>Remark</th>
-											<th>Name</th>
-											<th>Contact</th>
-											<th>Email</th>
-											<th>Address</th>
-											<th>Create Date</th>
-											<th>ObjStatus</th>
-										</tr>
-									</thead>
-<!-- 									<tbody id='parents'> -->
-<!-- 										<tr class="prototype"> -->
-<!-- 											<td><label for="parentId"></label></td> -->
-<!-- 											<td><label for="name"></label></td> -->
-<!-- 											<td><label for="contact"></label></td> -->
-<!-- 											<td><label for="email"></label></td> -->
-<!-- 											<td><label for="address"></label></td> -->
-<!-- 											<td><label for="createDate"></label></td> -->
-<!-- 											<td><label for="options">pls work!</label></td> -->
-<!-- 										</tr> -->
-<!-- 									</tbody> -->
-								</table>
+								<div class="dataTable_wrapper">
+									<table id="parentTable" class="table table-striped table-bordered table-hover dt-responsive display nowrap">
+										<thead>
+											<tr>
+												<th>Parent ID</th>
+												<th>Remark</th>
+												<th>Name</th>
+												<th>Contact</th>
+												<th>Email</th>
+												<th>Address</th>
+												<th>Create Date</th>
+												<th>Options</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>

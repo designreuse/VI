@@ -2,7 +2,7 @@
 //if (adminId == null) {
 //    window.location.replace('../pages/login.html');;
 //} else {
-    $(document).ready(function() {
+ $(document).ready(function() {
     	getParents();
     });
 //}
@@ -58,7 +58,7 @@ function getParents() {
 		},
 		success : function(data) {
 			if (data.status == 1){
-				loadDataTable(data);
+				loadDataTable();
 			}
 			else{
 				console.log(data.message);
@@ -67,76 +67,27 @@ function getParents() {
 	});		
 }
 
-function loadDataTable(data){
-//	console.log(JSON.stringify(data));
-//	console.log(JSON.stringify(data.status));
-//	console.log(JSON.stringify(data.message));
-	if (data.status == 1){
-		console.log(JSON.stringify(data));
-		$('#parentTable').DataTable({
-			ajax:{
-				url: '../VI/GetAllParentsServlet?input={}',
-				dataSrc: 'message'
-			},
-			processing: true,
-			columns: [
-				{"data": "parentId"},
-				{"data": "remark"},
-				{"data": 'name'},
-				{"data": 'contact'},
-				{"data": 'email'},
-				{"data": 'address'},
-				{"data": 'createDate'},
-				{"data": "objStatus"}
-				]
-		});
-
-	}
-	else{
-		console.log("failure!");
-	}
+function loadDataTable(){
+	$('#parentTable').DataTable({
+		ajax:{
+			url: '../VI/GetAllParentsServlet?input={}',
+			dataSrc: 'message'
+		},
+		columns: [
+			{"data": "parentId"},
+			{"data": "remark"},
+			{"data": 'name'},
+			{"data": 'contact'},
+			{"data": 'email'},
+			{"data": 'address'},
+			{"data": 'createDate'},
+			{"data": null, "defaultContent":'<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="test();" title=""></button>'}
+		]
+	});
 }
 
+function test(){
+	console.log("success!");
+}
 
-//
-//$('#parentTable').DataTable({
-//"data": data,
-//"columns": {
-//	"message": "parentId",
-//	"message": "name",
-//	"message": "contact",
-//	"message": "email",
-//	"message": "address",
-//	"message": "createDate",
-//	"message": "parentId",
-//}
-//});
-//}
-//else{
-//console.log(message);
-//}
-//}
-//});
-
-//$.ajax({
-//	url : '../VI/GetAllParentsServlet?input={}',
-//	method : 'GET',
-//	dataType : 'json',
-//	success : function(data) {
-//		console.log(JSON.stringify(data));
-//		console.log(data.status);
-//		if (data.status == 1) {
-//			$('#parentTable').dynatable({
-//				dataset : {
-//					records : data.message
-//				}
-//			});
-//		} else {
-//			console.log(status);
-//		}
-//	},
-//	error : function(err) {
-//		console.log(err);
-//	}
-//});
 
