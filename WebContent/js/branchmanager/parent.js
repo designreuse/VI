@@ -58,7 +58,7 @@ function getParents() {
 		},
 		success : function(data) {
 			if (data.status == 1){
-				loadDataTable();
+				//loadDataTable();
 			}
 			else{
 				console.log(data.message);
@@ -68,22 +68,22 @@ function getParents() {
 }
 
 function loadDataTable(){
-	$('#parentTable').DataTable({
-		ajax:{
-			url: '../VI/GetAllParentsServlet?input={}',
-			dataSrc: 'message'
-		},
-		columns: [
-			{"data": "parentId"},
-			{"data": "remark"},
-			{"data": 'name'},
-			{"data": 'contact'},
-			{"data": 'email'},
-			{"data": 'address'},
-			{"data": 'createDate'},
-			{"data": null, "defaultContent":'<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="test();" title=""></button>'}
-		]
-	});
+//	$('#parentTable').DataTable({
+//		ajax:{
+//			url: '../VI/GetAllParentsServlet?input={}',
+//			dataSrc: 'message'
+//		},
+//		columns: [
+//			{"data": "parentId"},
+//			{"data": "remark"},
+//			{"data": 'name'},
+//			{"data": 'contact'},
+//			{"data": 'email'},
+//			{"data": 'address'},
+//			{"data": 'createDate'},
+//			{"data": null, "defaultContent":'<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="test();" title=""></button>'}
+//		]
+//	});
 }
 
 function test(){

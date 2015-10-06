@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 5, 2015 5:37:30 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Oct 6, 2015 5:42:59 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="model.Teacher" table="TEACHER">
   <id name="teacherId" type="long">
@@ -19,12 +19,6 @@
   </property>
   <property generated="never" lazy="false" name="address" type="java.lang.String">
    <column name="ADDRESS"/>
-  </property>
-  <property generated="never" lazy="false" name="dateOfBirth" type="java.util.Date">
-   <column name="DATEOFBIRTH"/>
-  </property>
-  <property generated="never" lazy="false" name="age" type="long">
-   <column name="AGE"/>
   </property>
   <property generated="never" lazy="false" name="qualification" type="java.lang.String">
    <column name="QUALIFICATION"/>

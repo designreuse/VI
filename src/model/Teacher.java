@@ -18,8 +18,6 @@ public class Teacher {
 	private String email;
 	private String contact;
 	private String address;
-	private Date dateOfBirth;
-	private long age;
 	private String qualification;
 	private String passwordSalt;
 	private String passwordHash;
@@ -38,15 +36,15 @@ public class Teacher {
 	public Teacher() {
 	}
 
-	public Teacher(String name, String email, String contact, String address, Date dateOfBirth, long age,
-			String qualification, String teacherNric, Branch branch) {
+	public Teacher(String name, String email, String passwordSalt, String passwordHash, String contact, String address, String qualification, String teacherNric,
+			Branch branch) {
 		super();
 		this.name = name;
 		this.email = email;
+		this.passwordSalt = passwordSalt;
+		this.passwordHash = passwordHash;
 		this.contact = contact;
 		this.address = address;
-		this.dateOfBirth = dateOfBirth;
-		this.age = age;
 		this.qualification = qualification;
 		this.branch = branch;
 		this.teacherNric = teacherNric;
@@ -112,36 +110,6 @@ public class Teacher {
 	 */
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	/**
-	 * @return the dateOfBirth
-	 */
-	public Date getDateOfBirth() {
-		return dateOfBirth;
-	}
-
-	/**
-	 * @param dateOfBirth
-	 *            the dateOfBirth to set
-	 */
-	public void setDateOfBirth(Date dateOfBirth) {
-		this.dateOfBirth = dateOfBirth;
-	}
-
-	/**
-	 * @return the age
-	 */
-	public long getAge() {
-		return age;
-	}
-
-	/**
-	 * @param age
-	 *            the age to set
-	 */
-	public void setAge(long age) {
-		this.age = age;
 	}
 
 	/**
@@ -279,7 +247,6 @@ public class Teacher {
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-	
 
 	public Set<TeacherCourse> getTeacherCourses() {
 		return teacherCourses;
@@ -289,7 +256,6 @@ public class Teacher {
 		this.teacherCourses = teacherCourses;
 	}
 
-	
 	public Set<PointEvent> getPointEvents() {
 		return pointEvents;
 	}
@@ -313,8 +279,6 @@ public class Teacher {
 		returnJson.put(Key.EMAIL, this.email);
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
-		returnJson.put(Key.DATEOFBIRTH, this.dateOfBirth);
-		returnJson.put(Key.AGE, this.age);
 		returnJson.put(Key.QUALIFICATION, this.qualification);
 
 		returnJson.put(Key.BRANCH, this.branch.toJson());// need to implement
@@ -334,8 +298,6 @@ public class Teacher {
 		returnJson.put(Key.EMAIL, this.email);
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
-		returnJson.put(Key.DATEOFBIRTH, this.dateOfBirth);
-		returnJson.put(Key.AGE, this.age);
 		returnJson.put(Key.QUALIFICATION, this.qualification);
 
 		returnJson.put(Key.BRANCH, this.branch.toJson());// need to implement

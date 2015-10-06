@@ -38,11 +38,13 @@ public class Student {
 	public Student() {
 	}
 
-	public Student(String name, String email, String contact, String address, String studentLevel, String nric, Parent parent,
+	public Student(String name, String email, String passwordSalt, String passwordHash, String contact, String address, String studentLevel, String nric, Parent parent,
 			Branch branch) {
 		super();
 		this.name = name;
 		this.email = email;
+		this.passwordSalt = passwordSalt;
+		this.passwordHash = passwordHash;
 		this.contact = contact;
 		this.address = address;
 		this.studentLevel = studentLevel;

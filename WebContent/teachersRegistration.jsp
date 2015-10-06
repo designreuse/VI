@@ -31,7 +31,23 @@
 
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="./js/pages/parent.js"></script>
+<script src="./js/branchmanager/teacher.js"></script>
+
+<!-- yl test -->
+<!-- <script type="text/javascript"> -->
+<!-- // var counter = 1; -->
+<!-- // var limit = 3; -->
+<!-- // function addInput(divName){ -->
+<!-- //      if (counter == limit)  { -->
+<!-- //           alert("You have reached the limit of adding " + counter + " inputs"); -->
+<!-- //      } -->
+<!-- //      else { -->
+<!-- //           var newdiv = document.createElement('div'); -->
+<!-- //           newdiv.innerHTML = "Entry " + (counter + 1) + "<br><div class='form-group '><label for='year' class='control-label col-lg-2'>Year<span class='required'>*</span></label><div class='col-lg-10'><input class='form-control' id='year' name='year'type='text' required /></div></div>"; -->
+<!-- //           document.getElementById(divName).appendChild(newdiv); -->
+<!-- //           counter++; -->
+<!-- //      } -->
+<!-- }</script> -->
 
 </head>
 
@@ -73,7 +89,7 @@
 						<section class="panel">
 							<div class="form">
 								<form class="form-validate form-horizontal" id="feedback_form"
-									method="post" action="teacherSuccess.jsp"
+									method="post"
 									onsubmit="registerTeacher();return false;">
 									<div>
 										<font color="red" id="message"></font>
@@ -119,6 +135,15 @@
 											</div>
 										</div>
 										<div class="form-group ">
+											<label for="tNric" class="control-label col-lg-2">NRIC
+												<span class="required">*</span>
+											</label>
+											<div class="col-lg-10">
+												<input class="form-control" id="teacherNric" name="sNric"
+													type="text" required />
+											</div>
+										</div>
+										<div class="form-group ">
 											<label for="contactNumber" class="control-label col-lg-2">ContactNumber
 												<span class="required">*</span>
 											</label>
@@ -134,21 +159,54 @@
 													name="address" required></textarea>
 											</div>
 										</div>
-										<div class="form-group ">
-											<label for="education" class="control-label col-lg-2">Education</label>
-											<div class="col-lg-10">
-												<input class="form-control" id="teacherEducation"
-													name="education" required></textarea>
-											</div>
-										</div>
-
-										<div class="form-group">
-											<div class="col-lg-offset-2 col-lg-10">
-												<button class="btn btn-primary" type="submit">Register</button>
-												<button class="btn btn-default pull-right" type="button">Back</button>
-											</div>
-										</div>
 									</div>
+									<header class="panel-heading"> Education Details </header>
+									<div class="panel-body">
+										<div id="dynamicInput">
+
+											<div class="form-group ">
+												<label for="school" class="control-label col-lg-2">School<span
+													class="required">*</span></label>
+												<div class="col-lg-10">
+													<input class="form-control" id="teacherSchool"
+														name="school" required>
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="qualification" class="control-label col-lg-2">Qualification
+													<span class="required">*</span>
+												</label>
+												<div class="col-lg-10">
+													<input class="form-control" id="qualification"
+														name="qualification" type="text" required />
+												</div>
+											</div>
+											<div class="form-group ">
+												<label for="year" class="control-label col-lg-2">Year
+													<span class="required">*</span>
+												</label>
+												<div class="col-lg-10">
+													<input class="form-control" id="year" name="year"
+														type="text" required />
+												</div>
+											</div>
+
+
+											<!-- 										<div class="form-group "> -->
+											<!-- 												Entry 1<br> -->
+											<!-- 												<input type="text" name="myInputs[]"> -->
+											<!-- 											</div> -->
+											<!-- 											<input type="button" value="Add another education" -->
+											<!-- 												onClick="addInput('dynamicInput');"> -->
+											<!-- 										</div> -->
+
+											<div class="form-group">
+												<div class="col-lg-offset-2 col-lg-10">
+													<button class="btn btn-primary" type="submit">Register</button>
+													<button class="btn btn-default pull-right" type="button">Back</button>
+												</div>
+											</div>
+										</div>
 								</form>
 							</div>
 

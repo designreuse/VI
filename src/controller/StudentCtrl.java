@@ -42,12 +42,16 @@ public class StudentCtrl {
 				if (parent != null) {
 					String name = (String) inputJson.get(Key.NAME);
 					String email = (String) inputJson.get(Key.EMAIL);
+					String password = (String) inputJson.get(Key.PASSWORD);
+					
+					String passwordSalt = Encrypt.nextSalt();
+					String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 					String contact = (String) inputJson.get(Key.CONTACT);
 					String address = (String) inputJson.get(Key.ADDRESS);
 					String studentLevel = (String) inputJson.get(Key.STUDENTLEVEL);
 					String parentNric = (String) inputJson.get(Key.PARENTNRIC);
 
-					Student student = new Student(name, email, contact, address, studentLevel, parentNric, parent, branch);
+					Student student = new Student(name, email, passwordSalt, passwordHash, contact, address, studentLevel, parentNric, parent, branch);
 					StudentDAO.addStudent(student);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);

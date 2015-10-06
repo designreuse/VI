@@ -20,6 +20,10 @@
 					<li><a class="" href="parentProfile.jsp">Profile List</a></li>
 				</ul></li>
 				
+				<li class="active"><a class="" href="teachersRegistration.jsp"> <i
+					class="icon_house_alt"></i> <span>Teacher Registration</span>
+			</a></li>
+			
 <!-- 			<li class="sub-menu"><a href="javascript:;" class=""> <i -->
 <!-- 					class="icon_desktop"></i> <span>UI Fitures</span> <span -->
 <!-- 					class="menu-arrow arrow_carrot-right"></span> -->

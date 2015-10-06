@@ -37,18 +37,22 @@ public class TeacherCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
-			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			long branchId = Long.parseLong((String)inputJson.get(Key.BRANCHID));
+			Branch branch = BranchDAO.getBranchById(branchId);
 			if (branch != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				String email = (String) inputJson.get(Key.EMAIL);
+				String password = (String) inputJson.get(Key.PASSWORD);
+				
+				String passwordSalt = Encrypt.nextSalt();
+				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+				
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
-				Date dateOfBirth = Config.SDF.parse((String) inputJson.get(Key.DATEOFBIRTH));
-				long age = (long) inputJson.get(Key.AGE);
 				String qualification = (String) inputJson.get(Key.QUALIFICATION);
 				String teacherNric = (String) inputJson.get(Key.TEACHERNRIC);
 
-				Teacher teacher = new Teacher(name, email, contact, address, dateOfBirth, age, qualification, teacherNric, branch);
+				Teacher teacher = new Teacher(name, email, passwordSalt, passwordHash, contact, address, qualification, teacherNric, branch);
 				TeacherDAO.addTeacher(teacher);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -117,16 +121,12 @@ public class TeacherCtrl {
 				String email = (String) inputJson.get(Key.EMAIL);
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
-				Date dateOfBirth = Config.SDF.parse((String) inputJson.get(Key.DATEOFBIRTH));
-				long age = (long) inputJson.get(Key.AGE);
 				String qualification = (String) inputJson.get(Key.QUALIFICATION);
 
 				teacher.setName(name);
 				teacher.setEmail(email);
 				teacher.setContact(contact);
 				teacher.setAddress(address);
-				teacher.setDateOfBirth(dateOfBirth);
-				teacher.setAge(age);
 				teacher.setQualification(qualification);
 
 				TeacherDAO.modifyTeacher(teacher);
