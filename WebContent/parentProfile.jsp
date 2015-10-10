@@ -33,9 +33,10 @@
 <link href="js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 <!-- ----------------------DataTables Responsive CSS---------------------- -->
 <link href="js/datatables/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<script src="./js/pages/parent.js"></script>
+<script src="./js/branchmanager/parent.js"></script>
 	
 </head>
 
@@ -88,8 +89,11 @@
 						<div class="panel panel-default">
 						<div class="panel-heading">View All Parents</div>
 							<div class="panel-body">
+								<div id = "resultAlert" class="alert fade in">
+								    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+								  </div>
 								<div class="dataTable_wrapper">
-									<table id="parentTable" class="table table-striped table-bordered table-hover dt-responsive display nowrap">
+									<table id="parentTable" class="table table-bordered dt-responsive display nowrap">
 										<thead>
 											<tr>
 												<th>Parent ID</th>
