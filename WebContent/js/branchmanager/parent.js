@@ -58,7 +58,6 @@ function getParents() {
 			 },
 			 columns: [
 				 {"data": "parentId"},
-				 {"data": "remark"},
 				 {"data": 'name'},
 				 {"data": 'contact'},
 				 {"data": 'email'},
@@ -67,8 +66,6 @@ function getParents() {
 				 {"data": null, "defaultContent":'<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="editParent();" title=""></button>'}
 				]
 	    });
-	
-	
 }
 
 function editParent(){

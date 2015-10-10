@@ -36,7 +36,7 @@
 
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<script src="./js/branchmanager/parent.js"></script>
+<script src="./js/branchmanager/student.js"></script>
 	
 </head>
 
@@ -87,21 +87,22 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-						<div class="panel-heading">View All Parents</div>
+						<div class="panel-heading">View All Students</div>
 							<div class="panel-body">
 								<div id = "resultAlert" class="alert fade in">
 								    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 								  </div>
 								<div class="dataTable_wrapper">
-									<table id="parentTable" class="table table-bordered dt-responsive display nowrap">
+									<table id="studentTable" class="table table-bordered dt-responsive display nowrap">
 										<thead>
 											<tr>
-												<th>Parent ID</th>
-												<th>Remark</th>
+												<th>Student ID</th>
 												<th>Name</th>
+												<th>Nric</th>
 												<th>Contact</th>
 												<th>Email</th>
 												<th>Address</th>
+												<th>Points</th>
 												<th>Create Date</th>
 												<th>Options</th>
 											</tr>
