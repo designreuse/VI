@@ -37,8 +37,7 @@ public class TeacherCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
-			long branchId = Long.parseLong((String)inputJson.get(Key.BRANCHID));
-			Branch branch = BranchDAO.getBranchById(branchId);
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			if (branch != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				String email = (String) inputJson.get(Key.EMAIL);

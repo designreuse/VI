@@ -13,6 +13,9 @@ function registerParent() {
 	var parentName = $("#parentName").val();
 	var contactNumber = $("#contactNumber").val();
 	var parentAddress = $("#parentAddress").val();
+	
+	var branchId = localStorage.getItem("branchId");
+	console.log(branchId);
 
 	var input = {};
 	input.email = parentEmail;
@@ -20,6 +23,8 @@ function registerParent() {
 	input.name = parentName;
 	input.contact = contactNumber;
 	input.address = parentAddress;
+	input.branchId = Number(branchId);
+	
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({

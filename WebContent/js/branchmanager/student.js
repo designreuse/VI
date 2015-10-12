@@ -17,7 +17,7 @@ function registerStudent() {
 	var contactNumber = $("#contactNumber").val();
 	var studentAddress = $("#studentAddress").val();
 	
-	var studentNric = $("#studentNric").val();
+	var parentNric = $("#parentNric").val();
 	
 	var branchId = localStorage.getItem("branchId");
 	console.log(branchId);
@@ -29,8 +29,8 @@ function registerStudent() {
 	input.contact = contactNumber;
 	input.address = studentAddress;
 	input.studentNric = studentNric;
-	input.studentNric = studentNric;
-	input.branchId = branchId;
+	input.parentNric = parentNric;
+	input.branchId = Number(branchId);
 	var inputStr = JSON.stringify(input);
 	
 	

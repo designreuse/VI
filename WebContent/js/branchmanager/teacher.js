@@ -21,9 +21,11 @@ function registerTeacher() {
 	var year = $("#year").val();
 	
 	var qualification = teacherSchool.concat(teacherQualification, year);
-	console.log(qualification);
 	
 	var branchId = localStorage.getItem("branchId");
+	var numBranchId = Number(branchId);
+	console.log(branchId);
+	console.log(numBranchId);
 	
 	var input = {};
 	input.email = teacherEmail;
@@ -34,10 +36,10 @@ function registerTeacher() {
 	input.teacherNric = teacherNric;
 	input.qualification = qualification;
 	
-	input.branchId = branchId;
+	input.branchId = numBranchId;
 	
 	var inputStr = JSON.stringify(input);
-	console.log(inputStr);
+	//console.log(inputStr);
 	
 	inputStr = encodeURIComponent(inputStr);
 	

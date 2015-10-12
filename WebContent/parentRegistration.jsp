@@ -31,7 +31,7 @@
 
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="./js/pages/parent.js"></script>
+<script src="./js/branchmanager/parent.js"></script>
 
 </head>
 
