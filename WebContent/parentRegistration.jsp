@@ -118,6 +118,15 @@
 											</div>
 										</div>
 										<div class="form-group ">
+											<label for="pNric" class="control-label col-lg-2">NRIC
+												<span class="required">*</span>
+											</label>
+											<div class="col-lg-10">
+												<input class="form-control" id="parentNric" name="pNric"
+													type="text" required />
+											</div>
+										</div>
+										<div class="form-group ">
 											<label for="contactNumber" class="control-label col-lg-2">ContactNumber
 												<span class="required">*</span>
 											</label>

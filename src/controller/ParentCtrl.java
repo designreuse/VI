@@ -31,7 +31,7 @@ public class ParentCtrl {
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
 				String password = (String) inputJson.get(Key.PASSWORD);
-				String parentNric = (String) inputJson.get(Key.TEACHERNRIC);
+				String parentNric = (String) inputJson.get(Key.PARENTNRIC);
 
 				String passwordSalt = Encrypt.nextSalt();
 				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);

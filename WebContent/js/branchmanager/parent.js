@@ -11,8 +11,10 @@ function registerParent() {
 	var parentEmail = $("#parentEmail").val();
 	var parentPassword = $("#parentPassword").val();
 	var parentName = $("#parentName").val();
+	var parentNric = $("#parentNric").val();
 	var contactNumber = $("#contactNumber").val();
 	var parentAddress = $("#parentAddress").val();
+	
 	
 	var branchId = localStorage.getItem("branchId");
 	console.log(branchId);
@@ -21,6 +23,7 @@ function registerParent() {
 	input.email = parentEmail;
 	input.password = parentPassword;
 	input.name = parentName;
+	input.parentNric = parentNric;
 	input.contact = contactNumber;
 	input.address = parentAddress;
 	input.branchId = Number(branchId);

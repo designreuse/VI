@@ -99,9 +99,9 @@
 												<th>Teacher ID</th>
 												<th>Name</th>
 												<th>Contact</th>
-												<th>Nric</th>
 												<th>Email</th>
 												<th>Address</th>
+												<th>Nric</th>
 												<th>Qualification</th>
 												<th>Create Date</th>
 												<th>Options</th>
