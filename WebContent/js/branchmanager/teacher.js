@@ -3,7 +3,7 @@
 //    window.location.replace('../pages/login.html');;
 //} else {
     $(document).ready(function() {
-    	//getTeachers();
+    	getTeachers();
     });
 //}
 

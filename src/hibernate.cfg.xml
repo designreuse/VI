@@ -5,13 +5,13 @@
 	<session-factory name="VI">
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<!-- openshift config -->
-<!-- 		<property name="hibernate.connection.url">jdbc:mysql://127.4.30.2:3306/is480</property> -->
-<!-- 		<property name="hibernate.connection.username">adminnjpdIqb</property> -->
-<!-- 		<property name="hibernate.connection.password">wqEkcYzKSncV</property> -->
+		<property name="hibernate.connection.url">jdbc:mysql://127.4.30.2:3306/is480</property>
+		<property name="hibernate.connection.username">adminnjpdIqb</property>
+		<property name="hibernate.connection.password">wqEkcYzKSncV</property>
 
 		<!-- localhost config -->
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3307/VI</property>
-		<property name="hibernate.connection.username">root</property>
+<!-- 		<property name="hibernate.connection.url">jdbc:mysql://localhost:3307/VI</property> -->
+<!-- 		<property name="hibernate.connection.username">root</property> -->
 
 
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
