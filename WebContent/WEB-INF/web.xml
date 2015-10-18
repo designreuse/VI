@@ -106,6 +106,14 @@
     <servlet-name>UpdateTeacherServlet</servlet-name>
     <url-pattern>/UpdateTeacherServlet</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>UpdateAttendanceServlet</servlet-name>
+    <servlet-class>service.UpdateAttendanceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAttendanceServlet</servlet-name>
+    <url-pattern>/UpdateAttendanceServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>GetAttendancesByClassroom</servlet-name>
     <servlet-class>service.GetAttendancesByClassroom</servlet-class>

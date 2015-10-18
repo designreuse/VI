@@ -16,10 +16,6 @@ import system.Config;
 import system.Key;
 import system.Value;
 
-/**
- * Servlet implementation class UpdateAttendanceServlet
- */
-@WebServlet("/UpdateAttendanceServlet")
 public class UpdateAttendanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
