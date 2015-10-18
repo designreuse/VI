@@ -23,6 +23,8 @@ function login() {
 			if (status == 1) {
 				var branchManager = message;
 				//console.log(branchManager);
+				localStorage.setItem("courseId", 1);
+				
 				localStorage.setItem("branchId", branchManager.branch.branchId);
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);
 				window.location = "studentRegistration.jsp";

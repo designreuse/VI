@@ -76,8 +76,8 @@ public class StudentCtrl {
 	public static JSONObject getStudentById(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			long studentId = Long.parseLong((String)inputJson.get(Key.STUDENTID));
-			//long studentId = (long) inputJson.get(Key.STUDENTID);
+			//long studentId = Long.parseLong((String)inputJson.get(Key.STUDENTID));
+			long studentId = (long) inputJson.get(Key.STUDENTID);
 			Student student = StudentDAO.getStudentById(studentId);
 			if (student != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);

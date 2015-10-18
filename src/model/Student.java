@@ -53,7 +53,7 @@ public class Student {
 		this.parent = parent;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
-		this.points = 0;
+		this.points = 0L;
 	}
 
 	/**

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -96,51 +95,28 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Attendance Taking</div>
+							<div class="panel-heading">Manual Attendance Taking</div>
 							<div class="panel-body">
-<!-- 								<p id="demo"></p> -->
+								<div id="resultAlert" class="alert fade in">
+									<a href="#" class="close" data-dismiss="alert"
+										aria-label="close">&times;</a>
+								</div>
+								<div class="dataTable_wrapper">
+									<table id="attendanceTable"
+										class="table table-bordered dt-responsive display nowrap">
+										<thead>
+											<tr>
+												<th>Attendance Id</th>
+												<th>Student Id</th>
+												<th>Present?</th>
+											</tr>
+										</thead>
+										<tbody>
 
-												<form action="manualAttendance.jsp" method="get">
-													<input class="btn btn-default" type="submit"
-														value="Manual Attendance Taking">
-												</form>
-								<hr>
-								<canvas></canvas>
-								<hr>
-								<ul></ul>
-								<script type="text/javascript" src="js/QR/qrcodelib.js"></script>
-								<script type="text/javascript" src="js/QR/webcodecamjs.js"></script>
-								<script type="text/javascript"
-									src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-								<script type="text/javascript" src="js/branchmanager/student.js"></script>
-								<script type="text/javascript">
-									var txt = "innerText" in HTMLElement.prototype ? "innerText"
-											: "textContent";
-									var studentName = "";
-									var arg = {
-										resultFunction : function(resText,
-												lastImageSrc) {
-											var aChild = document
-													.createElement('li');
-											aChild[txt] = resText;
-											var qrStudentId = resText;
-
-											var studentName = getStudentById(qrStudentId);
-											//console.log(studentName);
-											
-											var miliseconds = new Date();
-											var currentTime = miliseconds.toUTCString();
-											console.log(currentTime);
-											//timestamp
-											//call update attendance servlet?
-													
-											//document.getElementById("demo").innerHTML = studentName;
-											//document.querySelector('body').appendChild(aChild);
-
-										}
-									};
-									new WebCodeCamJS("canvas").init(arg).play();
-								</script>
+										</tbody>
+									</table>
+									<button class="btn btn-default" onclick="submit()"> Submit </button> 
+								</div>
 							</div>
 						</div>
 					</div>

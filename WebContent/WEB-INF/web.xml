@@ -378,7 +378,7 @@
     <servlet-name>CreateAttendanceServlet</servlet-name>
     <url-pattern>/CreateAttendanceServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>LoginBranchManagerServlet</servlet-name>
     <servlet-class>service.LoginBranchManagerServlet</servlet-class>
   </servlet>

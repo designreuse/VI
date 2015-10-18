@@ -117,19 +117,23 @@ public class AttendanceCtrl {
 		JSONObject returnJson = new JSONObject();
 
 		try {
-			Attendance attendance = AttendanceDAO.getAttendanceById((long) inputJson.get(Key.BRANCHID));
+			Attendance attendance = AttendanceDAO.getAttendanceById((long) inputJson.get(Key.ATTENDANCEID));
 
 			if (attendance != null) {
+				//Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+				Date actualStartDate = (Date) inputJson.get(Key.ACTUALSTARTDATE);
 				// String name = (String) inputJson.get(Key.NAME);
 				// String location = (String) inputJson.get(Key.LOCATION);
 				// String postalCode = (String) inputJson.get(Key.POSTALCODE);
 				// //String contactNo = (String) inputJson.get(Key.CONTACTNO);
-				//
+				
+				//attendance.setStudent(student);
+				attendance.setActualStartDate(actualStartDate);
 				// attendance.setName(name);
 				// attendance.setLocation(location);
 				// attendance.setPostalcode(postalCode);
-				// //attendance.setContactNo(contactNo);
-				//
+				// attendance.setContactNo(contactNo);
+				
 				AttendanceDAO.modifyAttendance(attendance);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -200,7 +204,8 @@ public class AttendanceCtrl {
 	public static JSONObject getAttendancesByCourse(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Course course = (Course) inputJson.get(Key.COURSE);
+			long courseId = (long) inputJson.get(Key.COURSEID);
+			Course course = CourseDAO.getCourseById(courseId);
 			ArrayList<Attendance> attendances = AttendanceDAO.getAttendancesByCourse(course);
 			if (attendances != null) {
 				for (Attendance attendance : attendances) {

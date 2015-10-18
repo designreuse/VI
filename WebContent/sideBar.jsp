@@ -40,6 +40,10 @@
 					<li><a class="" href="teachersProfile.jsp">Teachers List</a></li>
 				</ul>
 			</li>
+			
+			<li><a class="" href="QR.jsp"> <i
+					class="icon_check"></i> <span>Attendance Taking</span>
+			</a></li>
 
 			<!-- 			<li class="sub-menu"><a href="javascript:;" class=""> <i -->
 			<!-- 					class="icon_desktop"></i> <span>UI Fitures</span> <span -->
