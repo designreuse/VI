@@ -4,15 +4,12 @@ import hibernate.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import model.Admin;
-import model.Branch;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
+import system.Value;
 
 public class AdminDAO {
 	// a. Admin class method: C R U D
@@ -48,6 +45,7 @@ public class AdminDAO {
 		Admin tempAdmin = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
 		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
 			tempAdmin = (Admin) o;
@@ -64,33 +62,13 @@ public class AdminDAO {
 		Admin tempAdmin = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
 		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
 			tempAdmin = (Admin) o;
 			if (tempAdmin.getEmail().equals(email)) {
 				admin = tempAdmin;
 				break;
-			}
-		}
-		return admin;
-	}
-
-	public static Admin getAdminByBranch(Branch branch) {
-		Admin admin = null;
-		Admin tempAdmin = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Admin.class);
-		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for (Object o : list) {
-			tempAdmin = (Admin) o;
-			// need to iterate through?
-			//Set<Branch> branches = tempAdmin.getBranches();
-			Set<Branch> branches = tempAdmin.getBranches();
-			for (Branch b : branches) {
-				if (b.equals(branch)) {
-					admin = tempAdmin;
-					break;
-				}
 			}
 		}
 		return admin;

@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 6, 2015 5:42:59 PM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping default-lazy="false">
+<!-- Generated Oct 19, 2015 6:19:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
  <class name="model.Teacher" table="TEACHER">
   <id name="teacherId" type="long">
    <column name="TEACHERID"/>
@@ -14,6 +14,12 @@
   <property generated="never" lazy="false" name="email" type="java.lang.String">
    <column name="EMAIL"/>
   </property>
+  <property generated="never" lazy="false" name="passwordSalt" type="java.lang.String">
+   <column name="PASSWORDSALT"/>
+  </property>
+  <property generated="never" lazy="false" name="passwordHash" type="java.lang.String">
+   <column name="PASSWORDHASH"/>
+  </property>
   <property generated="never" lazy="false" name="contact" type="java.lang.String">
    <column name="CONTACT"/>
   </property>
@@ -22,12 +28,6 @@
   </property>
   <property generated="never" lazy="false" name="qualification" type="java.lang.String">
    <column name="QUALIFICATION"/>
-  </property>
-  <property generated="never" lazy="false" name="passwordSalt" type="java.lang.String">
-   <column name="PASSWORDSALT"/>
-  </property>
-  <property generated="never" lazy="false" name="passwordHash" type="java.lang.String">
-   <column name="PASSWORDHASH"/>
   </property>
   <property generated="never" lazy="false" name="teacherNric" type="java.lang.String">
    <column name="TEACHERNRIC"/>
@@ -41,12 +41,9 @@
   <property generated="never" lazy="false" name="remark" type="java.lang.String">
    <column name="REMARK"/>
   </property>
-  <set lazy="true" name="courses" sort="unsorted" table="COURSE">
-   <key>
-    <column name="TEACHERID"/>
-   </key>
-   <one-to-many class="model.Course"/>
-  </set>
+  <many-to-one class="model.Branch" fetch="join" name="branch">
+   <column name="BRANCHID"/>
+  </many-to-one>
   <set lazy="true" name="salaries" sort="unsorted" table="SALARY">
    <key>
     <column name="TEACHERID"/>
@@ -59,9 +56,6 @@
    </key>
    <one-to-many class="model.TeacherCourse"/>
   </set>
-  <many-to-one class="model.Branch" fetch="join" name="branch">
-   <column name="BRANCHID"/>
-  </many-to-one>
   <set lazy="true" name="pointEvents" sort="unsorted" table="POINTEVENT">
    <key>
     <column name="TEACHERID"/>

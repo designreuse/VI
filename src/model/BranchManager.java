@@ -13,8 +13,8 @@ public class BranchManager {
 	private String email;
 	private String passwordSalt;
 	private String passwordHash;
-	private String contactNumber;
-	private String branchMangerNric;
+	private String contact;
+	private String branchManagerNric;
 	
 	private Branch branch;
 	
@@ -26,16 +26,16 @@ public class BranchManager {
 		
 	}
 	
-	public BranchManager(String email, String passwordSalt, String passwordHash, Branch branch, String contactNumber, String branchManagerNric) {
+	public BranchManager(String email, String passwordSalt, String passwordHash, String contact, String branchManagerNric, Branch branch) {
 		super();
 		this.email = email;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
+		this.contact = contact;
+		this.branchManagerNric = branchManagerNric;
 		this.branch = branch;
 		this.setCreateDate(new Date());
 		this.setObjStatus(Value.ACTIVED);
-		this.contactNumber = contactNumber;
-		this.branchMangerNric = branchManagerNric;
 	}
 
 	/**
@@ -95,31 +95,31 @@ public class BranchManager {
 	}
 
 	/**
-	 * @return the contactNumber
+	 * @return the contact
 	 */
-	public String getContactNumber() {
-		return contactNumber;
+	public String getContact() {
+		return contact;
 	}
 
 	/**
-	 * @param contactNumber the contactNumber to set
+	 * @param contact the contact to set
 	 */
-	public void setContactNumber(String contactNumber) {
-		this.contactNumber = contactNumber;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 	/**
-	 * @return the branchMangerNric
+	 * @return the branchManagerNric
 	 */
-	public String getBranchMangerNric() {
-		return branchMangerNric;
+	public String getBranchManagerNric() {
+		return branchManagerNric;
 	}
 
 	/**
-	 * @param branchMangerNric the branchMangerNric to set
+	 * @param branchManagerNric the branchManagerNric to set
 	 */
-	public void setBranchMangerNric(String branchMangerNric) {
-		this.branchMangerNric = branchMangerNric;
+	public void setBranchManagerNric(String branchManagerNric) {
+		this.branchManagerNric = branchManagerNric;
 	}
 
 	/**
@@ -180,10 +180,10 @@ public class BranchManager {
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
-		
 		returnJson.put(Key.BRANCHMANAGERID, this.branchManagerId);
 		returnJson.put(Key.EMAIL, this.email);
-		returnJson.put(Key.CONTACTNUMBER, this.contactNumber);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.BRANCHMANAGERNRIC, this.branchManagerNric);
 		
 		returnJson.put(Key.BRANCH, this.branch.toJson());
 		
@@ -193,6 +193,4 @@ public class BranchManager {
 		
 		return returnJson;
 	}
-
-
 }

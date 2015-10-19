@@ -5,7 +5,6 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Admin;
 import model.Branch;
 import model.BranchManager;
 
@@ -60,10 +59,28 @@ public class BranchManagerDAO {
 		BranchManager tempBranchManager = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BranchManager.class);
 		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
 			tempBranchManager = (BranchManager) o;
 			if (tempBranchManager.getEmail().equals(email)) {
+				branchManager = tempBranchManager;
+				break;
+			}
+		}
+		return branchManager;
+	}
+	
+	public static BranchManager getBranchManagerByNric(String branchManagerNric) {
+		BranchManager branchManager = null;
+		BranchManager tempBranchManager = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(BranchManager.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCHMANAGERNRIC, branchManagerNric));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempBranchManager = (BranchManager)o;
+			if(tempBranchManager.getBranchManagerNric().equals(branchManagerNric)){
 				branchManager = tempBranchManager;
 				break;
 			}

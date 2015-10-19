@@ -122,7 +122,7 @@ public class Bill {
 		returnJson.put(Key.BILLAMOUNT, this.billAmount);
 		returnJson.put(Key.DUEDATE, this.dueDate);
 		
-		returnJson.put(Key.STUDENT, this.student.toJson());//need to implement
+		returnJson.put(Key.STUDENT, this.student.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

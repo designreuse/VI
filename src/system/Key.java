@@ -16,6 +16,7 @@ public class Key {
 	public static final String FILEURL = "fileUrl";
 	
 	public static final String ADMIN = "admin";
+	public static final String ADMINS = "admins";
 	public static final String ADMINID = "adminId";
 	public static final String NAME = "name";
 	public static final String USERNAME = "username";
@@ -26,9 +27,8 @@ public class Key {
 	public static final String BRANCH = "branch";
 	public static final String BRANCHS = "branchs";
 	public static final String BRANCHID = "branchId";
-	public static final String LOCATION = "Location";
+	public static final String LOCATION = "location";
 	public static final String POSTALCODE = "postalCode";
-	public static final String CONTACTNUMBER = "contactnumber";
 	
 	public static final String BRANCHMANAGER = "branchManager";
 	public static final String BRANCHMANAGERS = "branchManagers";
@@ -80,6 +80,7 @@ public class Key {
 	public static final String COURSELEVEL = "courseLevel";
 	public static final String COURSECOST = "courseCost";
 	public static final String COURSECAPACITY = "courseCapacity";
+	public static final String DESCRIPTION = "description";
 	
 	public static final String CLASSROOM = "classroom";
 	public static final String CLASSROOMS = "classrooms";
@@ -88,22 +89,21 @@ public class Key {
 	
 	public static final String ATTENDANCE = "attendance";
 	public static final String ATTENDANCES = "attendances";
-	public static final String ATTENDANCEID = "attendaceId";
-	public static final String PLANNEDSTARTDATE = "planStartDate";
+	public static final String ATTENDANCEID = "attendanceId";
+	public static final String ATTENDANCESTATUS = "attendanceStatus";
 	public static final String ACTUALSTARTDATE = "actualStartDate";
 	
-	public static final String POINTAMOUNT = "pointAmount";
-	public static final String DESCRIPTION = "description";
+	public static final String POINTEVENT = "pointEvent";
+	public static final String POINTEVENTS = "pointEvents";
 	public static final String POINTEVENTID = "pointEventId";
+	public static final String POINTAMOUNT = "pointAmount";
+	
+	public static final String SCHEDULE = "schedule";
+	public static final String SCHEDULES = "schedules";
+	public static final String SCHEDULEID = "scheduleId";
+	public static final String PLANNEDSTARTDATE = "planStartDate";
+	
+	public static final String TEACHERCOURSE = "teacherCourse";
+	public static final String TEACHERCOURSES = "teacherCourses";
 	public static final String TEACHERCOURSEID = "teacherCourseId";
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
 }

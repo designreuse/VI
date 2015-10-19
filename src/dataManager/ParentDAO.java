@@ -7,8 +7,6 @@ import java.util.List;
 
 import model.Branch;
 import model.Parent;
-import model.Student;
-import model.Parent;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -50,6 +48,7 @@ public class ParentDAO {
 		Parent tempParent = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
 		detachedCriteria.add(Restrictions.eq(Key.PARENTNRIC, parentNric));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
 			tempParent = (Parent)o;
@@ -66,26 +65,11 @@ public class ParentDAO {
 		Parent tempParent = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
 		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
 			tempParent = (Parent)o;
 			if(tempParent.getEmail().equals(email)){
-				parent = tempParent;
-				break;
-			}
-		}
-		return parent;
-	}
-	
-	public static Parent getParentByBranch(Branch branch){
-		Parent parent = null;
-		Parent tempParent = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
-		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempParent = (Parent)o;
-			if(tempParent.getBranch().equals(branch)){
 				parent = tempParent;
 				break;
 			}
@@ -104,20 +88,5 @@ public class ParentDAO {
 		}
 		return parents;
 	}
-	public static Parent getParentByStudent(Student student){
-		Parent parent = null;
-		Parent tempParent = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Parent.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempParent = (Parent)o;
-			//would this work? need to iterate through?
-			if(tempParent.getStudents().equals(student)){
-				parent = tempParent;
-				break;
-			}
-		}
-		return parent;
-	}
+
 }

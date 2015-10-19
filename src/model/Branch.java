@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.BranchManagerDAO;
 import dataManager.ClassroomDAO;
+import dataManager.ParentDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
 import system.Config;
@@ -18,10 +19,11 @@ public class Branch {
 	private long branchId;
 	private String name;
 	private String location;
-	private String postalcode;
-	private String contactnumber;
+	private String postalCode;
+	private String contact;
 	
 	private Admin admin;
+	private Set<Parent> parents;
 	private Set<Student> students;
 	private Set<Teacher> teachers;
 	private Set<BranchManager> branchManagers;
@@ -33,17 +35,24 @@ public class Branch {
 	
 	public Branch(){}
 
-	public Branch(String name, String location, String postalcode, Admin admin, String contactnumber) {
+	/**
+	 * @param name
+	 * @param location
+	 * @param postalCode
+	 * @param contact
+	 * @param admin
+	 */
+	public Branch(String name, String location, String postalCode, String contact, Admin admin) {
 		super();
 		this.name = name;
 		this.location = location;
-		this.postalcode = postalcode;
+		this.postalCode = postalCode;
+		this.contact = contact;
 		this.admin = admin;
 		this.setCreateDate(new Date());
 		this.setObjStatus(Value.ACTIVED);
-		this.contactnumber = contactnumber;
 	}
-
+	
 	/**
 	 * @return the branchId
 	 */
@@ -87,17 +96,31 @@ public class Branch {
 	}
 
 	/**
-	 * @return the postalcode
+	 * @return the postalCode
 	 */
-	public String getPostalcode() {
-		return postalcode;
+	public String getPostalCode() {
+		return postalCode;
 	}
 
 	/**
-	 * @param postalcode the postalcode to set
+	 * @param postalCode the postalCode to set
 	 */
-	public void setPostalcode(String postalcode) {
-		this.postalcode = postalcode;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	/**
+	 * @return the contact
+	 */
+	public String getContact() {
+		return contact;
+	}
+
+	/**
+	 * @param contact the contact to set
+	 */
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 	/**
@@ -112,6 +135,20 @@ public class Branch {
 	 */
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
+	}
+
+	/**
+	 * @return the parents
+	 */
+	public Set<Parent> getParents() {
+		return parents;
+	}
+
+	/**
+	 * @param parents the parents to set
+	 */
+	public void setParents(Set<Parent> parents) {
+		this.parents = parents;
 	}
 
 	/**
@@ -157,6 +194,20 @@ public class Branch {
 	}
 
 	/**
+	 * @return the classrooms
+	 */
+	public Set<Classroom> getClassrooms() {
+		return classrooms;
+	}
+
+	/**
+	 * @param classrooms the classrooms to set
+	 */
+	public void setClassrooms(Set<Classroom> classrooms) {
+		this.classrooms = classrooms;
+	}
+
+	/**
 	 * @return the objStatus
 	 */
 	public long getObjStatus() {
@@ -197,31 +248,15 @@ public class Branch {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-	public String getContactnumber() {
-		return contactnumber;
-	}
 
-	public void setContactnumber(String contactnumber) {
-		this.contactnumber = contactnumber;
-	}
-
-	public Set<Classroom> getClassrooms() {
-		return classrooms;
-	}
-
-	public void setClassrooms(Set<Classroom> classrooms) {
-		this.classrooms = classrooms;
-	}
-	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
 		returnJson.put(Key.BRANCHID, this.branchId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.LOCATION, this.location);
-		returnJson.put(Key.POSTALCODE, this.postalcode);
-		returnJson.put(Key.CONTACTNUMBER, this.contactnumber);
+		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.CONTACT, this.contact);
 		
 		returnJson.put(Key.ADMIN, this.admin.toJson());
 		
@@ -231,14 +266,15 @@ public class Branch {
 		
 		return returnJson;
 	}
+	
 	public JSONObject toJsonStrong(){
 		JSONObject returnJson = new JSONObject();
 		
 		returnJson.put(Key.BRANCHID, this.branchId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.LOCATION, this.location);
-		returnJson.put(Key.POSTALCODE, this.postalcode);
-		returnJson.put(Key.CONTACTNUMBER, this.contactnumber);
+		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.CONTACT, this.contact);
 		
 		returnJson.put(Key.ADMIN, this.admin.toJson());
 		
@@ -246,7 +282,7 @@ public class Branch {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-		//branch manager, teacher, classroom, student
+		//branch manager, teacher, classroom, student, parent
 		
 		JSONArray branchManagerArr = new JSONArray();
 		for(BranchManager bm : BranchManagerDAO.getBranchManagersByBranch(this)){
@@ -271,6 +307,12 @@ public class Branch {
 			studentArr.add(s.toJson());
 		}
 		returnJson.put(Key.STUDENTS, studentArr);
+		
+		JSONArray parentArr = new JSONArray();
+		for(Parent p : ParentDAO.getParentsByBranch(this)){
+			parentArr.add(p.toJson());
+		}
+		returnJson.put(Key.PARENTS, parentArr);
 		
 		return returnJson;
 	}

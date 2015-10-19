@@ -6,8 +6,9 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.CourseDAO;
+import dataManager.PointEventDAO;
 import dataManager.SalaryDAO;
+import dataManager.TeacherCourseDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -28,13 +29,11 @@ public class Teacher {
 	private String remark;
 
 	private Branch branch;
-	private Set<Course> courses;
 	private Set<Salary> salaries;
 	private Set<TeacherCourse> teacherCourses;
 	private Set<PointEvent> pointEvents;
 
-	public Teacher() {
-	}
+	public Teacher() {}
 
 	public Teacher(String name, String email, String passwordSalt,
 			String passwordHash, String contact, String address,
@@ -52,7 +51,7 @@ public class Teacher {
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
-	
+
 	/**
 	 * @return the teacherId
 	 */
@@ -236,20 +235,6 @@ public class Teacher {
 	}
 
 	/**
-	 * @return the courses
-	 */
-	public Set<Course> getCourses() {
-		return courses;
-	}
-
-	/**
-	 * @param courses the courses to set
-	 */
-	public void setCourses(Set<Course> courses) {
-		this.courses = courses;
-	}
-
-	/**
 	 * @return the salaries
 	 */
 	public Set<Salary> getSalaries() {
@@ -330,15 +315,19 @@ public class Teacher {
 			salaryArr.add(s.toJson());
 		}
 		returnJson.put(Key.SALARYS, salaryArr);
-
-		JSONArray courseArr = new JSONArray();
-		for (Course c : CourseDAO.getCoursesByTeacher(this)) {
-			courseArr.add(c.toJson());
+		
+		JSONArray teacherCourseArr = new JSONArray();
+		for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByTeacher(this)) {
+			teacherCourseArr.add(tc.toJson());
 		}
-		returnJson.put(Key.COURSES, courseArr);
+		returnJson.put(Key.TEACHERCOURSES, teacherCourseArr);
 		
-		//TODO teacherCourses pointEvents
-		
+		JSONArray pointEventArr = new JSONArray();
+		for (PointEvent pe : PointEventDAO.getPointEventsByTeacher(this)) {
+			pointEventArr.add(pe.toJson());
+		}
+		returnJson.put(Key.POINTEVENTS, pointEventArr);
+
 		return returnJson;
 	}
 

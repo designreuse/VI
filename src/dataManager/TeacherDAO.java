@@ -6,10 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Branch;
-import model.BranchManager;
-import model.Course;
-import model.Salary;
-import model.Student;
 import model.Teacher;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -47,6 +43,7 @@ public class TeacherDAO {
 	}
 	
 	//features
+	//get by branch
 	public static ArrayList<Teacher> getTeachersByBranch(Branch branch){
 		ArrayList<Teacher> teachers = new ArrayList<Teacher>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
@@ -58,11 +55,14 @@ public class TeacherDAO {
 		}
 		return teachers;
 	}
+	
+	//get by email
 	public static Teacher getTeacherByEmail(String email){
 		Teacher teacher = null;
 		Teacher tempTeacher = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
 		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
 			tempTeacher = (Teacher)o;
@@ -73,36 +73,23 @@ public class TeacherDAO {
 		}
 		return teacher;
 	}
-	public static Teacher getTeacherByCourse(Course course){
+	
+	//get by nric
+	public static Teacher getTeacherByNric(String teacherNric){
 		Teacher teacher = null;
 		Teacher tempTeacher = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
-		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.TEACHERNRIC, teacherNric));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
 			tempTeacher = (Teacher)o;
-			//would this work? need to iterate through?
-			if(tempTeacher.getCourses().equals(course)){
+			if(tempTeacher.getTeacherNric().equals(teacherNric)){
 				teacher = tempTeacher;
 				break;
 			}
 		}
 		return teacher;
 	}
-	public static Teacher getTeacherBySalary(Salary salary){
-		Teacher teacher = null;
-		Teacher tempTeacher = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Teacher.class);
-		detachedCriteria.add(Restrictions.eq(Key.SALARY, salary));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempTeacher = (Teacher)o;
-			//would this work? need to iterate through?
-			if(tempTeacher.getSalaries().equals(salary)){
-				teacher = tempTeacher;
-				break;
-			}
-		}
-		return teacher;
-	}
+	
 }

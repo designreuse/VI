@@ -5,11 +5,10 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Branch;
-import model.Salary;
 import model.Teacher;
-
+import model.Salary;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
@@ -54,5 +53,19 @@ public class SalaryDAO {
 			salaries.add((Salary) o);
 		}
 		return salaries;
+	}
+	
+	public static Salary getLatestSalaryByTeacher(Teacher teacher){
+		Salary salary = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Salary.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+		detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 1);
+		if(!list.isEmpty()){
+			for(Object o : list){
+				return salary = (Salary) o;
+			}
+		} 
+		return salary;
 	}
 }

@@ -5,13 +5,8 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Attendance;
-import model.Branch;
 import model.Classroom;
-import model.Course;
-import model.Student;
-import model.Teacher;
-
+import model.Branch;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -58,21 +53,38 @@ public class ClassroomDAO {
 		}
 		return classrooms;
 	}
-	public static Classroom getClassroomByAttendance(Attendance attendance){
+	
+	public static Classroom getClassroomByName(String name) {
 		Classroom classroom = null;
 		Classroom tempClassroom = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Classroom.class);
-		detachedCriteria.add(Restrictions.eq(Key.ATTENDANCE, attendance));
+		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempClassroom = (Classroom)o;
-			//would this work? need to iterate through?
-			if(tempClassroom.getAttendances().equals(attendance)){
+		for (Object o : list) {
+			tempClassroom = (Classroom) o;
+			if (tempClassroom.getName().equals(name)) {
 				classroom = tempClassroom;
 				break;
 			}
 		}
 		return classroom;
 	}
+//	public static Classroom getClassroomBySchedule(Schedule schedule){
+//		Classroom classroom = null;
+//		Classroom tempClassroom = null;
+//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Classroom.class);
+//		detachedCriteria.add(Restrictions.eq(Key.SCHEDULE, schedule));
+//		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+//		for(Object o : list){
+//			tempClassroom = (Classroom)o;
+//			//would this work? need to iterate through?
+//			if(tempClassroom.getSchedules().equals(schedule)){
+//				classroom = tempClassroom;
+//				break;
+//			}
+//		}
+//		return classroom;
+//	}
 	
 }

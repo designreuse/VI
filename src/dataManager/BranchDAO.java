@@ -4,16 +4,8 @@ import hibernate.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import model.Admin;
 import model.Branch;
-import model.BranchManager;
-import model.Classroom;
-import model.Result;
-import model.Student;
-import model.Teacher;
-
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -61,65 +53,16 @@ public class BranchDAO {
 		return branches;
 	}
 	
-	public static Branch getBranchByStudent(long studentId){
+	public static Branch getBranchByPostalCode(String postalCode) {
 		Branch branch = null;
 		Branch tempBranch = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Branch.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENTID, studentId));
+		detachedCriteria.add(Restrictions.eq(Key.POSTALCODE, postalCode));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempBranch = (Branch)o;
-			//would this work? need to iterate through?
-			if(tempBranch != null){
-				branch = tempBranch;
-				break;
-			}
-		}
-		return branch;
-	}
-	public static Branch getBranchByBranchManager(BranchManager branchManager){
-		Branch branch = null;
-		Branch tempBranch = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Branch.class);
-		detachedCriteria.add(Restrictions.eq(Key.BRANCHMANAGER, branchManager));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempBranch = (Branch)o;
-			//would this work? need to iterate through?
-			if(tempBranch.getBranchManagers().equals(branchManager)){
-				branch = tempBranch;
-				break;
-			}
-		}
-		return branch;
-	}
-	public static Branch getBranchByClassroom(Classroom classroom){
-		Branch branch = null;
-		Branch tempBranch = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Branch.class);
-		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempBranch = (Branch)o;
-			//would this work? need to iterate through?
-			if(tempBranch.getClassrooms().equals(classroom)){
-				branch = tempBranch;
-				break;
-			}
-		}
-		return branch;
-	}
-	
-	public static Branch getBranchByTeacher(Teacher teacher){
-		Branch branch = null;
-		Branch tempBranch = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Branch.class);
-		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempBranch = (Branch)o;
-			//would this work? need to iterate through?
-			if(tempBranch.getTeachers().equals(teacher)){
+		for (Object b : list) {
+			tempBranch = (Branch) b;
+			if (tempBranch.getPostalCode().equals(postalCode)) {
 				branch = tempBranch;
 				break;
 			}

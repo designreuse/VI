@@ -13,6 +13,8 @@ import system.Value;
 
 public class Result {
 	private long resultId;
+	private String name;
+	private String description;
 	private double resultValue;
 	private Date resultDate;
 
@@ -25,9 +27,12 @@ public class Result {
 	
 	public Result(){}
 	
-	public Result(double resultValue, Course course, Student student) {
+	public Result(String name, String description, double resultValue, Date resultDate, Course course, Student student) {
 		super();
+		this.name = name;
+		this.description = description;
 		this.resultValue = resultValue;
+		this.resultDate = resultDate;
 		this.course = course;
 		this.student = student;
 		this.setObjStatus(Value.ACTIVED);
@@ -49,6 +54,34 @@ public class Result {
 	}
 
 	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
 	 * @return the resultValue
 	 */
 	public double getResultValue() {
@@ -60,6 +93,20 @@ public class Result {
 	 */
 	public void setResultValue(double resultValue) {
 		this.resultValue = resultValue;
+	}
+
+	/**
+	 * @return the resultDate
+	 */
+	public Date getResultDate() {
+		return resultDate;
+	}
+
+	/**
+	 * @param resultDate the resultDate to set
+	 */
+	public void setResultDate(Date resultDate) {
+		this.resultDate = resultDate;
 	}
 
 	/**
@@ -131,30 +178,18 @@ public class Result {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
-	
-
-	/**
-	 * @return the resultDate
-	 */
-	public Date getResultDate() {
-		return resultDate;
-	}
-	/**
-	 * @param resultDate the resultDate to set
-	 */
-	public void setResultDate(Date resultDate) {
-		this.resultDate = resultDate;
-	}
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
-		returnJson.put(Key.RESULT, this.resultId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, this.description);
+		returnJson.put(Key.RESULTID, this.resultId);
 		returnJson.put(Key.RESULTVALUE, this.resultValue);
-		returnJson.put(Key.RESULTDATE, this.resultDate);
+		returnJson.put(Key.RESULTDATE, Config.SDF.format(this.resultDate));
 		
-		returnJson.put(Key.COURSE, this.course.toJson());//need to implement
-		returnJson.put(Key.STUDENT, this.student.toJson());//need to implement
+		returnJson.put(Key.COURSE, this.course.toJson());
+		returnJson.put(Key.STUDENT, this.student.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

@@ -19,16 +19,18 @@ public class Admin {
 	private String email;
 	private String passwordSalt;
 	private String passwordHash;
-	
+
 	private long objStatus;
 	private Date createDate;
 	private String remark;
-	
-	private Set<Branch> branches;
-	
-	public Admin(){}
 
-	public Admin(String name, String email, String passwordSalt, String passwordHash) {
+	private Set<Branch> branches;
+
+	public Admin() {
+	}
+
+	public Admin(String name, String email, String passwordSalt,
+			String passwordHash) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -37,6 +39,7 @@ public class Admin {
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
+
 	/**
 	 * @return the adminId
 	 */
@@ -45,7 +48,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param adminId the adminId to set
+	 * @param adminId
+	 *            the adminId to set
 	 */
 	public void setAdminId(long adminId) {
 		this.adminId = adminId;
@@ -59,7 +63,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param name
+	 *            the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -73,7 +78,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param email
+	 *            the email to set
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -87,7 +93,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param passwordSalt the passwordSalt to set
+	 * @param passwordSalt
+	 *            the passwordSalt to set
 	 */
 	public void setPasswordSalt(String passwordSalt) {
 		this.passwordSalt = passwordSalt;
@@ -101,7 +108,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param passwordHash the passwordHash to set
+	 * @param passwordHash
+	 *            the passwordHash to set
 	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
@@ -115,7 +123,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param objStatus the objStatus to set
+	 * @param objStatus
+	 *            the objStatus to set
 	 */
 	public void setObjStatus(long objStatus) {
 		this.objStatus = objStatus;
@@ -129,7 +138,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param createDate the createDate to set
+	 * @param createDate
+	 *            the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
@@ -143,7 +153,8 @@ public class Admin {
 	}
 
 	/**
-	 * @param remark the remark to set
+	 * @param remark
+	 *            the remark to set
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
@@ -157,43 +168,44 @@ public class Admin {
 	}
 
 	/**
-	 * @param branches the branches to set
+	 * @param branches
+	 *            the branches to set
 	 */
 	public void setBranches(Set<Branch> branches) {
 		this.branches = branches;
 	}
 
-	public JSONObject toJson(){
+	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
-		
+
 		returnJson.put(Key.ADMINID, this.adminId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.EMAIL, this.email);
-		
+
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
-		
+
 		return returnJson;
 	}
-	
-	public JSONObject toJsonStrong(){
+
+	public JSONObject toJsonStrong() {
 		JSONObject returnJson = new JSONObject();
-		
-		returnJson.put(Key. ADMINID, this.adminId);
+
+		returnJson.put(Key.ADMINID, this.adminId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.EMAIL, this.email);
-		
+
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
-		
+
 		JSONArray branchArr = new JSONArray();
-		for(Branch b : BranchDAO.getBranchesByAdmin(this)){
+		for (Branch b : BranchDAO.getBranchesByAdmin(this)) {
 			branchArr.add(b.toJson());
 		}
 		returnJson.put(Key.BRANCHS, branchArr);
-		
+
 		return returnJson;
 	}
 }

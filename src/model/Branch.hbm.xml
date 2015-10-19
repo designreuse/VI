@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 28, 2015 2:57:38 PM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping default-lazy="false">
+<!-- Generated Oct 19, 2015 6:19:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
  <class name="model.Branch" table="BRANCH">
   <id name="branchId" type="long">
    <column name="BRANCHID"/>
@@ -14,15 +14,21 @@
   <property generated="never" lazy="false" name="location" type="java.lang.String">
    <column name="LOCATION"/>
   </property>
-  <property generated="never" lazy="false" name="postalcode" type="java.lang.String">
+  <property generated="never" lazy="false" name="postalCode" type="java.lang.String">
    <column name="POSTALCODE"/>
   </property>
-  <property generated="never" lazy="false" name="contactnumber" type="java.lang.String">
-   <column name="CONTACTNUMBER"/>
+  <property generated="never" lazy="false" name="contact" type="java.lang.String">
+   <column name="CONTACT"/>
   </property>
   <many-to-one class="model.Admin" fetch="join" name="admin">
    <column name="ADMINID"/>
   </many-to-one>
+  <set lazy="true" name="parents" sort="unsorted" table="PARENT">
+   <key>
+    <column name="BRANCHID"/>
+   </key>
+   <one-to-many class="model.Parent"/>
+  </set>
   <set lazy="true" name="students" sort="unsorted" table="STUDENT">
    <key>
     <column name="BRANCHID"/>

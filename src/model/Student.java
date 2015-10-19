@@ -6,6 +6,8 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.AttendanceDAO;
+import dataManager.PointEventDAO;
 import dataManager.ResultDAO;
 import dataManager.BillDAO;
 import system.Config;
@@ -26,6 +28,7 @@ public class Student {
 
 	private Parent parent;
 	private Branch branch;
+	
 	private Set<Result> results;
 	private Set<Bill> bills;
 	private Set<Attendance> attendances;
@@ -40,7 +43,7 @@ public class Student {
 
 	public Student(String name, String email, String passwordSalt,
 			String passwordHash, String contact, String address,
-			String studentLevel, String nric, Parent parent, Branch branch) {
+			String studentLevel, String studentNric, Parent parent, Branch branch) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -49,12 +52,13 @@ public class Student {
 		this.contact = contact;
 		this.address = address;
 		this.studentLevel = studentLevel;
-		this.studentNric = nric;
-		this.branch = branch;
+		this.studentNric = studentNric;
+		this.points = 0L;
 		this.parent = parent;
+		this.branch = branch;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
-		this.points = 0L;
+		
 	}
 
 	/**
@@ -65,8 +69,7 @@ public class Student {
 	}
 
 	/**
-	 * @param studentId
-	 *            the studentId to set
+	 * @param studentId the studentId to set
 	 */
 	public void setStudentId(long studentId) {
 		this.studentId = studentId;
@@ -80,11 +83,52 @@ public class Student {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the passwordSalt
+	 */
+	public String getPasswordSalt() {
+		return passwordSalt;
+	}
+
+	/**
+	 * @param passwordSalt the passwordSalt to set
+	 */
+	public void setPasswordSalt(String passwordSalt) {
+		this.passwordSalt = passwordSalt;
+	}
+
+	/**
+	 * @return the passwordHash
+	 */
+	public String getPasswordHash() {
+		return passwordHash;
+	}
+
+	/**
+	 * @param passwordHash the passwordHash to set
+	 */
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
 	/**
@@ -95,8 +139,7 @@ public class Student {
 	}
 
 	/**
-	 * @param contact
-	 *            the contact to set
+	 * @param contact the contact to set
 	 */
 	public void setContact(String contact) {
 		this.contact = contact;
@@ -110,8 +153,7 @@ public class Student {
 	}
 
 	/**
-	 * @param address
-	 *            the address to set
+	 * @param address the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
@@ -125,11 +167,38 @@ public class Student {
 	}
 
 	/**
-	 * @param studentLevel
-	 *            the studentLevel to set
+	 * @param studentLevel the studentLevel to set
 	 */
 	public void setStudentLevel(String studentLevel) {
 		this.studentLevel = studentLevel;
+	}
+
+	/**
+	 * @return the studentNric
+	 */
+	public String getStudentNric() {
+		return studentNric;
+	}
+
+	/**
+	 * @param studentNric the studentNric to set
+	 */
+	public void setStudentNric(String studentNric) {
+		this.studentNric = studentNric;
+	}
+
+	/**
+	 * @return the points
+	 */
+	public long getPoints() {
+		return points;
+	}
+
+	/**
+	 * @param points the points to set
+	 */
+	public void setPoints(long points) {
+		this.points = points;
 	}
 
 	/**
@@ -140,11 +209,24 @@ public class Student {
 	}
 
 	/**
-	 * @param parent
-	 *            the parent to set
+	 * @param parent the parent to set
 	 */
 	public void setParent(Parent parent) {
 		this.parent = parent;
+	}
+
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
+	}
+
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 
 	/**
@@ -155,8 +237,7 @@ public class Student {
 	}
 
 	/**
-	 * @param results
-	 *            the results to set
+	 * @param results the results to set
 	 */
 	public void setResults(Set<Result> results) {
 		this.results = results;
@@ -170,11 +251,38 @@ public class Student {
 	}
 
 	/**
-	 * @param bills
-	 *            the bills to set
+	 * @param bills the bills to set
 	 */
 	public void setBills(Set<Bill> bills) {
 		this.bills = bills;
+	}
+
+	/**
+	 * @return the attendances
+	 */
+	public Set<Attendance> getAttendances() {
+		return attendances;
+	}
+
+	/**
+	 * @param attendances the attendances to set
+	 */
+	public void setAttendances(Set<Attendance> attendances) {
+		this.attendances = attendances;
+	}
+
+	/**
+	 * @return the pointEvents
+	 */
+	public Set<PointEvent> getPointEvents() {
+		return pointEvents;
+	}
+
+	/**
+	 * @param pointEvents the pointEvents to set
+	 */
+	public void setPointEvents(Set<PointEvent> pointEvents) {
+		this.pointEvents = pointEvents;
 	}
 
 	/**
@@ -185,8 +293,7 @@ public class Student {
 	}
 
 	/**
-	 * @param objStatus
-	 *            the objStatus to set
+	 * @param objStatus the objStatus to set
 	 */
 	public void setObjStatus(long objStatus) {
 		this.objStatus = objStatus;
@@ -200,8 +307,7 @@ public class Student {
 	}
 
 	/**
-	 * @param createDate
-	 *            the createDate to set
+	 * @param createDate the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
@@ -215,89 +321,10 @@ public class Student {
 	}
 
 	/**
-	 * @param remark
-	 *            the remark to set
+	 * @param remark the remark to set
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	/**
-	 * @return the branch
-	 */
-	public Branch getBranch() {
-		return branch;
-	}
-
-	/**
-	 * @param branch
-	 *            the branch to set
-	 */
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email
-	 *            the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPasswordSalt() {
-		return passwordSalt;
-	}
-
-	public void setPasswordSalt(String passwordSalt) {
-		this.passwordSalt = passwordSalt;
-	}
-
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
-	}
-
-	public Set<Attendance> getAttendances() {
-		return attendances;
-	}
-
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
-	}
-
-	public Set<PointEvent> getPointEvents() {
-		return pointEvents;
-	}
-
-	public void setPointEvents(Set<PointEvent> pointEvents) {
-		this.pointEvents = pointEvents;
-	}
-
-	public long getPoints() {
-		return points;
-	}
-
-	public void setPoints(long points) {
-		this.points = points;
-	}
-
-	public String getStudentNric() {
-		return studentNric;
-	}
-
-	public void setStudentNric(String nric) {
-		this.studentNric = nric;
 	}
 
 	public JSONObject toJson() {
@@ -309,10 +336,11 @@ public class Student {
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.STUDENTLEVEL, this.studentLevel);
+		returnJson.put(Key.STUDENTNRIC, this.studentNric);
 		returnJson.put(Key.POINTS, this.points);
 
-		returnJson.put(Key.BRANCH, this.branch.toJson());// need to implement
-		returnJson.put(Key.PARENT, this.parent.toJson());// need to implement
+		returnJson.put(Key.PARENT, this.parent.toJson());
+		returnJson.put(Key.BRANCH, this.branch.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -330,9 +358,11 @@ public class Student {
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.STUDENTLEVEL, this.studentLevel);
+		returnJson.put(Key.STUDENTNRIC, this.studentNric);
+		returnJson.put(Key.POINTS, this.points);
 
-		returnJson.put(Key.BRANCH, this.branch.toJson());
 		returnJson.put(Key.PARENT, this.parent.toJson());
+		returnJson.put(Key.BRANCH, this.branch.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -350,6 +380,18 @@ public class Student {
 		}
 		returnJson.put(Key.BILLS, billArr);
 
+		JSONArray attendanceArr = new JSONArray();
+		for (Attendance a : AttendanceDAO.getAttendancesByStudent(this)) {
+			attendanceArr.add(a.toJson());
+		}
+		returnJson.put(Key.ATTENDANCES, attendanceArr);
+		
+		JSONArray pointEventArr = new JSONArray();
+		for (PointEvent pe : PointEventDAO.getPointEventsByStudent(this)) {
+			pointEventArr.add(pe.toJson());
+		}
+		returnJson.put(Key.POINTEVENTS, pointEventArr);
+		
 		return returnJson;
 	}
 

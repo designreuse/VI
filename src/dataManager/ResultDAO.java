@@ -8,7 +8,6 @@ import java.util.List;
 import model.Student;
 import model.Course;
 import model.Result;
-import model.Result;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -61,6 +60,19 @@ public class ResultDAO {
 		ArrayList<Result> results = new ArrayList<Result>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
 		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			results.add((Result) o);
+		}
+		return results;
+	}
+	
+	public static ArrayList<Result> getResultsByCourseAndStudent(Course course, Student student){
+		ArrayList<Result> results = new ArrayList<Result>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
+		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){

@@ -5,13 +5,8 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Admin;
-import model.Attendance;
-import model.Bill;
 import model.Branch;
-import model.Classroom;
 import model.Parent;
-import model.Result;
 import model.Student;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -38,7 +33,7 @@ public class StudentDAO {
 
 	public static void addStudent(Student student) {
 		HibernateUtil.save(student);
-		System.out.println("SAVED");
+		//System.out.println("SAVED");
 	}
 
 	public static void modifyStudent(Student modifiedStudent) {
@@ -50,17 +45,6 @@ public class StudentDAO {
 	}
 	
 	//features
-	public static ArrayList<Student> getStudentsByBranch(Branch branch){
-		ArrayList<Student> students = new ArrayList<Student>();
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
-		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			students.add((Student) o);
-		}
-		return students;
-	}
 	public static Student getStudentByEmail(String email){
 		Student student = null;
 		Student tempStudent = null;
@@ -77,6 +61,36 @@ public class StudentDAO {
 		}
 		return student;
 	}
+	
+	public static Student getStudentByNric(String studentNric){
+		Student student = null;
+		Student tempStudent = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
+		detachedCriteria.add(Restrictions.eq(Key.STUDENTNRIC, studentNric));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			tempStudent = (Student)o;
+			if(tempStudent.getStudentNric().equals(studentNric)){
+				student = tempStudent;
+				break;
+			}
+		}
+		return student;
+	}
+	
+	public static ArrayList<Student> getStudentsByBranch(Branch branch){
+		ArrayList<Student> students = new ArrayList<Student>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
+		detachedCriteria.add(Restrictions.eq(Key.BRANCH, branch));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			students.add((Student) o);
+		}
+		return students;
+	}
+	
 	public static ArrayList<Student> getStudentsByParent(Parent parent){
 		ArrayList<Student> students = new ArrayList<Student>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
@@ -88,56 +102,6 @@ public class StudentDAO {
 		}
 		return students;
 	}
-	public static Student getStudentByBill(Bill bill){
-		Student student = null;
-		Student tempStudent = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
-		detachedCriteria.add(Restrictions.eq(Key.BILL, bill));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempStudent = (Student)o;
-			//would this work? need to iterate through?
-			if(tempStudent.getBills().equals(bill)){
-				student = tempStudent;
-				break;
-			}
-		}
-		return student;
-	}
-	public static Student getStudentByResult(Result result){
-		Student student = null;
-		Student tempStudent = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
-		detachedCriteria.add(Restrictions.eq(Key.RESULT, result));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempStudent = (Student)o;
-			//would this work? need to iterate through?
-			if(tempStudent.getResults().equals(result)){
-				student = tempStudent;
-				break;
-			}
-		}
-		return student;
-	}
 	
-	public static Student getStudentByAttendance(Attendance attendance){
-		Student student = null;
-		Student tempStudent = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
-		detachedCriteria.add(Restrictions.eq(Key.ATTENDANCE, attendance));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempStudent = (Student)o;
-			//would this work? need to iterate through?
-			if(tempStudent.getAttendances().equals(attendance)){
-				student = tempStudent;
-				break;
-			}
-		}
-		return student;
-	}
+	
 }

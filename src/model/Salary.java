@@ -123,12 +123,11 @@ public class Salary {
 		returnJson.put(Key.SALARYAMOUNT, this.salaryAmount);
 		returnJson.put(Key.DUEDATE, this.dueDate);
 		
-		returnJson.put(Key.TEACHER, this.teacher.toJson());//need to implement
+		returnJson.put(Key.TEACHER, this.teacher.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
-		
 		
 		return returnJson;
 	}

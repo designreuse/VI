@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.BranchManagerDAO;
 import dataManager.ClassroomDAO;
+import dataManager.ScheduleDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
 import system.Config;
@@ -24,7 +25,7 @@ public class Classroom {
 	private String remark;
 	
 	private Branch branch;
-	private Set<Attendance> attendances;
+	private Set<Schedule> schedules;
 	
 	public Classroom(){}
 	
@@ -36,6 +37,7 @@ public class Classroom {
 		this.setCreateDate(new Date());
 		this.setObjStatus(Value.ACTIVED);
 	}
+
 	/**
 	 * @return the classroomId
 	 */
@@ -135,17 +137,17 @@ public class Classroom {
 	}
 
 	/**
-	 * @return the attendances
+	 * @return the schedules
 	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
+	public Set<Schedule> getSchedules() {
+		return schedules;
 	}
 
 	/**
-	 * @param attendances the attendances to set
+	 * @param schedules the schedules to set
 	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
+	public void setSchedules(Set<Schedule> schedules) {
+		this.schedules = schedules;
 	}
 
 	public JSONObject toJson(){
@@ -155,7 +157,7 @@ public class Classroom {
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.ROOMCAPACITY, this.roomCapacity);
 		
-		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		returnJson.put(Key.BRANCH, this.branch.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -177,11 +179,12 @@ public class Classroom {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-//		JSONArray attendanceArr = new JSONArray();
-//		for(Attendance a : AttendanceDAO.getBranchManagersByBranch(this)){
-//			attendanceArr.add(a.toJson());
-//		}
-//		returnJson.put(Key.ATTENDANCES, attendanceArr);
+		//TODO implement the DAO method
+		JSONArray scheduleArr = new JSONArray();
+		for(Schedule s: ScheduleDAO.getSchedulesByClassroom(this)){
+			scheduleArr.add(s.toJson());
+		}
+		returnJson.put(Key.SCHEDULES, scheduleArr);
 		
 		return returnJson;
 	}

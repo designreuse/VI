@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Attendance;
-import model.Classroom;
-import model.Course;
-import model.Result;
+import model.Schedule;
 import model.Student;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -46,21 +44,11 @@ public class AttendanceDAO {
 	}
 	
 	//features
-	public static ArrayList<Attendance> getAttendancesByClassroom(Classroom classroom){
+	
+	public static ArrayList<Attendance> getAttendancesBySchedule(Schedule schedule){
 		ArrayList<Attendance> results = new ArrayList<Attendance>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Attendance.class);
-		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			results.add((Attendance) o);
-		}
-		return results;
-	}
-	public static ArrayList<Attendance> getAttendancesByCourse(Course course){
-		ArrayList<Attendance> results = new ArrayList<Attendance>();
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Attendance.class);
-		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.SCHEDULE, schedule));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
@@ -80,5 +68,17 @@ public class AttendanceDAO {
 		}
 		return results;
 	}
-
+	
+	public static ArrayList<Attendance> getAttendancesByStudentAndSchedule(Student student, Schedule schedule){
+		ArrayList<Attendance> results = new ArrayList<Attendance>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Attendance.class);
+		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.SCHEDULE, schedule));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			results.add((Attendance) o);
+		}
+		return results;
+	}
 }

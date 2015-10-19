@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import dataManager.CourseDAO;
 import dataManager.ResultDAO;
 import dataManager.SalaryDAO;
+import dataManager.TeacherCourseDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -16,14 +17,13 @@ import system.Value;
 public class Course {
 	private long courseId;
 	private String name;
+	private String description;
 	private String courseLevel;
 	private String courseCost;
 	private long courseCapacity;
 	
 	private Set<Result> results;
-	private Set<Attendance> attendances;
 	private Set<TeacherCourse> teacherCourses;
-	private Teacher teacher;
 	
 	private long objStatus;
 	private Date createDate;
@@ -31,14 +31,13 @@ public class Course {
 	
 	public Course(){}
 	
-	public Course(String name, String courseLevel, String courseCost,long courseCapacity,
-			Teacher teacher) {
+	public Course(String name, String description, String courseLevel, String courseCost, long courseCapacity) {
 		super();
 		this.name = name;
+		this.description = description;
 		this.courseLevel = courseLevel;
 		this.courseCost = courseCost;
 		this.courseCapacity = courseCapacity;
-		this.teacher = teacher;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -49,58 +48,79 @@ public class Course {
 	public long getCourseId() {
 		return courseId;
 	}
+
 	/**
 	 * @param courseId the courseId to set
 	 */
 	public void setCourseId(long courseId) {
 		this.courseId = courseId;
 	}
+
 	/**
 	 * @return the name
 	 */
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	/**
 	 * @return the courseLevel
 	 */
 	public String getCourseLevel() {
 		return courseLevel;
 	}
+
 	/**
 	 * @param courseLevel the courseLevel to set
 	 */
 	public void setCourseLevel(String courseLevel) {
 		this.courseLevel = courseLevel;
 	}
+
 	/**
 	 * @return the courseCost
 	 */
 	public String getCourseCost() {
 		return courseCost;
 	}
+
 	/**
 	 * @param courseCost the courseCost to set
 	 */
 	public void setCourseCost(String courseCost) {
 		this.courseCost = courseCost;
 	}
-	
+
 	/**
-	 * @return the capacity
+	 * @return the courseCapacity
 	 */
 	public long getCourseCapacity() {
 		return courseCapacity;
 	}
 
 	/**
-	 * @param capacity the capacity to set
+	 * @param courseCapacity the courseCapacity to set
 	 */
 	public void setCourseCapacity(long courseCapacity) {
 		this.courseCapacity = courseCapacity;
@@ -112,91 +132,78 @@ public class Course {
 	public Set<Result> getResults() {
 		return results;
 	}
+
 	/**
 	 * @param results the results to set
 	 */
 	public void setResults(Set<Result> results) {
 		this.results = results;
 	}
+
 	/**
-	 * @return the attendances
+	 * @return the teacherCourses
 	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
+	public Set<TeacherCourse> getTeacherCourses() {
+		return teacherCourses;
 	}
+
 	/**
-	 * @param attendances the attendances to set
+	 * @param teacherCourses the teacherCourses to set
 	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
+	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
+		this.teacherCourses = teacherCourses;
 	}
-	/**
-	 * @return the teacher
-	 */
-	public Teacher getTeacher() {
-		return teacher;
-	}
-	/**
-	 * @param teacher the teacher to set
-	 */
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
+
 	/**
 	 * @return the objStatus
 	 */
 	public long getObjStatus() {
 		return objStatus;
 	}
+
 	/**
 	 * @param objStatus the objStatus to set
 	 */
 	public void setObjStatus(long objStatus) {
 		this.objStatus = objStatus;
 	}
+
 	/**
 	 * @return the createDate
 	 */
 	public Date getCreateDate() {
 		return createDate;
 	}
+
 	/**
 	 * @param createDate the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
+
 	/**
 	 * @return the remark
 	 */
 	public String getRemark() {
 		return remark;
 	}
+
 	/**
 	 * @param remark the remark to set
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-	public Set<TeacherCourse> getTeacherCourses() {
-		return teacherCourses;
-	}
-
-	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
-		this.teacherCourses = teacherCourses;
-	}
 
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
-		
 		returnJson.put(Key.COURSEID, this.courseId);
 		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, this.description);
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.COURSECOST, this.courseCost);
 		returnJson.put(Key.COURSECAPACITY, this.courseCapacity);
-		
-		returnJson.put(Key.TEACHER, this.teacher.toJson());//need to implement
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -206,15 +213,12 @@ public class Course {
 	}
 	public JSONObject toJsonStrong(){
 		JSONObject returnJson = new JSONObject();
-		
 		returnJson.put(Key.COURSEID, this.courseId);
 		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, this.description);
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.COURSECOST, this.courseCost);
 		returnJson.put(Key.COURSECAPACITY, this.courseCapacity);
-		
-		
-		returnJson.put(Key.TEACHER, this.teacher.toJson());//need to implement
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -226,11 +230,11 @@ public class Course {
 		}
 		returnJson.put(Key.RESULTS, resultArr);
 		
-//		JSONArray attendanceArr = new JSONArray();
-//		for(Attendance a : AttendanceDAO.getBillsByStudent(this)){
-//			attendanceArr.add(a.toJson());
-//		}
-//		returnJson.put(Key.ATTENDANCE, attendanceArr);
+		JSONArray teacherCourseArr = new JSONArray();
+		for(TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByCourse(this)){
+			teacherCourseArr.add(tc.toJson());
+		}
+		returnJson.put(Key.TEACHERCOURSES, teacherCourseArr);
 		
 		return returnJson;
 	}

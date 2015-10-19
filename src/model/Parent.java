@@ -3,8 +3,10 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.StudentDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -26,8 +28,7 @@ public class Parent {
 	private Date createDate;
 	private String remark;
 
-	public Parent() {
-	}
+	public Parent() {}
 
 	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address, String email,
 			String parentNric, Branch branch) {
@@ -36,11 +37,11 @@ public class Parent {
 		this.passwordHash = passwordHash;
 		this.contact = contact;
 		this.address = address;
+		this.email = email;
+		this.parentNric = parentNric;
+		this.branch = branch;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
-		this.email = email;
-		this.branch = branch;
-		this.parentNric = parentNric;
 	}
 	
 	/**
@@ -233,6 +234,7 @@ public class Parent {
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.PARENTNRIC, this.parentNric);
 		returnJson.put(Key.BRANCH, this.branch.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
@@ -242,6 +244,28 @@ public class Parent {
 		return returnJson;
 	}
 	
-	//TODO implement toJsonStrong
+	public JSONObject toJsonStrong() {
+		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.PARENTID, this.parentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.PARENTNRIC, this.parentNric);
+		returnJson.put(Key.BRANCH, this.branch.toJson());
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		JSONArray studentArr = new JSONArray();
+		for(Student s : StudentDAO.getStudentsByParent(this)){
+			studentArr.add(s.toJson());
+		}
+		returnJson.put(Key.STUDENTS, studentArr);
+
+		return returnJson;
+	}
 	
 }
