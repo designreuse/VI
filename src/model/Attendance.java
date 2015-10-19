@@ -146,7 +146,6 @@ public class Attendance {
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 				
-<<<<<<< HEAD
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 		
@@ -166,12 +165,6 @@ public class Attendance {
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
-=======
-		returnJson.put(Key.STUDENTID, this.attendaceId);
-		returnJson.put(Key.PLANNEDSTARTDATE, this.planStartDate);
-		returnJson.put(Key.LOCATION, this.location);
-		returnJson.put(Key.ACTUALSTARTDATE, this.actualStartDate);
->>>>>>> origin/master
 
 		returnJson.put(Key.SCHEDULE, this.schedule.toJson());
 		returnJson.put(Key.STUDENT, this.student.toJson());
