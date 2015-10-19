@@ -204,17 +204,17 @@ public class AttendanceCtrl {
 	public static JSONObject getAttendancesByCourse(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			long courseId = (long) inputJson.get(Key.COURSEID);
-			Course course = CourseDAO.getCourseById(courseId);
-			ArrayList<Attendance> attendances = AttendanceDAO.getAttendancesByCourse(course);
-			if (attendances != null) {
-				for (Attendance attendance : attendances) {
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, attendance.toJson());
+			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+			if (course != null) {
+				JSONArray attendanceJArr = new JSONArray();
+				for (Attendance attendance : AttendanceDAO.getAttendancesByCourse(course)) {
+					attendanceJArr.add(attendance.toJson());
 				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, attendanceJArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

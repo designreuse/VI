@@ -223,7 +223,7 @@ public class Branch {
 		returnJson.put(Key.POSTALCODE, this.postalcode);
 		returnJson.put(Key.CONTACTNUMBER, this.contactnumber);
 		
-		returnJson.put(Key.ADMIN, this.admin.toJson());//need to implement
+		returnJson.put(Key.ADMIN, this.admin.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -240,7 +240,7 @@ public class Branch {
 		returnJson.put(Key.POSTALCODE, this.postalcode);
 		returnJson.put(Key.CONTACTNUMBER, this.contactnumber);
 		
-		returnJson.put(Key.ADMIN, this.admin.toJson());//need to implement
+		returnJson.put(Key.ADMIN, this.admin.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

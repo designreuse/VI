@@ -38,75 +38,73 @@ public class BranchManager {
 		this.branchMangerNric = branchManagerNric;
 	}
 
+	/**
+	 * @return the branchManagerId
+	 */
 	public long getBranchManagerId() {
 		return branchManagerId;
 	}
 
+	/**
+	 * @param branchManagerId the branchManagerId to set
+	 */
 	public void setBranchManagerId(long branchManagerId) {
 		this.branchManagerId = branchManagerId;
 	}
 
+	/**
+	 * @return the email
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * @param email the email to set
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * @return the passwordSalt
+	 */
 	public String getPasswordSalt() {
 		return passwordSalt;
 	}
 
+	/**
+	 * @param passwordSalt the passwordSalt to set
+	 */
 	public void setPasswordSalt(String passwordSalt) {
 		this.passwordSalt = passwordSalt;
 	}
 
+	/**
+	 * @return the passwordHash
+	 */
 	public String getPasswordHash() {
 		return passwordHash;
 	}
 
+	/**
+	 * @param passwordHash the passwordHash to set
+	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
 
-	public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
-	public long getObjStatus() {
-		return objStatus;
-	}
-
-	public void setObjStatus(long objStatus) {
-		this.objStatus = objStatus;
-	}
-
-	public Date getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
-
-	public String getRemark() {
-		return remark;
-	}
-
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
-	
+	/**
+	 * @return the contactNumber
+	 */
 	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactnumber(String contactNumber) {
+	/**
+	 * @param contactNumber the contactNumber to set
+	 */
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
@@ -123,7 +121,63 @@ public class BranchManager {
 	public void setBranchMangerNric(String branchMangerNric) {
 		this.branchMangerNric = branchMangerNric;
 	}
-	
+
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
+	}
+
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
+	}
+
+	/**
+	 * @return the objStatus
+	 */
+	public long getObjStatus() {
+		return objStatus;
+	}
+
+	/**
+	 * @param objStatus the objStatus to set
+	 */
+	public void setObjStatus(long objStatus) {
+		this.objStatus = objStatus;
+	}
+
+	/**
+	 * @return the createDate
+	 */
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	/**
+	 * @param createDate the createDate to set
+	 */
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	/**
+	 * @return the remark
+	 */
+	public String getRemark() {
+		return remark;
+	}
+
+	/**
+	 * @param remark the remark to set
+	 */
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
@@ -131,7 +185,7 @@ public class BranchManager {
 		returnJson.put(Key.EMAIL, this.email);
 		returnJson.put(Key.CONTACTNUMBER, this.contactNumber);
 		
-		returnJson.put(Key.BRANCH, this.branch.toJson());//need to implement
+		returnJson.put(Key.BRANCH, this.branch.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

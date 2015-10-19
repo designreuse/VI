@@ -42,7 +42,7 @@ public class Parent {
 		this.branch = branch;
 		this.parentNric = parentNric;
 	}
-
+	
 	/**
 	 * @return the parentId
 	 */
@@ -51,8 +51,7 @@ public class Parent {
 	}
 
 	/**
-	 * @param parentId
-	 *            the parentId to set
+	 * @param parentId the parentId to set
 	 */
 	public void setParentId(long parentId) {
 		this.parentId = parentId;
@@ -66,8 +65,7 @@ public class Parent {
 	}
 
 	/**
-	 * @param name
-	 *            the name to set
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -81,8 +79,7 @@ public class Parent {
 	}
 
 	/**
-	 * @param passwordSalt
-	 *            the passwordSalt to set
+	 * @param passwordSalt the passwordSalt to set
 	 */
 	public void setPasswordSalt(String passwordSalt) {
 		this.passwordSalt = passwordSalt;
@@ -96,8 +93,7 @@ public class Parent {
 	}
 
 	/**
-	 * @param passwordHash
-	 *            the passwordHash to set
+	 * @param passwordHash the passwordHash to set
 	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
@@ -111,8 +107,7 @@ public class Parent {
 	}
 
 	/**
-	 * @param contact
-	 *            the contact to set
+	 * @param contact the contact to set
 	 */
 	public void setContact(String contact) {
 		this.contact = contact;
@@ -126,11 +121,38 @@ public class Parent {
 	}
 
 	/**
-	 * @param address
-	 *            the address to set
+	 * @param address the address to set
 	 */
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the parentNric
+	 */
+	public String getParentNric() {
+		return parentNric;
+	}
+
+	/**
+	 * @param parentNric the parentNric to set
+	 */
+	public void setParentNric(String parentNric) {
+		this.parentNric = parentNric;
 	}
 
 	/**
@@ -141,11 +163,24 @@ public class Parent {
 	}
 
 	/**
-	 * @param students
-	 *            the students to set
+	 * @param students the students to set
 	 */
 	public void setStudents(Set<Student> students) {
 		this.students = students;
+	}
+
+	/**
+	 * @return the branch
+	 */
+	public Branch getBranch() {
+		return branch;
+	}
+
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 
 	/**
@@ -156,8 +191,7 @@ public class Parent {
 	}
 
 	/**
-	 * @param objStatus
-	 *            the objStatus to set
+	 * @param objStatus the objStatus to set
 	 */
 	public void setObjStatus(long objStatus) {
 		this.objStatus = objStatus;
@@ -171,8 +205,7 @@ public class Parent {
 	}
 
 	/**
-	 * @param createDate
-	 *            the createDate to set
+	 * @param createDate the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
@@ -186,35 +219,10 @@ public class Parent {
 	}
 
 	/**
-	 * @param remark
-	 *            the remark to set
+	 * @param remark the remark to set
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Branch getBranch() {
-		return branch;
-	}
-
-	public void setBranch(Branch branch) {
-		this.branch = branch;
-	}
-
-	public String getParentNric() {
-		return parentNric;
-	}
-
-	public void setParentNric(String parentNric) {
-		this.parentNric = parentNric;
 	}
 
 	public JSONObject toJson() {
@@ -225,6 +233,7 @@ public class Parent {
 		returnJson.put(Key.CONTACT, this.contact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.BRANCH, this.branch.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -232,4 +241,7 @@ public class Parent {
 
 		return returnJson;
 	}
+	
+	//TODO implement toJsonStrong
+	
 }

@@ -108,7 +108,7 @@ public class BranchManagerCtrl {
 				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 
 				branchManager.setEmail(email);
-				branchManager.setContactnumber(contactnumber);
+				branchManager.setContactNumber(contactnumber);
 				branchManager.setBranch(branch);
 
 				BranchManagerDAO.modifyBranchManager(branchManager);

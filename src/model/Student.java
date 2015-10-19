@@ -16,16 +16,16 @@ public class Student {
 	private long studentId;
 	private String name;
 	private String email;
+	private String passwordSalt;
+	private String passwordHash;
 	private String contact;
 	private String address;
 	private String studentLevel;
-	private String passwordSalt;
-	private String passwordHash;
-	private long points; 
 	private String studentNric;
+	private long points;
 
-	private Branch branch;
 	private Parent parent;
+	private Branch branch;
 	private Set<Result> results;
 	private Set<Bill> bills;
 	private Set<Attendance> attendances;
@@ -38,8 +38,9 @@ public class Student {
 	public Student() {
 	}
 
-	public Student(String name, String email, String passwordSalt, String passwordHash, String contact, String address, String studentLevel, String nric, Parent parent,
-			Branch branch) {
+	public Student(String name, String email, String passwordSalt,
+			String passwordHash, String contact, String address,
+			String studentLevel, String nric, Parent parent, Branch branch) {
 		super();
 		this.name = name;
 		this.email = email;
@@ -275,7 +276,6 @@ public class Student {
 		this.attendances = attendances;
 	}
 
-	
 	public Set<PointEvent> getPointEvents() {
 		return pointEvents;
 	}
@@ -283,6 +283,7 @@ public class Student {
 	public void setPointEvents(Set<PointEvent> pointEvents) {
 		this.pointEvents = pointEvents;
 	}
+
 	public long getPoints() {
 		return points;
 	}
