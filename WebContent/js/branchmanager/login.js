@@ -27,7 +27,7 @@ function login() {
 				
 				localStorage.setItem("branchId", branchManager.branch.branchId);
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);
-				window.location = "studentRegistration.jsp";
+				window.location = "scheduleMain.jsp";
 			} else {
 				$("#message").html("Invalid Email/Password");
 			}
