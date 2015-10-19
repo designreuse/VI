@@ -106,8 +106,8 @@
 										class="table table-bordered dt-responsive display nowrap">
 										<thead>
 											<tr>
-												<th>Attendance Id</th>
-												<th>Student Id</th>
+												<th>AttendanceId</th>
+												<th>StudentId</th>
 												<th>Present?</th>
 											</tr>
 										</thead>

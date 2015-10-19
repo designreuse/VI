@@ -170,9 +170,9 @@ public class Attendance {
 		JSONObject returnJson = new JSONObject();
 				
 		returnJson.put(Key.STUDENTID, this.attendaceId);
-		returnJson.put(Key.PLANNEDSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANNEDSTARTDATE, this.planStartDate);
 		returnJson.put(Key.LOCATION, this.location);
-		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
+		returnJson.put(Key.ACTUALSTARTDATE, this.actualStartDate);
 
 		returnJson.put(Key.COURSE, this.course.toJson());// need to implement
 		returnJson.put(Key.STUDENT, this.student.toJson());// need to implement

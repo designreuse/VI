@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,45 +31,55 @@
 <link href="css/style-responsive.css" rel="stylesheet" />
 
 <!-- -----------------------DataTables CSS---------------------------------------- -->
-<link href="js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+<link
+	href="js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
+	rel="stylesheet">
 <!-- ----------------------DataTables Responsive CSS---------------------- -->
-<link href="js/datatables/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+<link
+	href="js/datatables/datatables-responsive/css/dataTables.responsive.css"
+	rel="stylesheet">
 
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<script src="./js/branchmanager/parent.js"></script>
-	
+<script src="./js/parent/parent.js"></script>
+
+
 </head>
 
 <body>
-<!-- -----------------javascripts------------------ -->
+	<!-- -----------------javascripts------------------ -->
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-	
+	<script
+		src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+
 	<!-- ------------------nice scroll----------------------- -->
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-	
-	
+
+
 	<!-- -------custome script for all page----------- -->
 	<script src="js/scripts.js"></script>
-	
-		<!-- --------DataTables JavaScript----------- -->
-	<script src="./js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-	<script src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-	<script src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
-	
+
+	<!-- --------DataTables JavaScript----------- -->
+	<script
+		src="./js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script
+		src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+	<script
+		src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
+
 	<!-- --------DataTables JavaScript----------- -->
 	<script src="./js/bootbox.min.js"></script>
 
 	<!------- container section start------------ -->
 	<section id="container" class="">
-	
+
 		<!--------- including navBar & sideBar------------ -->
 		<%@include file="navBar.jsp"%>
 		<%@include file="sideBar.jsp"%>
-		
+
+
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
@@ -78,31 +89,28 @@
 							<i class="fa fa fa-bars"></i> Pages
 						</h3>
 						<ol class="breadcrumb">
-							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Home</a></li>
+							<li><i class="fa fa-home"></i><a
+								href="partTimeCalOverview.jsp">Home</a></li>
+							<li><i class="icon_contacts_alt"></i><a
+								href="parentProfile.jsp">View Profile</a></li>
 						</ol>
 					</div>
 				</div>
-				
+
 				<!-- -------------------page start-------------------------->
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-						<div class="panel-heading">View All Parents</div>
+							<div class="panel-heading">User Profile</div>
 							<div class="panel-body">
-								<div id = "resultAlert" class="alert fade in">
-								    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-								  </div>
 								<div class="dataTable_wrapper">
 									<table id="parentTable" class="table table-bordered dt-responsive display nowrap">
 										<thead>
 											<tr>
 												<th>Parent ID</th>
-												<th>Remark</th>
 												<th>Name</th>
-												<th>Contact</th>
 												<th>Email</th>
 												<th>Address</th>
-												<th>Create Date</th>
 												<th>Options</th>
 											</tr>
 										</thead>
@@ -110,6 +118,28 @@
 										</tbody>
 									</table>
 								</div>
+								
+								<div class="panel-heading"> Your child(ren)</div>
+								<div class="dataTable_wrapper">
+									<table id="studentTable" class="table table-bordered dt-responsive display nowrap">
+										<thead>
+											<tr>
+												<th>Student ID</th>
+												<th>Name</th>
+												<th>Nric</th>
+												<th>Contact</th>
+												<th>Email</th>
+												<th>Address</th>
+												<th>Points</th>
+												<th>Options</th>
+											</tr>
+										</thead>
+										<tbody>
+										</tbody>
+									</table>
+								</div>
+								
+								
 							</div>
 						</div>
 					</div>
@@ -125,3 +155,4 @@
 	<!-- container section end -->
 </body>
 </html>
+								

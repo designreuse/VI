@@ -281,14 +281,14 @@ public class StudentCtrl {
 	public static JSONObject getStudentsByParent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Parent parent = (Parent) inputJson.get(Key.PARENT);
+			long parentId = (long)inputJson.get(Key.PARENTID);
+			Parent parent = ParentDAO.getParentById(parentId);
 			ArrayList<Student> students = StudentDAO.getStudentsByParent(parent);
 			if (students != null) {
 				// iterate through the list of students & add into jsonobject
 				for (Student student : students) {
 					// add 1 time or many times
 					returnJson.put(Key.STATUS, Value.SUCCESS);
-
 					returnJson.put(Key.MESSAGE, student.toJson());
 				}
 			} else {

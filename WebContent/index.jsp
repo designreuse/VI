@@ -24,7 +24,8 @@
 
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-<script src="./js/branchmanager/login.js"></script>
+<!-- <script src="./js/branchmanager/login.js"></script> -->
+<script src="./js/parent/login.js"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
 <!--[if lt IE 9]>

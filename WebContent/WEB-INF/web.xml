@@ -19,6 +19,14 @@
     <url-pattern>/LoginAdminServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>LoginParentServlet</servlet-name>
+    <servlet-class>service.LoginParentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginParentServlet</servlet-name>
+    <url-pattern>/LoginParentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>LoginStudentServlet</servlet-name>
     <servlet-class>service.LoginStudentServlet</servlet-class>
   </servlet>
@@ -329,6 +337,14 @@
   <servlet-mapping>
     <servlet-name>GetStudentById</servlet-name>
     <url-pattern>/GetStudentById</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetParentById</servlet-name>
+    <servlet-class>service.GetParentById</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetParentById</servlet-name>
+    <url-pattern>/GetParentById</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetTeacherCoursesByTeacher</servlet-name>
