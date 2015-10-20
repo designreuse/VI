@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,7 +41,8 @@
 
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<script src="./js/branchmanager/attendance.js"></script>
+<script src="./js/parent/parent.js"></script>
+
 
 </head>
 
@@ -77,6 +79,7 @@
 		<%@include file="navBar.jsp"%>
 		<%@include file="sideBar.jsp"%>
 
+
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
@@ -86,7 +89,10 @@
 							<i class="fa fa fa-bars"></i> Pages
 						</h3>
 						<ol class="breadcrumb">
-							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Home</a></li>
+							<li><i class="fa fa-home"></i><a
+								href="partTimeCalOverview.jsp">Home</a></li>
+							<li><i class="icon_contacts_alt"></i><a
+								href="parentProfile.jsp">View Profile</a></li>
 						</ol>
 					</div>
 				</div>
@@ -95,32 +101,65 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Manual Attendance Taking</div>
+							<div class="panel-heading">User Profile</div>
 							<div class="panel-body">
-								<div id="resultAlert" class="alert fade in">
-									<a href="#" class="close" data-dismiss="alert"
-										aria-label="close">&times;</a>
-								</div>
-								<div class="dataTable_wrapper">
-									<table id="attendanceTable"
-										class="table table-bordered dt-responsive display nowrap">
-										<thead>
-											<tr>
-												<th>AttendanceId</th>
-												<th>StudentId</th>
-												<th>Present?</th>
-											</tr>
-										</thead>
-										<tbody>
+								<div class="panel panel-info">
 
-										</tbody>
-									</table>
-									<button class="btn btn-default" onclick="submit()"> Submit </button> 
+									<!--  start of displaying parents panel -- -->
+									<div class="panel-heading" id="name"></div>
+
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-3 col-lg-3" align="center">
+												<img alt="User Pic" src="./img/profile-avatar.jpg"
+													class="img-circle img-responsive">
+											</div>
+											<div class="col-md-6 col-lg-6">
+												<table class="table table-user-information">
+													<tbody>
+														<tr>
+															<td><strong>Home Address:</strong></td>
+															<td id="address"></td>
+														</tr>
+														<tr>
+															<td><strong>Phone Number:</strong></td>
+															<td id="phone"></td>
+														</tr>
+													</tbody>
+												</table>
+												 <button type="button" class="btn btn-primary view" data-toggle="collapse" data-target="#viewChildren">
+												 View Children
+												 </button>
+											</div>
+										</div>
+									</div>
+
+									<!-- end of displaying parents panel -->
+
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="collapse" id="viewChildren">
+												<div class="panel panel-info">
+													<div class="panel-heading">Status of broadcasted
+														shift</div>
+													<div class="panel-body">
+
+														<div class="row">
+															<div class="col-lg-12">
+																<p>insert any html element here</p>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+
 
 				<!-- /.panel-heading -->
 				<!-- --------------------page end-------------------------------->

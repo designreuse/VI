@@ -30,53 +30,44 @@
 <link href="css/style-responsive.css" rel="stylesheet" />
 
 <!-- -----------------------DataTables CSS---------------------------------------- -->
-<link
-	href="js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css"
-	rel="stylesheet">
+<link href="js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
 <!-- ----------------------DataTables Responsive CSS---------------------- -->
-<link
-	href="js/datatables/datatables-responsive/css/dataTables.responsive.css"
-	rel="stylesheet">
+<link href="js/datatables/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
 
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<script src="./js/branchmanager/attendance.js"></script>
-
+<!-- <script src="./js/branchmanager/parent.js"></script> -->
 </head>
 
 <body>
-	<!-- -----------------javascripts------------------ -->
+<!-- -----------------javascripts------------------ -->
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script
-		src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-
+	<script src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+	
 	<!-- ------------------nice scroll----------------------- -->
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-
-
+	
+	
 	<!-- -------custome script for all page----------- -->
 	<script src="js/scripts.js"></script>
-
-	<!-- --------DataTables JavaScript----------- -->
-	<script
-		src="./js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-	<script
-		src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-	<script
-		src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
-
+	
+		<!-- --------DataTables JavaScript----------- -->
+	<script src="./js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+	<script src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+	<script src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
+	
 	<!-- --------DataTables JavaScript----------- -->
 	<script src="./js/bootbox.min.js"></script>
 
 	<!------- container section start------------ -->
 	<section id="container" class="">
-
+	
 		<!--------- including navBar & sideBar------------ -->
 		<%@include file="navBar.jsp"%>
 		<%@include file="sideBar.jsp"%>
-
+		
 		<!--main content start-->
 		<section id="main-content">
 			<section class="wrapper">
@@ -90,41 +81,22 @@
 						</ol>
 					</div>
 				</div>
-
+				
 				<!-- -------------------page start-------------------------->
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-							<div class="panel-heading">Manual Attendance Taking</div>
+						<div class="panel-heading">Schedule Overview</div>
 							<div class="panel-body">
-								<div id="resultAlert" class="alert fade in">
-									<a href="#" class="close" data-dismiss="alert"
-										aria-label="close">&times;</a>
-								</div>
-								<div class="dataTable_wrapper">
-									<table id="attendanceTable"
-										class="table table-bordered dt-responsive display nowrap">
-										<thead>
-											<tr>
-												<th>AttendanceId</th>
-												<th>StudentId</th>
-												<th>Present?</th>
-											</tr>
-										</thead>
-										<tbody>
-
-										</tbody>
-									</table>
-									<button class="btn btn-default" onclick="submit()"> Submit </button> 
-								</div>
+								this is the main page
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<!-- /.panel-heading -->
+							
+								<!-- /.panel-heading -->
 				<!-- --------------------page end-------------------------------->
-
+				
 			</section>
 		</section>
 		<!--main content end-->
