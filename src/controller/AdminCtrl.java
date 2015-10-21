@@ -13,6 +13,9 @@ import system.Key;
 import system.Message;
 import system.Value;
 
+/**
+ * @author RaySong
+ */
 public class AdminCtrl {
 	
 	/**
@@ -202,23 +205,23 @@ public class AdminCtrl {
 		return returnJson;
 	}
 	//Get admin by branch
-		public static JSONObject getAdminByBranch (JSONObject inputJson){
-			JSONObject returnJson = new JSONObject();
-			try{
-				Branch branch = BranchDAO.getBranchById((long)inputJson.get(Key.BRANCHID));
-				if(branch != null){
-					Admin admin = branch.getAdmin();
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, admin.toJson());
-				}else{
-					returnJson.put(Key.STATUS, Value.FAIL)  ;
-					returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
-				}
-			}catch(Exception e){
-				e.printStackTrace();
+	public static JSONObject getAdminByBranch (JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			Branch branch = BranchDAO.getBranchById((long)inputJson.get(Key.BRANCHID));
+			if(branch != null){
+				Admin admin = branch.getAdmin();
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, admin.toJson());
+			}else{
 				returnJson.put(Key.STATUS, Value.FAIL)  ;
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
-			return returnJson;
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
 		}
+		return returnJson;
+	}
 }

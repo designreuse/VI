@@ -16,6 +16,9 @@ import system.Key;
 import system.Message;
 import system.Value;
 
+/**
+ * @author RaySong
+ */
 public class AttendanceCtrl {
 
 	/**
@@ -23,7 +26,6 @@ public class AttendanceCtrl {
 	 */
 	public static JSONObject createAttendance(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
 			if (schedule != null) {

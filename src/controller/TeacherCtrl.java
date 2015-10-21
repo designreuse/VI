@@ -1,14 +1,8 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import model.Branch;
-import model.Classroom;
-import model.Course;
 import model.PointEvent;
 import model.Salary;
-import model.Student;
 import model.Teacher;
 import model.TeacherCourse;
 
@@ -16,13 +10,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
-import dataManager.ClassroomDAO;
-import dataManager.CourseDAO;
 import dataManager.PointEventDAO;
 import dataManager.SalaryDAO;
 import dataManager.TeacherCourseDAO;
 import dataManager.TeacherDAO;
-import system.Config;
 import system.Encrypt;
 import system.Key;
 import system.Message;

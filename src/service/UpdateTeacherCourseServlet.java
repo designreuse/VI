@@ -10,29 +10,29 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import controller.TeacherCourseCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.BranchCtrl;
 
 /**
  * @author RaySong
  */
-public class GetAllBranchesServlet extends HttpServlet {
+public class UpdateTeacherCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAllBranchesServlet() {
+    public UpdateTeacherCourseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -57,7 +57,7 @@ public class GetAllBranchesServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = BranchCtrl.getAllBranches();
+			returnJson = TeacherCourseCtrl.updateTeacherCourse(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

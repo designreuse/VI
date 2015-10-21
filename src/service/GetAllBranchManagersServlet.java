@@ -13,23 +13,23 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.BranchCtrl;
+import controller.BranchManagerCtrl;
 
 /**
  * @author RaySong
  */
-public class GetAllBranchesServlet extends HttpServlet {
+public class GetAllBranchManagersServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAllBranchesServlet() {
+    public GetAllBranchManagersServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    /**
+	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -57,7 +57,7 @@ public class GetAllBranchesServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = BranchCtrl.getAllBranches();
+			returnJson = BranchManagerCtrl.getAllBranchManagers();
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

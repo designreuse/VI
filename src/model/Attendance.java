@@ -143,6 +143,8 @@ public class Attendance {
 		this.remark = remark;
 	}
 	
+	//shall i add in a checker to return actual date?
+	//no, the logic checking is handle in the controller.
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 				

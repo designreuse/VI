@@ -4,28 +4,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.AttendanceCtrl;
+import controller.ScheduleCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
 
 /**
- * 
+ * @author RaySong
  */
-public class GetAttendancesByCourse extends HttpServlet {
+public class UpdateScheduleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAttendancesByCourse() {
+    public UpdateScheduleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +57,7 @@ public class GetAttendancesByCourse extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = AttendanceCtrl.getAttendancesByCourse(inputJson);
+			returnJson = ScheduleCtrl.updateSchedule(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
