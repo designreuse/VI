@@ -346,6 +346,14 @@
     <servlet-name>GetParentById</servlet-name>
     <url-pattern>/GetParentById</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>GetTeacherById</servlet-name>
+    <servlet-class>service.GetTeacherById</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTeacherById</servlet-name>
+    <url-pattern>/GetTeacherById</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>GetTeacherCoursesByTeacher</servlet-name>
     <servlet-class>service.GetTeacherCoursesByTeacher</servlet-class>

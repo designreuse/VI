@@ -41,7 +41,7 @@
 
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<script src="./js/parent/parent.js"></script>
+<script src="./js/teacher/teacher.js"></script>
 
 
 </head>
@@ -105,7 +105,7 @@
 							<div class="panel-body">
 								<div class="panel panel-info">
 
-									<!--  start of displaying parents panel -- -->
+									<!--  start of displaying teacher panel -- -->
 									<div class="panel-heading" id="name"></div>
 
 									<div class="panel-body">
@@ -127,46 +127,6 @@
 														</tr>
 													</tbody>
 												</table>
-												<button type="button" class="btn btn-primary view"
-													data-toggle="collapse" data-target="#viewChildren">
-													View Children</button>
-											</div>
-										</div>
-									</div>
-
-									<!-- end of displaying parents panel -->
-
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="collapse" id="viewChildren">
-												<div class="panel panel-info">
-													<div class="panel-heading">Child(ren)</div>
-													<div class="panel-body">
-
-														<div class="row">
-															<div class="col-lg-12">
-																<div class="col-md-3 col-lg-3" align="center">
-																	<img alt="User Pic" src="./img/avatar1.jpg"
-																		class="img-circle img-responsive">
-																</div>
-																<div class="col-md-6 col-lg-6" id="test">
-<!-- 																	<table class="table table-user-information"> -->
-<!-- 																		<tbody> -->
-<!-- 																			<tr> -->
-<!-- 																				<td><strong>Name:</strong></td> -->
-<!-- 																				<td id="cName"></td> -->
-<!-- 																			</tr> -->
-<!-- 																			<tr> -->
-<!-- 																				<td><strong>Email:</strong></td> -->
-<!-- 																				<td id="cEmail"></td> -->
-<!-- 																			</tr> -->
-<!-- 																		</tbody> -->
-<!-- 																	</table> -->
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
 											</div>
 										</div>
 									</div>
