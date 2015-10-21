@@ -42,8 +42,8 @@ public class ResultDAO {
 	public static void deleteResult(Result result) {
 		HibernateUtil.delete(result);
 	}
-	//features
 	
+	//features
 	public static ArrayList<Result> getResultsByStudent(Student student){
 		ArrayList<Result> results = new ArrayList<Result>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);

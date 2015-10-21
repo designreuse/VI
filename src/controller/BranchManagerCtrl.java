@@ -1,14 +1,10 @@
 package controller;
 
-import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AdminDAO;
 import dataManager.BranchDAO;
 import dataManager.BranchManagerDAO;
-import model.Admin;
 import model.Branch;
 import model.BranchManager;
 import system.Encrypt;
@@ -23,20 +19,19 @@ public class BranchManagerCtrl {
 	 */
 	public static JSONObject createBranchManager(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			if (branch != null) {
 				String email = (String) inputJson.get(Key.EMAIL);
 				String password = (String) inputJson.get(Key.PASSWORD);
-				String contactNumber = (String) inputJson.get(Key.CONTACTNUMBER);
+				String contact = (String) inputJson.get(Key.CONTACT);
 				String branchManagerNric = (String) inputJson.get(Key.BRANCHMANAGERNRIC);
 
 				String passwordSalt = Encrypt.nextSalt();
 				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 
-				BranchManager branchManager = new BranchManager(email, passwordSalt, passwordHash, branch,
-						contactNumber, branchManagerNric);
+				BranchManager branchManager = new BranchManager(email, passwordSalt, passwordHash,
+						contact, branchManagerNric, branch);
 				BranchManagerDAO.addBranchManager(branchManager);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -58,16 +53,14 @@ public class BranchManagerCtrl {
 	public static JSONObject getBranchManagerId(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			long branchManagerId = (long) inputJson.get(Key.BRANCHMANAGERID);
-			BranchManager branchManager = BranchManagerDAO.getBranchManagerById(branchManagerId);
-			if (branchManager != null) {
+			BranchManager bm = BranchManagerDAO.getBranchManagerById((long) inputJson.get(Key.BRANCHMANAGERID));
+			if (bm != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, branchManager.toJson());
+				returnJson.put(Key.MESSAGE, bm.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.BRANCHMANAGERNOTEXIST);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -96,19 +89,17 @@ public class BranchManagerCtrl {
 
 	public static JSONObject updateBranchManager(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
-			BranchManager branchManager = BranchManagerDAO
-					.getBranchManagerById((long) inputJson.get(Key.BRANCHMANAGERID));
-
+			BranchManager branchManager = BranchManagerDAO.getBranchManagerById((long) inputJson.get(Key.BRANCHMANAGERID));
 			if (branchManager != null) {
 				String email = (String) inputJson.get(Key.EMAIL);
-				String contactnumber = (String) inputJson.get(Key.CONTACTNUMBER);
-
+				String contact = (String) inputJson.get(Key.CONTACT);
+				String branchManagerNric = (String) inputJson.get(Key.BRANCHMANAGERNRIC);
 				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 
 				branchManager.setEmail(email);
-				branchManager.setContactNumber(contactnumber);
+				branchManager.setContact(contact);
+				branchManager.setBranchManagerNric(branchManagerNric);
 				branchManager.setBranch(branch);
 
 				BranchManagerDAO.modifyBranchManager(branchManager);
@@ -124,17 +115,13 @@ public class BranchManagerCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
 	public static JSONObject deleteBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
-			BranchManager branchManager = BranchManagerDAO
-					.getBranchManagerById((long) inputJson.get(Key.BRANCHMANAGERID));
-
+			BranchManager branchManager = BranchManagerDAO.getBranchManagerById((long) inputJson.get(Key.BRANCHMANAGERID));
 			if (branchManager != null) {
 				branchManager.setObjStatus(Value.DELETED);
 				BranchManagerDAO.modifyBranchManager(branchManager);
@@ -150,7 +137,6 @@ public class BranchManagerCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
@@ -159,20 +145,17 @@ public class BranchManagerCtrl {
 	public static JSONObject getBranchManagersByBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Branch branch = (Branch) inputJson.get(Key.BRANCH);
-			ArrayList<BranchManager> branchManagers = BranchManagerDAO.getBranchManagersByBranch(branch);
-			if (branchManagers != null) {
-				// iterate through the list of branchManagers & add into
-				// jsonobject
-				for (BranchManager branchManager : branchManagers) {
-					// add 1 time or many times
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-
-					returnJson.put(Key.MESSAGE, branchManager.toJson());
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			if (branch != null) {
+				JSONArray branchManagerArr = new JSONArray();
+				for (BranchManager bm : BranchManagerDAO.getBranchManagersByBranch(branch)) {
+					branchManagerArr.add(bm.toJson());
 				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, branchManagerArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.BRANCHMANAGERNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

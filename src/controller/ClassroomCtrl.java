@@ -1,23 +1,15 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import model.Attendance;
 import model.Branch;
-import model.BranchManager;
 import model.Classroom;
-import model.Course;
+import model.Schedule;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AttendanceDAO;
 import dataManager.BranchDAO;
-import dataManager.BranchManagerDAO;
 import dataManager.ClassroomDAO;
-import dataManager.CourseDAO;
-import system.Config;
+import dataManager.ScheduleDAO;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -29,16 +21,13 @@ public class ClassroomCtrl {
 	 */
 	public static JSONObject createClassroom(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			if (branch != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				long roomCapacity = (long) inputJson.get(Key.ROOMCAPACITY);
-
 				Classroom classroom = new Classroom(name, roomCapacity, branch);
 				ClassroomDAO.addClassroom(classroom);
-
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, classroom.toJson());
 			} else {
@@ -50,7 +39,6 @@ public class ClassroomCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
@@ -58,16 +46,14 @@ public class ClassroomCtrl {
 	public static JSONObject getClassroomById(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			long classroomId = (long) inputJson.get(Key.CLASSROOMID);
-			Classroom classroom = ClassroomDAO.getClassroomById(classroomId);
-			if (classroom != null) {
+			Classroom c = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
+			if (c != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, classroom.toJson());
+				returnJson.put(Key.MESSAGE, c.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -96,18 +82,17 @@ public class ClassroomCtrl {
 
 	public static JSONObject updateClassroom(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
 			if (classroom != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				long roomCapacity = (long) inputJson.get(Key.ROOMCAPACITY);
 				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-
+				if(branch != null){
+					classroom.setBranch(branch);
+				}
 				classroom.setName(name);
 				classroom.setRoomCapacity(roomCapacity);
-				classroom.setBranch(branch);
-
 				ClassroomDAO.modifyClassroom(classroom);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -121,16 +106,13 @@ public class ClassroomCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
 	public static JSONObject deleteClassroom(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
-
 			if (classroom != null) {
 				classroom.setObjStatus(Value.DELETED);
 				ClassroomDAO.modifyClassroom(classroom);
@@ -146,7 +128,6 @@ public class ClassroomCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
@@ -155,17 +136,14 @@ public class ClassroomCtrl {
 	public static JSONObject getClassroomsByBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Branch branch = (Branch) inputJson.get(Key.BRANCH);
-			ArrayList<Classroom> classrooms = ClassroomDAO.getClassroomsByBranch(branch);
-			if (classrooms != null) {
-				// iterate through the list of classrooms & add into
-				// jsonobject
-				for (Classroom classroom : classrooms) {
-					// add 1 time or many times
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-
-					returnJson.put(Key.MESSAGE, classroom.toJson());
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			if (branch != null) {
+				JSONArray classroomArr = new JSONArray();
+				for (Classroom classroom : ClassroomDAO.getClassroomsByBranch(branch)) {
+					classroomArr.add(classroom.toJson());
 				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, classroomArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
@@ -182,9 +160,9 @@ public class ClassroomCtrl {
 	public static JSONObject getClassroomByAttendance(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Attendance attendance = AttendanceDAO.getAttendanceById((long)inputJson.get(Key.ATTENDANCEID));
-			if (attendance != null) {
-				Classroom classroom = attendance.getClassroom();
+			Schedule schedule = ScheduleDAO.getScheduleById((long)inputJson.get(Key.SCHEDULEID));
+			if (schedule != null) {
+				Classroom classroom = schedule.getClassroom();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, classroom.toJson());
 			} else {

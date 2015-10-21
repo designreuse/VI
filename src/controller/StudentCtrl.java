@@ -1,8 +1,5 @@
 package controller;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import model.Attendance;
 import model.Bill;
 import model.Branch;
@@ -42,15 +39,14 @@ public class StudentCtrl {
 					String name = (String) inputJson.get(Key.NAME);
 					String email = (String) inputJson.get(Key.EMAIL);
 					String password = (String) inputJson.get(Key.PASSWORD);
-					
 					String passwordSalt = Encrypt.nextSalt();
 					String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 					String contact = (String) inputJson.get(Key.CONTACT);
 					String address = (String) inputJson.get(Key.ADDRESS);
 					String studentLevel = (String) inputJson.get(Key.STUDENTLEVEL);
-					String parentNric = (String) inputJson.get(Key.PARENTNRIC);
+					String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
 
-					Student student = new Student(name, email, passwordSalt, passwordHash, contact, address, studentLevel, parentNric, parent, branch);
+					Student student = new Student(name, email, passwordSalt, passwordHash, contact, address, studentLevel, studentNric, parent, branch);
 					StudentDAO.addStudent(student);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -76,9 +72,7 @@ public class StudentCtrl {
 	public static JSONObject getStudentById(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			//long studentId = Long.parseLong((String)inputJson.get(Key.STUDENTID));
-			long studentId = (long) inputJson.get(Key.STUDENTID);
-			Student student = StudentDAO.getStudentById(studentId);
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 			if (student != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, student.toJson());
@@ -86,7 +80,6 @@ public class StudentCtrl {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -95,7 +88,7 @@ public class StudentCtrl {
 		return returnJson;
 	}
 
-	// Get all student
+	// Get all student, useful while doing holistic analysis
 	public static JSONObject getAllStudents() {
 		JSONObject returnJson = new JSONObject();
 		try {
@@ -115,27 +108,29 @@ public class StudentCtrl {
 
 	public static JSONObject updateStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
-
 			if (student != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				String email = (String) inputJson.get(Key.EMAIL);
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
 				String studentLevel = (String) inputJson.get(Key.STUDENTLEVEL);
-
+				String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
+				
 				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+				if(branch != null){
+					student.setBranch(branch);
+				}
 				Parent parent = ParentDAO.getParentById((long) inputJson.get(Key.PARENTID));
-
+				if(parent != null){
+					student.setParent(parent);
+				}
 				student.setName(name);
 				student.setEmail(email);
 				student.setContact(contact);
 				student.setAddress(address);
 				student.setStudentLevel(studentLevel);
-				student.setBranch(branch);
-				student.setParent(parent);
 
 				StudentDAO.modifyStudent(student);
 
@@ -150,16 +145,13 @@ public class StudentCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
 	public static JSONObject deleteStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
-
 			if (student != null) {
 				student.setObjStatus(Value.DELETED);
 				StudentDAO.modifyStudent(student);
@@ -175,7 +167,6 @@ public class StudentCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
@@ -249,16 +240,7 @@ public class StudentCtrl {
 		JSONObject returnJson = new JSONObject();
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-			// ArrayList<Student> students =
-			// StudentDAO.getStudentsByBranch(branch);
 			if (branch != null) {
-				// iterate through the list of students & add into jsonobject
-				// for (Student student : students) {
-				// // add 1 time or many times
-				// returnJson.put(Key.STATUS, Value.SUCCESS);
-				//
-				// returnJson.put(Key.MESSAGE, student.toJson());
-				// }
 				JSONArray studentArr = new JSONArray();
 				for (Student s : StudentDAO.getStudentsByBranch(branch)) {
 					studentArr.add(s.toJson());
@@ -281,19 +263,17 @@ public class StudentCtrl {
 	public static JSONObject getStudentsByParent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Parent parent = (Parent) inputJson.get(Key.PARENT);
-			ArrayList<Student> students = StudentDAO.getStudentsByParent(parent);
-			if (students != null) {
-				// iterate through the list of students & add into jsonobject
-				for (Student student : students) {
-					// add 1 time or many times
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-
-					returnJson.put(Key.MESSAGE, student.toJson());
+			Parent parent = ParentDAO.getParentById((long)inputJson.get(Key.PARENTID));
+			if (parent != null) {
+				JSONArray studentArr = new JSONArray();
+				for (Student s : StudentDAO.getStudentsByParent(parent)) {
+					studentArr.add(s.toJson());
 				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, studentArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -303,7 +283,7 @@ public class StudentCtrl {
 		return returnJson;
 	}
 
-	// Get student by bill
+	// Get student by bill, may not be useful as the student is already in the bill object.
 	public static JSONObject getStudentByBill(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {

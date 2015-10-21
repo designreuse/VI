@@ -4,11 +4,8 @@ import model.Admin;
 import model.Branch;
 import model.BranchManager;
 import model.Classroom;
-import model.Parent;
 import model.Student;
 import model.Teacher;
-
-import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -30,16 +27,15 @@ public class BranchCtrl {
 	 */
 	public static JSONObject createBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Admin admin = AdminDAO.getAdminById((long) inputJson.get(Key.ADMINID));
 			if (admin != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				String location = (String) inputJson.get(Key.LOCATION);
 				String postalCode = (String) inputJson.get(Key.POSTALCODE);
-				String contactnumber = (String) inputJson.get(Key.CONTACTNUMBER);
+				String contact = (String) inputJson.get(Key.CONTACT);
 
-				Branch branch = new Branch(name, location, postalCode, admin, contactnumber);
+				Branch branch = new Branch(name, location, postalCode, contact, admin);
 				BranchDAO.addBranch(branch);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -61,8 +57,7 @@ public class BranchCtrl {
 	public static JSONObject getBranchById(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			long branchId = (long) inputJson.get(Key.BRANCHID);
-			Branch branch = BranchDAO.getBranchById(branchId);
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			if (branch != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, branch.toJson());
@@ -70,7 +65,6 @@ public class BranchCtrl {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -102,17 +96,19 @@ public class BranchCtrl {
 
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-
 			if (branch != null) {
 				String name = (String) inputJson.get(Key.NAME);
 				String location = (String) inputJson.get(Key.LOCATION);
 				String postalCode = (String) inputJson.get(Key.POSTALCODE);
-				String contactnumber = (String) inputJson.get(Key.CONTACTNUMBER);
-
+				String contact = (String) inputJson.get(Key.CONTACT);
+				Admin admin = AdminDAO.getAdminById((long) inputJson.get(Key.ADMINID));
+				if(admin != null){
+					branch.setAdmin(admin);
+				}
 				branch.setName(name);
 				branch.setLocation(location);
-				branch.setPostalcode(postalCode);
-				branch.setContactnumber(contactnumber);
+				branch.setPostalCode(postalCode);
+				branch.setContact(contact);
 
 				BranchDAO.modifyBranch(branch);
 
@@ -127,16 +123,13 @@ public class BranchCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
 	public static JSONObject deleteBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-
 			if (branch != null) {
 				branch.setObjStatus(Value.DELETED);
 				BranchDAO.modifyBranch(branch);
@@ -152,7 +145,6 @@ public class BranchCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
@@ -161,19 +153,17 @@ public class BranchCtrl {
 	public static JSONObject getBranchesByAdmin(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Admin admin = (Admin) inputJson.get(Key.ADMIN);
-			ArrayList<Branch> branches = BranchDAO.getBranchesByAdmin(admin);
-			if (branches != null) {
-				// iterate through the list of branches & add into jsonobject
-				for (Branch branch : branches) {
-					// add 1 time or many times
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-
-					returnJson.put(Key.MESSAGE, branch.toJson());
+			Admin admin = AdminDAO.getAdminById((long) inputJson.get(Key.ADMINID));
+			if (admin != null) {
+				JSONArray branchArr = new JSONArray();
+				for (Branch branch : BranchDAO.getBranchesByAdmin(admin)) {
+					branchArr.add(branch.toJson());
 				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, branchArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.ADMINNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

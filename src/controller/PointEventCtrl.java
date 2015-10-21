@@ -1,23 +1,14 @@
 package controller;
 
-import java.util.ArrayList;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AttendanceDAO;
-import dataManager.BranchDAO;
-import dataManager.ParentDAO;
 import dataManager.PointEventDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
-import model.Attendance;
-import model.Branch;
-import model.Parent;
 import model.PointEvent;
 import model.Student;
 import model.Teacher;
-import system.Encrypt;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -30,8 +21,8 @@ public class PointEventCtrl {
 		JSONObject returnJson = new JSONObject();
 		try {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
-			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
 			if (student != null) {
+				Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
 				if (teacher != null) {
 					long pointAmount = (long) inputJson.get(Key.POINTAMOUNT);
 					String description = (String) inputJson.get(Key.DESCRIPTION);
@@ -54,7 +45,6 @@ public class PointEventCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
 
@@ -71,7 +61,6 @@ public class PointEventCtrl {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.POINTEVENTNOTEXIST);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -100,17 +89,13 @@ public class PointEventCtrl {
 
 	public static JSONObject updatePointEvent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			PointEvent pointEvent = PointEventDAO.getPointEventById((long) inputJson.get(Key.POINTEVENTID));
-
 			if (pointEvent != null) {
 				long pointAmount = (long) inputJson.get(Key.POINTAMOUNT);
 				String description = (String) inputJson.get(Key.DESCRIPTION);
-
 				pointEvent.setPointAmount(pointAmount);
 				pointEvent.setDescription(description);
-
 				PointEventDAO.modifyPointEvent(pointEvent);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -124,18 +109,16 @@ public class PointEventCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
-
+	
+	//totally delete away the point event
 	public static JSONObject deletePointEvent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-
 		try {
 			PointEvent pointEvent = PointEventDAO.getPointEventById((long) inputJson.get(Key.POINTEVENTID));
-
 			if (pointEvent != null) {
-				PointEventDAO.modifyPointEvent(pointEvent);
+				PointEventDAO.deletePointEvent(pointEvent);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, pointEvent.toJson());
@@ -148,24 +131,25 @@ public class PointEventCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, e);
 		}
-
 		return returnJson;
 	}
+	
 	// features
-	// Get pointevents by student
+	// Get point events by student
 	public static JSONObject getPointEventsByStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Student student = (Student) inputJson.get(Key.STUDENT);
-			ArrayList<PointEvent> pointEvents = PointEventDAO.getPointEventsByStudent(student);
-			if (pointEvents != null) {
-				for (PointEvent pointEvent : pointEvents) {
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, pointEvent.toJson());
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+			if (student != null) {
+				JSONArray pointEventArr = new JSONArray();
+				for (PointEvent pe : PointEventDAO.getPointEventsByStudent(student)) {
+					pointEventArr.add(pe.toJson());
 				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, pointEventArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.POINTEVENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -174,20 +158,52 @@ public class PointEventCtrl {
 		}
 		return returnJson;
 	}
-	// Get pointevents by teacher
+	
+	// Get point events by teacher
 	public static JSONObject getPointEventsByTeacher(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Teacher teacher = (Teacher) inputJson.get(Key.TEACHER);
-			ArrayList<PointEvent> pointEvents = PointEventDAO.getPointEventsByTeacher(teacher);
-			if (pointEvents != null) {
-				for (PointEvent pointEvent : pointEvents) {
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				JSONArray pointEventArr = new JSONArray();
+				for (PointEvent pe : PointEventDAO.getPointEventsByTeacher(teacher)) {
+					pointEventArr.add(pe.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, pointEventArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get point events by teacher and student
+	public static JSONObject getPointEventsByTeacherAndStudent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+				if(student != null){
+					JSONArray pointEventArr = new JSONArray();
+					for (PointEvent pe : PointEventDAO.getPointEventsByTeacherAndStudent(teacher, student)) {
+						pointEventArr.add(pe.toJson());
+					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, pointEvent.toJson());
+					returnJson.put(Key.MESSAGE, pointEventArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.POINTEVENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

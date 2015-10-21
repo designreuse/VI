@@ -32,6 +32,7 @@
 		<mapping resource="model/PointEvent.hbm.xml" />
 		<mapping resource="model/Result.hbm.xml" />
 		<mapping resource="model/Salary.hbm.xml" />
+		<mapping resource="model/Schedule.hbm.xml" />
 		<mapping resource="model/Student.hbm.xml" />
 		<mapping resource="model/TeacherCourse.hbm.xml" />
 		<mapping resource="model/Teacher.hbm.xml" />

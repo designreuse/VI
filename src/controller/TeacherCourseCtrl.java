@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.CourseDAO;
 import dataManager.TeacherCourseDAO;
+import dataManager.TeacherDAO;
 import model.Course;
 import model.Teacher;
 import model.TeacherCourse;
@@ -22,20 +23,28 @@ public class TeacherCourseCtrl {
 	public static JSONObject createTeacherCourse(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
-			long courseId = (long) inputJson.get(Key.COURSEID);
-			long teacherId = (long) inputJson.get(Key.TEACHERID);
-			
-			TeacherCourse teacherCourse = new TeacherCourse(courseId, teacherId);
-			TeacherCourseDAO.addTeacherCourse(teacherCourse);
-			
-			returnJson.put(Key.STATUS, Value.SUCCESS)  ;
-			returnJson.put(Key.MESSAGE, teacherCourse.toJson());
+			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+			if(course != null){
+				Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+				if(teacher != null){
+					TeacherCourse teacherCourse = new TeacherCourse(course, teacher);
+					TeacherCourseDAO.addTeacherCourse(teacherCourse);
+					
+					returnJson.put(Key.STATUS, Value.SUCCESS)  ;
+					returnJson.put(Key.MESSAGE, teacherCourse.toJson());
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
 			returnJson.put(Key.MESSAGE, e);
 		}
-		
 		return returnJson;
 	}
 	
@@ -52,7 +61,6 @@ public class TeacherCourseCtrl {
 				returnJson.put(Key.STATUS, Value.FAIL)  ;
 				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
 			}
-			
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
@@ -81,17 +89,17 @@ public class TeacherCourseCtrl {
 	
 	public static JSONObject updateTeacherCourse(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
-		
 		try{
 			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
-			
 			if(teacherCourse != null){
-				long courseId = (long) inputJson.get(Key.COURSEID);
-				long teacherId = (long) inputJson.get(Key.TEACHERID);
-				
-				teacherCourse.setCourseId(courseId);
-				teacherCourse.setTeacherId(teacherId);
-				
+				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+				if(course != null){
+					teacherCourse.setCourse(course);
+				}//TODO maybe add in the else clause to state the absent of course.
+				Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+				if(teacher != null){
+					teacherCourse.setTeacher(teacher);
+				}//TODO same as b=above for teacher.
 				TeacherCourseDAO.modifyTeacherCourse(teacherCourse);
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
@@ -111,16 +119,13 @@ public class TeacherCourseCtrl {
 	
 	public static JSONObject deleteTeacherCourse(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
-		
 		try{
 			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
-			
 			if(teacherCourse != null){
-				teacherCourse.setObjStatus(Value.DELETED);
-				TeacherCourseDAO.modifyTeacherCourse(teacherCourse);
+				TeacherCourseDAO.deleteTeacherCourse(teacherCourse);
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS)  ;
-				returnJson.put(Key.MESSAGE, teacherCourse.toJson());
+				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSEDELETED);
 			}else{
 				returnJson.put(Key.STATUS, Value.FAIL)  ;
 				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
@@ -130,7 +135,6 @@ public class TeacherCourseCtrl {
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
 			returnJson.put(Key.MESSAGE, e);
 		}
-		
 		return returnJson;
 	}
 	// features
@@ -138,16 +142,71 @@ public class TeacherCourseCtrl {
 	public static JSONObject getTeacherCoursesByTeacher(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Teacher teacher = (Teacher) inputJson.get(Key.TEACHER);
-			ArrayList<TeacherCourse> teacherCourses = TeacherCourseDAO.getTeacherCoursesByTeacher(teacher);
-			if (teacherCourses != null) {
-				for (TeacherCourse teacherCourse : teacherCourses) {
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				JSONArray teacherCourseArr = new JSONArray();
+				for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByTeacher(teacher)) {
+					teacherCourseArr.add(tc.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacherCourseArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get teachercourses by course
+	public static JSONObject getTeacherCoursesByCourse(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+			if (course != null) {
+				JSONArray teacherCourseArr = new JSONArray();
+				for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByCourse(course)) {
+					teacherCourseArr.add(tc.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacherCourseArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get teachercourses by teacher and course
+	public static JSONObject getTeacherCoursesByTeacherAndCourse(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+				if (course != null) {
+					JSONArray teacherCourseArr = new JSONArray();
+					for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByTeacherAndCourse(teacher, course)) {
+						teacherCourseArr.add(tc.toJson());
+					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, teacherCourse.toJson());
+					returnJson.put(Key.MESSAGE, teacherCourseArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

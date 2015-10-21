@@ -65,7 +65,7 @@ public class TeacherCourseDAO {
 		return teacherCourses;
 	}
 	
-	public static ArrayList<TeacherCourse> getTeacherCoursesByCourseAndTeacher(Course course, Teacher teacher) {
+	public static ArrayList<TeacherCourse> getTeacherCoursesByTeacherAndCourse(Teacher teacher, Course course) {
 		ArrayList<TeacherCourse> teacherCourses = new ArrayList<TeacherCourse>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherCourse.class);
 		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
