@@ -13,7 +13,10 @@ import system.Value;
 
 public class Schedule {
 	private long scheduleId;
+	private String name;
+	private String description;
 	private Date planStartDate;
+	private Date planEndDate;
 	
 	private TeacherCourse teacherCourse;
 	private Classroom classroom;
@@ -26,16 +29,19 @@ public class Schedule {
 	
 	public Schedule(){}
 
-	public Schedule(Date planStartDate, TeacherCourse teacherCourse,
+	public Schedule(String name, String description, Date planStartDate, Date planEndDate, TeacherCourse teacherCourse,
 			Classroom classroom) {
 		super();
+		this.setName(name);
+		this.setDescription(description);
 		this.planStartDate = planStartDate;
+		this.setPlanEndDate(planEndDate);
 		this.teacherCourse = teacherCourse;
 		this.classroom = classroom;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
-
+	
 	/**
 	 * @return the scheduleId
 	 */
@@ -51,6 +57,34 @@ public class Schedule {
 	}
 
 	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description the description to set
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
 	 * @return the planStartDate
 	 */
 	public Date getPlanStartDate() {
@@ -62,6 +96,20 @@ public class Schedule {
 	 */
 	public void setPlanStartDate(Date planStartDate) {
 		this.planStartDate = planStartDate;
+	}
+
+	/**
+	 * @return the planEndDate
+	 */
+	public Date getPlanEndDate() {
+		return planEndDate;
+	}
+
+	/**
+	 * @param planEndDate the planEndDate to set
+	 */
+	public void setPlanEndDate(Date planEndDate) {
+		this.planEndDate = planEndDate;
 	}
 
 	/**
@@ -147,12 +195,14 @@ public class Schedule {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
+
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
-		
 		returnJson.put(Key.SCHEDULEID, this.scheduleId);
-		returnJson.put(Key.PLANNEDSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, description);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
 		
 		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
 		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
@@ -166,9 +216,11 @@ public class Schedule {
 	
 	public JSONObject toJsonStrong() {
 		JSONObject returnJson = new JSONObject();
-		
 		returnJson.put(Key.SCHEDULEID, this.scheduleId);
-		returnJson.put(Key.PLANNEDSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, description);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
 		
 		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
 		returnJson.put(Key.CLASSROOM, this.classroom.toJson());

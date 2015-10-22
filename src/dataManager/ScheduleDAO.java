@@ -90,7 +90,7 @@ public class ScheduleDAO {
 	public static ArrayList<Schedule> getSchedulesByPlanStartDate(Date planStartDate) {
 		ArrayList<Schedule> results = new ArrayList<Schedule>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		detachedCriteria.add(Restrictions.eq(Key.PLANNEDSTARTDATE, planStartDate));
+		detachedCriteria.add(Restrictions.eq(Key.PLANSTARTDATE, planStartDate));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
@@ -100,6 +100,19 @@ public class ScheduleDAO {
 	}
 	
 	//TODO create the method to retrieve base on plan start date, teacherCourse
+	public static ArrayList<Schedule> getSchedulesByTeacherCourseAndPlanStartDate(TeacherCourse teacherCourse, Date planStartDate) {
+		ArrayList<Schedule> results = new ArrayList<Schedule>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
+		detachedCriteria.add(Restrictions.eq(Key.PLANSTARTDATE, planStartDate));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for (Object o : list) {
+			results.add((Schedule) o);
+		}
+		return results;
+	}
+	
 	
 //	public static Schedule getScheduleByEmail(String email) {
 //		Schedule schedule = null;

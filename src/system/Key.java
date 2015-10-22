@@ -101,7 +101,8 @@ public class Key {
 	public static final String SCHEDULE = "schedule";
 	public static final String SCHEDULES = "schedules";
 	public static final String SCHEDULEID = "scheduleId";
-	public static final String PLANNEDSTARTDATE = "planStartDate";
+	public static final String PLANSTARTDATE = "planStartDate";
+	public static final String PLANENDDATE = "planEndDate";
 	
 	public static final String TEACHERCOURSE = "teacherCourse";
 	public static final String TEACHERCOURSES = "teacherCourses";
