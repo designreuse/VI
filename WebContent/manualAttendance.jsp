@@ -41,6 +41,7 @@
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
 <script src="./js/branchmanager/attendance.js"></script>
+<script src="./js/moment.js"></script>
 
 </head>
 
@@ -106,16 +107,25 @@
 										class="table table-bordered dt-responsive display nowrap">
 										<thead>
 											<tr>
-												<th>AttendanceId</th>
-												<th>StudentId</th>
-												<th>Present?</th>
+												<th>Name</th>
+												<th>NRIC </th>
+												<th>Attendance</th>
 											</tr>
 										</thead>
 										<tbody>
 
 										</tbody>
 									</table>
+									<div align = center>
+								<button class="btn btn-default" onclick="deselectAll()">Deselect All</button> 
+								</div>
+								
+								<div align =center>
+								<button class="btn btn-default" onclick="selectAll()">Select All</button> 
+								</div>
+								<div align = center>
 									<button class="btn btn-default" onclick="submit()"> Submit </button> 
+									</div>
 								</div>
 							</div>
 						</div>

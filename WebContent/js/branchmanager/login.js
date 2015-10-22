@@ -22,8 +22,9 @@ function login() {
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
 				var branchManager = message;
-				//console.log(branchManager);
-				localStorage.setItem("courseId", 1);
+				//temporary
+				localStorage.setItem("teacherCourseId", 1);
+				localStorage.setItem("planStartDate", "2015-10-06T17:50:18.000Z");
 				
 				localStorage.setItem("branchId", branchManager.branch.branchId);
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);

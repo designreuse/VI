@@ -9,12 +9,13 @@
 
 function getStudents() {
 	$.fn.dataTable.ext.errMode = 'none';
-	var courseId = Number(localStorage.getItem("courseId"));
+	//var planStartDate = moment(localStorage.getItem("planStartDate"), "DD/MM/YYYY");
+	var planStartDate = localStorage.getItem("planStartDate");
+	var teacherCourseId = Number(localStorage.getItem("teacherCourseId"));
 	
-	//var branchId = Number(localStorage.getItem("branchId"));
 	var input = {};
-	//input.branchId = branchId;
-	input.courseId = courseId;
+	input.teacherCourseId = teacherCourseId;
+	input.planStartDate = planStartDate;
 	
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
@@ -23,13 +24,16 @@ function getStudents() {
 	        console.log( 'An error has been reported by DataTables: ', message );
 	    }).DataTable({
 	    	ajax:{
-				 url: '../VI/GetAttendancesByCourse?input=' + inputStr,
+				 url: '../VI/GetSchedulesByTeacherCourseAndPlanStartDateServlet?input=' + inputStr,
 				 dataSrc: 'message'
 			 },
-			 columns: [
-			     {"data": 'attendanceId'},      
-				 {"data": 'studentId'},
-				 {"data": null, "defaultContent":'<input type="checkbox" name="attendance" value="present">'}
+			 columns: [   
+				// {"data": 'teacherCourse.teacher.email'},
+				//ajax - need a for loop to iterate through
+				 {"data": 'attendances[0].student.name'},
+				 {"data": 'attendances[0].student.studentNric'},
+				 {"data": null, "defaultContent":'<input type="checkbox" name="attendance" value="attendance">'}
+				 
 				]
 	    });
 }
@@ -43,7 +47,7 @@ function submit(){
 			num ++;
 		}
 	}
-	
+	console.log(num);
 	bootbox.confirm({
 		title: "Confirm submission",
 		message: "Are you sure you want to submit attendance? ",
@@ -131,4 +135,23 @@ function getStudentById(studentId){
 			}
 		}
 	});
+}
+
+function deselectAll() {
+	var x = document.getElementsByName("attendance");
+	var i;
+	for (i = 0; i < x.length; i++) {
+		if (x[i].type == "checkbox") {
+			x[i].checked = false;
+	     }
+	}
+}
+
+function selectAll() {
+	var x = document.getElementsByName("attendance");
+	var i;
+	for (i = 0; i < x.length; i++) {
+			x[i].checked =true;
+	}
+
 }
