@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Oct 19, 2015 6:19:14 PM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping>
+<hibernate-mapping default-lazy="false">
  <class name="model.Course" table="COURSE">
   <id name="courseId" type="long">
    <column name="COURSEID"/>

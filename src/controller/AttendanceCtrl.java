@@ -62,7 +62,6 @@ public class AttendanceCtrl {
 		try {
 			Attendance attendance = AttendanceDAO.getAttendanceById((long) inputJson.get(Key.ATTENDANCEID));
 			if (attendance != null) {
-				//TODO, verified if the next line works
 				if(attendance.getActualStartDate() != null){
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, attendance.toJsonMark());
@@ -165,13 +164,12 @@ public class AttendanceCtrl {
 			if (schedule != null) {
 				JSONArray attendanceArr = new JSONArray();
 				for (Attendance a : AttendanceDAO.getAttendancesBySchedule(schedule)) {
-					//TODO after validating the above get attendance by id method, change the code below to match the fetching logic
-//					if(a.getActualStartDate() != null){
-//						attendanceArr.add(a.toJsonMark());
-//					} else {
-//						attendanceArr.add(a.toJson());
-//					}
-					attendanceArr.add(a.toJson());
+					if(a.getActualStartDate() != null){
+						attendanceArr.add(a.toJsonMark());
+					} else {
+						attendanceArr.add(a.toJson());
+					}
+//					attendanceArr.add(a.toJson());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, attendanceArr);
@@ -195,13 +193,12 @@ public class AttendanceCtrl {
 			if (student != null) {
 				JSONArray attendanceArr = new JSONArray();
 				for (Attendance a : AttendanceDAO.getAttendancesByStudent(student)) {
-					//TODO after validating the above get attendance by id method, change the code below to match the fetching logic
-//					if(a.getActualStartDate() != null){
-//						attendanceArr.add(a.toJsonMark());
-//					} else {
-//						attendanceArr.add(a.toJson());
-//					}
-					attendanceArr.add(a.toJson());
+					if(a.getActualStartDate() != null){
+						attendanceArr.add(a.toJsonMark());
+					} else {
+						attendanceArr.add(a.toJson());
+					}
+//					attendanceArr.add(a.toJson());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, attendanceArr);
@@ -226,16 +223,14 @@ public class AttendanceCtrl {
 				Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
 				if(schedule != null){
 					JSONArray attendanceArr = new JSONArray();
-					for (Attendance a : AttendanceDAO.getAttendancesByStudentAndSchedule(student, schedule)) {
-						//TODO after validating the above get attendance by id method, change the code below to match the fetching logic
-//							if(a.getActualStartDate() != null){
-//								attendanceArr.add(a.toJsonMark());
-//							} else {
-//								attendanceArr.add(a.toJson());
-//							}
-						
-						//right now, everything fetched do not return actual start date even if there is one.
-						attendanceArr.add(a.toJson());
+					for (Attendance a : AttendanceDAO.getAttendancesByStudentAndSchedule(student, schedule)) {//TODO after validating the above get attendance by id method, change the code below to match the fetching logic
+						if(a.getActualStartDate() != null){
+							attendanceArr.add(a.toJsonMark());
+						} else {
+							attendanceArr.add(a.toJson());
+						}
+						//the below lone fetched everything do not return actual start date even if there is one.
+//						attendanceArr.add(a.toJson());
 					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, attendanceArr);

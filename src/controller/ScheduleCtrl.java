@@ -252,7 +252,8 @@ public class ScheduleCtrl {
 				Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
 				for (Schedule s : ScheduleDAO.getSchedulesByTeacherCourseAndPlanStartDate(teacherCourse, planStartDate)) {
 					//TODO can i use toJsonStrong method to retrieve the attendance at once also? so only one servlet call will do
-					salaryArr.add(s.toJson());
+					salaryArr.add(s.toJsonStrong());
+//					salaryArr.add(s.toJson());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, salaryArr);

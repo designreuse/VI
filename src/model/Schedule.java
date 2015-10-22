@@ -231,7 +231,12 @@ public class Schedule {
 		
 		JSONArray attendanceArr = new JSONArray();
 		for (Attendance a : AttendanceDAO.getAttendancesBySchedule(this)) {
-			attendanceArr.add(a.toJson());
+			if(a.getActualStartDate() != null){
+				attendanceArr.add(a.toScheduleJsonMark());
+			} else {
+				attendanceArr.add(a.toScheduleJson());
+			}
+//			attendanceArr.add(a.toJson());
 		}
 		returnJson.put(Key.ATTENDANCES, attendanceArr);
 		

@@ -177,4 +177,35 @@ public class Attendance {
 		
 		return returnJson;
 	}
+	
+	public JSONObject toScheduleJson(){
+		JSONObject returnJson = new JSONObject();
+				
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		
+		returnJson.put(Key.STUDENT, this.student.toJson());
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
+	public JSONObject toScheduleJsonMark(){
+		JSONObject returnJson = new JSONObject();
+				
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
+
+		returnJson.put(Key.STUDENT, this.student.toJson());
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
 }
