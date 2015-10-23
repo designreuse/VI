@@ -32,18 +32,20 @@ function getStudents() {
 					 var return_data = new Array();
 					 for(var i=0;i< attendances.length; i++){
 						 return_data.push({
+							 'attendanceId': attendances[i].attendanceId,
 							 'studentName': attendances[i].student.name,
-							 'studentNric': attendances[i].student.studentNric
+							 'studentNric': attendances[i].student.studentNric,
+							 'attendanceStatus': attendances[i].attendanceStatus,
 						 })
 					 }
 					 return return_data;
 				 }
 			 },
 			 columns: [   
-				// {"data": 'teacherCourse.teacher.email'},
-				//ajax - need a for loop to iterate through
+			     {"data": 'attendanceId'},   
 				 {"data": 'studentName'},
 				 {"data": 'studentNric'},
+				 {"data": 'attendanceStatus'},
 				 {"data": null, "defaultContent":'<input type="checkbox" name="attendance" value="attendance">'}
 				 
 				]
@@ -59,19 +61,18 @@ function submit(){
 			num ++;
 		}
 	}
-	console.log(num);
+	//console.log(num);
 	bootbox.confirm({
 		title: "Confirm submission",
 		message: "Are you sure you want to submit attendance? ",
 		callback: function(result){
 			if (result){
 				bootbox.confirm({
-					title: "Confirmat submission",
+					title: "Confirm submission",
 					message: "Attendance updated",
 					callback: function(){
 							updateAttendance();
 							window.location = 'adminMain.jsp';
-							//localStorage.setItem("status", "pending");
 						}
 					});
 				
@@ -83,17 +84,28 @@ function submit(){
 }
 
 function updateAttendance(){
+	//{"scheduleId":1,"attendanceId":1,"studentId":5,"attendanceStatus":0,"actualStartDate":"2015-10-06T17:50:18.000Z"}
+	var table = $('#attendanceTable').DataTable();
+	$('#attendanceTable tbody').on( 'click', 'button', function () {
+	var tr = $(this).closest('tr');
+	var row = table.row( tr );
 	var attendanceId = row.data().attendanceId;
+	var attendanceStatus = row.data().attendanceStatus;
+	
 	var miliseconds = new Date();
 	var actualStartDate = miliseconds.toUTCString();
 	
+	var attendances = []
+	attendances.push(Number(attendanceId), attendanceStatus, actualStartDate);
+	
 	var input = {}
-	input.attendanceId = Number(attendanceId);
-	input.actualStartDate = actualStartDate;
+	input.attendances = attendances;
 	
 	var inputStr = JSON.stringify(input);
 	
 	inputStr = encodeURIComponent(inputStr);
+	console.log(inputStr);
+
 	$.ajax({
 		url : '../VI/UpdateAttendanceServlet?input=' + inputStr, //need to implement
 		method : 'POST',
@@ -116,7 +128,7 @@ function updateAttendance(){
 			}
 		}
 	});
-
+	});
 }
 
 function getStudentById(studentId){

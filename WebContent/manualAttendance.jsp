@@ -107,8 +107,10 @@
 										class="table table-bordered dt-responsive display nowrap">
 										<thead>
 											<tr>
+												<th>Attendance ID</th>
 												<th>Name</th>
 												<th>NRIC </th>
+												<th>Attendance Status</th>
 												<th>Attendance</th>
 											</tr>
 										</thead>
