@@ -34,6 +34,7 @@ public class Message {
 	public static final String EMAILALREADYEXIST = "The email has already been used.";
 	public static final String WRONGPARENTPASSWORD = "The Parent password is incorrect.";
 	public static final String WRONGBRANCHMANAGERPASSWORD = "The branch manager password is incorrect.";
+	public static final String PLANSTARTDATEEMPTY = "The plan start date input is empty.";
 	
 	
 

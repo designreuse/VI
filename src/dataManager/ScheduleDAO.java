@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.Parent;
 import model.Schedule;
 import model.Classroom;
 import model.TeacherCourse;
@@ -100,17 +101,22 @@ public class ScheduleDAO {
 	}
 	
 	//TODO create the method to retrieve base on plan start date, teacherCourse
-	public static ArrayList<Schedule> getSchedulesByTeacherCourseAndPlanStartDate(TeacherCourse teacherCourse, Date planStartDate) {
-		ArrayList<Schedule> results = new ArrayList<Schedule>();
+	public static Schedule getScheduleByTeacherCourseAndPlanStartDate(TeacherCourse teacherCourse, Date planStartDate) {
+		Schedule schedule = null;
+		Schedule tempSchedule = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
 		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
 		detachedCriteria.add(Restrictions.eq(Key.PLANSTARTDATE, planStartDate));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
-			results.add((Schedule) o);
+			tempSchedule = (Schedule)o;
+			if(tempSchedule != null){
+				schedule = tempSchedule;
+				break;
+			}
 		}
-		return results;
+		return schedule;
 	}
 	
 	

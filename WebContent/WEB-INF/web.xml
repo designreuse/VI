@@ -427,12 +427,12 @@
     <url-pattern>/GetStudentsByParent</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetSchedulesByTeacherCourseAndPlanStartDateServlet</servlet-name>
-    <servlet-class>service.GetSchedulesByTeacherCourseAndPlanStartDateServlet</servlet-class>
+    <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name>
+    <servlet-class>service.GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetSchedulesByTeacherCourseAndPlanStartDateServlet</servlet-name>
-    <url-pattern>/GetSchedulesByTeacherCourseAndPlanStartDateServlet</url-pattern>
+    <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name>
+    <url-pattern>/GetScheduleByTeacherCourseAndPlanStartDateServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetTeacherBySalary</servlet-name>

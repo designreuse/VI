@@ -242,21 +242,24 @@ public class ScheduleCtrl {
 		return returnJson;
 	}
 	
-	public static JSONObject getSchedulesByTeacherCourseAndPlanStartDate (JSONObject inputJson){
+	public static JSONObject getScheduleByTeacherCourseAndPlanStartDate (JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
 			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
 			if(teacherCourse != null){
-				JSONArray salaryArr = new JSONArray();
-				//TODO do i need to add in checker to verified the date?
+//				JSONArray scheduleArr = new JSONArray();
 				Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
-				for (Schedule s : ScheduleDAO.getSchedulesByTeacherCourseAndPlanStartDate(teacherCourse, planStartDate)) {
+				if(planStartDate != null){
+					Schedule schedule = ScheduleDAO.getScheduleByTeacherCourseAndPlanStartDate(teacherCourse, planStartDate);
 					//TODO can i use toJsonStrong method to retrieve the attendance at once also? so only one servlet call will do
-					salaryArr.add(s.toJsonStrong());
+//					scheduleArr.add(s.toJsonStrong());
 //					salaryArr.add(s.toJson());
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, schedule.toJsonStrong());
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.PLANSTARTDATEEMPTY);
 				}
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, salaryArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);

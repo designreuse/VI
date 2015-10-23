@@ -5,12 +5,15 @@ import java.util.Date;
 import model.Attendance;
 import model.Schedule;
 import model.Student;
+import model.TeacherCourse;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.AttendanceDAO;
 import dataManager.ScheduleDAO;
 import dataManager.StudentDAO;
+import dataManager.TeacherCourseDAO;
 import system.Config;
 import system.Key;
 import system.Message;
@@ -249,4 +252,38 @@ public class AttendanceCtrl {
 		}
 		return returnJson;
 	}
+	
+//	public static JSONObject getAttendancesBySchedules (JSONObject inputJson){
+//		JSONObject returnJson = new JSONObject();
+//		try{
+////			JSONObject resultObj = ScheduleCtrl.getSchedulesByTeacherCourseAndPlanStartDate(inputJson);
+//			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
+//			if(teacherCourse != null){
+//				//TODO do i need to add in checker to verified the date?
+//				JSONArray scheduleArr = new JSONArray();
+//				Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
+//				for (Schedule s : ScheduleDAO.getSchedulesByTeacherCourseAndPlanStartDate(teacherCourse, planStartDate)) {
+//					//TODO can i use toJsonStrong method to retrieve the attendance at once also? so only one servlet call will do
+//					scheduleArr.add(s.toJsonStrong());
+////					salaryArr.add(s.toJson());
+//				}
+//				//TODO add in a checker for the scheduleArr
+//				
+//				JSONArray attendanceArr = new JSONArray();
+//				//loop through the scheduleArr to find all the attendance
+//				scheduleArr
+//				
+//				returnJson.put(Key.STATUS, Value.SUCCESS);
+//				returnJson.put(Key.MESSAGE, attendanceArr);
+//			} else {
+//				returnJson.put(Key.STATUS, Value.FAIL);
+//				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+//			}
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			returnJson.put(Key.STATUS, Value.FAIL)  ;
+//			returnJson.put(Key.MESSAGE, e);
+//		}
+//		return returnJson;
+//	}
 }

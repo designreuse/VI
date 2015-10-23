@@ -24,7 +24,7 @@ function login() {
 				var branchManager = message;
 				//temporary
 				localStorage.setItem("teacherCourseId", 1);
-				localStorage.setItem("planStartDate", "2015-10-06T17:50:18.000Z");
+				localStorage.setItem("planStartDate", "2015-10-22T15:00:00.000Z");
 				
 				localStorage.setItem("branchId", branchManager.branch.branchId);
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);

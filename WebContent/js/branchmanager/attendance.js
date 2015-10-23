@@ -24,14 +24,26 @@ function getStudents() {
 	        console.log( 'An error has been reported by DataTables: ', message );
 	    }).DataTable({
 	    	ajax:{
-				 url: '../VI/GetSchedulesByTeacherCourseAndPlanStartDateServlet?input=' + inputStr,
-				 dataSrc: 'message'
+				 url: '../VI/GetScheduleByTeacherCourseAndPlanStartDateServlet?input=' + inputStr,
+//				 dataSrc: 'message'
+				 dataSrc: function (json) {
+					 var attendances = json.message.attendances;
+					 console.log(attendances);
+					 var return_data = new Array();
+					 for(var i=0;i< attendances.length; i++){
+						 return_data.push({
+							 'studentName': attendances[i].student.name,
+							 'studentNric': attendances[i].student.studentNric
+						 })
+					 }
+					 return return_data;
+				 }
 			 },
 			 columns: [   
 				// {"data": 'teacherCourse.teacher.email'},
 				//ajax - need a for loop to iterate through
-				 {"data": 'attendances[0].student.name'},
-				 {"data": 'attendances[0].student.studentNric'},
+				 {"data": 'studentName'},
+				 {"data": 'studentNric'},
 				 {"data": null, "defaultContent":'<input type="checkbox" name="attendance" value="attendance">'}
 				 
 				]
