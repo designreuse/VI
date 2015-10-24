@@ -45,7 +45,7 @@
 					class="icon_check"></i> <span>Attendance Taking</span>
 			</a></li>
 			
-			<li><a class="" href="index.jsp" onclick="logout();"> <i
+			<li><a class="" href="adminLogin.jsp" onclick="logout();"> <i
 					class="fa fa-times-circle-o"></i> <span>Log Out</span>
 			</a></li>
 
