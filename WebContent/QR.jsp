@@ -44,6 +44,7 @@
 <script type="text/javascript" src="js/QR/qrcodelib.js"></script>
 <script type="text/javascript" src="js/QR/webcodecamjs.js"></script>
 <script src="./js/QR/scan.js"></script>
+<script src="./js/moment.js"></script>
 
 </head>
 

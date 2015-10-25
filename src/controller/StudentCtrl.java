@@ -118,10 +118,10 @@ public class StudentCtrl {
 				String studentLevel = (String) inputJson.get(Key.STUDENTLEVEL);
 				String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
 				
-				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
-				if(branch != null){
-					student.setBranch(branch);
-				}
+				//Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+//				if(branch != null){
+//					student.setBranch(branch);
+//				}
 				Parent parent = ParentDAO.getParentById((long) inputJson.get(Key.PARENTID));
 				if(parent != null){
 					student.setParent(parent);

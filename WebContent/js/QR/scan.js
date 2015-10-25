@@ -2,6 +2,8 @@ $(document).ready(function() {
 	scan();
 });
 
+//var STUDENTID;
+
 function scan(){
 	var txt = "innerText" in HTMLElement.prototype ? "innerText"
 			: "textContent";
@@ -10,13 +12,9 @@ function scan(){
 			var aChild = document.createElement('li');
 			aChild[txt] = resText;
 			var qrStudentId = resText;
-
-			var studentName = getStudentById(qrStudentId);
-
-			//call update attendance servlet?
-
-			//document.getElementById("demo").innerHTML = studentName;
-			//document.querySelector('body').appendChild(aChild);
+			updateQRAttendance(qrStudentId);
+//			STUDENTID = qrStudentId;
+//			var studentName = getStudentById(qrStudentId);
 
 		}
 	};
@@ -63,6 +61,7 @@ function updateQRAttendance(studentId){
 	var actualStartDate = moment().format();
 	var input = {}
 	input.studentId = Number(studentId);
+	input.scheduleId = 1;
 	input.attendanceStatus = Number(attendanceStatus);
 	input.actualStartDate = actualStartDate;
 	
@@ -71,7 +70,7 @@ function updateQRAttendance(studentId){
 	inputStr = encodeURIComponent(inputStr);
 	
 	$.ajax({
-		url : '../VI/UpdateAttendanceServlet?input=' + inputStr, 
+		url : '../VI/UpdateAttendanceWithQRServlet?input=' + inputStr, 
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {
@@ -84,7 +83,7 @@ function updateQRAttendance(studentId){
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
-				bootbox.alert("Attendance taken! Welcome to class, " + message.name, function() {
+				bootbox.alert("Attendance taken! Welcome to class, " + message.student.name, function() {
 					});
 			} else {
 				$("#message").html("Something's wrong, please try again!");

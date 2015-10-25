@@ -147,6 +147,22 @@
     <url-pattern>/UpdateAttendanceServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>UpdateAttendancesServlet</servlet-name>
+    <servlet-class>service.UpdateAttendancesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAttendancesServlet</servlet-name>
+    <url-pattern>/UpdateAttendancesServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateAttendanceWithQRServlet</servlet-name>
+    <servlet-class>service.UpdateAttendanceWithQRServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAttendanceWithQRServlet</servlet-name>
+    <url-pattern>/UpdateAttendanceWithQRServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>UpdateBillServlet</servlet-name>
     <servlet-class>service.UpdateBillServlet</servlet-class>
   </servlet>
