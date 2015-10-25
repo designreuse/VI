@@ -41,7 +41,9 @@
 
 <!-- -------------------------------javascripts----------------------- -->
 <script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<script src="./js/branchmanager/attendance.js"></script>
+<script type="text/javascript" src="js/QR/qrcodelib.js"></script>
+<script type="text/javascript" src="js/QR/webcodecamjs.js"></script>
+<script src="./js/QR/scan.js"></script>
 
 </head>
 
@@ -98,48 +100,23 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">Attendance Taking</div>
 							<div class="panel-body">
-<!-- 								<p id="demo"></p> -->
+								<!-- 								<p id="demo"></p> -->
 
-												<form action="manualAttendance.jsp" method="get">
-													<input class="btn btn-default" type="submit"
-														value="Manual Attendance Taking">
-												</form>
+								<form action="manualAttendance.jsp" method="get">
+									<input class="btn btn-default" type="submit"
+										value="Manual Attendance Taking">
+								</form>
 								<hr>
+								<hr>
+								<div class ="row">
+									<div class="col-lg-4"></div>
+									<div class="col-lg-4">
 								<canvas></canvas>
-								<hr>
-								<ul></ul>
-								<script type="text/javascript" src="js/QR/qrcodelib.js"></script>
-								<script type="text/javascript" src="js/QR/webcodecamjs.js"></script>
-								<script type="text/javascript"
-									src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-								<script type="text/javascript" src="js/branchmanager/student.js"></script>
+								</div>
+								<div class="col-lg-4"></div>
+								</div>
 								<script type="text/javascript">
-									var txt = "innerText" in HTMLElement.prototype ? "innerText"
-											: "textContent";
-									var studentName = "";
-									var arg = {
-										resultFunction : function(resText,
-												lastImageSrc) {
-											var aChild = document
-													.createElement('li');
-											aChild[txt] = resText;
-											var qrStudentId = resText;
-
-											var studentName = getStudentById(qrStudentId);
-											//console.log(studentName);
-											
-											var miliseconds = new Date();
-											var currentTime = miliseconds.toUTCString();
-											console.log(currentTime);
-											//timestamp
-											//call update attendance servlet?
-													
-											//document.getElementById("demo").innerHTML = studentName;
-											//document.querySelector('body').appendChild(aChild);
-
-										}
-									};
-									new WebCodeCamJS("canvas").init(arg).play();
+								scan();
 								</script>
 							</div>
 						</div>

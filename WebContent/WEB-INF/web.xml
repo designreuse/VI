@@ -515,9 +515,9 @@
     <url-pattern>/CreateAttendanceServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>landingPage.html</welcome-file>
+    <welcome-file>landingPage.htm</welcome-file>
+    <welcome-file>landingPage.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
