@@ -100,14 +100,14 @@ public class ParentCtrl {
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
 				String parentNric = (String) inputJson.get(Key.PARENTNRIC);
-				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+				//Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 				
 				parent.setName(name);
 				parent.setEmail(email);
 				parent.setContact(contact);
 				parent.setAddress(address);
 				parent.setParentNric(parentNric);
-				parent.setBranch(branch);
+				//parent.setBranch(branch);
 
 				ParentDAO.modifyParent(parent);
 

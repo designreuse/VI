@@ -35,6 +35,7 @@ public class Message {
 	public static final String WRONGPARENTPASSWORD = "The Parent password is incorrect.";
 	public static final String WRONGBRANCHMANAGERPASSWORD = "The branch manager password is incorrect.";
 	public static final String PLANSTARTDATEEMPTY = "The plan start date input is empty.";
+	public static final String ATTENDANCESISEMPTY = "The attendances array is empty.";
 	
 	
 

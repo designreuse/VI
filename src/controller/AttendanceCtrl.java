@@ -109,14 +109,14 @@ public class AttendanceCtrl {
 			if (attendance != null) {
 				Date actualStartDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALSTARTDATE));
 				long attendanceStatus = (long) inputJson.get(Key.ATTENDANCESTATUS);
-				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
-				if(student != null){
-					attendance.setStudent(student);
-				}
-				Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
-				if(schedule != null){
-					attendance.setSchedule(schedule);
-				}
+//				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+//				if(student != null){
+//					attendance.setStudent(student);
+//				}
+//				Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
+//				if(schedule != null){
+//					attendance.setSchedule(schedule);
+//				}
 				attendance.setActualStartDate(actualStartDate);
 				attendance.setAttendanceStatus(attendanceStatus);
 				
@@ -244,6 +244,41 @@ public class AttendanceCtrl {
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	//batch update attendances
+	public static JSONObject updateAttendances(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			JSONArray attendanceArr = (JSONArray) inputJson.get(Key.ATTENDANCES);
+			if (attendanceArr != null) {
+				JSONArray returnArr = new JSONArray();
+				for(int i = 0; i < attendanceArr.size(); i++){
+					JSONObject attendanceObj = (JSONObject) attendanceArr.get(i);
+					//TODO may need to add in a checker to verify the inputs are not empty or null
+					Attendance attendance = AttendanceDAO.getAttendanceById((long) attendanceObj.get(Key.ATTENDANCEID));
+					Date actualStartDate = Config.SDF.parse((String) attendanceObj.get(Key.ACTUALSTARTDATE));
+					long attendanceStatus = (long) attendanceObj.get(Key.ATTENDANCESTATUS);
+					
+					attendance.setActualStartDate(actualStartDate);
+					attendance.setAttendanceStatus(attendanceStatus);
+					
+					AttendanceDAO.modifyAttendance(attendance);
+					
+					returnArr.add(attendance.toScheduleJsonMark());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, returnArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.ATTENDANCESISEMPTY);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
