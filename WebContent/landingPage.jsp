@@ -4,15 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Explore & Learn - Landing Page</title>
+<title>Explore and Learn - Landing Page</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.css" rel="stylesheet">
 <link href="css/elegant-icons-style.css" rel="stylesheet" />
 <link href="css/font-awesome.min.css" rel="stylesheet" />
 <link href="css/landing-page-style.css" rel="stylesheet" />
-
-
-
 </head>
 
 
@@ -32,7 +29,7 @@
           <img src="./img/childrenLanding.jpg" alt="Texto Alternativo" class="img-circle img-thumbnail">
           <h2>Parents</h2>
           <p>View your children's progress and own profile here</p>
-          <a href="#" class="btn btn-primary" title="See more">Parents Portal »</a>
+          <a href="parentLogin.jsp" class="btn btn-primary" title="See more">Parents Portal »</a>
         </div>
       </div>
       

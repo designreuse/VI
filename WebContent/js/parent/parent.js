@@ -47,7 +47,6 @@ function getParent() {
 function viewChildren() {
 	$(".view").click(function() {
 		$(".collapse").collapse('toggle');
-		console.log("clicked!")
 	});
 
 	var parentId = Number(localStorage.getItem("parentId"));
@@ -56,34 +55,56 @@ function viewChildren() {
 	var inputStr = JSON.stringify(input);
 	var i = encodeURIComponent(inputStr);
 
-	$
-			.ajax({
-				url : '../VI/GetStudentsByParent?input=' + inputStr, // this
-																		// part
-																		// sends
-				// to the servlet
+	$.ajax({
+				url : '../VI/GetStudentsByParent?input=' + inputStr,
 				method : 'POST',
 				dataType : 'json',
 				error : function(err) {
 					console.log(err);
 				},
 				success : function(data) {
-					;
-					var status = data.status; // shows the success/failure of
-												// the
-					// servlet request
+					var status = data.status; 
+					
 					if (status == 1) {
+						var childrenTable = document.getElementById("test");
 						for (var i = 0; i < data.message.length; i++) {
 							var obj = data.message[i];
 							var name = obj.name;
 							var email = obj.email;
-
-							testInput = "<table class='table table-user-information'><tbody><tr><td><strong>Name:</strong></td><td id='cName'></td></tr><tr><td><strong>Email:</strong></td><td id='cEmail'></td></tr></tbody></table>"
-
-							document.getElementById("test").innerHTML = testInput;
-							document.getElementById('cName').innerHTML = name;
-							document.getElementById('cEmail').innerHTML = email;							
+							
+						    var table = document.createElement('TABLE');
+						    table.className = "table table-information";
+						    var tableBody = document.createElement('TBODY');
+						    
+						    var nameRow = document.createElement('TR');
+						    var nameHeader = document.createElement('TD');
+						    var nameValue = document.createElement('TD');
+						    
+						    var emailRow = document.createElement('TR');
+						    var emailHeader = document.createElement('TD');
+						    var emailValue = document.createElement('TD');
+						    
+						    nameHeader.appendChild(document.createTextNode("Name"));
+						    nameValue.appendChild(document.createTextNode(name));
+						    nameRow.appendChild(nameHeader);
+						    nameRow.appendChild(nameValue);
+						    
+						    emailHeader.appendChild(document.createTextNode("Email"));
+						    emailValue.appendChild(document.createTextNode(email));
+						    emailRow.appendChild(emailHeader);
+						    emailRow.appendChild(emailValue);
+						    
+						    tableBody.appendChild(nameRow);
+						    tableBody.appendChild(emailRow);
+						    
+						    table.appendChild(tableBody);
+						    
+//							testInput = "<table class='table table-user-information'><tbody><tr><td><strong>Name:</strong></td><td id='cName'></td></tr><tr><td><strong>Email:</strong></td><td id='cEmail'></td></tr></tbody></table>"
+						    
+							childrenTable.appendChild(table);
 						}
+						
+						
 					} else {
 						console.log(message);
 					}

@@ -28,7 +28,8 @@ function login() {
 				
 				localStorage.setItem("branchId", branchManager.branch.branchId);
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);
-				window.location = "scheduleMain.jsp";
+//				window.location = "scheduleMain.jsp";
+				console.log(data.message)
 			} else {
 				$("#message").html("Invalid Email/Password");
 			}

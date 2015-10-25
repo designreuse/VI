@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "name": "Tiger Nixon",
+            "timeIn": "8AM",
+            "timeOut": "6PM",
+            "modify": "modify",
+            "delete": "delete"
+        },
+        {
+            "name": "Garrett Winters",
+            "timeIn": "8AM",
+            "timeOut": "6PM",
+            "modify": "modify",
+            "delete": "delete"
+        }
+    ]
+}

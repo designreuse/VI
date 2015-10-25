@@ -8,7 +8,7 @@
 <meta name="author" content="">
 <link rel="shortcut icon" href="img/favicon.png">
 
-<title>Explore and Learn Pte Ltd - Main Page</title>
+<title>Explore and Learn Pte Ltd - Parent Profile</title>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
 <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
 <link href="css/font-awesome.min.css" rel="stylesheet" />
 
 <!-- -------------------External CSS: Custom styles----------------------------- -->
-<link href="css/style.css" rel="stylesheet">
+<link href="css/parent-style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
 
 <!-- -----------------------DataTables CSS---------------------------------------- -->
@@ -76,8 +76,8 @@
 	<section id="container" class="">
 
 		<!--------- including navBar & sideBar------------ -->
-		<%@include file="navBar.jsp"%>
-		<%@include file="sideBar.jsp"%>
+		<%@include file="parentNavBar.jsp"%>
+		<%@include file="parentSideBar.jsp"%>
 
 
 		<!--main content start-->
@@ -150,18 +150,7 @@
 																		class="img-circle img-responsive">
 																</div>
 																<div class="col-md-6 col-lg-6" id="test">
-<!-- 																	<table class="table table-user-information"> -->
-<!-- 																		<tbody> -->
-<!-- 																			<tr> -->
-<!-- 																				<td><strong>Name:</strong></td> -->
-<!-- 																				<td id="cName"></td> -->
-<!-- 																			</tr> -->
-<!-- 																			<tr> -->
-<!-- 																				<td><strong>Email:</strong></td> -->
-<!-- 																				<td id="cEmail"></td> -->
-<!-- 																			</tr> -->
-<!-- 																		</tbody> -->
-<!-- 																	</table> -->
+
 																</div>
 															</div>
 														</div>

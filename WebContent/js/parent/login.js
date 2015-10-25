@@ -21,7 +21,7 @@ function login() {
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
-				var parent = message;	
+				var parent = message;
 				localStorage.setItem("parentId", message.parentId);
 				window.location = "parentProfile.jsp";
 			} else {

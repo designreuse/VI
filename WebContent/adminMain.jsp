@@ -29,38 +29,31 @@
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
 
-<!-- -----------------------DataTables CSS---------------------------------------- -->
-<link href="js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-<!-- ----------------------DataTables Responsive CSS---------------------- -->
-<link href="js/datatables/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+<!-- ----------------------FullCalender's CSS----------------------------- -->
+<link href="css/fullcalendar.min.css" rel="stylesheet">
+<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
 
-<!-- -------------------------------javascripts----------------------- -->
-<script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
-<!-- <script src="./js/branchmanager/parent.js"></script> -->
+<!-- -----------------javascripts------------------ -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
 	
+<!-- ---------------------nice scroll----------- -->
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+	
+<!-- ------------------custome script for all page------------------->
+<script src="js/scripts.js"></script>
+	
+<!-- -------------------------------fullcalendar javascripts----------------------- -->
+<script src='./js/fullcalendar/lib/moment.min.js'></script>
+<script src="./js/fullcalendar/fullcalendar.min.js"></script>
+	
+<!-- -------------------------------fullcalendar javascripts----------------------- -->
+<script src="./js/bootbox.min.js"></script>	
 </head>
 
 <body>
-<!-- -----------------javascripts------------------ -->
-	<script src="js/jquery.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-	
-	<!-- ------------------nice scroll----------------------- -->
-	<script src="js/jquery.scrollTo.min.js"></script>
-	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-	
-	
-	<!-- -------custome script for all page----------- -->
-	<script src="js/scripts.js"></script>
-	
-		<!-- --------DataTables JavaScript----------- -->
-	<script src="./js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-	<script src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-	<script src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
-	
-	<!-- --------DataTables JavaScript----------- -->
-	<script src="./js/bootbox.min.js"></script>
+	<script src="./js/branchmanager/calendar.js"></script>
 
 	<!------- container section start------------ -->
 	<section id="container" class="">
@@ -89,7 +82,8 @@
 						<div class="panel panel-default">
 						<div class="panel-heading">Admin Main</div>
 							<div class="panel-body">
-								hello
+								<div id='calendar'>
+								</div>
 							</div>
 						</div>
 					</div>

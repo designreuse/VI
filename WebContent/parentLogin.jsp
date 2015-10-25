@@ -1,29 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta name="keyword" content="">
+<link rel="shortcut icon" href="img/favicon.png">
+
 <title>Explore and Learn - Parent Login</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/bootstrap-theme.css" rel="stylesheet">
 <link href="css/elegant-icons-style.css" rel="stylesheet" />
 <link href="css/font-awesome.min.css" rel="stylesheet" />
 <link href="css/parent-login.css" rel="stylesheet" />
+
+<script type="text/javascript" src="./js/jQuery-2.1.4.min.js"></script>
+<script src="./js/parent/login.js"></script>
 </head>
 
 <body>
 <div class="container">
-    <div class="row">
+    <div class="row"> 
         <div class="col-md-12">
             
             <div class="wrap">
-                <p class="form-title">Sign In</p>
+				<div class = "row"> 
+					<p class="form-title">
+					<img src="./img/parentLg.jpg" alt="login" class="img-circle"><br><br>
+					Sign In
+					</p>
+				</div>
+                
+                <div>
+					<font color="red" id="message"></font>
+				</div>
                     
-                    
-                <form class="login">
-                <input type="text" placeholder="Username" />
-                <input type="password" placeholder="Password" />
+                <form class="login" action="parentProfile.jsp" method="post" onsubmit="login();">
+                <input type="text" placeholder="Username" id="email"/>
+                <input type="password" placeholder="Password" id="password"/>
                 <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
               
               
