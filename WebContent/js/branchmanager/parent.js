@@ -78,7 +78,7 @@ function getParents() {
 
 function editParent(){
 	var table = $('#parentTable').DataTable();
-	$('#parentTable tbody').on( 'click', 'button', function () {
+	$('#parentTable tbody').off('click').on( 'click', 'button', function () {
 		var tr = $(this).closest('tr');
         var row = table.row( tr );
        

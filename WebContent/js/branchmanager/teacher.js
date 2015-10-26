@@ -91,7 +91,7 @@ $.fn.dataTable.ext.errMode = 'none';
 
 function editTeacher(){
 	var table = $('#teacherTable').DataTable();
-	$('#teacherTable tbody').on( 'click', 'button', function () {
+	$('#teacherTable tbody').off('click').on( 'click', 'button', function () {
 		var tr = $(this).closest('tr');
         var row = table.row( tr );
        

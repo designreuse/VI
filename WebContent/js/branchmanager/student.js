@@ -84,7 +84,7 @@ function getStudents() {
 
 function editStudent(){
 	var table = $('#studentTable').DataTable();
-	$('#studentTable tbody').on( 'click', 'button', function () {
+	$('#studentTable tbody').off('click').on( 'click', 'button', function () {
 		var tr = $(this).closest('tr');
         var row = table.row( tr );
        

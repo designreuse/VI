@@ -81,7 +81,7 @@ function getStudents() {
 
 function getValue() {
 	var table = $('#attendanceTable').DataTable();
-	$('#attendanceTable tbody').on('click', 'button', function() {
+	$('#attendanceTable tbody').off('click').on('click', 'button', function() {
 		var attendanceStatus = 1;
 		var input = {}
 		var tr = $(this).closest('tr');
