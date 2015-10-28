@@ -147,14 +147,6 @@
     <url-pattern>/UpdateAttendanceServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>UpdateAttendancesServlet</servlet-name>
-    <servlet-class>service.UpdateAttendancesServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateAttendancesServlet</servlet-name>
-    <url-pattern>/UpdateAttendancesServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>UpdateAttendanceWithQRServlet</servlet-name>
     <servlet-class>service.UpdateAttendanceWithQRServlet</servlet-class>
   </servlet>
@@ -339,6 +331,14 @@
     <url-pattern>/GetBranchesByAdmin</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetBranchCoursesByBranchServlet</servlet-name>
+    <servlet-class>service.GetBranchCoursesByBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetBranchCoursesByBranchServlet</servlet-name>
+    <url-pattern>/GetBranchCoursesByBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetBranchManagersByBranch</servlet-name>
     <servlet-class>service.GetBranchManagersByBranch</servlet-class>
   </servlet>
@@ -393,6 +393,24 @@
   <servlet-mapping>
     <servlet-name>GetSalariesByTeacher</servlet-name>
     <url-pattern>/GetSalariesByTeacher</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetSchedulesByCourse</servlet-name>
+    <servlet-class>service.GetSchedulesByCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSchedulesByCourse</servlet-name>
+    <url-pattern>/GetSchedulesByCourse</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name>
+    <servlet-class>service.GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name>
+    <url-pattern>/GetScheduleByTeacherCourseAndPlanStartDateServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetStudentByAttendance</servlet-name>

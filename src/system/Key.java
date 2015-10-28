@@ -107,4 +107,8 @@ public class Key {
 	public static final String TEACHERCOURSE = "teacherCourse";
 	public static final String TEACHERCOURSES = "teacherCourses";
 	public static final String TEACHERCOURSEID = "teacherCourseId";
+	
+	public static final String BRANCHCOURSE = "branchCourse";
+	public static final String BRANCHCOURSES = "branchCourses";
+	public static final String BRANCHCOURSEID = "branchCourseId";
 }

@@ -1,8 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import model.Classroom;
+import model.Course;
 import model.Schedule;
 import model.TeacherCourse;
 
@@ -10,6 +12,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.ClassroomDAO;
+import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.TeacherCourseDAO;
 import system.Config;
@@ -264,6 +267,37 @@ public class ScheduleCtrl {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
 			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+
+	public static JSONObject getSchedulesByCourse(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try{
+			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+			if (course != null) {
+				ArrayList<TeacherCourse> tcList = TeacherCourseDAO.getTeacherCoursesByCourse(course);
+				if(!tcList.isEmpty()){
+					JSONArray scheduleArr = new JSONArray();
+					for (TeacherCourse tc : tcList) {
+						for (Schedule s : ScheduleDAO.getSchedulesByTeacherCourse(tc)) {
+							scheduleArr.add(s.toJson());
+						}
+					}
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, scheduleArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+			} 
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL)  ;

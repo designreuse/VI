@@ -6,6 +6,7 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.BranchCourseDAO;
 import dataManager.BranchManagerDAO;
 import dataManager.ClassroomDAO;
 import dataManager.ParentDAO;
@@ -28,6 +29,7 @@ public class Branch {
 	private Set<Teacher> teachers;
 	private Set<BranchManager> branchManagers;
 	private Set<Classroom> classrooms;
+	private Set<BranchCourse> branchCourses;
 
 	private long objStatus;
 	private Date createDate;
@@ -206,7 +208,21 @@ public class Branch {
 	public void setClassrooms(Set<Classroom> classrooms) {
 		this.classrooms = classrooms;
 	}
+	
+	/**
+	 * @return the branchCourses
+	 */
+	public Set<BranchCourse> getBranchCourses() {
+		return branchCourses;
+	}
 
+	/**
+	 * @param branchCourses the branchCourses to set
+	 */
+	public void setBranchCourses(Set<BranchCourse> branchCourses) {
+		this.branchCourses = branchCourses;
+	}
+	
 	/**
 	 * @return the objStatus
 	 */
@@ -313,6 +329,12 @@ public class Branch {
 			parentArr.add(p.toJson());
 		}
 		returnJson.put(Key.PARENTS, parentArr);
+		
+		JSONArray bcArr = new JSONArray();
+		for(BranchCourse bc : BranchCourseDAO.getBranchCoursesByBranch(this)){
+			bcArr.add(bc.toJson());
+		}
+		returnJson.put(Key.BRANCHCOURSES, bcArr);
 		
 		return returnJson;
 	}

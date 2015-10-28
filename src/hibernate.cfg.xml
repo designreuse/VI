@@ -10,7 +10,7 @@
 <!-- 		<property name="hibernate.connection.password">wqEkcYzKSncV</property> -->
 
 		<!-- localhost config -->
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3307/VI</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/VI</property>
 		<property name="hibernate.connection.username">root</property>
 
 
@@ -25,6 +25,7 @@
 		<mapping resource="model/Attendance.hbm.xml" />
 		<mapping resource="model/Bill.hbm.xml" />
 		<mapping resource="model/Branch.hbm.xml" />
+		<mapping resource="model/BranchCourse.hbm.xml" />
 		<mapping resource="model/BranchManager.hbm.xml" />
 		<mapping resource="model/Classroom.hbm.xml" />
 		<mapping resource="model/Course.hbm.xml" />

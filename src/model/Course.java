@@ -24,6 +24,7 @@ public class Course {
 	
 	private Set<Result> results;
 	private Set<TeacherCourse> teacherCourses;
+	private Set<BranchCourse> branchCourses;
 	
 	private long objStatus;
 	private Date createDate;
@@ -153,6 +154,20 @@ public class Course {
 	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
 		this.teacherCourses = teacherCourses;
 	}
+	
+	/**
+	 * @return the branchCourses
+	 */
+	public Set<BranchCourse> getBranchCourses() {
+		return branchCourses;
+	}
+
+	/**
+	 * @param branchCourses the branchCourses to set
+	 */
+	public void setBranchCourses(Set<BranchCourse> branchCourses) {
+		this.branchCourses = branchCourses;
+	}
 
 	/**
 	 * @return the objStatus
@@ -235,6 +250,13 @@ public class Course {
 			teacherCourseArr.add(tc.toJson());
 		}
 		returnJson.put(Key.TEACHERCOURSES, teacherCourseArr);
+		
+		//TODO implement it if necessary
+//		JSONArray branchCourseArr = new JSONArray();
+//		for(BranchCourse bc : BranchCourseDAO.getBranchCoursesByCourse(this)){
+//			branchCourseArr.add(bc.toJson());
+//		}
+//		returnJson.put(Key.TEACHERCOURSES, branchCourseArr);
 		
 		return returnJson;
 	}
