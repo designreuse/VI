@@ -394,24 +394,22 @@
     <servlet-name>GetSalariesByTeacher</servlet-name>
     <url-pattern>/GetSalariesByTeacher</url-pattern>
   </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetSchedulesByCourse</servlet-name>
-    <servlet-class>service.GetSchedulesByCourse</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetSchedulesByCourse</servlet-name>
-    <url-pattern>/GetSchedulesByCourse</url-pattern>
-  </servlet-mapping>
-  
-  <servlet>
-    <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name>
-    <servlet-class>service.GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name>
-    <url-pattern>/GetScheduleByTeacherCourseAndPlanStartDateServlet</url-pattern>
-  </servlet-mapping>
+<!--   <servlet> -->
+<!--     <servlet-name>GetSchedulesByCourse</servlet-name> -->
+<!--     <servlet-class>service.GetSchedulesByCourse</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>GetSchedulesByCourse</servlet-name> -->
+<!--     <url-pattern>/GetSchedulesByCourse</url-pattern> -->
+<!--   </servlet-mapping> -->
+<!--   <servlet> -->
+<!--     <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name> -->
+<!--     <servlet-class>service.GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name> -->
+<!--     <url-pattern>/GetScheduleByTeacherCourseAndPlanStartDateServlet</url-pattern> -->
+<!--   </servlet-mapping> -->
   <servlet>
     <servlet-name>GetStudentByAttendance</servlet-name>
     <servlet-class>service.GetStudentByAttendance</servlet-class>
