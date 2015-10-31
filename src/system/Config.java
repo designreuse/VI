@@ -12,6 +12,13 @@ public class Config {
 	
 	public static final String ROOT = "VI";
 	
+	//email server configuration
+	public static final String HOST = "smtp.gmail.com";
+//	public static final String PORT = "587";
+	public static final String PORT = "465";
+	public static final String USERNAME = "exploreandlearnvi@gmail.com";
+	public static final String PASSWORD = "exploreAndLearn";
+	
 	//TODO change the inputs below
 	public static final String ACCESSKEY = "AKIAI4KNTFI3L5YLROAQ";
 	public static final String SECRETKEY = "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";

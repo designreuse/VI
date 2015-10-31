@@ -9,6 +9,7 @@ public class Key {
 	public static final String MESSAGE = "message";
 	public static final String INPUT = "input";
 	
+	public static final String IMAGE = "image";
 	public static final String FILE = "file";
 	public static final String UPLOADDIRECTORY = "uploadDirectory";
 	public static final String FOLDERNAME = "folderName";
@@ -111,4 +112,5 @@ public class Key {
 	public static final String BRANCHCOURSE = "branchCourse";
 	public static final String BRANCHCOURSES = "branchCourses";
 	public static final String BRANCHCOURSEID = "branchCourseId";
+	
 }
