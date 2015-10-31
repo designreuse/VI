@@ -85,6 +85,23 @@ function updateQRAttendance(studentId){
 			if (status == 1) {
 				bootbox.alert("Attendance taken! Welcome to class, " + message.student.name, function() {
 					});
+				//call the send email servlet to send the email
+				var inputMsg = JSON.stringify(message);
+				$.ajax({
+					url : '../VI/SendEmailServlet?input=' + inputMsg, 
+					method : 'POST',
+					dataType : 'json',
+					error : function(err) {
+						console.log(err);
+						//$("#message").html(err);
+					},
+					success : function(data) {
+						console.log(data);
+						var status = data.status; //shows the  success/failure of the servlet request
+						var message = data.message;
+						console.log("email sent");
+					}
+				});
 			} else {
 				$("#message").html("Something's wrong, please try again!");
 			}

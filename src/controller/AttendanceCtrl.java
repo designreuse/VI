@@ -3,6 +3,7 @@ package controller;
 import java.util.Date;
 
 import model.Attendance;
+import model.Parent;
 import model.Schedule;
 import model.Student;
 import model.TeacherCourse;
@@ -310,6 +311,10 @@ public class AttendanceCtrl {
 					} else {
 						attendanceObj = attendance.toJson();
 					}
+					
+					Parent parent = student.getParent();
+					attendanceObj.put(Key.PARENT, parent);
+					
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, attendanceObj);
 				} else {

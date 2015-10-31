@@ -562,6 +562,15 @@
     <servlet-name>DeleteTeacherServlet</servlet-name>
     <url-pattern>/DeleteTeacherServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SendEmailServlet</servlet-name>
+    <servlet-class>service.system.SendEmailServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendEmailServlet</servlet-name>
+    <url-pattern>/system/SendEmailServlet</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>landingPage.html</welcome-file>
     <welcome-file>landingPage.htm</welcome-file>
