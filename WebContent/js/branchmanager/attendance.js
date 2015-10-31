@@ -12,7 +12,9 @@ function getStudents() {
 	// var planStartDate = moment(localStorage.getItem("planStartDate"),
 	// "DD/MM/YYYY");
 	var planStartDate = localStorage.getItem("planStartDate");
+	console.log(planStartDate);
 	var teacherCourseId = Number(localStorage.getItem("teacherCourseId"));
+	console.log(teacherCourseId);
 
 	var input = {};
 	input.teacherCourseId = teacherCourseId;
@@ -47,7 +49,7 @@ function getStudents() {
 													'studentName' : attendances[i].student.name,
 													'studentNric' : attendances[i].student.studentNric,
 													'attendanceStatus' : attendances[i].attendanceStatus,
-													'button' : "<button class='btn btn-sm btn-success fa fa-file-powerpoint-o' onclick='getValue();'></button>"
+													'button' : "<button class='btn btn-sm btn-success fa fa-check' onclick='getValue();'></button>"
 												})
 									} else {
 										return_data

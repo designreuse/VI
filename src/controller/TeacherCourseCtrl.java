@@ -146,7 +146,7 @@ public class TeacherCourseCtrl {
 			if (teacher != null) {
 				JSONArray teacherCourseArr = new JSONArray();
 				for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByTeacher(teacher)) {
-					teacherCourseArr.add(tc.toJson());
+					teacherCourseArr.add(tc.toJsonStrong());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, teacherCourseArr);

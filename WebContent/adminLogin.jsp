@@ -39,7 +39,7 @@
 <body class="login-img3-body">
 	<div class="container">
 		<form class="login-form" action="studentRegistration.jsp" method="post"
-			onsubmit="login();return false;">
+			onsubmit="loginBranchManager();return false;">
 			<div class="login-wrap">
 				<p class="login-img">
 					<i class="icon_lock_alt"></i>

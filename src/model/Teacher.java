@@ -318,15 +318,15 @@ public class Teacher {
 		
 		JSONArray teacherCourseArr = new JSONArray();
 		for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByTeacher(this)) {
-			teacherCourseArr.add(tc.toJson());
+			teacherCourseArr.add(tc.toJsonStrong());
 		}
 		returnJson.put(Key.TEACHERCOURSES, teacherCourseArr);
 		
-		JSONArray pointEventArr = new JSONArray();
-		for (PointEvent pe : PointEventDAO.getPointEventsByTeacher(this)) {
-			pointEventArr.add(pe.toJson());
-		}
-		returnJson.put(Key.POINTEVENTS, pointEventArr);
+//		JSONArray pointEventArr = new JSONArray();
+//		for (PointEvent pe : PointEventDAO.getPointEventsByTeacher(this)) {
+//			pointEventArr.add(pe.toJson());
+//		}
+		//returnJson.put(Key.POINTEVENTS, pointEventArr);
 
 		return returnJson;
 	}

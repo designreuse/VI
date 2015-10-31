@@ -204,7 +204,7 @@ public class TeacherCtrl {
 				String checkHash = teacher.getPasswordHash();
 				if (checkHash.equals(passwordHash)) {
 					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, teacher.toJson());
+					returnJson.put(Key.MESSAGE, teacher.toJsonStrong());
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
 					returnJson.put(Key.MESSAGE, Message.WRONGTEACHERPASSWORD);
