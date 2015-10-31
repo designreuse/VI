@@ -25,17 +25,23 @@ function scheduleCall(){
 			if (status == 1) {
 				for (var i = 0; i < message.length; i++){
 					var id = message[i].id;
-					var start = message[i].start;
 					var title = message[i].title;
-					var end = message[i].end;
 					var allDay = message[i].allDay;
 					
-					var dt = moment(start, "YYYY-MM-DD HH:mm:ss");
-					console.log(dt.format('dddd'));
+					var sdt = moment(message[i].start, "YYYY-MM-DD HH:mm:ss");
+					var edt = moment(message[i].end, "YYYY-MM-DD HH:mm:ss");
+					
+					var startTime = sdt.format('HH:mm');
+					var endTime = edt.format('HH:mm')
+					var startDate = sdt.format('YYYY-MM-DD');
+					var endDate = edt.format('YYYY-MM-DD');
+					
+					
+
 					
 					//if-else for calendar schedules!
 					
-					var scheduleStr = '{"id": ' + id + ', "title": "' + title + '", "start": "' + start + '", "end": "' + end + '", "allDay": false }';
+					var scheduleStr = '{"id": ' + id + ', "title": "' + title + '", "start": "' + sdt.format('HH:mm') + '", "end": "' + edt.format('HH:mm') + '", "dow": ['+ sdt.format('E') + '] }';
 					var schedJSON = JSON.parse(scheduleStr);
 					schedules.push(schedJSON);
 				}
