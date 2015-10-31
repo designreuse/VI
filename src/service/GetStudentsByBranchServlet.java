@@ -19,13 +19,13 @@ import system.Value;
 /**
  *
  */
-public class GetStudentsByBranch extends HttpServlet {
+public class GetStudentsByBranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetStudentsByBranch() {
+    public GetStudentsByBranchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

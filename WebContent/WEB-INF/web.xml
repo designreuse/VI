@@ -379,6 +379,14 @@
     <url-pattern>/GetParentById</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetParentsByBranchServlet</servlet-name>
+    <servlet-class>service.GetParentsByBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetParentsByBranchServlet</servlet-name>
+    <url-pattern>/GetParentsByBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetResultsByStudent</servlet-name>
     <servlet-class>service.GetResultsByStudent</servlet-class>
   </servlet>
@@ -394,22 +402,6 @@
     <servlet-name>GetSalariesByTeacher</servlet-name>
     <url-pattern>/GetSalariesByTeacher</url-pattern>
   </servlet-mapping>
-<!--   <servlet> -->
-<!--     <servlet-name>GetSchedulesByCourse</servlet-name> -->
-<!--     <servlet-class>service.GetSchedulesByCourse</servlet-class> -->
-<!--   </servlet> -->
-<!--   <servlet-mapping> -->
-<!--     <servlet-name>GetSchedulesByCourse</servlet-name> -->
-<!--     <url-pattern>/GetSchedulesByCourse</url-pattern> -->
-<!--   </servlet-mapping> -->
-<!--   <servlet> -->
-<!--     <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name> -->
-<!--     <servlet-class>service.GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-class> -->
-<!--   </servlet> -->
-<!--   <servlet-mapping> -->
-<!--     <servlet-name>GetScheduleByTeacherCourseAndPlanStartDateServlet</servlet-name> -->
-<!--     <url-pattern>/GetScheduleByTeacherCourseAndPlanStartDateServlet</url-pattern> -->
-<!--   </servlet-mapping> -->
   <servlet>
     <servlet-name>GetStudentByAttendance</servlet-name>
     <servlet-class>service.GetStudentByAttendance</servlet-class>
@@ -443,12 +435,12 @@
     <url-pattern>/GetStudentByResult</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetStudentsByBranch</servlet-name>
-    <servlet-class>service.GetStudentsByBranch</servlet-class>
+    <servlet-name>GetStudentsByBranchServlet</servlet-name>
+    <servlet-class>service.GetStudentsByBranchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetStudentsByBranch</servlet-name>
-    <url-pattern>/GetStudentsByBranch</url-pattern>
+    <servlet-name>GetStudentsByBranchServlet</servlet-name>
+    <url-pattern>/GetStudentsByBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetStudentsByParent</servlet-name>
@@ -475,12 +467,12 @@
     <url-pattern>/GetTeacherBySalary</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetTeachersByBranch</servlet-name>
-    <servlet-class>service.GetTeachersByBranch</servlet-class>
+    <servlet-name>GetTeachersByBranchServlet</servlet-name>
+    <servlet-class>service.GetTeachersByBranchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetTeachersByBranch</servlet-name>
-    <url-pattern>/GetTeachersByBranch</url-pattern>
+    <servlet-name>GetTeachersByBranchServlet</servlet-name>
+    <url-pattern>/GetTeachersByBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetTeacherById</servlet-name>
@@ -545,6 +537,30 @@
   <servlet-mapping>
     <servlet-name>CreateAttendanceServlet</servlet-name>
     <url-pattern>/CreateAttendanceServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteParentServlet</servlet-name>
+    <servlet-class>service.DeleteParentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteParentServlet</servlet-name>
+    <url-pattern>/DeleteParentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteStudentServlet</servlet-name>
+    <servlet-class>service.DeleteStudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteStudentServlet</servlet-name>
+    <url-pattern>/DeleteStudentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteTeacherServlet</servlet-name>
+    <servlet-class>service.DeleteTeacherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTeacherServlet</servlet-name>
+    <url-pattern>/DeleteTeacherServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>landingPage.html</welcome-file>

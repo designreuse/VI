@@ -3,7 +3,7 @@
 //    window.location.replace('../pages/login.html');;
 //} else {
     $(document).ready(function() {
-    	getTeachers();
+    	getTeachersByBranch(localStorage.getItem('branchId'));
     });
 //}
 
@@ -65,14 +65,17 @@ function registerTeacher() {
 	});
 }
 
-function getTeachers() {
-$.fn.dataTable.ext.errMode = 'none';
-	
+function getTeachersByBranch(branchId){
+	$.fn.dataTable.ext.errMode = 'none';
+	var input = {};
+	input.branchId = Number(branchId);
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
 	var table =  $('#teacherTable').on( 'error.dt', function ( e, settings, techNote, message ) {
 	        console.log( 'An error has been reported by DataTables: ', message );
 	    }).DataTable({
 	    	ajax:{
-				 url: '../VI/GetAllTeachersServlet?input={}',
+				 url: '../VI/GetTeachersByBranchServlet?input='+ inputStr,
 				 dataSrc: 'message'
 			 },
 			 columns: [
@@ -84,7 +87,7 @@ $.fn.dataTable.ext.errMode = 'none';
 				 {"data": 'teacherNric'},
 				 {"data": 'qualification'},
 				 {"data": 'createDate'},
-				 {"data": null, "defaultContent":'<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="editTeacher();" title=""></button>'}
+				 {"data": null, "defaultContent":'<button class="btn btn-sm btn-warning fa" onclick="editTeacher();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteTeacher();" title="Delete"><i class="fa fa-trash-o"></i></button>'}
 				]
 	    });	
 }
@@ -174,4 +177,73 @@ function editTeacher(){
 	});
 }
 
-
+function deleteTeacher(){
+	var table = $('#teacherTable').DataTable();
+	$('#teacherTable tbody').off('click').on( 'click', 'button', function () {
+		var tr = $(this).closest('tr');
+        var row = table.row( tr );
+       
+        bootbox.dialog({
+        	title: "Delete Teacher",
+    		message: '<div class="row">  ' +
+						'<div class="col-md-12"> ' +
+							'<form class="form-horizontal" method="post"> ' +
+								'<div class="form-group"> ' +
+									'<label class="col-md-1 control-label"></label> ' +
+									'<div>Please enter the teacher name to confirm delete</div></br>'+
+									'<div><font color="red" id="deleteMessage"></font></div>'+
+									'<label class="col-md-2 control-label" for="name">Name</label> ' +
+									'<div class="col-md-10"> ' +
+										'<input id="deleteName" name="deleteName" type="text" class="form-control input-md" placeholder= ' + row.data().name + '> ' +
+									'</div> ' +
+								'</div> ' +
+							'</form> ' +
+						'</div> ' +
+					'</div>',
+    		onEscape: function() {},
+    		buttons: {
+    			success:{
+    				label: "Delete!",
+    				className: "btn-danger",
+    				
+    				callback: function(){
+    					var teacherId = row.data().teacherId;
+    					var teacherName = row.data().name;
+    					var checkName = $("#deleteName").val();
+    					
+    					if(teacherName == checkName){
+    						var input = {}
+        					input.teacherId = Number(teacherId);
+        					var inputStr = JSON.stringify(input);
+        					inputStr = encodeURIComponent(inputStr);
+        					$.ajax({
+        						url : '../VI/DeleteTeacherServlet?input=' + inputStr, //this part sends to the servlet
+        						method : 'POST',
+        						dataType : 'json',
+        						error : function(err) {
+        							console.log(err);
+        							$("#deleteMessage").html("System has some error. Please try again.");
+        						},
+        						success : function(data) {
+        							console.log(data);
+        							var status = data.status; 
+        							var message = data.message;
+        							
+        							if (status == 1) {
+        								bootbox.alert("Delete is successful!")
+        								table.ajax.reload();
+        								
+        							} else {
+        								$("#deleteMessage").html("Something's wrong, please try again!");
+        							}
+        						}
+        					});
+    					} else {
+    						$("#deleteMessage").html("The entered name does not match, please try again.");
+    					}
+    				}    		
+    			}
+    		}	
+    	}); 
+	});
+}

@@ -3,7 +3,7 @@
 //    window.location.replace('../pages/login.html');;
 //} else {
  $(document).ready(function() {
-    	getParents();
+    	getParentsByBranch(localStorage.getItem('branchId'));
     });
 //}
 
@@ -54,14 +54,17 @@ function registerParent() {
 	});
 }
 
-function getParents() {
+function getParentsByBranch(branchId) {
 	$.fn.dataTable.ext.errMode = 'none';
-	
+	var input = {};
+	input.branchId = Number(branchId);
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
 	var table =  $('#parentTable').on( 'error.dt', function ( e, settings, techNote, message ) {
 	        console.log( 'An error has been reported by DataTables: ', message );
 	    }).DataTable({
 	    	ajax:{
-				 url: '../VI/GetAllParentsServlet?input={}',
+				 url: '../VI/GetParentsByBranchServlet?input=' + inputStr,
 				 dataSrc: 'message'
 			 },
 			 columns: [
@@ -71,7 +74,7 @@ function getParents() {
 				 {"data": 'email'},
 				 {"data": 'address'},
 				 {"data": 'createDate'},
-				 {"data": null, "defaultContent":'<button class="btn btn-sm btn-success fa fa-file-powerpoint-o" onclick="editParent();" title=""></button>'}
+				 {"data": null, "defaultContent":'<button class="btn btn-sm btn-warning fa" onclick="editParent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteParent();" title="Delete"><i class="fa fa-trash-o"></i></button>'}
 				]
 	    });
 }
@@ -161,4 +164,73 @@ function editParent(){
 	});
 }
 
-
+function deleteParent(){
+	var table = $('#parentTable').DataTable();
+	$('#parentTable tbody').off('click').on( 'click', 'button', function () {
+		var tr = $(this).closest('tr');
+        var row = table.row( tr );
+       
+        bootbox.dialog({
+        	title: "Delete Parent",
+    		message: '<div class="row">  ' +
+						'<div class="col-md-12"> ' +
+							'<form class="form-horizontal" method="post"> ' +
+								'<div class="form-group"> ' +
+									'<label class="col-md-1 control-label"></label> ' +
+									'<div>Please enter the parent name to confirm delete</div></br>'+
+									'<div><font color="red" id="deleteMessage"></font></div>'+
+									'<label class="col-md-2 control-label" for="name">Name</label> ' +
+									'<div class="col-md-10"> ' +
+										'<input id="deleteName" name="deleteName" type="text" class="form-control input-md" placeholder= ' + row.data().name + '> ' +
+									'</div> ' +
+								'</div> ' +
+							'</form> ' +
+						'</div> ' +
+					'</div>',
+    		onEscape: function() {},
+    		buttons: {
+    			success:{
+    				label: "Delete!",
+    				className: "btn-danger",
+    				
+    				callback: function(){
+    					var parentId = row.data().parentId;
+    					var parentName = row.data().name;
+    					var checkName = $("#deleteName").val();
+    					
+    					if(parentName == checkName){
+    						var input = {}
+        					input.parentId = Number(parentId);
+        					var inputStr = JSON.stringify(input);
+        					inputStr = encodeURIComponent(inputStr);
+        					$.ajax({
+        						url : '../VI/DeleteParentServlet?input=' + inputStr, //this part sends to the servlet
+        						method : 'POST',
+        						dataType : 'json',
+        						error : function(err) {
+        							console.log(err);
+        							$("#deleteMessage").html("System has some error. Please try again.");
+        						},
+        						success : function(data) {
+        							console.log(data);
+        							var status = data.status; 
+        							var message = data.message;
+        							
+        							if (status == 1) {
+        								bootbox.alert("Delete is successful!")
+        								table.ajax.reload();
+        								
+        							} else {
+        								$("#deleteMessage").html("Something's wrong, please try again!");
+        							}
+        						}
+        					});
+    					} else {
+    						$("#deleteMessage").html("The entered name does not match, please try again.");
+    					}
+    				}    		
+    			}
+    		}	
+    	}); 
+	});
+}

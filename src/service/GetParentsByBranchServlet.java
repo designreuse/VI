@@ -11,21 +11,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.TeacherCtrl;
+import controller.ParentCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
 
 /**
- * 
+ * @author RaySong
  */
-public class GetTeachersByBranch extends HttpServlet {
+public class GetParentsByBranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetTeachersByBranch() {
+    public GetParentsByBranchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class GetTeachersByBranch extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = TeacherCtrl.getTeachersByBranch(inputJson);
+			returnJson = ParentCtrl.getParentsByBranch(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
