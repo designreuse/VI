@@ -459,6 +459,14 @@
     <url-pattern>/GetScheduleByTeacherCourseAndPlanStartDateServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetSchedulesByBranchServlet</servlet-name>
+    <servlet-class>service.GetSchedulesByBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSchedulesByBranchServlet</servlet-name>
+    <url-pattern>/GetSchedulesByBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetTeacherBySalary</servlet-name>
     <servlet-class>service.GetTeacherBySalary</servlet-class>
   </servlet>
@@ -570,7 +578,6 @@
     <servlet-name>SendEmailServlet</servlet-name>
     <url-pattern>/system/SendEmailServlet</url-pattern>
   </servlet-mapping>
-  
   <welcome-file-list>
     <welcome-file>landingPage.html</welcome-file>
     <welcome-file>landingPage.htm</welcome-file>

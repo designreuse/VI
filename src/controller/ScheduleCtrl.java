@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.Branch;
 import model.Classroom;
 import model.Course;
 import model.Schedule;
@@ -11,6 +12,7 @@ import model.TeacherCourse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.BranchDAO;
 import dataManager.ClassroomDAO;
 import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
@@ -298,6 +300,37 @@ public class ScheduleCtrl {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
 			} 
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	public static JSONObject getSchedulesByBranch (JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			if(branch != null){
+				ArrayList<Classroom> crList = ClassroomDAO.getClassroomsByBranch(branch);
+				if(!crList.isEmpty()){
+					JSONArray scheduleArr = new JSONArray();
+					for (Classroom cr : crList){
+						for (Schedule s : ScheduleDAO.getSchedulesByClassroom(cr)) {
+							scheduleArr.add(s.toCalendarJson());
+						}
+					}
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, scheduleArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
