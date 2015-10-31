@@ -105,6 +105,7 @@ public class AttendanceCtrl {
 
 	public static JSONObject updateAttendance(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
+		JSONObject attendanceObj = new JSONObject();
 		try {
 			Attendance attendance = AttendanceDAO.getAttendanceById((long) inputJson.get(Key.ATTENDANCEID));
 			if (attendance != null) {
@@ -123,8 +124,16 @@ public class AttendanceCtrl {
 				
 				AttendanceDAO.modifyAttendance(attendance);
 
+				attendanceObj = attendance.toJson();
+				Student student = attendance.getStudent();
+				
+				Parent parent = student.getParent();
+				System.out.println(parent.getName());
+				attendanceObj.put(Key.PARENT, parent.toJson());
+				
+				
 				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, attendance.toJson());
+				returnJson.put(Key.MESSAGE, attendanceObj);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
