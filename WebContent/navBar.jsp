@@ -6,11 +6,11 @@
 	</div>
 
 	<!--logo start-->
-	<a href="adminMain.jsp" class="logo"> <span class="lite">Explore</span>and<span class="lite">Learn</span></a>
+	<a href="" class="logo"> <span class="lite">Explore</span>and<span class="lite">Learn</span></a>
 	<!--logo end-->
 	
 	<div class="top-nav notification-row"> 
-		<a href="adminMain.jsp" class="logo"> <span class="lite">Welcome,</span> Xin Ying</a>
+		<a href="" class="logo"> <span class="lite">Welcome</a>
 	</div>
 </header>
 <!--header end-->

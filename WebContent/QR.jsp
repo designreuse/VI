@@ -79,7 +79,7 @@
 
 		<!--------- including navBar & sideBar------------ -->
 		<%@include file="navBar.jsp"%>
-		<%@include file="sideBar.jsp"%>
+		<%@include file="teacherSideBar.jsp"%>
 
 		<!--main content start-->
 		<section id="main-content">
@@ -90,7 +90,7 @@
 							<i class="fa fa fa-bars"></i> Pages
 						</h3>
 						<ol class="breadcrumb">
-							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Home</a></li>
+							<li><i class="fa fa-home"></i><a href="teacherProfile.jsp">Home</a></li>
 						</ol>
 					</div>
 				</div>

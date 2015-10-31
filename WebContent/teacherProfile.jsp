@@ -77,7 +77,7 @@
 
 		<!--------- including navBar & sideBar------------ -->
 		<%@include file="navBar.jsp"%>
-		<%@include file="sideBar.jsp"%>
+		<%@include file="teacherSideBar.jsp"%>
 
 
 		<!--main content start-->
@@ -90,9 +90,9 @@
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a
-								href="partTimeCalOverview.jsp">Home</a></li>
+								href="teacherProfile.jsp">Home</a></li>
 							<li><i class="icon_contacts_alt"></i><a
-								href="parentProfile.jsp">View Profile</a></li>
+								href="teacherProfile.jsp">View Profile</a></li>
 						</ol>
 					</div>
 				</div>
