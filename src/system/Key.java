@@ -16,6 +16,13 @@ public class Key {
 	public static final String FILETYPE = "fileType";
 	public static final String FILEURL = "fileUrl";
 	
+	//attribute for calendar return object
+	public static final String ID = "id";
+	public static final String TITLE = "title";
+	public static final String START = "start";
+	public static final String END = "end";
+	public static final String ALLDAY = "allDay";
+	
 	public static final String ADMIN = "admin";
 	public static final String ADMINS = "admins";
 	public static final String ADMINID = "adminId";
