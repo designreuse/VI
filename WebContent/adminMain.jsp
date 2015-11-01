@@ -80,28 +80,139 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-						<div class="panel-heading">Branch Schedule</div>
+							<div class="panel-heading">Branch Schedule</div>
 							<div class="panel-body">
-							
+
 								<div class="row">
-									<div class = "col-lg-10">
+									<div class="col-lg-10">
 										<div id='calendar'></div>
 									</div>
-									<div class = "col-lg-2">
+									<div class="col-lg-2">
 										<div class="panel panel-default">
 											<div class="panel-heading">Action Items</div>
 											<div class="panel-body">
-												<button type="button" class="btn btn-primary btn-block" onclick="">Add Schedule</button>
+												<button type="button" class="btn btn-primary view"
+													data-toggle="collapse" data-target="#addSchedule">
+													Add Schedule</button>
 											</div>
 										</div>
 									</div>
 								</div>
+								
+								<hr></hr>
+								
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="collapse" id="addSchedule">
+											<div class="panel panel-info">
+												<div class="panel-heading">Child(ren)</div>
+												<div class="panel-body">
+
+													<div class="row">
+														<div class="col-lg-12">
+															<form>
+																<div class="form-group">
+																	<label for="scheduleName" class="control-label col-lg-2">Schedule Name</label>
+																	
+																	<div class="col-lg-10">
+																		<input class="form-control" id="scheduleName" name="scheduleName"
+																			type="email" required />
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label for="scheduleDesc" class="control-label col-lg-2">Description</label>
+																	
+																	<div class="col-lg-10">
+																		<input class="form-control" id="scheduleDesc" name="scheduleDesc"
+																			type="email" required />
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label for="scheduleStartDate" class="control-label col-lg-2">Start Date</label>
+																	
+																	<div class="col-lg-10">
+																		<input class="form-control" id="scheduleStartDate" name="scheduleStartDate"
+																			type="date" required />
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label for="scheduleStartTime" class="control-label col-lg-2">Start Time
+																	</label>
+																	
+																	<div class="col-lg-10">
+																		<input class="form-control" id="scheduleStartTime" name="scheduleStartTime"
+																			type="time" required />
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label for="scheduleEndDate" class="control-label col-lg-2">End Date
+																	</label>
+																	
+																	<div class="col-lg-10">
+																		<input class="form-control" id="scheduleEndDate" name="scheduleEndDate"
+																			type="date" required />
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label for="scheduleStartDate" class="control-label col-lg-2">End Time
+																	</label>
+																	
+																	<div class="col-lg-10">
+																		<input class="form-control" id="scheduleEndTime" name="scheduleEndTime"
+																			type="time" required />
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label for="teacherSelect" class="control-label col-lg-2">Teacher
+																	</label>
+																	
+																	<div class="col-lg-10">
+																		 <select class="form-control m-bot15" id="teachercourse">
+                                         								 </select>
+																	</div>
+																</div>
+																
+																<div class="form-group">
+																	<label for="classroomSelect" class="control-label col-lg-2">Classroom
+																	</label>
+																	
+																	<div class="col-lg-10">
+																		 <select class="form-control m-bot15" id="classroom">
+                                         								 </select>
+																	</div>
+																</div>
+																
+																<div class="row">
+																	<div class="col-lg-10"></div>
+																	<div class="col-lg-2">
+																		<input class="btn btn-primary btn-lg btn-block submit" type="button" value="Create Schedule" onclick="createSchedule();">
+																	</div>
+																</div>
+
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								
 							</div>
 						</div>
 					</div>
 				</div>
-							
-								<!-- /.panel-heading -->
+
+
+
+				<!-- /.panel-heading -->
 				<!-- --------------------page end-------------------------------->
 				
 			</section>

@@ -1,6 +1,76 @@
 $(document).ready(function() {
 	scheduleCall();
+	schedulePanelView();
+	generateTeacherOption();
+	generateClassroomOption();
 });
+
+function generateTeacherOption(){
+	var branchId = Number(localStorage.getItem("branchId"));
+	var $select = $('#teachercourse');
+	$select.html('');
+	var input = {};
+	input.branchId = branchId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetTeacherCoursesByBranchServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			 $select.html('<option id="-1">none available</option>');
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				 $select.html('<option id="0"></option>');
+				for (var t = 0; t < message.length; t++){
+					var selectText = message[t].teacher.name + ' : ' + message[t].course.name;
+					$select.append('<option id="' + message[t].teacherCourseId + '">' + selectText + '</option>' );
+				}
+			} else{
+				 $select.html('<option id="-1">none available</option>');
+			}
+		}
+	});
+}
+
+function generateClassroomOption(){
+	var branchId = Number(localStorage.getItem("branchId"));
+	var $classselect = $('#classroom');
+	$classselect.html('');
+	var input = {};
+	input.branchId = branchId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetClassroomsByBranchServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			$classselect.html('<option id="-1">none available</option>');
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				console.log(JSON.stringify(message));
+				
+				$classselect.html('<option id="0"></option>');
+				for (var c = 0; c < message.length; c++){
+					$classselect.append('<option id="' + message[c].classroomId + '">' + message[c].name + '</option>' );
+				}
+			} else{
+				$classselect.html('<option id="-1">none available</option>');
+			}
+		}
+	});
+}
 
 var schedules = [];
 function scheduleCall(){
@@ -72,15 +142,39 @@ function calendarInitiate(schedJSON){
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
+			contentHeight: 450,
 			defaultDate: date,
 			eventLimit: true, // allow "more" link when too many events
 			events: schedJSON,
 			eventRender: function(event, element, view){
-		        console.log(event.start.format());
 		        return (event.ranges.filter(function(range){
 		            return (event.start.isBefore(range.end) &&
 		                    event.end.isAfter(range.start));
 		        }).length)>0;
 		    },
 		});
+}
+
+function schedulePanelView(){
+	$(".view").click(function() {
+		$(".collapse").collapse('toggle');
+	});
+}
+
+function createSchedule(){
+	var scheduleName = $("#scheduleName").val();
+	var scheduleDesc = $("#scheduleDesc").val();
+	var scheduleStartDate = $("#scheduleStartDate").val();
+	var scheduleStartTime = $("#scheduleStartTime").val();
+	var scheduleEndDate = $("#scheduleEndDate").val();
+	var scheduleEndTime = $("#scheduleEndTime").val();
+//	var teacherCourseId = $("#teacher").val();
+//	var classroomId = $("#classroom")val();
+	
+	console.log(scheduleName);
+	console.log(scheduleDesc);
+	console.log(scheduleStartDate);
+	console.log(scheduleStartTime);
+	console.log(scheduleEndDate);
+	console.log(scheduleEndTime);
 }
