@@ -71,7 +71,7 @@
 							<i class="fa fa fa-bars"></i> Pages
 						</h3>
 						<ol class="breadcrumb">
-							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Home</a></li>
+							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Branch Schedule</a></li>
 						</ol>
 					</div>
 				</div>
@@ -80,9 +80,21 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel panel-default">
-						<div class="panel-heading">Admin Main</div>
+						<div class="panel-heading">Branch Schedule</div>
 							<div class="panel-body">
-								<div id='calendar'>
+							
+								<div class="row">
+									<div class = "col-lg-10">
+										<div id='calendar'></div>
+									</div>
+									<div class = "col-lg-2">
+										<div class="panel panel-default">
+											<div class="panel-heading">Action Items</div>
+											<div class="panel-body">
+												<button type="button" class="btn btn-primary btn-block" onclick="">Add Schedule</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>

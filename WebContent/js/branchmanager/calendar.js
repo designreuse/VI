@@ -18,7 +18,6 @@ function scheduleCall(){
 		},
 		success : function(data) {
 			// you have to do a for loop to get all the data.'
-			console.log(data);
 			var status = data.status; 
 			var message = data.message;
 			
@@ -31,19 +30,26 @@ function scheduleCall(){
 					var sdt = moment(message[i].start, "YYYY-MM-DD HH:mm:ss");
 					var edt = moment(message[i].end, "YYYY-MM-DD HH:mm:ss");
 					
+					var dow = [];
+					var ranges = [];
 					var startTime = sdt.format('HH:mm');
 					var endTime = edt.format('HH:mm')
 					var startDate = sdt.format('YYYY-MM-DD');
 					var endDate = edt.format('YYYY-MM-DD');
+					dow.push(sdt.format('E'));
 					
-					
-
-					
-					//if-else for calendar schedules!
-					
-					var scheduleStr = '{"id": ' + id + ', "title": "' + title + '", "start": "' + sdt.format('HH:mm') + '", "end": "' + edt.format('HH:mm') + '", "dow": ['+ sdt.format('E') + '] }';
-					var schedJSON = JSON.parse(scheduleStr);
-					schedules.push(schedJSON);
+					var scheduleStr = {
+						title: title,
+						id: id,
+						start: startTime,
+						end: endTime,
+						dow: dow,
+						ranges: [{
+							start: sdt,
+							end: edt
+						}]
+					};
+					schedules.push(scheduleStr);
 				}
 				calendarInitiate(schedules);
 			} else {
@@ -68,6 +74,13 @@ function calendarInitiate(schedJSON){
 			},
 			defaultDate: date,
 			eventLimit: true, // allow "more" link when too many events
-			events: schedJSON
+			events: schedJSON,
+			eventRender: function(event, element, view){
+		        console.log(event.start.format());
+		        return (event.ranges.filter(function(range){
+		            return (event.start.isBefore(range.end) &&
+		                    event.end.isAfter(range.start));
+		        }).length)>0;
+		    },
 		});
 }
