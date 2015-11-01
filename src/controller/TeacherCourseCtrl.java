@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.BranchDAO;
 import dataManager.CourseDAO;
 import dataManager.TeacherCourseDAO;
 import dataManager.TeacherDAO;
+import model.Branch;
 import model.Course;
 import model.Teacher;
 import model.TeacherCourse;
@@ -215,4 +217,38 @@ public class TeacherCourseCtrl {
 		}
 		return returnJson;
 	}
+	
+	// Get teachercourses by branch
+	public static JSONObject getTeacherCoursesByBranch(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			if(branch != null){
+				ArrayList<Teacher> tList = TeacherDAO.getTeachersByBranch(branch);
+				if(!tList.isEmpty()){
+					JSONArray scheduleArr = new JSONArray();
+					for (Teacher t : tList){
+						for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByTeacher(t)) {
+							scheduleArr.add(tc.toJson());
+//							scheduleArr.add(t.toJsonStrong());
+						}
+					}
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, scheduleArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 }

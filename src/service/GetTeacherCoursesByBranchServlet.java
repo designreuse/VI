@@ -13,19 +13,18 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.AttendanceCtrl;
-import controller.ScheduleCtrl;
+import controller.TeacherCourseCtrl;
 
 /**
  * @author RaySong
  */
-public class GetAttendancesBySchedulesServlet extends HttpServlet {
+public class GetTeacherCoursesByBranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetAttendancesBySchedulesServlet() {
+    public GetTeacherCoursesByBranchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +57,7 @@ public class GetAttendancesBySchedulesServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = AttendanceCtrl.getAttendancesBySchedules(inputJson);
+			returnJson = TeacherCourseCtrl.getTeacherCoursesByBranch(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -66,4 +65,4 @@ public class GetAttendancesBySchedulesServlet extends HttpServlet {
 		}
 		out.println(returnJson.toJSONString());
 	}
-}
+}	

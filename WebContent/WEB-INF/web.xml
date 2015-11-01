@@ -355,12 +355,12 @@
     <url-pattern>/GetClassroomByAttendance</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetClassroomsByBranch</servlet-name>
-    <servlet-class>service.GetClassroomsByBranch</servlet-class>
+    <servlet-name>GetClassroomsByBranchServlet</servlet-name>
+    <servlet-class>service.GetClassroomsByBranchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetClassroomsByBranch</servlet-name>
-    <url-pattern>/GetClassroomsByBranch</url-pattern>
+    <servlet-name>GetClassroomsByBranchServlet</servlet-name>
+    <url-pattern>/GetClassroomsByBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetCourseByResult</servlet-name>
@@ -499,6 +499,14 @@
     <url-pattern>/GetTeacherCoursesByTeacher</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetTeacherCoursesByBranchServlet</servlet-name>
+    <servlet-class>service.GetTeacherCoursesByBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetTeacherCoursesByBranchServlet</servlet-name>
+    <url-pattern>/GetTeacherCoursesByBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetTeacherByPointEvent</servlet-name>
     <servlet-class>service.GetTeacherByPointEvent</servlet-class>
   </servlet>
@@ -545,6 +553,14 @@
   <servlet-mapping>
     <servlet-name>CreateAttendanceServlet</servlet-name>
     <url-pattern>/CreateAttendanceServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>CreateScheduleServlet</servlet-name>
+    <servlet-class>service.CreateScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateScheduleServlet</servlet-name>
+    <url-pattern>/CreateScheduleServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>DeleteParentServlet</servlet-name>
