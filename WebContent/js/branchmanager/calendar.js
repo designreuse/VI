@@ -29,7 +29,7 @@ function generateTeacherOption(){
 				 $select.html('<option id="0"></option>');
 				for (var t = 0; t < message.length; t++){
 					var selectText = message[t].teacher.name + ' : ' + message[t].course.name;
-					$select.append('<option id="' + message[t].teacherCourseId + '">' + selectText + '</option>' );
+					$select.append('<option value=' + message[t].teacherCourseId + '>' + selectText + '</option>' );
 				}
 			} else{
 				 $select.html('<option id="-1">none available</option>');
@@ -59,11 +59,10 @@ function generateClassroomOption(){
 			var message = data.message;
 			
 			if (status == 1) {
-				console.log(JSON.stringify(message));
-				
+//				console.log(JSON.stringify(message));
 				$classselect.html('<option id="0"></option>');
 				for (var c = 0; c < message.length; c++){
-					$classselect.append('<option id="' + message[c].classroomId + '">' + message[c].name + '</option>' );
+					$classselect.append('<option value=' + message[c].classroomId + '>' + message[c].name + '</option>' );
 				}
 			} else{
 				$classselect.html('<option id="-1">none available</option>');
@@ -131,10 +130,10 @@ function scheduleCall(){
 
 
 function calendarInitiate(schedJSON){
-	var date = new Date();
-	var d = date.getDate();
-	var m = date.getMonth();
-	var y = date.getFullYear();
+//	var date = new Date();
+//	var d = date.getDate();
+//	var m = date.getMonth();
+//	var y = date.getFullYear();
 		
 		$('#calendar').fullCalendar({
 			header: {
@@ -143,7 +142,7 @@ function calendarInitiate(schedJSON){
 				right: 'month,agendaWeek,agendaDay'
 			},
 			contentHeight: 450,
-			defaultDate: date,
+			defaultDate: moment(),
 			eventLimit: true, // allow "more" link when too many events
 			events: schedJSON,
 			eventRender: function(event, element, view){
@@ -168,13 +167,53 @@ function createSchedule(){
 	var scheduleStartTime = $("#scheduleStartTime").val();
 	var scheduleEndDate = $("#scheduleEndDate").val();
 	var scheduleEndTime = $("#scheduleEndTime").val();
-//	var teacherCourseId = $("#teacher").val();
-//	var classroomId = $("#classroom")val();
+	var teacher = document.getElementById("teachercourse");
+	var classroom = document.getElementById("classroom");
+	var teacherCourseId = teacher.options[teacher.selectedIndex].value;
+	var classroomId = classroom.options[classroom.selectedIndex].value;
 	
-	console.log(scheduleName);
-	console.log(scheduleDesc);
-	console.log(scheduleStartDate);
-	console.log(scheduleStartTime);
-	console.log(scheduleEndDate);
-	console.log(scheduleEndTime);
+	var start = scheduleStartDate + " " + scheduleStartTime;
+	var end = scheduleEndDate + " " + scheduleEndTime;
+		
+//	console.log(moment(start).format());
+	
+	var input = {};
+	input.name = scheduleName;
+	input.description = scheduleDesc;
+	input.planStartDate = moment(start).format();
+	input.planEndDate = moment(end).format();
+	input.teacherCourseId = Number(teacherCourseId);
+	input.classroomId = Number(classroomId);
+	
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	$.ajax({
+		url : '../VI/CreateScheduleServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+			$("#message").html("System has some error. Please try again.");
+		},
+		success : function(data) {
+			console.log(data);
+			var status = data.status; //shows the  success/failure of the servlet request
+			var message = data.message;
+			
+			if (status == 1){
+				window.location.reload();
+			}
+		}
+		
+	});
+//	}
+	
+//	console.log(scheduleName);
+//	console.log(scheduleDesc);
+//	console.log(scheduleStartDate);
+//	console.log(scheduleStartTime);
+//	console.log(scheduleEndDate);
+//	console.log(scheduleEndTime);
+//	console.log(teacherCourseId);
+//	console.log(classroomId)
 }

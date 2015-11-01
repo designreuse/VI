@@ -35,7 +35,7 @@ function loginBranchManager() {
 				
 				localStorage.setItem("branchId", branchManager.branch.branchId);
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);
-				window.location = "scheduleMain.jsp";
+				window.location = "adminMain.jsp";
 				console.log(data.message)
 			} else {
 				$("#message").html("Invalid Email/Password");
