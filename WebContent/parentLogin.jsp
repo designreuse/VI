@@ -33,12 +33,8 @@
 					Sign In
 					</p>
 				</div>
-                
-                <div>
-					<font color="red" id="message"></font>
-				</div>
                     
-                <form class="login" action="parentProfile.jsp" method="post" onsubmit="login();">
+                <form class="login" action="parentProfile.jsp" method="post" onsubmit="login();return false;">
                 <input type="text" placeholder="Username" id="email"/>
                 <input type="password" placeholder="Password" id="password"/>
                 <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
@@ -59,6 +55,10 @@
                         </div>
                     </div>
                 </div>
+                
+                                <div>
+					<font color="red" id="message"></font>
+				</div>
                 
                 </form>
             </div>

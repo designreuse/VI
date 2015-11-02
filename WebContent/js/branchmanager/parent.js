@@ -7,12 +7,15 @@
     });
 //}
 
+
 function registerParent() {
 	var parentEmail = $("#parentEmail").val();
 	var parentPassword = $("#parentPassword").val();
 	var parentName = $("#parentName").val();
+	
 	var parentNric = $("#parentNric").val();
 	var contactNumber = $("#contactNumber").val();
+	//contact int
 	var parentAddress = $("#parentAddress").val();
 	
 	

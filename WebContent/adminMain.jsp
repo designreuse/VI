@@ -105,7 +105,7 @@
 									<div class="col-lg-12">
 										<div class="collapse" id="addSchedule">
 											<div class="panel panel-info">
-												<div class="panel-heading">Child(ren)</div>
+												<div class="panel-heading">Create Schedule</div>
 												<div class="panel-body">
 
 													<div class="row">

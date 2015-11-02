@@ -117,16 +117,6 @@
 										<tbody>
 										</tbody>
 									</table>
-									<div align = center>
-								<button class="btn btn-default" onclick="deselectAll()">Deselect All</button> 
-								</div>
-								
-								<div align =center>
-								<button class="btn btn-default" onclick="selectAll()">Select All</button> 
-								</div>
-								<div align = center>
-									<button class="btn btn-default" onclick="submit()"> Submit </button> 
-									</div>
 								</div>
 							</div>
 						</div>

@@ -124,9 +124,8 @@ public class SendEmailServlet extends HttpServlet {
 				message.setSubject("[Explore And Learn] Attendance notification.");
 				
 				// Now set the actual message in html format
-				message.setText("Hello, " + parent.get(Key.NAME) +
-						"\n\nYour child " + student.get(Key.NAME) +".\n\n" +
-						"Has attend the class\n\n\n" +
+				message.setText("Hello " + parent.get(Key.NAME) + ", " +
+						"\n\nYour child " + student.get(Key.NAME) + " has attended class.\n\n\n" +
 						"\n\nPlease DO NOT reply to this email directly! As it is a computer genrated message.");
 				
 				//message.setContent(

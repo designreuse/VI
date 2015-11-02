@@ -70,7 +70,9 @@ function viewChildren() {
 						for (var i = 0; i < data.message.length; i++) {
 							var obj = data.message[i];
 							var name = obj.name;
-							var email = obj.email;
+							var course = "";
+							var grades = "";
+							var feedback ="";
 							
 						    var table = document.createElement('TABLE');
 						    table.className = "table table-information";
@@ -80,22 +82,46 @@ function viewChildren() {
 						    var nameHeader = document.createElement('TD');
 						    var nameValue = document.createElement('TD');
 						    
-						    var emailRow = document.createElement('TR');
-						    var emailHeader = document.createElement('TD');
-						    var emailValue = document.createElement('TD');
+						    var courseRow = document.createElement('TR');
+						    var courseHeader = document.createElement('TD');
+						    var courseValue = document.createElement('TD');
 						    
-						    nameHeader.appendChild(document.createTextNode("Name"));
+						    var gradesRow = document.createElement('TR');
+						    var gradesHeader = document.createElement('TD');
+						    var gradesValue = document.createElement('TD');
+						    
+						    var feedbackRow = document.createElement('TR');
+						    var feedbackHeader = document.createElement('TD');
+						    var feedbackValue = document.createElement('TD');
+						    
+						    var bold = document.createElement("b");
+						    bold.appendChild(document.createTextNode("Name"));
+						    
+						    nameHeader.appendChild(bold);
 						    nameValue.appendChild(document.createTextNode(name));
+						    
 						    nameRow.appendChild(nameHeader);
 						    nameRow.appendChild(nameValue);
 						    
-						    emailHeader.appendChild(document.createTextNode("Email"));
-						    emailValue.appendChild(document.createTextNode(email));
-						    emailRow.appendChild(emailHeader);
-						    emailRow.appendChild(emailValue);
+						    courseHeader.appendChild(document.createTextNode("Course Enrolled"));
+						    courseValue.appendChild(document.createTextNode(course));
+						    courseRow.appendChild(courseHeader);
+						    courseRow.appendChild(courseValue);
+						    
+						    gradesHeader.appendChild(document.createTextNode("Grades"));
+						    gradesValue.appendChild(document.createTextNode(grades));
+						    gradesRow.appendChild(gradesHeader);
+						    gradesRow.appendChild(gradesValue);
+						    
+						    feedbackHeader.appendChild(document.createTextNode("Feedback"));
+						    feedbackValue.appendChild(document.createTextNode(feedback));
+						    feedbackRow.appendChild(feedbackHeader);
+						    feedbackRow.appendChild(feedbackValue);
 						    
 						    tableBody.appendChild(nameRow);
-						    tableBody.appendChild(emailRow);
+						    tableBody.appendChild(courseRow);
+						    tableBody.appendChild(gradesRow);
+						    tableBody.appendChild(feedbackRow);
 						    
 						    table.appendChild(tableBody);
 						    

@@ -32,6 +32,8 @@
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="./js/branchmanager/parent.js"></script>
+<script src="./js/jquery.validate.min.js"></script>
+<script src="./js/form-validation-script.js"></script>
 
 </head>
 
@@ -72,8 +74,8 @@
 					<div class="col-lg-12">
 						<section class="panel">
 							<div class="form">
-								<form class="form-validate form-horizontal" id="feedback_form"
-									method="post" action="parentSuccess.jsp" onsubmit="registerParent();return false;">
+								<form class="form-validate form-horizontal" id="register_form"
+									method="post" action="parentSuccess.jsp" onsubmit="registerParent();return false;" >
 									<div>
 										<font color="red" id="message"></font>
 									</div>
