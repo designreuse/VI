@@ -100,19 +100,23 @@ function editStudent(){
 			'<div><font color="red" id="updatedMessage"></font></div>'+
 			'<label class="col-md-2 control-label" for="name">Name</label> ' +
 			'<div class="col-md-10"> ' +
-			'<input id="name" name="name" type="text" class="form-control input-md" placeholder= ' + row.data().name + '> ' +
+			'<input id="name" name="name" type="text" class="form-control input-md" value= ' + row.data().name + '> ' +
+			'</div> ' +
+			'<label class="col-md-2 control-label" for="nric">NRIC</label> ' +
+			'<div class="col-md-10"> ' +
+				'<input id="nric" name="nric" type="text" class="form-control input-md" value= ' + row.data().studentNric + '> ' +
 			'</div> ' +
 			'<label class="col-md-2 control-label" for="contact">Contact</label> ' +
 			'<div class="col-md-10"> ' +
-			'<input id="contact" name="contact" type="text" class="form-control input-md" placeholder= ' + row.data().contact + '> ' +
+			'<input id="contact" name="contact" type="text" class="form-control input-md" value= ' + row.data().contact + '> ' +
 			'</div> ' +
 			'<label class="col-md-2 control-label" for="email">Email</label> ' +
 			'<div class="col-md-10"> ' +
-			'<input id="email" name="email" type="text" class="form-control input-md" placeholder= ' + row.data().email + '> ' +
+			'<input id="email" name="email" type="text" class="form-control input-md" value= ' + row.data().email + '> ' +
 			'</div> ' +
 			'<label class="col-md-2 control-label" for="address">Address</label> ' +
 			'<div class="col-md-10"> ' +
-			'<input id="address" name="address" type="text" class="form-control input-md" placeholder= ' + row.data().address + '> ' +
+			'<input id="address" name="address" type="text" class="form-control input-md" value= ' + row.data().address + '> ' +
 			'</div> ' +
 			'</div> ' +
 			'</form> ' +
@@ -127,6 +131,7 @@ function editStudent(){
     				callback: function(){
     					var studentId = row.data().studentId;
     					var updatedName = $("#name").val();
+    					var updatedNric = $("#nric").val();
     					var updatedContact = $("#contact").val();
     					var updatedAddress = $("#address").val();
     					var updatedEmail = $("#email").val();
@@ -134,6 +139,7 @@ function editStudent(){
     					var input = {}
     					input.studentId = Number(studentId);
     					input.name = updatedName;
+    					input.studentNric = updatedNric;
     					input.contact = updatedContact;
     					input.address = updatedAddress;
     					input.email = updatedEmail;

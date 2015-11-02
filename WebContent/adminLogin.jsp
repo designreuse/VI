@@ -55,7 +55,7 @@
 						id="password">
 				</div>
 				<button class="btn btn-primary btn-lg btn-block" type="submit">Login</button>
-
+				<a class="btn btn-lg btn-block" href="landingPage.jsp">Back</a>
 				<div>
 					<font color="red" id="message"></font>
 				</div>

@@ -7,7 +7,6 @@
     });
 //}
 
-
 function registerParent() {
 	var parentEmail = $("#parentEmail").val();
 	var parentPassword = $("#parentPassword").val();
@@ -72,6 +71,7 @@ function getParentsByBranch(branchId) {
 			 columns: [
 				 {"data": "parentId"},
 				 {"data": 'name'},
+				 {"data": 'parentNric'},
 				 {"data": 'contact'},
 				 {"data": 'email'},
 				 {"data": 'address'},
@@ -90,30 +90,34 @@ function editParent(){
         bootbox.dialog({
         	title: "Edit Details",
     		message: '<div class="row">  ' +
-			'<div class="col-md-12"> ' +
-			'<form class="form-horizontal" method="post"> ' +
-			'<div class="form-group"> ' +
-			'<div><font color="red" id="updatedMessage"></font></div>'+
-			'<label class="col-md-2 control-label" for="name">Name</label> ' +
-			'<div class="col-md-10"> ' +
-			'<input id="name" name="name" type="text" class="form-control input-md" placeholder= ' + row.data().name + '> ' +
-			'</div> ' +
-			'<label class="col-md-2 control-label" for="contact">Contact</label> ' +
-			'<div class="col-md-10"> ' +
-			'<input id="contact" name="contact" type="text" class="form-control input-md" placeholder= ' + row.data().contact + '> ' +
-			'</div> ' +
-			'<label class="col-md-2 control-label" for="email">Email</label> ' +
-			'<div class="col-md-10"> ' +
-			'<input id="email" name="email" type="text" class="form-control input-md" placeholder= ' + row.data().email + '> ' +
-			'</div> ' +
-			'<label class="col-md-2 control-label" for="address">Address</label> ' +
-			'<div class="col-md-10"> ' +
-			'<input id="address" name="address" type="text" class="form-control input-md" placeholder= ' + row.data().address + '> ' +
-			'</div> ' +
-			'</div> ' +
-			'</form> ' +
-			'</div> ' +
-			'</div>',
+						'<div class="col-md-12"> ' +
+							'<form class="form-horizontal" method="post"> ' +
+								'<div class="form-group"> ' +
+									'<div><font color="red" id="updatedMessage"></font></div>'+
+									'<label class="col-md-2 control-label" for="name">Name</label> ' +
+									'<div class="col-md-10"> ' +
+										'<input id="name" name="name" type="text" class="form-control input-md" value= ' + row.data().name + '> ' +
+									'</div> ' +
+									'<label class="col-md-2 control-label" for="nric">NRIC</label> ' +
+									'<div class="col-md-10"> ' +
+										'<input id="nric" name="nric" type="text" class="form-control input-md" value= ' + row.data().parentNric + '> ' +
+									'</div> ' +
+									'<label class="col-md-2 control-label" for="contact">Contact</label> ' +
+									'<div class="col-md-10"> ' +
+										'<input id="contact" name="contact" type="text" class="form-control input-md" value= ' + row.data().contact + '> ' +
+									'</div> ' +
+									'<label class="col-md-2 control-label" for="email">Email</label> ' +
+									'<div class="col-md-10"> ' +
+										'<input id="email" name="email" type="text" class="form-control input-md" value= ' + row.data().email + '> ' +
+									'</div> ' +
+									'<label class="col-md-2 control-label" for="address">Address</label> ' +
+									'<div class="col-md-10"> ' +
+										'<input id="address" name="address" type="text" class="form-control input-md" value= ' + row.data().address + '> ' +
+									'</div> ' +
+								'</div> ' +
+							'</form> ' +
+						'</div> ' +
+					'</div>',
     		onEscape: function() {},
     		buttons: {
     			success:{
@@ -123,6 +127,7 @@ function editParent(){
     				callback: function(){
     					var parentId = row.data().parentId;
     					var updatedName = $("#name").val();
+    					var updatedNric = $("#nric").val();
     					var updatedContact = $("#contact").val();
     					var updatedAddress = $("#address").val();
     					var updatedEmail = $("#email").val();
@@ -130,6 +135,7 @@ function editParent(){
     					var input = {}
     					input.parentId = Number(parentId);
     					input.name = updatedName;
+    					input.parentNric = updatedNric;
     					input.contact = updatedContact;
     					input.address = updatedAddress;
     					input.email = updatedEmail;

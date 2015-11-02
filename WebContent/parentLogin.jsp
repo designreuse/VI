@@ -39,7 +39,7 @@
                 <input type="password" placeholder="Password" id="password"/>
                 <input type="submit" value="Sign In" class="btn btn-success btn-sm" />
               
-              
+              	<a class="btn btn-lg btn-block" href="landingPage.jsp">Back</a>
                 <div class="remember-forgot">
                     <div class="row">
                         <div class="col-md-6">
