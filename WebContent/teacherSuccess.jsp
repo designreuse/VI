@@ -55,17 +55,17 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa fa-bars"></i> Parents Registration
+							<i class="fa fa fa-bars"></i> Students Registration
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="adminMain.jsp">Home</a></li>
-							<li><i class="icon_document_alt"></i>Parent</li>
-							<li><i class="fa fa-files-o"></i>New Parent Registration</li>
+							<li><i class="icon_document_alt"></i>Teacher</li>
+							<li><i class="fa fa-files-o"></i>New Teacher Registration</li>
 						</ol>
 					</div>
 				</div>
 				<!-- page start-->
-				Parent Registration Successful!
+				Teacher Registration Successful!
 				<!-- page end-->
 			</section>
 		</section>

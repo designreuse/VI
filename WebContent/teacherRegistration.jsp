@@ -128,10 +128,11 @@
 									<header class="panel-heading"> Teacher Details </header>
 									<div class="panel-body">
 										<div class="form-group ">
-											<label for="tName" class="control-label col-lg-2">Name</label>
+											<label for="tName" class="control-label col-lg-2">Name<span class="required">*</span>
+											</label>
 											<div class="col-lg-10">
 												<input class="form-control " id="teacherName" type="text"
-													name="tName" />
+													name="tName" pattern="^([a-zA-Z\s]{1,255})$" title="Letters only" required/>
 											</div>
 										</div>
 										<div class="form-group ">
@@ -140,7 +141,7 @@
 											</label>
 											<div class="col-lg-10">
 												<input class="form-control" id="teacherNric" name="sNric"
-													type="text" required />
+													type="text" pattern="^[SFTG]\d{7}[A-Z]$" title="NRIC only" required />
 											</div>
 										</div>
 										<div class="form-group ">
@@ -153,7 +154,8 @@
 											</div>
 										</div>
 										<div class="form-group ">
-											<label for="address" class="control-label col-lg-2">Address</label>
+											<label for="address" class="control-label col-lg-2">Address
+											<span class="required">*</span></label>
 											<div class="col-lg-10">
 												<textarea class="form-control" rows="4" id="teacherAddress"
 													name="address" required></textarea>
@@ -169,7 +171,7 @@
 													class="required">*</span></label>
 												<div class="col-lg-10">
 													<input class="form-control" id="teacherSchool"
-														name="school" required>
+														name="school" pattern="[A-Za-z]" title="Letters only" required>
 												</div>
 											</div>
 											<div class="form-group ">
@@ -178,7 +180,7 @@
 												</label>
 												<div class="col-lg-10">
 													<input class="form-control" id="qualification"
-														name="qualification" type="text" required />
+														name="qualification" type="text" pattern="[A-Za-z]" title="Letters only" required />
 												</div>
 											</div>
 											<div class="form-group ">

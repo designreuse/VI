@@ -32,8 +32,8 @@
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script src="./js/branchmanager/parent.js"></script>
-<script src="./js/jquery.validate.min.js"></script>
-<script src="./js/form-validation-script.js"></script>
+<!-- <script src="./js/jquery.validate.min.js"></script> -->
+<!-- <script src="./js/form-validation-script.js"></script> -->
 
 </head>
 
@@ -75,7 +75,8 @@
 						<section class="panel">
 							<div class="form">
 								<form class="form-validate form-horizontal" id="register_form"
-									method="post" action="parentSuccess.jsp" onsubmit="registerParent();return false;" >
+									method="post" action="parentSuccess.jsp"
+									onsubmit="registerParent();return false;">
 									<div>
 										<font color="red" id="message"></font>
 									</div>
@@ -113,10 +114,13 @@
 									<header class="panel-heading"> Parent Details </header>
 									<div class="panel-body">
 										<div class="form-group ">
-											<label for="PName" class="control-label col-lg-2">Name</label>
+											<label for="PName" class="control-label col-lg-2">Name
+												<span class="required">*</span>
+											</label>
 											<div class="col-lg-10">
 												<input class="form-control " id="parentName" type="text"
-													name="pName" />
+													name="pName" pattern="^([a-zA-Z\s]{1,255})$" title="Letters only"
+													required />
 											</div>
 										</div>
 										<div class="form-group ">
@@ -125,7 +129,7 @@
 											</label>
 											<div class="col-lg-10">
 												<input class="form-control" id="parentNric" name="pNric"
-													type="text" required />
+													type="text" pattern="^[SFTG]\d{7}[A-Z]$" title="NRIC only" required />
 											</div>
 										</div>
 										<div class="form-group ">
@@ -138,7 +142,8 @@
 											</div>
 										</div>
 										<div class="form-group ">
-											<label for="address" class="control-label col-lg-2">Address</label>
+											<label for="address" class="control-label col-lg-2">Address<span class="required">*</span>
+											</label>
 											<div class="col-lg-10">
 												<textarea class="form-control" rows="4" id="parentAddress"
 													name="address" required></textarea>

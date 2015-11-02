@@ -58,6 +58,7 @@ function registerTeacher() {
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
 				alert("Created successfully");	
+				window.location = "teacherSuccess.jsp";
 			} else {
 				$("#message").html("Something's wrong, please try again!");
 			}

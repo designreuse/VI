@@ -12,10 +12,8 @@ function registerParent() {
 	var parentEmail = $("#parentEmail").val();
 	var parentPassword = $("#parentPassword").val();
 	var parentName = $("#parentName").val();
-	
 	var parentNric = $("#parentNric").val();
 	var contactNumber = $("#contactNumber").val();
-	//contact int
 	var parentAddress = $("#parentAddress").val();
 	
 	
@@ -47,6 +45,7 @@ function registerParent() {
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
+				alert("Created successfully");	
 				var parentMessage = message;
 				localStorage.setItem("parentMessage", parentMessage);
 				window.location = "parentSuccess.jsp";

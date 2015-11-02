@@ -37,11 +37,11 @@ function loginBranchManager() {
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);
 				window.location = "adminMain.jsp";
 				console.log(data.message)
-			} else {
-				$("#message").html("Invalid Email/Password");
-			}
+			} 
 			if(unsuccessful != true){
 				loginTeacher();
+			}else {
+				$("#message").html("Invalid Email/Password");
 			}
 		}
 	});
