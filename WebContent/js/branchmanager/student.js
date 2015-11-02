@@ -52,7 +52,7 @@ function registerStudent() {
 				alert("Created successfully");
 				window.location = "studentSuccess.jsp";
 			} else {
-				$("#message").html("Something's wrong, please try again!");
+				$("#message").html(message);
 			}
 		}
 	});

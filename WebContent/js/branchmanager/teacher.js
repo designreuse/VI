@@ -60,7 +60,7 @@ function registerTeacher() {
 				alert("Created successfully");	
 				window.location = "teacherSuccess.jsp";
 			} else {
-				$("#message").html("Something's wrong, please try again!");
+				$("#message").html(message);
 			}
 		}
 	});

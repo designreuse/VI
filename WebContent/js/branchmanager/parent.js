@@ -50,7 +50,7 @@ function registerParent() {
 				localStorage.setItem("parentMessage", parentMessage);
 				window.location = "parentSuccess.jsp";
 			} else {
-				$("#message").html("Something's wrong, please try again!");
+				$("#message").html(message);
 			}
 		}
 	});
