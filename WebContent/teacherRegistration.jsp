@@ -206,7 +206,7 @@
 											<div class="form-group">
 												<div class="col-lg-offset-2 col-lg-10">
 													<button class="btn btn-primary" type="submit">Register</button>
-													<button class="btn btn-default pull-right" type="button">Back</button>
+<!-- 													<button class="btn btn-default pull-right" type="button">Back</button> -->
 												</div>
 											</div>
 										</div>
