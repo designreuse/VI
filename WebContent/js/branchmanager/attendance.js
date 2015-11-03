@@ -121,7 +121,17 @@ function getValue() {
 					table.ajax.reload();
 					
 					//call the send email servlet to send the email
-					var inputMsg = JSON.stringify(message);
+					var studentName = message.student.name;
+					var parentName = message.student.parent.name;
+					var email = message.student.parent.email;
+					
+					var input = {};
+					input.studentName = studentName;
+					input.parentName = parentName;
+					input.email = email;
+					
+					var inputMsg = JSON.stringify(input);
+					console.log(inputMsg);
 					$.ajax({
 						url : '../VI/system/SendEmailServlet?input=' + inputMsg, 
 						method : 'POST',

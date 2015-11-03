@@ -128,7 +128,7 @@ public class AttendanceCtrl {
 				Student student = attendance.getStudent();
 				
 				Parent parent = student.getParent();
-				System.out.println(parent.getName());
+//				System.out.println(parent.getName());
 				attendanceObj.put(Key.PARENT, parent.toJson());
 				
 				

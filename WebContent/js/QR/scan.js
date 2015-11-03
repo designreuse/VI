@@ -85,11 +85,22 @@ function updateQRAttendance(studentId){
 			console.log(message);
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
-				console.log("hello!");
 				bootbox.alert("Attendance taken! Welcome to class, " + message.student.name, function() {
 					});
 				//call the send email servlet to send the email
-				var inputMsg = JSON.stringify(message);
+				console.log("here!!!");
+				var studentName = message.student.name;
+				var parentName = message.student.parent.name;
+				var email = message.student.parent.email;
+				
+				var input = {};
+				input.studentName = studentName;
+				input.parentName = parentName;
+				input.email = email;
+				
+				var inputMsg = JSON.stringify(input);
+				console.log(inputMsg);
+				
 				$.ajax({
 					url : '../VI/system/SendEmailServlet?input=' + inputMsg, 
 					method : 'POST',

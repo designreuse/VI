@@ -70,14 +70,15 @@ public class SendEmailServlet extends HttpServlet {
 		try {
 			String inputStr = request.getParameter(Key.INPUT);
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
-			System.out.println(inputJson.toJSONString());
+			System.out.println(inputJson.toJSONString() + " JSON");
 			
 			//Get the parent from the database base on student Id;
-			JSONObject parent = (JSONObject)inputJson.get(Key.PARENT);
-			JSONObject student = (JSONObject) inputJson.get(Key.STUDENT);
+			String parentName = (String)inputJson.get(Key.PARENTNAME);
+			String studentName = (String) inputJson.get(Key.STUDENTNAME);
 			
 			// Recipient's email
-			String to = (String) parent.get(Key.EMAIL);
+			String to = (String) inputJson.get(Key.EMAIL);
+			System.out.println(to + " here!!");
 			
 			//email server configuration
 		   
@@ -124,8 +125,8 @@ public class SendEmailServlet extends HttpServlet {
 				message.setSubject("[Explore And Learn] Attendance notification.");
 				
 				// Now set the actual message in html format
-				message.setText("Hello " + parent.get(Key.NAME) + ", " +
-						"\n\nYour child " + student.get(Key.NAME) + " has attended class.\n\n\n" +
+				message.setText("Hello " + parentName + ", " +
+						"\n\nYour child " + studentName + " has attended class.\n\n\n" +
 						"\n\nPlease DO NOT reply to this email directly! As it is a computer genrated message.");
 				
 				//message.setContent(

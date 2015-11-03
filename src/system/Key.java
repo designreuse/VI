@@ -46,6 +46,7 @@ public class Key {
 	public static final String PARENT = "parent";
 	public static final String PARENTS = "parents";
 	public static final String PARENTID = "parentId";
+	public static final String PARENTNAME = "parentName";
 	public static final String CONTACT = "contact";
 	public static final String ADDRESS = "address";
 	public static final String PARENTNRIC = "parentNric";
@@ -67,6 +68,7 @@ public class Key {
 	public static final String STUDENT = "student";
 	public static final String STUDENTS = "students";
 	public static final String STUDENTID = "studentId";
+	public static final String STUDENTNAME = "studentName";
 	public static final String STUDENTLEVEL = "studentLevel";
 	public static final String POINTS = "points";
 	public static final String STUDENTNRIC = "studentNric";
@@ -119,5 +121,6 @@ public class Key {
 	public static final String BRANCHCOURSE = "branchCourse";
 	public static final String BRANCHCOURSES = "branchCourses";
 	public static final String BRANCHCOURSEID = "branchCourseId";
+	
 	
 }
