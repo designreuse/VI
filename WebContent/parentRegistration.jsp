@@ -88,7 +88,7 @@
 											</label>
 											<div class="col-lg-10">
 												<input class="form-control" id="parentEmail" name="email"
-													type="email" required />
+													type="email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" title="Invalid Email" required />
 											</div>
 										</div>
 										<div class="form-group ">

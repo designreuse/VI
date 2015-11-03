@@ -102,9 +102,10 @@
 											</label>
 											<div class="col-lg-10">
 												<input class="form-control" id="teacherEmail" name="email"
-													type="email" required />
+													type="email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" title="Invalid Email" required />
 											</div>
 										</div>
+										
 										<div class="form-group ">
 											<label for="tPassword" class="control-label col-lg-2">Password
 												<span class="required">*</span>
@@ -171,7 +172,7 @@
 													class="required">*</span></label>
 												<div class="col-lg-10">
 													<input class="form-control" id="teacherSchool"
-														name="school" pattern="[A-Za-z]" title="Letters only" required>
+														name="school" pattern="^([a-zA-Z\s]{1,255})$" title="Letters only" required>
 												</div>
 											</div>
 											<div class="form-group ">
@@ -180,7 +181,7 @@
 												</label>
 												<div class="col-lg-10">
 													<input class="form-control" id="qualification"
-														name="qualification" type="text" pattern="[A-Za-z]" title="Letters only" required />
+														name="qualification" type="text" pattern="^([a-zA-Z\s]{1,255})$" title="Letters only" required />
 												</div>
 											</div>
 											<div class="form-group ">
@@ -189,7 +190,7 @@
 												</label>
 												<div class="col-lg-10">
 													<input class="form-control" id="year" name="year"
-														type="text" required />
+														type="text" pattern="^\d{4}$" title="Year only" required />
 												</div>
 											</div>
 

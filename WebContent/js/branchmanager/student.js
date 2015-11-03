@@ -7,7 +7,19 @@
     });
 //}
 
-var STUDENTS = [];
+    window.onload = function () {
+		document.getElementById("studentPassword").onchange = validatePassword;
+		document.getElementById("verifyPassword").onchange = validatePassword;
+	}
+	function validatePassword(){
+	var pass2=document.getElementById("verifyPassword").value;
+	var pass1=document.getElementById("studentPassword").value;
+	if(pass1!=pass2)
+		document.getElementById("verifyPassword").setCustomValidity("Passwords Don't Match");
+	else
+		document.getElementById("verifyPassword").setCustomValidity('');	 
+	//empty string means no validation error
+	}
 
 function registerStudent() {
 	var studentEmail = $("#studentEmail").val();
