@@ -248,7 +248,7 @@ function calendarInitiate(schedJSON){
 	    							
 	    							if (status == 1) {
 	    								console.log(message);
-	    								
+	    								window.location.reload();
 	    							} else {
 	    								$("#message").html("Something's wrong, please try again!");
 	    							}

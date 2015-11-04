@@ -240,7 +240,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>UpdateScheduleServlet</servlet-name>
-    <url-pattern>/UpdateScheduleServlets</url-pattern>
+    <url-pattern>/UpdateScheduleServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>UpdateTeacherServlet</servlet-name>
