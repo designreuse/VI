@@ -571,6 +571,14 @@
     <url-pattern>/DeleteParentServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>DeleteScheduleServlet</servlet-name>
+    <servlet-class>service.DeleteScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteScheduleServlet</servlet-name>
+    <url-pattern>/DeleteScheduleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>DeleteStudentServlet</servlet-name>
     <servlet-class>service.DeleteStudentServlet</servlet-class>
   </servlet>
