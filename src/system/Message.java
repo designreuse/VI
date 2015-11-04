@@ -28,16 +28,21 @@ public class Message {
 	public static final String BRANCHCOURSENOTEXIST = "The branchCourse does not exist.";
 	
 	public static final String TEACHERCOURSEDELETED = "The teacher course has been successfully deleted.";
-	public static final Object BRANCHCOURSEDELETED = "The branch course has been successfully deleted.";
+	public static final String BRANCHCOURSEDELETED = "The branch course has been successfully deleted.";
 	
 	public static final String WRONGADMINPASSWORD = "The Admin password is incorrect.";
 	public static final String WRONGSTUDENTPASSWORD = "The Student password is incorrect.";
 	public static final String WRONGTEACHERPASSWORD = "The Teacher password is incorrect.";
 	public static final String EMAILALREADYEXIST = "The email has already been used.";
+	public static final String PARENTNRICALREADYEXIST = "The parent Nric has already been used.";
+	public static final String STUDENTNRICALREADYEXIST = "The student Nric has already been used.";
+	public static final String TEACHERNRICALREADYEXIST = "The teacher Nric has already been used.";
+	
 	public static final String WRONGPARENTPASSWORD = "The Parent password is incorrect.";
 	public static final String WRONGBRANCHMANAGERPASSWORD = "The branch manager password is incorrect.";
 	public static final String PLANSTARTDATEEMPTY = "The plan start date input is empty.";
 	public static final String ATTENDANCESISEMPTY = "The attendances array is empty.";
+	
 	
 	
 	

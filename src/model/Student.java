@@ -40,7 +40,23 @@ public class Student {
 
 	public Student() {
 	}
-
+	
+	public Student(String name, String contact, String address,
+			String studentLevel, String studentNric, Parent parent, Branch branch) {
+		super();
+		this.name = name;
+		this.contact = contact;
+		this.address = address;
+		this.studentLevel = studentLevel;
+		this.studentNric = studentNric;
+		this.points = 0L;
+		this.parent = parent;
+		this.branch = branch;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
+		
+	}
+	
 	public Student(String name, String email, String passwordSalt,
 			String passwordHash, String contact, String address,
 			String studentLevel, String studentNric, Parent parent, Branch branch) {
