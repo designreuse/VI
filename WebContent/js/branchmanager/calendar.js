@@ -92,9 +92,14 @@ function scheduleCall(){
 			
 			if (status == 1) {
 				for (var i = 0; i < message.length; i++){
+
 					var id = message[i].id;
 					var title = message[i].title;
 					var allDay = message[i].allDay;
+					var classroomId = message[i].classroom.classroomId;
+					var roomCap = message[i].classroom.roomCapacity;
+					var desc = message[i].description;
+					var teacherCourseId = message[i].teacherCourse.teacherCourseId;
 					
 					var sdt = moment(message[i].start, "YYYY-MM-DD HH:mm:ss");
 					var edt = moment(message[i].end, "YYYY-MM-DD HH:mm:ss");
@@ -116,13 +121,17 @@ function scheduleCall(){
 						ranges: [{
 							start: sdt,
 							end: edt
-						}]
+						}],
+						desc: desc,
+						classroomId: classroomId,
+						roomCap: roomCap,
+						teacherCourseId: teacherCourseId
 					};
 					schedules.push(scheduleStr);
 				}
 				calendarInitiate(schedules);
 			} else {
-				console.log("try agin");
+				console.log("try again");
 			}
 		}
 	});
@@ -130,27 +139,128 @@ function scheduleCall(){
 
 
 function calendarInitiate(schedJSON){
-//	var date = new Date();
-//	var d = date.getDate();
-//	var m = date.getMonth();
-//	var y = date.getFullYear();
-		
 		$('#calendar').fullCalendar({
 			header: {
 				left: 'prev,next today',
 				center: 'title',
 				right: 'month,agendaWeek,agendaDay'
 			},
-			contentHeight: 450,
+			contentHeight: 500,
 			defaultDate: moment(),
 			eventLimit: true, // allow "more" link when too many events
 			events: schedJSON,
 			eventRender: function(event, element, view){
+				var content = '<b>Description</b>: ' + event.desc + '<br> <b>Classroom Id</b>: ' + event.classroomId  + '<br><b>Room Capacity</b>: ' + event.roomCap + '<br><br> <b>Click on me to edit</b>';
+				 $(element).tooltip({title: content, html: true, container: 'body'}); 
 		        return (event.ranges.filter(function(range){
 		            return (event.start.isBefore(range.end) &&
 		                    event.end.isAfter(range.start));
 		        }).length)>0;
 		    },
+		    eventClick: function(calEvent, jsEvent, view) {
+		    	bootbox.dialog({
+		    		title: "Edit Schedule for " + calEvent.title,
+		    		message: '<div class = "row">' +
+			    			'<label class="col-md-2 control-label" for="schedDesc"><b>Schedule Name</b></label> ' +
+							'<div class="col-md-10"> ' +
+								'<input id="schedName" name="schedName" type="text" class="form-control input-md" value= "' + calEvent.title + '"> ' +
+							'</div> ' +
+						'</div>' +
+					
+					'<div class = "row">' +
+						'<label class="col-md-2 control-label" for="schedDesc"><b>Schedule Description<b></label> ' +
+						'<div class="col-md-10"> ' +
+							'<input id="schedDesc" name="schedDesc" type="text" class="form-control input-md" value= "' + calEvent.desc + '"> ' +
+						'</div> ' +
+					'</div>' +
+						
+					'<div class = "row">' +
+						'<label class="col-md-2 control-label" for="startDate"><b>Schedule Start Date<b></label> ' +
+						'<div class="col-md-10"> ' +
+							'<input id="startDate" name="startDate" type="date" class="form-control input-md" value= "' + calEvent.ranges[0].start.format("YYYY-MM-DD") + '"> ' +
+						'</div> ' +
+					'</div>' + 
+					
+					'<div class = "row">' +
+						'<label class="col-md-2 control-label" for="startTime"><b> Schedule Start Time<b></label> ' +
+						'<div class="col-md-10"> ' +
+							'<input id="startTime" name="startTime" type="time" class="form-control input-md" value= "' + calEvent.start.format("HH:mm") + '"> ' +
+						'</div> ' +
+					'</div>' + 
+					
+					'<div class = "row">' +
+						'<label class="col-md-2 control-label" for="endDate"><b> Schedule End Date<b></label> ' +
+						'<div class="col-md-10"> ' +
+							'<input id="endDate" name="endDate" type="date" class="form-control input-md" value= "' + calEvent.ranges[0].end.format("YYYY-MM-DD") + '"> ' +
+						'</div> ' +
+					'</div>' +
+					
+					'<div class = "row">' +
+						'<label class="col-md-2 control-label" for="endTime"><b> Schedule End Time<b></label> ' +
+						'<div class="col-md-10"> ' +
+							'<input id="endTime" name="endTime" type="time" class="form-control input-md" value= "' + calEvent.end.format("HH:mm") + '"> ' +
+						'</div> ' +
+					'</div>',
+								
+				onEscape: function() {},
+	    		buttons: {
+	    			success:{
+	    				label: "Save",
+	    				className: "btn-success",
+	    				
+	    				callback: function(){
+	    					var id = Number(calEvent.id);
+	    					var updatedName = $("#schedName").val();
+	    					var updatedDesc = $("#schedDesc").val();
+	    					var updatedSD = $("#startDate").val();
+	    					var updatedST = $("#startTime").val();
+	    					var updatedED = $("#endDate").val();
+	    					var updatedET = $("#endTime").val();
+	    					var teacherCourseId = calEvent.teacherCourseId;
+	    					var classroomId = calEvent.classroomId;
+	    					
+	    					var ustart = updatedSD + " " + updatedST;
+	    					var uend = updatedED + " " + updatedET;
+	    					
+	    					var input = {};
+	    					input.scheduleId = id;
+	    					input.name = updatedName;
+	    					input.description = updatedDesc;
+	    					input.planStartDate = moment(ustart).format();
+	    					input.planEndDate = moment(uend).format();
+	    					input.teacherCourseId = Number(teacherCourseId);
+	    					input.classroomId = Number(classroomId);
+	    					
+	    					var inputStr = JSON.stringify(input);
+	    					inputStr = encodeURIComponent(inputStr);
+	    					
+	    					$.ajax({
+	    						url : '../VI/UpdateScheduleServlet?input=' + inputStr, //this part sends to the servlet
+	    						method : 'POST',
+	    						dataType : 'json',
+	    						error : function(err) {
+	    							console.log(err);
+	    						},
+	    						success : function(data) {
+	    							console.log(data);
+	    							var status = data.status; 
+	    							var message = data.message;
+	    							
+	    							if (status == 1) {
+	    								console.log(message);
+	    								
+	    							} else {
+	    								$("#message").html("Something's wrong, please try again!");
+	    							}
+	    						}
+	    					});
+	    					
+	    				}
+	    		
+	    				}
+	    			}
+		    	});
+		    }
 		});
 }
 
@@ -175,8 +285,6 @@ function createSchedule(){
 	var start = scheduleStartDate + " " + scheduleStartTime;
 	var end = scheduleEndDate + " " + scheduleEndTime;
 		
-//	console.log(moment(start).format());
-	
 	var input = {};
 	input.name = scheduleName;
 	input.description = scheduleDesc;
