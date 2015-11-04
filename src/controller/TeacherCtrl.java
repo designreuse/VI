@@ -1,6 +1,7 @@
 package controller;
 
 import model.Branch;
+import model.Parent;
 import model.PointEvent;
 import model.Salary;
 import model.Teacher;
@@ -10,6 +11,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
+import dataManager.ParentDAO;
 import dataManager.PointEventDAO;
 import dataManager.SalaryDAO;
 import dataManager.TeacherCourseDAO;
@@ -162,7 +164,13 @@ public class TeacherCtrl {
 		JSONObject returnJson = new JSONObject();
 		returnJson = getTeacherByEmail(inputJson);
 		if ((long) returnJson.get(Key.STATUS) == 0) {
-			returnJson = createTeacher(inputJson);
+			returnJson = getTeacherByNric(inputJson);
+			if ((long) returnJson.get(Key.STATUS) == 0) {
+				returnJson = createTeacher(inputJson);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNRICALREADYEXIST);
+			}
 		} else {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
@@ -190,7 +198,28 @@ public class TeacherCtrl {
 		}
 		return returnJson;
 	}
-
+	
+	// Get parent by parent nric
+	public static JSONObject getTeacherByNric(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			String nric = (String) inputJson.get(Key.PARENTNRIC);
+			Teacher teacher = TeacherDAO.getTeacherByNric(nric);
+			if (teacher != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacher.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 	// login Teacher
 	public static JSONObject loginTeacher(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();

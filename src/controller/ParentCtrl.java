@@ -181,9 +181,14 @@ public class ParentCtrl {
 	public static JSONObject registerParent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		returnJson = getParentByEmail(inputJson);
-		Long statusTest = (long) returnJson.get(Key.STATUS);
-		if (statusTest.intValue() == 0) {
-			returnJson = createParent(inputJson);
+		if ((long) returnJson.get(Key.STATUS) == 0) {
+			returnJson = getParentByNric(inputJson);
+			if ((long) returnJson.get(Key.STATUS) == 0) {
+				returnJson = createParent(inputJson);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.PARENTNRICALREADYEXIST);
+			}
 		} else {
 			returnJson.put(Key.STATUS, Value.FAIL);
 			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
@@ -211,7 +216,28 @@ public class ParentCtrl {
 		}
 		return returnJson;
 	}
-
+	
+	// Get parent by parent nric
+	public static JSONObject getParentByNric(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			String nric = (String) inputJson.get(Key.PARENTNRIC);
+			Parent parent = ParentDAO.getParentByNric(nric);
+			if (parent != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, parent.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 	// Get parents by branch
 	public static JSONObject getParentsByBranch(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();

@@ -37,16 +37,16 @@ public class StudentCtrl {
 			if (branch != null) {
 				if (parent != null) {
 					String name = (String) inputJson.get(Key.NAME);
-					String email = (String) inputJson.get(Key.EMAIL);
-					String password = (String) inputJson.get(Key.PASSWORD);
-					String passwordSalt = Encrypt.nextSalt();
-					String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
+//					String email = (String) inputJson.get(Key.EMAIL);
+//					String password = (String) inputJson.get(Key.PASSWORD);
+//					String passwordSalt = Encrypt.nextSalt();
+//					String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 					String contact = (String) inputJson.get(Key.CONTACT);
 					String address = (String) inputJson.get(Key.ADDRESS);
 					String studentLevel = (String) inputJson.get(Key.STUDENTLEVEL);
 					String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
 
-					Student student = new Student(name, email, passwordSalt, passwordHash, contact, address, studentLevel, studentNric, parent, branch);
+					Student student = new Student(name, contact, address, studentLevel, studentNric, parent, branch);
 					StudentDAO.addStudent(student);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -112,7 +112,7 @@ public class StudentCtrl {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 			if (student != null) {
 				String name = (String) inputJson.get(Key.NAME);
-				String email = (String) inputJson.get(Key.EMAIL);
+//				String email = (String) inputJson.get(Key.EMAIL);
 				String contact = (String) inputJson.get(Key.CONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
 				String studentLevel = (String) inputJson.get(Key.STUDENTLEVEL);
@@ -127,7 +127,7 @@ public class StudentCtrl {
 					student.setParent(parent);
 				}
 				student.setName(name);
-				student.setEmail(email);
+//				student.setEmail(email);
 				student.setContact(contact);
 				student.setAddress(address);
 				student.setStudentLevel(studentLevel);
@@ -174,12 +174,12 @@ public class StudentCtrl {
 	// Register a new student
 	public static JSONObject registerStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
-		returnJson = getStudentByEmail(inputJson);
+		returnJson = getStudentByNric(inputJson);
 		if ((long) returnJson.get(Key.STATUS) == 0) {
 			returnJson = createStudent(inputJson);
 		} else {
 			returnJson.put(Key.STATUS, Value.FAIL);
-			returnJson.put(Key.MESSAGE, Message.EMAILALREADYEXIST);
+			returnJson.put(Key.MESSAGE, Message.STUDENTNRICALREADYEXIST);
 		}
 		return returnJson;
 	}
@@ -190,6 +190,27 @@ public class StudentCtrl {
 		try {
 			String email = (String) inputJson.get(Key.EMAIL);
 			Student student = StudentDAO.getStudentByEmail(email);
+			if (student != null) {
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, student.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get parent by student nric
+	public static JSONObject getStudentByNric(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			String nric = (String) inputJson.get(Key.STUDENTNRIC);
+			Student student = StudentDAO.getStudentByNric(nric);
 			if (student != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, student.toJson());
