@@ -204,6 +204,51 @@ function calendarInitiate(schedJSON){
 								
 				onEscape: function() {},
 	    		buttons: {
+    				main: {
+    				      label: "Delete",
+    				      className: "btn-primary",
+    				      callback: function() {
+    				        bootbox.dialog({
+    				        	title: "Delete Schedule",
+    				        	message: "Are you sure you want to delete <b>" + calEvent.title + "</b>?",
+    				        	onEscape: function() {},
+    				        	buttons: {
+    				        		main: {
+    				        			label: "Ok",
+    				        			className: "btn-primary",
+    				        			callback: function(){
+    				        				var id = Number(calEvent.id);
+    				        				var input = {};
+    				    					input.scheduleId = id;
+    				    					var inputStr = JSON.stringify(input);
+    				    					inputStr = encodeURIComponent(inputStr);
+    				        				
+    				        				$.ajax({
+    				    						url : '../VI/DeleteScheduleServlet?input=' + inputStr, //this part sends to the servlet
+    				    						method : 'POST',
+    				    						dataType : 'json',
+    				    						error : function(err) {
+    				    							console.log(err);
+    				    						},
+    				    						success : function(data) {
+    				    							console.log(data);
+    				    							var status = data.status; 
+    				    							var message = data.message;
+    				    							
+    				    							if (status == 1) {
+    				    								window.location.reload();
+    				    							} else {
+    				    								console.log("error");
+    				    							}
+    				    						}
+    				    					});
+    				        			}
+    				        		}
+    				        	}
+    				        });
+    				      }
+    					},
+	    			
 	    			success:{
 	    				label: "Save",
 	    				className: "btn-success",
@@ -255,8 +300,7 @@ function calendarInitiate(schedJSON){
 	    						}
 	    					});
 	    					
-	    				}
-	    		
+	    					}
 	    				}
 	    			}
 		    	});
