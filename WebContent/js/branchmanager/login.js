@@ -18,9 +18,8 @@ function loginBranchManager() {
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {
+
 			unsuccessful = err;
-			console.log(err);
-			$("#message").html("system failed to login in");
 		},
 		success : function(data) {
 			console.log(data);
@@ -37,12 +36,15 @@ function loginBranchManager() {
 				localStorage.setItem("branchManagerId", branchManager.branchManagerId);
 				window.location = "adminMain.jsp";
 				console.log(data.message)
-			} 
-			if(unsuccessful != true){
+				
+			} else{
 				loginTeacher();
-			}else {
-				$("#message").html("Invalid Email/Password");
 			}
+//			if(unsuccessful != true){
+//				loginTeacher();
+//			}else {
+//				$("#message").html("Invalid Email/Password");
+//			}
 		}
 	});
 }
@@ -79,7 +81,7 @@ function loginTeacher() {
 				console.log(teacherCourse[0].schedules[0].planStartDate);
 				window.location = "teacherProfile.jsp";
 			} else {
-				$("#message").html("Invalid Email/Password");
+				$("#message").html("Invalid Email/Password, Account does not exist.");
 			}
 		}
 	});

@@ -98,9 +98,10 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">Manual Attendance Taking</div>
 							<div class="panel-body">
-								<div id="resultAlert" class="alert fade in">
-									<a href="#" class="close" data-dismiss="alert"
-										aria-label="close">&times;</a>
+								<div class="row">
+									<div class="col-lg-2">
+										<a href="QR.jsp" class="btn btn-default" type="button">Back</a>
+									</div>
 								</div>
 								<div class="dataTable_wrapper">
 									<table id="attendanceTable"
@@ -109,7 +110,7 @@
 											<tr>
 												<th>Attendance ID</th>
 												<th>Name</th>
-												<th>NRIC </th>
+												<th>NRIC</th>
 												<th>Attendance Status</th>
 												<th>Attendance</th>
 											</tr>

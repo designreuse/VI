@@ -100,7 +100,6 @@
 												<th>Name</th>
 												<th>Nric</th>
 												<th>Contact</th>
-												<th>Email</th>
 												<th>Address</th>
 												<th>Points</th>
 												<th>Create Date</th>

@@ -7,23 +7,9 @@
     });
 //}
 
-    window.onload = function () {
-		document.getElementById("studentPassword").onchange = validatePassword;
-		document.getElementById("verifyPassword").onchange = validatePassword;
-	}
-	function validatePassword(){
-	var pass2=document.getElementById("verifyPassword").value;
-	var pass1=document.getElementById("studentPassword").value;
-	if(pass1!=pass2)
-		document.getElementById("verifyPassword").setCustomValidity("Passwords Don't Match");
-	else
-		document.getElementById("verifyPassword").setCustomValidity('');	 
-	//empty string means no validation error
-	}
-
 function registerStudent() {
-	var studentEmail = $("#studentEmail").val();
-	var studentPassword = $("#studentPassword").val();
+//	var studentEmail = $("#studentEmail").val();
+//	var studentPassword = $("#studentPassword").val();
 	var studentName = $("#studentName").val();
 	var studentNric = $("#studentNric").val();
 	var contactNumber = $("#contactNumber").val();
@@ -35,8 +21,8 @@ function registerStudent() {
 	console.log(branchId);
 	
 	var input = {};
-	input.email = studentEmail;
-	input.password = studentPassword;
+//	input.email = studentEmail;
+//	input.password = studentPassword;
 	input.name = studentName;
 	input.contact = contactNumber;
 	input.address = studentAddress;
@@ -113,7 +99,6 @@ function getStudentsByBranch(branchId) {
 			 {"data": 'name'},
 			 {"data": 'studentNric'},
 			 {"data": 'contact'},
-			 {"data": 'email'},
 			 {"data": 'address'},
 			 {"data": 'points'},
 			 {"data": 'createDate'},
@@ -146,10 +131,6 @@ function editStudent(){
 			'<label class="col-md-2 control-label" for="contact">Contact</label> ' +
 			'<div class="col-md-10"> ' +
 			'<input id="contact" name="contact" type="text" class="form-control input-md" value= ' + row.data().contact + '> ' +
-			'</div> ' +
-			'<label class="col-md-2 control-label" for="email">Email</label> ' +
-			'<div class="col-md-10"> ' +
-			'<input id="email" name="email" type="text" class="form-control input-md" value= ' + row.data().email + '> ' +
 			'</div> ' +
 			'<label class="col-md-2 control-label" for="address">Address</label> ' +
 			'<div class="col-md-10"> ' +

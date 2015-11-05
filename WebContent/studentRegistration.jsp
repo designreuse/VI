@@ -78,37 +78,6 @@
 									<div>
 										<font color="red" id="message"></font>
 									</div>
-									<header class="panel-heading"> Account Details </header>
-									<div class="panel-body">
-										<div class="form-group ">
-											<label for="sEmail" class="control-label col-lg-2">Email<span
-												class="required">*</span>
-											</label>
-											<div class="col-lg-10">
-												<input class="form-control" id="studentEmail" name="email"
-													type="email" pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" title="Invalid Email" required />
-											</div>
-										</div>
-										<div class="form-group ">
-											<label for="sPassword" class="control-label col-lg-2">Password
-												<span class="required">*</span>
-											</label>
-											<div class="col-lg-10">
-												<input class="form-control " id="studentPassword"
-													type="password" name="password" required />
-											</div>
-										</div>
-										<div class="form-group ">
-											<label for="sVerifyPassword" class="control-label col-lg-2">Verify
-												Password <span class="required">*</span>
-											</label>
-											<div class="col-lg-10">
-												<input class="form-control " id="verifyPassword"
-													type="password" name="verifyPassword" required />
-											</div>
-										</div>
-									</div>
-
 									<header class="panel-heading"> Student Details </header>
 									<div class="panel-body">
 										<div class="form-group ">
