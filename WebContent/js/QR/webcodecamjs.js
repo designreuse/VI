@@ -61,7 +61,7 @@ var WebCodeCamJS = function(element) {
             flipVertical: false,
             flipHorizontal: false,
             zoom: -1,
-            beep: 'audio/beep.mp3',
+            beep: './js/QR/audio/beep.mp3',
             brightness: 0,
             autoBrightnessValue: false,
             grayScale: false,
