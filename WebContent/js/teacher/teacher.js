@@ -23,7 +23,7 @@ function getTeacher() {
 		error : function(err) {
 			console.log(err);
 		},
-		success : function(data) {;
+		success : function(data) {
 			var status = data.status; //shows the  success/failure of the servlet request
 			if (status == 1) {
 				var name = data.message.name;

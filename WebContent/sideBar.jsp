@@ -1,53 +1,44 @@
-<script src="./js/branchmanager/logout.js"></script>
-<aside>
-	<div id="sidebar" class="nav-collapse ">
-		<!-- sidebar menu start-->
-		<ul class="sidebar-menu">
-			<li><a class="" href="adminMain.jsp"> <i
-					class="icon_house_alt"></i> <span>Dashboard</span>
-			</a></li>
+<!-- Left side column. contains the logo and sidebar -->
+ <aside class="main-sidebar">
+    <section class="sidebar">
 
-			<!-- 			<li class="active"><a class="" href="scheduleOverview.jsp"> <i -->
-			<!-- 					class="icon_house_alt"></i> <span>Schedule</span> -->
-			<!-- 			</a></li> -->
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>Bukit Batok Branch</p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
 
-			<li class="sub-menu"><a href="javascript:;" class=""> <i
-					class="icon_document_alt"></i> <span>Parent</span> <span
-					class="menu-arrow arrow_carrot-right"></span>
-				</a>
-				<ul class="sub">
-					<li><a class="" href="parentRegistration.jsp">Registration</a></li>
-					<li><a class="" href="parentsProfile.jsp">Parents List</a></li>
-				</ul>
-			</li>
-			
-			<li class="sub-menu"><a href="javascript:;" class=""> <i
-					class="icon_document_alt"></i> <span>Student</span> <span
-					class="menu-arrow arrow_carrot-right"></span>
-				</a>
-				<ul class="sub">
-					<li><a class="" href="studentRegistration.jsp">Registration</a></li>
-					<li><a class="" href="studentsProfile.jsp">Students List</a></li>
-				</ul>
-			</li>
-				
-			<li class="sub-menu"><a href="javascript:;" class=""> <i
-					class="icon_document_alt"></i> <span>Teacher</span> <span
-					class="menu-arrow arrow_carrot-right"></span>
-				</a>
-				<ul class="sub">
-					<li><a class="" href="teacherRegistration.jsp">Registration</a></li>
-					<li><a class="" href="teachersProfile.jsp">Teachers List</a></li>
-				</ul>
-			</li>
-			
-			<li><a class="" href="adminLogin.jsp" onclick="logout();"> <i
-					class="fa fa-times-circle-o"></i> <span>Log Out</span>
-			</a></li>
-
-
-		</ul>
-		<!-- sidebar menu end-->
-	</div>
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header">Navigation</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li class="active"><a href="adminMain.jsp"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+     
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Registration</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a href="parentRegistration.jsp">New Parent</a></li>
+            <li><a href="studentRegistration.jsp">New Student</a></li>
+            <li><a href="teacherRegistration.jsp">New Teacher</a></li>
+          </ul>
+        </li>
+        
+        <li class="treeview">
+          <a href="#"><i class="fa fa-link"></i> <span>Database</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a href="parentsProfile.jsp">View All Parents</a></li>
+            <li><a href="studentsProfile.jsp">View All Students</a></li>
+             <li><a href="teachersProfile.jsp">View All Teachers</a></li>
+          </ul>
+        </li>
+        
+      </ul>
+      
+    </section>
 </aside>
-<!--sidebar end-->
