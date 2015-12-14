@@ -91,6 +91,7 @@ public class Key {
 	public static final String COURSECOST = "courseCost";
 	public static final String COURSECAPACITY = "courseCapacity";
 	public static final String DESCRIPTION = "description";
+	public static final String COURSENAME = "name";
 	
 	public static final String CLASSROOM = "classroom";
 	public static final String CLASSROOMS = "classrooms";

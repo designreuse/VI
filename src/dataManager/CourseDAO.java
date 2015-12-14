@@ -57,7 +57,7 @@ public class CourseDAO {
 		Course course = null;
 		Course tempCourse = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Course.class);
-		detachedCriteria.add(Restrictions.eq(Key.NAME, name));
+		detachedCriteria.add(Restrictions.eq(Key.COURSENAME, name));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {

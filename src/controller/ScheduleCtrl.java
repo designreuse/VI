@@ -308,6 +308,37 @@ public class ScheduleCtrl {
 		return returnJson;
 	}
 	
+	public static JSONObject getSchedulesByCourseName(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try{
+			Course course = CourseDAO.getCourseByName((String) inputJson.get(Key.COURSENAME));
+			if (course != null) {
+				ArrayList<TeacherCourse> tcList = TeacherCourseDAO.getTeacherCoursesByCourse(course);
+				if(!tcList.isEmpty()){
+					JSONArray scheduleArr = new JSONArray();
+					for (TeacherCourse tc : tcList) {
+						for (Schedule s : ScheduleDAO.getSchedulesByTeacherCourse(tc)) {
+							scheduleArr.add(s.toJson());
+						}
+					}
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, scheduleArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+			} 
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 	public static JSONObject getSchedulesByBranch (JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
