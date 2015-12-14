@@ -37,7 +37,7 @@
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 	<!-- including navBar and sideBar -->
-	<%@include file="navBar.jsp"%>
+	<%@include file="teacherNavBar.jsp"%>
 	<%@include file="teacherSideBar.jsp"%>
   
   <!-- Content Wrapper. Contains page content -->

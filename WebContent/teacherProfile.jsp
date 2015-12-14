@@ -37,15 +37,15 @@
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 	<!-- including navBar and sideBar -->
-	<%@include file="parentNavBar.jsp"%>
-	<%@include file="parentSideBar.jsp"%>
+	<%@include file="teacherNavBar.jsp"%>
+	<%@include file="teacherSideBar.jsp"%>
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        View User Profile
+        View Teacher Profile
       </h1>
     </section>
 
@@ -54,11 +54,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="box">
-							<div class="box-header" id="name"><h3 class="box-title">User Profile</h3></div>
+							<div class="box-header" id="name"><h2 class="box-title">User Profile</h2></div>
 							<div class="box-body">
 								<div class="row">
 									<div class="col-md-3 col-lg-3" align="center">
-										<img alt="User Pic" src="dist/img/user5-128x128.jpg" class="img-circle img-responsive">
+										<img alt="User Pic" src="dist/img/user6-128x128.jpg" class="img-circle img-responsive">
 									</div>
 									
 									<div class="col-md-6 col-lg-6">
