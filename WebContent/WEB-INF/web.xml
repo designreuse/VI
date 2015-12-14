@@ -466,6 +466,14 @@
     <servlet-name>GetSchedulesByBranchServlet</servlet-name>
     <url-pattern>/GetSchedulesByBranchServlet</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>GetSchedulesByCourseName</servlet-name>
+    <servlet-class>service.GetSchedulesByCourseName</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSchedulesByCourseName</servlet-name>
+    <url-pattern>/GetSchedulesByCourseName</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>GetTeacherBySalary</servlet-name>
     <servlet-class>service.GetTeacherBySalary</servlet-class>
