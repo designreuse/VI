@@ -40,10 +40,10 @@ public class ScheduleCtrl {
 				if(teachercourse != null){
 					String name = (String) inputJson.get(Key.NAME);
 					String description = (String) inputJson.get(Key.DESCRIPTION);
-					Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
-					Date planEndDate = Config.SDF.parse((String) inputJson.get(Key.PLANENDDATE));
+					Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
+					Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
 					
-					Schedule schedule = new Schedule(name, description, planStartDate, planEndDate, teachercourse, classroom);
+					Schedule schedule = new Schedule(name, description, scheduleStartDate, scheduleEndDate, teachercourse, classroom);
 					ScheduleDAO.addSchedule(schedule);
 					
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -121,13 +121,13 @@ public class ScheduleCtrl {
 				}
 				String name = (String) inputJson.get(Key.NAME);
 				String description = (String) inputJson.get(Key.DESCRIPTION);
-				Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
-				Date planEndDate = Config.SDF.parse((String) inputJson.get(Key.PLANENDDATE));
+				Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
+				Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
 				
 				schedule.setName(name);
 				schedule.setDescription(description);
-				schedule.setPlanStartDate(planStartDate);
-				schedule.setPlanEndDate(planEndDate);
+				schedule.setScheduleStartDate(scheduleStartDate);
+				schedule.setScheduleEndDate(scheduleEndDate);
 				
 				ScheduleDAO.modifySchedule(schedule);
 				
@@ -247,15 +247,15 @@ public class ScheduleCtrl {
 		return returnJson;
 	}
 	
-	public static JSONObject getScheduleByTeacherCourseAndPlanStartDate (JSONObject inputJson){
+	public static JSONObject getScheduleByTeacherCourseAndScheduleStartDate (JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
 			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
 			if(teacherCourse != null){
 //				JSONArray scheduleArr = new JSONArray();
-				Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
-				if(planStartDate != null){
-					Schedule schedule = ScheduleDAO.getScheduleByTeacherCourseAndPlanStartDate(teacherCourse, planStartDate);
+				Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
+				if(scheduleStartDate != null){
+					Schedule schedule = ScheduleDAO.getScheduleByTeacherCourseAndScheduleStartDate(teacherCourse, scheduleStartDate);
 					//TODO can i use toJsonStrong method to retrieve the attendance at once also? so only one servlet call will do
 //					scheduleArr.add(s.toJsonStrong());
 //					salaryArr.add(s.toJson());
@@ -263,7 +263,7 @@ public class ScheduleCtrl {
 					returnJson.put(Key.MESSAGE, schedule.toJsonStrong());
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.PLANSTARTDATEEMPTY);
+					returnJson.put(Key.MESSAGE, Message.SCHEDULESTARTDATEEMPTY);
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);

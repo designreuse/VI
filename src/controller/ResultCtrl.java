@@ -3,6 +3,7 @@ package controller;
 import model.Course;
 import model.Result;
 import model.Student;
+import model.TeacherCourse;
 
 import java.util.Date;
 
@@ -12,6 +13,7 @@ import org.json.simple.JSONObject;
 import dataManager.CourseDAO;
 import dataManager.ResultDAO;
 import dataManager.StudentDAO;
+import dataManager.TeacherCourseDAO;
 import system.Config;
 import system.Key;
 import system.Message;
@@ -27,21 +29,21 @@ public class ResultCtrl {
 		try{
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 			if (student != null) {
-				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
-				if(course != null){
+				TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
+				if(teacherCourse != null){
 					String name = (String) inputJson.get(Key.NAME);
 					String description = (String) inputJson.get(Key.DESCRIPTION);
 					double resultValue = Double.valueOf((String) inputJson.get(Key.RESULTVALUE));
 					Date resultDate = Config.SDF.parse((String) inputJson.get(Key.RESULTDATE));
 					
-					Result result = new Result(name, description, resultValue, resultDate, course, student);
+					Result result = new Result(name, description, resultValue, resultDate, teacherCourse, student);
 					ResultDAO.addResult(result);
 					
 					returnJson.put(Key.STATUS, Value.SUCCESS) ;
 					returnJson.put(Key.MESSAGE, result.toJson());
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+					returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
 				}	
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
@@ -107,9 +109,9 @@ public class ResultCtrl {
 				if(student != null){
 					result.setStudent(student);
 				}
-				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
-				if(course != null){
-					result.setCourse(course);
+				TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
+				if(teacherCourse != null){
+					result.setTeacherCourse(teacherCourse);
 				}
 				result.setName(name);
 				result.setDescription(description);
@@ -178,20 +180,20 @@ public class ResultCtrl {
 	}
 	
 	// Get results by course
-	public static JSONObject getResultsByCourse(JSONObject inputJson) {
+	public static JSONObject getResultsByTeacherCourse(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
-			if (course != null) {
+			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
+			if (teacherCourse != null) {
 				JSONArray resultArr = new JSONArray();
-				for (Result r : ResultDAO.getResultsByCourse(course)) {
+				for (Result r : ResultDAO.getResultsByTeacherCourse(teacherCourse)) {
 					resultArr.add(r.toJson());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, resultArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -202,15 +204,15 @@ public class ResultCtrl {
 	}
 	
 	// Get results by course and student
-	public static JSONObject getResultsByCourseAndStudent(JSONObject inputJson) {
+	public static JSONObject getResultsByTeacherCourseAndStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
-			if (course != null) {
+			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
+			if (teacherCourse != null) {
 				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 				if (student != null) {
 					JSONArray resultArr = new JSONArray();
-					for (Result r : ResultDAO.getResultsByCourseAndStudent(course, student)) {
+					for (Result r : ResultDAO.getResultsByTeacherCourseAndStudent(teacherCourse, student)) {
 						resultArr.add(r.toJson());
 					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -221,7 +223,7 @@ public class ResultCtrl {
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

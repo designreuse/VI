@@ -206,12 +206,13 @@ public class AttendanceCtrl {
 			if (student != null) {
 				JSONArray attendanceArr = new JSONArray();
 				for (Attendance a : AttendanceDAO.getAttendancesByStudent(student)) {
-					if(a.getActualStartDate() != null){
-						attendanceArr.add(a.toJsonMark());
-					} else {
-						attendanceArr.add(a.toJson());
-					}
-//					attendanceArr.add(a.toJson());
+					attendanceArr.add(a.toScheduleJson());
+//					if(a.getActualStartDate() != null){
+//						attendanceArr.add(a.toJsonMark());
+//					} else {
+//						attendanceArr.add(a.toJson());
+//					}
+////					attendanceArr.add(a.toJson());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, attendanceArr);

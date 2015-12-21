@@ -22,7 +22,6 @@ public class Course {
 	private String courseCost;
 	private long courseCapacity;
 	
-	private Set<Result> results;
 	private Set<TeacherCourse> teacherCourses;
 	private Set<BranchCourse> branchCourses;
 	
@@ -128,20 +127,6 @@ public class Course {
 	}
 
 	/**
-	 * @return the results
-	 */
-	public Set<Result> getResults() {
-		return results;
-	}
-
-	/**
-	 * @param results the results to set
-	 */
-	public void setResults(Set<Result> results) {
-		this.results = results;
-	}
-
-	/**
 	 * @return the teacherCourses
 	 */
 	public Set<TeacherCourse> getTeacherCourses() {
@@ -226,6 +211,7 @@ public class Course {
 		
 		return returnJson;
 	}
+	
 	public JSONObject toJsonStrong(){
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.COURSEID, this.courseId);
@@ -238,12 +224,6 @@ public class Course {
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
-		
-		JSONArray resultArr = new JSONArray();
-		for(Result r : ResultDAO.getResultsByCourse(this)){
-			resultArr.add(r.toJson());
-		}
-		returnJson.put(Key.RESULTS, resultArr);
 		
 		JSONArray teacherCourseArr = new JSONArray();
 		for(TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByCourse(this)){

@@ -162,25 +162,25 @@ public class CourseCtrl {
 	}
 	
 	// Get course by result
-	public static JSONObject getCourseByResult(JSONObject inputJson) {
-		JSONObject returnJson = new JSONObject();
-		try {
-			Result result = ResultDAO.getResultById((long)inputJson.get(Key.RESULTID));
-			if (result != null) {
-				Course course = result.getCourse();
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, course.toJson());
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.RESULTNOTEXIST);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL);
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
+//	public static JSONObject getCourseByResult(JSONObject inputJson) {
+//		JSONObject returnJson = new JSONObject();
+//		try {
+//			Result result = ResultDAO.getResultById((long)inputJson.get(Key.RESULTID));
+//			if (result != null) {
+//				Course course = result.getCourse();
+//				returnJson.put(Key.STATUS, Value.SUCCESS);
+//				returnJson.put(Key.MESSAGE, course.toJson());
+//			} else {
+//				returnJson.put(Key.STATUS, Value.FAIL);
+//				returnJson.put(Key.MESSAGE, Message.RESULTNOTEXIST);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			returnJson.put(Key.STATUS, Value.FAIL);
+//			returnJson.put(Key.MESSAGE, e);
+//		}
+//		return returnJson;
+//	}
 		
 		
 	// Get courses by teacher

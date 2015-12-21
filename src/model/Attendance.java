@@ -11,6 +11,10 @@ import system.Value;
 public class Attendance {
 	private long attendanceId;
 	private Date actualStartDate;
+	private Date actualEndDate;
+	private Date planStartDate;
+	private Date planEndDate;
+	
 	private long attendanceStatus;
 	
 	private Schedule schedule;
@@ -57,6 +61,48 @@ public class Attendance {
 	 */
 	public void setActualStartDate(Date actualStartDate) {
 		this.actualStartDate = actualStartDate;
+	}
+
+	/**
+	 * @return the actualEndDate
+	 */
+	public Date getActualEndDate() {
+		return actualEndDate;
+	}
+
+	/**
+	 * @param actualEndDate the actualEndDate to set
+	 */
+	public void setActualEndDate(Date actualEndDate) {
+		this.actualEndDate = actualEndDate;
+	}
+
+	/**
+	 * @return the planStartDate
+	 */
+	public Date getPlanStartDate() {
+		return planStartDate;
+	}
+
+	/**
+	 * @param planStartDate the planStartDate to set
+	 */
+	public void setPlanStartDate(Date planStartDate) {
+		this.planStartDate = planStartDate;
+	}
+
+	/**
+	 * @return the planEndDate
+	 */
+	public Date getPlanEndDate() {
+		return planEndDate;
+	}
+
+	/**
+	 * @param planEndDate the planEndDate to set
+	 */
+	public void setPlanEndDate(Date planEndDate) {
+		this.planEndDate = planEndDate;
 	}
 
 	/**
@@ -182,9 +228,11 @@ public class Attendance {
 		JSONObject returnJson = new JSONObject();
 				
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.PLANSTARTDATE, this.planStartDate);
+		returnJson.put(Key.PLANENDDATE, this.planEndDate);
+		returnJson.put(Key.SCHEDULEID, this.schedule.getScheduleId());
+		returnJson.put(Key.SCHEDULENAME, this.schedule.getName());
+		returnJson.put(Key.SCHEDULEDESCRIPTION, this.schedule.getDescription());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

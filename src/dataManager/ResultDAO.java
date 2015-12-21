@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Student;
-import model.Course;
+import model.TeacherCourse;
 import model.Result;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -56,10 +56,10 @@ public class ResultDAO {
 		return results;
 	}
 	
-	public static ArrayList<Result> getResultsByCourse(Course course){
+	public static ArrayList<Result> getResultsByTeacherCourse(TeacherCourse teacherCourse){
 		ArrayList<Result> results = new ArrayList<Result>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
-		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
@@ -68,10 +68,10 @@ public class ResultDAO {
 		return results;
 	}
 	
-	public static ArrayList<Result> getResultsByCourseAndStudent(Course course, Student student){
+	public static ArrayList<Result> getResultsByTeacherCourseAndStudent(TeacherCourse teacherCourse, Student student){
 		ArrayList<Result> results = new ArrayList<Result>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
-		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
 		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
@@ -80,4 +80,5 @@ public class ResultDAO {
 		}
 		return results;
 	}
+
 }

@@ -19,13 +19,13 @@ import system.Value;
 /**
  * 
  */
-public class GetResultsByCourse extends HttpServlet {
+public class GetResultsByTeacherCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetResultsByCourse() {
+    public GetResultsByTeacherCourseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class GetResultsByCourse extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = ResultCtrl.getResultsByCourse(inputJson);
+			returnJson = ResultCtrl.getResultsByTeacherCourse(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

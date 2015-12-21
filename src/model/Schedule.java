@@ -15,8 +15,8 @@ public class Schedule {
 	private long scheduleId;
 	private String name;
 	private String description;
-	private Date planStartDate;
-	private Date planEndDate;
+	private Date scheduleStartDate;
+	private Date scheduleEndDate;
 	
 	private TeacherCourse teacherCourse;
 	private Classroom classroom;
@@ -29,13 +29,13 @@ public class Schedule {
 	
 	public Schedule(){}
 
-	public Schedule(String name, String description, Date planStartDate, Date planEndDate, TeacherCourse teacherCourse,
+	public Schedule(String name, String description, Date scheduleStartDate, Date scheduleEndDate, TeacherCourse teacherCourse,
 			Classroom classroom) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
-		this.planStartDate = planStartDate;
-		this.setPlanEndDate(planEndDate);
+		this.scheduleStartDate = scheduleStartDate;
+		this.setScheduleEndDate(scheduleEndDate);
 		this.teacherCourse = teacherCourse;
 		this.classroom = classroom;
 		this.setObjStatus(Value.ACTIVED);
@@ -85,31 +85,31 @@ public class Schedule {
 	}
 
 	/**
-	 * @return the planStartDate
+	 * @return the scheduleStartDate
 	 */
-	public Date getPlanStartDate() {
-		return planStartDate;
+	public Date getScheduleStartDate() {
+		return scheduleStartDate;
 	}
 
 	/**
-	 * @param planStartDate the planStartDate to set
+	 * @param scheduleStartDate the scheduleStartDate to set
 	 */
-	public void setPlanStartDate(Date planStartDate) {
-		this.planStartDate = planStartDate;
+	public void setScheduleStartDate(Date scheduleStartDate) {
+		this.scheduleStartDate = scheduleStartDate;
 	}
 
 	/**
-	 * @return the planEndDate
+	 * @return the scheduleEndDate
 	 */
-	public Date getPlanEndDate() {
-		return planEndDate;
+	public Date getScheduleEndDate() {
+		return scheduleEndDate;
 	}
 
 	/**
-	 * @param planEndDate the planEndDate to set
+	 * @param scheduleEndDate the scheduleEndDate to set
 	 */
-	public void setPlanEndDate(Date planEndDate) {
-		this.planEndDate = planEndDate;
+	public void setScheduleEndDate(Date scheduleEndDate) {
+		this.scheduleEndDate = scheduleEndDate;
 	}
 
 	/**
@@ -201,8 +201,8 @@ public class Schedule {
 		returnJson.put(Key.SCHEDULEID, this.scheduleId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.DESCRIPTION, description);
-		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
-		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
+		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
+		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
 		
 		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
 		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
@@ -214,51 +214,51 @@ public class Schedule {
 		return returnJson;
 	}
 	
-	public JSONObject toCalendarJson() {
-		JSONObject returnJson = new JSONObject();
-		returnJson.put(Key.ID, this.scheduleId);
-		returnJson.put(Key.TITLE, this.name);
-		returnJson.put(Key.DESCRIPTION, description);
-		returnJson.put(Key.START, Config.SDF.format(this.planStartDate));
-		returnJson.put(Key.END, Config.SDF.format(this.planEndDate));
-		returnJson.put(Key.ALLDAY, false);
-		
-		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
-		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
-		
-		returnJson.put(Key.OBJSTATUS, this.objStatus);
-		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-		returnJson.put(Key.REMARK, this.remark);
-		
-		return returnJson;
-	}
+//	public JSONObject toCalendarJson() {
+//		JSONObject returnJson = new JSONObject();
+//		returnJson.put(Key.ID, this.scheduleId);
+//		returnJson.put(Key.TITLE, this.name);
+//		returnJson.put(Key.DESCRIPTION, description);
+//		returnJson.put(Key.START, Config.SDF.format(this.scheduleStartDate));
+//		returnJson.put(Key.END, Config.SDF.format(this.scheduleEndDate));
+//		returnJson.put(Key.ALLDAY, false);
+//		
+//		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
+//		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
+//		
+//		returnJson.put(Key.OBJSTATUS, this.objStatus);
+//		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+//		returnJson.put(Key.REMARK, this.remark);
+//		
+//		return returnJson;
+//	}
 	
-	public JSONObject toJsonStrong() {
-		JSONObject returnJson = new JSONObject();
-		returnJson.put(Key.SCHEDULEID, this.scheduleId);
-		returnJson.put(Key.NAME, this.name);
-		returnJson.put(Key.DESCRIPTION, description);
-		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
-		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
-		
-		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
-		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
-		
-		returnJson.put(Key.OBJSTATUS, this.objStatus);
-		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-		returnJson.put(Key.REMARK, this.remark);
-		
-		JSONArray attendanceArr = new JSONArray();
-		for (Attendance a : AttendanceDAO.getAttendancesBySchedule(this)) {
-			if(a.getActualStartDate() != null){
-				attendanceArr.add(a.toScheduleJsonMark());
-			} else {
-				attendanceArr.add(a.toScheduleJson());
-			}
-//			attendanceArr.add(a.toJson());
-		}
-		returnJson.put(Key.ATTENDANCES, attendanceArr);
-		
-		return returnJson;
-	}
+//	public JSONObject toJsonStrong() {
+//		JSONObject returnJson = new JSONObject();
+//		returnJson.put(Key.SCHEDULEID, this.scheduleId);
+//		returnJson.put(Key.NAME, this.name);
+//		returnJson.put(Key.DESCRIPTION, description);
+//		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
+//		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+//		
+//		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
+//		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
+//		
+//		returnJson.put(Key.OBJSTATUS, this.objStatus);
+//		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+//		returnJson.put(Key.REMARK, this.remark);
+//		
+//		JSONArray attendanceArr = new JSONArray();
+//		for (Attendance a : AttendanceDAO.getAttendancesBySchedule(this)) {
+//			if(a.getActualStartDate() != null){
+//				attendanceArr.add(a.toScheduleJsonMark());
+//			} else {
+//				attendanceArr.add(a.toScheduleJson());
+//			}
+////			attendanceArr.add(a.toJson());
+//		}
+//		returnJson.put(Key.ATTENDANCES, attendanceArr);
+//		
+//		return returnJson;
+//	}
 }

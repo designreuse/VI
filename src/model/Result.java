@@ -22,18 +22,18 @@ public class Result {
 	private Date createDate;
 	private String remark;
 	
-	private Course course;
+	private TeacherCourse teacherCourse;
 	private Student student;
 	
 	public Result(){}
 	
-	public Result(String name, String description, double resultValue, Date resultDate, Course course, Student student) {
+	public Result(String name, String description, double resultValue, Date resultDate, TeacherCourse teacherCourse, Student student) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.resultValue = resultValue;
 		this.resultDate = resultDate;
-		this.course = course;
+		this.teacherCourse = teacherCourse;
 		this.student = student;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
@@ -152,17 +152,17 @@ public class Result {
 	}
 
 	/**
-	 * @return the course
+	 * @return the teacherCourse
 	 */
-	public Course getCourse() {
-		return course;
+	public TeacherCourse getTeacherCourse() {
+		return teacherCourse;
 	}
 
 	/**
-	 * @param course the course to set
+	 * @param teacherCourse the teacherCourse to set
 	 */
-	public void setCourse(Course course) {
-		this.course = course;
+	public void setTeacherCourse(TeacherCourse teacherCourse) {
+		this.teacherCourse = teacherCourse;
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class Result {
 		returnJson.put(Key.RESULTVALUE, this.resultValue);
 		returnJson.put(Key.RESULTDATE, Config.SDF.format(this.resultDate));
 		
-		returnJson.put(Key.COURSE, this.course.toJson());
+		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
 		returnJson.put(Key.STUDENT, this.student.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);

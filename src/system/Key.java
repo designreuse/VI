@@ -3,6 +3,7 @@ package system;
 public class Key {
 	public static final String OBJSTATUS = "objStatus";
 	public static final String CREATEDATE = "createDate";
+	public static final String MODIFIEDDATE = "modifieDate";
 	public static final String REMARK = "remark";
 	
 	public static final String STATUS = "status";
@@ -103,6 +104,9 @@ public class Key {
 	public static final String ATTENDANCEID = "attendanceId";
 	public static final String ATTENDANCESTATUS = "attendanceStatus";
 	public static final String ACTUALSTARTDATE = "actualStartDate";
+	public static final String ACTUALENDDATE = "actualEndDate";
+	public static final String PLANSTARTDATE = "planStartDate";
+	public static final String PLANENDDATE = "planEndDate";
 	
 	public static final String POINTEVENT = "pointEvent";
 	public static final String POINTEVENTS = "pointEvents";
@@ -112,8 +116,10 @@ public class Key {
 	public static final String SCHEDULE = "schedule";
 	public static final String SCHEDULES = "schedules";
 	public static final String SCHEDULEID = "scheduleId";
-	public static final String PLANSTARTDATE = "planStartDate";
-	public static final String PLANENDDATE = "planEndDate";
+	public static final Object SCHEDULENAME = "scheduleName";
+	public static final Object SCHEDULEDESCRIPTION = "scheduleDescription";
+	public static final String SCHEDULESTARTDATE = "scheduleStartDate";
+	public static final String SCHEDULEENDDATE = "scheduleEndDate";
 	
 	public static final String TEACHERCOURSE = "teacherCourse";
 	public static final String TEACHERCOURSES = "teacherCourses";
@@ -122,6 +128,17 @@ public class Key {
 	public static final String BRANCHCOURSE = "branchCourse";
 	public static final String BRANCHCOURSES = "branchCourses";
 	public static final String BRANCHCOURSEID = "branchCourseId";
+	
+	
+	
+//	public static final String COMMENT = "comment";
+//	public static final String COMMENTS = "comments";
+//	public static final String COMMENTID = "commentId";
+//	public static final String COMMENTERNAME = "commenterName";
+//	
+//	public static final String TASK = "task";
+//	public static final String TASKS = "tasks";
+//	public static final String TASKID = "taskId";
 	
 	
 }

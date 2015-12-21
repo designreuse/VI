@@ -6,6 +6,7 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.ResultDAO;
 import dataManager.ScheduleDAO;
 import system.Config;
 import system.Key;
@@ -17,6 +18,7 @@ public class TeacherCourse {
 	private Course course;
 	private Teacher teacher;
 	private Set<Schedule> schedules;
+	private Set<Result> results;
 
 	private long objStatus;
 	private Date createDate;
@@ -92,7 +94,21 @@ public class TeacherCourse {
 	public void setSchedules(Set<Schedule> schedules) {
 		this.schedules = schedules;
 	}
+	
+	/**
+	 * @return the results
+	 */
+	public Set<Result> getResults() {
+		return results;
+	}
 
+	/**
+	 * @param results the results to set
+	 */
+	public void setResults(Set<Result> results) {
+		this.results = results;
+	}
+	
 	/**
 	 * @return the objStatus
 	 */
@@ -165,7 +181,14 @@ public class TeacherCourse {
 			scheduleArr.add(s.toJson());
 		}
 		returnJson.put(Key.SCHEDULES, scheduleArr);
+		
+		JSONArray resultArr = new JSONArray();
+		for(Result r : ResultDAO.getResultsByTeacherCourse(this)){
+			resultArr.add(r.toJson());
+		}
+		returnJson.put(Key.RESULTS, resultArr);
 
 		return returnJson;
 	}
+
 }

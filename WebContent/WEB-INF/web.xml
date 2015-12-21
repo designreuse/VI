@@ -259,12 +259,12 @@
     <url-pattern>/UpdateTeacherCourseServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetAttendancesByStudent</servlet-name>
-    <servlet-class>service.GetAttendancesByStudent</servlet-class>
+    <servlet-name>GetAttendancesByStudentServlet</servlet-name>
+    <servlet-class>service.GetAttendancesByStudentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetAttendancesByStudent</servlet-name>
-    <url-pattern>/GetAttendancesByStudent</url-pattern>
+    <servlet-name>GetAttendancesByStudentServlet</servlet-name>
+    <url-pattern>/GetAttendancesByStudentServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetAttendancesByStudentAndScheduleServlet</servlet-name>
@@ -393,6 +393,14 @@
   <servlet-mapping>
     <servlet-name>GetResultsByStudent</servlet-name>
     <url-pattern>/GetResultsByStudent</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetResultsByTeacherCourseServlet</servlet-name>
+    <servlet-class>service.GetResultsByTeacherCourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetResultsByTeacherCourseServlet</servlet-name>
+    <url-pattern>/GetResultsByTeacherCourseServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetSalariesByTeacher</servlet-name>
