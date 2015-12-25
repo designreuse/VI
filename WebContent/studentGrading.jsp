@@ -55,74 +55,21 @@
 					<div class="col-md-12">
 						<div class="box box-success">
 							<div class="box-body">
-								<div class="col-md-12">
-								
-									<div class='box-group' id='accordion'>
-									<div class='panel box box-success'>
-										<div class='box-header with-border'>
-											<h4 class='box-title'>
-												<a data-toggle='collapse' data-parent='#accordion'
-													href='#addSched'> Add Schedule </a>
-											</h4>
-										</div>
-
-										<div id='addSched' class='panel-collapse collapse'>
-											<div class='box-body'>
-												<div class='form-group'>
-													<label for='scheduleName'>Schedule Name</label>
-													<input class='form-control input-sm' id='scheduleName'
-														name='scheduleName' type='text' placeholder="Schedule Name" required />
-												</div>
-													
-												<div class="form-group">
-													<label for="scheduleDesc">Schedule Description</label>
-													<input class="form-control input-sm" id="scheduleDesc"
-														name="scheduleDesc" type="text" placeholder="Schedule Description" required />
-												</div>	
-											
-											</div>
-										</div>
+								<div class="row">
+									<div class="col-md-12" id="dynamicStudentList">
+										<!-- for the accordion -->
 									</div>
 								</div>
 								
-								<!-- for search of subjects -->
-								<div class="box-group" id="accordion">
-									<div class="panel box box-success">
-										<div class="box-header with-border">
-											<h4 class="box-title">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#collapseOne"> Filter Search by Students </a>
-											</h4>
-										</div>
-
-										<div id="collapseOne" class="panel-collapse collapse">
-											<div class="box-body">
-												<div class="form-group">
-													<label for="scheduleName">Schedule Name</label>
-													<input class="form-control input-sm" id="scheduleName1"
-														name="scheduleName1" type="text" placeholder="Schedule Name" required />
-												</div>
-													
-												<div class="form-group">
-													<label for="scheduleDesc">Schedule Description</label>
-													<input class="form-control input-sm" id="scheduleDesc1"
-														name="scheduleDesc1" type="text" placeholder="Schedule Description" required />
-												</div>	
-												
-											</div>
-											
-										</div>
+								<div class="row">
+									<div class="col-md-12">
+										<input class="btn btn-primary submit" type="button" value="Search" onclick="searchByCourse();">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-					
-					<input class="btn btn-primary submit"
-					type="button" value="Search" onclick="searchByCourse();">
-					
 				</div>
-			</div>
 
 				<!-- end of displaying parents panel -->
 			</section>
@@ -168,7 +115,7 @@
 
 <script src="./js/bootbox.min.js"></script>
 
-<script src="./js/branchmanager/calendar.js"></script>
+<script src="./js/teacher/feedback.js"></script>
 </body>
 </html>
 
