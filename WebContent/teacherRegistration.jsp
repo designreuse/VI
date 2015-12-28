@@ -181,13 +181,33 @@
 										</div>
 									</div>
 
+								</div>
+							</div>
+
+							<div class="box box-solid">
+								<div class="box-header with-border">
+									<h4 class="box-title">Courses</h4>
+								</div>
+								<div class="box-body">
+									<div class="form-group ">
+										<label for="school" class="control-label col-lg-2">Course(s)<span
+											class="required">*</span></label>
+										<div class="col-lg-10">
+											<input type="checkbox" name="course" value="Math">
+											Math <input type="checkbox" name="course" value="English">
+											English <input type="checkbox" name="course" value="Korean">
+											Korean<br>
+										</div>
+									</div>
 									<div class="form-group">
 										<div class="col-lg-offset-2 col-lg-10">
 											<button class="btn btn-primary" type="submit">Register</button>
 										</div>
 									</div>
 								</div>
+
 							</div>
+
 						</form>
 					</div>
 				</div>

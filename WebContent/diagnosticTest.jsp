@@ -35,6 +35,9 @@
 	href="js/datatables/datatables-responsive/css/dataTables.responsive.css"
 	rel="stylesheet">
 
+<!-- ------------------------ Add Points CSS -------------------------------- -->
+<link href="css/addPoints.css" rel="stylesheet">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -54,128 +57,91 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>New Parent Registration</h1>
+				<h1>Diagnostic Test</h1>
 			</section>
 
 			<!-- Main content -->
 			<section class="content">
 				<div class="row">
 					<div class="col-md-12">
-						<form class="form-validate form-horizontal" id="register_form"
-							method="post" action="parentSuccess.jsp"
-							onsubmit="registerParent();return false;">
+						<form class="form-validate form-horizontal myform"
+							id="register_form" method="post" action="diagnosticSuccess.jsp"
+							onsubmit="submitDiagnostic();return false;">
+
+							<!-- Need to create submitDiagnostic() -->
+
 							<div>
 								<font color="red" id="message"></font>
 							</div>
 
 							<div class="box box-solid">
 								<div class="box-header with-border">
-									<h4 class="box-title">Account Details</h4>
+									<h4 class="box-title">Add Diagnostic Test Results</h4>
 								</div>
 								<div class="box-body">
 									<div class="form-group">
-										<label for="pEmail" class="control-label col-lg-2">Email<span
+										<label for="sName" class="control-label col-lg-2">Name<span
 											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="parentEmail" name="email"
-												type="email"
-												pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-												title="Invalid Email" required />
+											<input class="form-control " id="studentName" type="text"
+												name="sName" pattern="^([a-zA-Z\s]{1,255})$"
+												title="Letters only" required />
 										</div>
 									</div>
-									<div class="form-group ">
-										<label for="pPassword" class="control-label col-lg-2">Password
-											<span class="required">*</span>
+									<div class="form-group">
+										<label for="sNric" class="control-label col-lg-2">NRIC<span
+											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control " id="parentPassword"
-												type="password" name="password" required />
-										</div>
-									</div>
-									<div class="form-group ">
-										<label for="pVerifyPassword" class="control-label col-lg-2">Verify
-											Password <span class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control " id="verifyPassword"
-												type="password" name="verifyPassword" required />
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="box box-solid">
-								<div class="box-header with-border">
-									<h4 class="box-title">Parent Details</h4>
-								</div>
-								<div class="box-body">
-									<div class="form-group ">
-										<label for="PName" class="control-label col-lg-2">Name
-											<span class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control " id="parentName" type="text"
-												name="pName" pattern="^([a-zA-Z\s]{1,255})$"
+											<input class="form-control " id="studentNric" type="text"
+												name="sName" pattern="^([a-zA-Z\s]{1,255})$"
 												title="Letters only" required />
 										</div>
 									</div>
 									<div class="form-group ">
-										<label for="pNric" class="control-label col-lg-2">NRIC
-											<span class="required">*</span>
+										<label for="coursesEnrolled" class="control-label col-lg-2">Courses
+											Enrolled<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="parentNric" name="pNric"
-												type="text" pattern="^[SFTG]\d{7}[A-Z]$" title="NRIC only"
-												required />
+											<div id="course_points">
+												<input type="checkbox" class="enable_cb" name="course1"
+													value="Math">Math
+												
+												<div class="enter_text">
+													Starting Point: 
+													<input type='button' value='-' class='qtyminus' field='math' /> 
+													<input type='text' name='math' value='0' class='qty' /> 
+													<input type='button' value='+' class='qtyplus' field='math' />
+												</div>
+												
+												<input type="checkbox" class="enable_cb" name="course2"
+													value="English">English
+												
+												<div class="enter_text">
+													Starting Point: 
+													<input type='button' value='-' class='qtyminus' field='eng' /> 
+													<input type='text' name='eng' value='0' class='qty' /> 
+													<input type='button' value='+' class='qtyplus' field='eng' />
+												</div>
+												
+												<input type="checkbox" class="enable_cb" name="course3"
+													value="Korean">Korean
+												
+												<div class="enter_text">
+													Starting Point: 
+													<input type='button' value='-' class='qtyminus' field='korean' /> 
+													<input type='text' name='korean' value='0' class='qty' /> 
+													<input type='button' value='+' class='qtyplus' field='korean' />
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="form-group ">
-										<label for="pRelationship" class="control-label col-lg-2">Relationship
-											<span class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control" id="relationship" name="relation"
-												type="text" required />
-										</div>
-									</div>
-									<!-- added in relationship -->
-
-									<div class="form-group ">
-										<label for="pOccupation" class="control-label col-lg-2">Occupation
-											<span class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control" id="occupation" name="occup"
-												type="text" required />
-										</div>
-									</div>
-									<!-- added in occupation -->
-
-									<div class="form-group ">
-										<label for="contactNumber" class="control-label col-lg-2">Mobile
-											Phone <span class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control" id="contactNumber" name="contact"
-												type="text" required />
-										</div>
-									</div>
-									<!--  removed address -->
-								<div class="form-group">
-									<div class="col-lg-offset-2 col-lg-10">
-										<button class="btn btn-primary" type="submit">Register</button>
 									</div>
 								</div>
-								</div>
-							</div>
-
-
 						</form>
 					</div>
 				</div>
 			</section>
-
 		</div>
 
 		<!-- /.content-wrapper -->
@@ -214,6 +180,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
 
-	<script src="./js/branchmanager/parent.js"></script>
+	<script src="./js/branchmanager/diagnostics.js"></script>
+
 </body>
 </html>
