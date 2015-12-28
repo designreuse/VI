@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Attendance;
-import model.Parent;
+import model.Classroom;
 import model.Schedule;
 import model.Student;
 
@@ -91,6 +91,18 @@ public class AttendanceDAO {
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
+			results.add((Attendance) o);
+		}
+		return results;
+	}
+
+	public static ArrayList<Attendance> getAttendancesByClassroom(Classroom classroom) {
+		ArrayList<Attendance> results = new ArrayList<Attendance>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
+		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for (Object o : list) {
 			results.add((Attendance) o);
 		}
 		return results;

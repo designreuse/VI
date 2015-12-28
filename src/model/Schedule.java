@@ -19,7 +19,7 @@ public class Schedule {
 	private Date scheduleEndDate;
 	
 	private TeacherCourse teacherCourse;
-	private Classroom classroom;
+	private Student student;
 	
 	private Set<Attendance> attendances; 
 	
@@ -30,18 +30,18 @@ public class Schedule {
 	public Schedule(){}
 
 	public Schedule(String name, String description, Date scheduleStartDate, Date scheduleEndDate, TeacherCourse teacherCourse,
-			Classroom classroom) {
+			Student student) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
-		this.scheduleStartDate = scheduleStartDate;
+		this.setScheduleStartDate(scheduleStartDate);
 		this.setScheduleEndDate(scheduleEndDate);
-		this.teacherCourse = teacherCourse;
-		this.classroom = classroom;
+		this.setTeacherCourse(teacherCourse);
+		this.setStudent(student);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
-	
+
 	/**
 	 * @return the scheduleId
 	 */
@@ -127,17 +127,17 @@ public class Schedule {
 	}
 
 	/**
-	 * @return the classroom
+	 * @return the student
 	 */
-	public Classroom getClassroom() {
-		return classroom;
+	public Student getStudent() {
+		return student;
 	}
 
 	/**
-	 * @param classroom the classroom to set
+	 * @param student the student to set
 	 */
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class Schedule {
 		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
 		
 		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
-		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
+		returnJson.put(Key.STUDENT, this.student.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -214,6 +214,7 @@ public class Schedule {
 		return returnJson;
 	}
 	
+	//May not need it anymore, delete once confirmation is made
 //	public JSONObject toCalendarJson() {
 //		JSONObject returnJson = new JSONObject();
 //		returnJson.put(Key.ID, this.scheduleId);
@@ -233,6 +234,7 @@ public class Schedule {
 //		return returnJson;
 //	}
 	
+	//TODO finish the method
 //	public JSONObject toJsonStrong() {
 //		JSONObject returnJson = new JSONObject();
 //		returnJson.put(Key.SCHEDULEID, this.scheduleId);

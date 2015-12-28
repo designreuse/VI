@@ -51,6 +51,8 @@ public class Key {
 	public static final String CONTACT = "contact";
 	public static final String ADDRESS = "address";
 	public static final String PARENTNRIC = "parentNric";
+	public static final String OCCUPATION = "occupation";
+	public static final String RELATIONSHIP = "relationship";
 	
 	public static final String TEACHER = "teacher";
 	public static final String TEACHERS = "teachers";
@@ -73,6 +75,12 @@ public class Key {
 	public static final String STUDENTLEVEL = "studentLevel";
 	public static final String POINTS = "points";
 	public static final String STUDENTNRIC = "studentNric";
+	public static final String GENDER = "gender";
+	public static final String BIRTHDATE = "birthDate";
+	public static final String HOMECONTACT = "homeContact";
+	public static final String EMERGENCYCONTACT = "EmergencyContact";
+	public static final String SCHOOLNAME = "schoolName";
+	public static final String SCHOOLLEVEL = "schoolLevel";
 	
 	public static final String BILL = "bill";
 	public static final String BILLS = "bills";
@@ -88,7 +96,6 @@ public class Key {
 	public static final String COURSE = "course";
 	public static final String COURSES = "courses";
 	public static final String COURSEID = "courseId";
-	public static final String COURSELEVEL = "courseLevel";
 	public static final String COURSECOST = "courseCost";
 	public static final String COURSECAPACITY = "courseCapacity";
 	public static final String DESCRIPTION = "description";
@@ -116,8 +123,8 @@ public class Key {
 	public static final String SCHEDULE = "schedule";
 	public static final String SCHEDULES = "schedules";
 	public static final String SCHEDULEID = "scheduleId";
-	public static final Object SCHEDULENAME = "scheduleName";
-	public static final Object SCHEDULEDESCRIPTION = "scheduleDescription";
+	public static final String SCHEDULENAME = "scheduleName";
+	public static final String SCHEDULEDESCRIPTION = "scheduleDescription";
 	public static final String SCHEDULESTARTDATE = "scheduleStartDate";
 	public static final String SCHEDULEENDDATE = "scheduleEndDate";
 	
@@ -129,7 +136,29 @@ public class Key {
 	public static final String BRANCHCOURSES = "branchCourses";
 	public static final String BRANCHCOURSEID = "branchCourseId";
 	
+	public static final String STUDENTCOURSE = "studentCourse";
+	public static final String STUDENTCOURSES = "studentCourses";
+	public static final String STUDENTCOURSEID = "studentCourseId";
 	
+	public static final String BOOKLET = "booklet";
+	public static final String BOOKLETS = "booklets";
+	public static final String BOOKLETID = "bookletId";
+	public static final String BOOKLETLEVEL = "bookletLevel";
+	public static final String BOOKLETNAME = "bookletName";
+	public static final String BOOKLETDESCRIPTION = "bookletDescription";
+	
+	public static final String COURSELEVEL = "courseLevel";
+	public static final String COURSELEVELS = "courseLevels";
+	public static final String COURSELEVELID = "courseLevelId";
+	
+	public static final String TEACHERSTUDENTCOURSE = "teacherStudentCourse";
+	public static final String TEACHERSTUDENTCOURSES = "teacherStudentCourses";
+	public static final String TEACHERSTUDENTCOURSEID = "teacherStudentCourseId";
+	
+	public static final String TEACHERFEEDBACK = "teacherFeedback";
+	public static final String TEACHERFEEDBACKS = "teacherFeedbacks";
+	public static final String TEACHERFEEDBACKID = "teacherFeedbackId";
+	public static final String CONTENT = "content";
 	
 //	public static final String COMMENT = "comment";
 //	public static final String COMMENTS = "comments";

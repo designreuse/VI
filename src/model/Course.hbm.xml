@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 21, 2015 11:56:35 AM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping default-lazy="false">
  <class name="model.Course" table="COURSE">
   <id name="courseId" type="long">
@@ -13,9 +13,6 @@
   </property>
   <property generated="never" lazy="false" name="description" type="java.lang.String">
    <column name="DESCRIPTION"/>
-  </property>
-  <property generated="never" lazy="false" name="courseLevel" type="java.lang.String">
-   <column name="COURSELEVEL"/>
   </property>
   <property generated="never" lazy="false" name="courseCost" type="java.lang.String">
    <column name="COURSECOST"/>
@@ -34,6 +31,12 @@
     <column name="COURSEID"/>
    </key>
    <one-to-many class="model.BranchCourse"/>
+  </set>
+  <set lazy="true" name="teacherStudentCourses" sort="unsorted" table="TEACHERSTUDENTCOURSE">
+   <key>
+    <column name="COURSEID"/>
+   </key>
+   <one-to-many class="model.TeacherStudentCourse"/>
   </set>
   <property generated="never" lazy="false" name="objStatus" type="long">
    <column name="OBJSTATUS"/>

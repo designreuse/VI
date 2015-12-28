@@ -26,16 +26,16 @@ public class ParentCtrl {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			if (branch != null) {
 				String name = (String) inputJson.get(Key.NAME);
-				String email = (String) inputJson.get(Key.EMAIL);
 				String contact = (String) inputJson.get(Key.CONTACT);
-				String address = (String) inputJson.get(Key.ADDRESS);
-				String password = (String) inputJson.get(Key.PASSWORD);
+				String email = (String) inputJson.get(Key.EMAIL);
 				String parentNric = (String) inputJson.get(Key.PARENTNRIC);
-
+				String occupation = (String) inputJson.get(Key.OCCUPATION);
+				String relatoinship = (String) inputJson.get(Key.RELATIONSHIP);
+				String password = (String) inputJson.get(Key.PASSWORD);
 				String passwordSalt = Encrypt.nextSalt();
 				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 
-				Parent parent = new Parent(name, passwordSalt, passwordHash, contact, address, email, parentNric, branch);
+				Parent parent = new Parent(name, passwordSalt, passwordHash, contact, email, parentNric, occupation, relatoinship, branch);
 				ParentDAO.addParent(parent);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -96,17 +96,19 @@ public class ParentCtrl {
 			Parent parent = ParentDAO.getParentById((long) inputJson.get(Key.PARENTID));
 			if (parent != null) {
 				String name = (String) inputJson.get(Key.NAME);
-				String email = (String) inputJson.get(Key.EMAIL);
 				String contact = (String) inputJson.get(Key.CONTACT);
-				String address = (String) inputJson.get(Key.ADDRESS);
+				String email = (String) inputJson.get(Key.EMAIL);
 				String parentNric = (String) inputJson.get(Key.PARENTNRIC);
+				String occupation = (String) inputJson.get(Key.OCCUPATION);
+				String relationship = (String) inputJson.get(Key.RELATIONSHIP);
 				//Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 				
 				parent.setName(name);
-				parent.setEmail(email);
 				parent.setContact(contact);
-				parent.setAddress(address);
+				parent.setEmail(email);
 				parent.setParentNric(parentNric);
+				parent.setOccupation(occupation);
+				parent.setRelationship(relationship);
 				//parent.setBranch(branch);
 
 				ParentDAO.modifyParent(parent);

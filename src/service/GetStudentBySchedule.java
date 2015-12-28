@@ -19,13 +19,13 @@ import system.Value;
 /**
  * 
  */
-public class GetStudentByAttendance extends HttpServlet {
+public class GetStudentBySchedule extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetStudentByAttendance() {
+    public GetStudentBySchedule() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class GetStudentByAttendance extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = StudentCtrl.getStudentByAttendance(inputJson);
+			returnJson = StudentCtrl.getStudentBySchedule(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

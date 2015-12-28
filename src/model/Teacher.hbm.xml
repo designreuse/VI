@@ -1,66 +1,72 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Oct 19, 2015 6:19:14 PM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping default-lazy="false">
- <class name="model.Teacher" table="TEACHER">
-  <id name="teacherId" type="long">
-   <column name="TEACHERID"/>
-   <generator class="increment"/>
-  </id>
-  <property generated="never" lazy="false" name="name" type="java.lang.String">
-   <column name="NAME"/>
-  </property>
-  <property generated="never" lazy="false" name="email" type="java.lang.String">
-   <column name="EMAIL"/>
-  </property>
-  <property generated="never" lazy="false" name="passwordSalt" type="java.lang.String">
-   <column name="PASSWORDSALT"/>
-  </property>
-  <property generated="never" lazy="false" name="passwordHash" type="java.lang.String">
-   <column name="PASSWORDHASH"/>
-  </property>
-  <property generated="never" lazy="false" name="contact" type="java.lang.String">
-   <column name="CONTACT"/>
-  </property>
-  <property generated="never" lazy="false" name="address" type="java.lang.String">
-   <column name="ADDRESS"/>
-  </property>
-  <property generated="never" lazy="false" name="qualification" type="java.lang.String">
-   <column name="QUALIFICATION"/>
-  </property>
-  <property generated="never" lazy="false" name="teacherNric" type="java.lang.String">
-   <column name="TEACHERNRIC"/>
-  </property>
-  <property generated="never" lazy="false" name="objStatus" type="long">
-   <column name="OBJSTATUS"/>
-  </property>
-  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
-   <column name="CREATEDATE"/>
-  </property>
-  <property generated="never" lazy="false" name="remark" type="java.lang.String">
-   <column name="REMARK"/>
-  </property>
-  <many-to-one class="model.Branch" fetch="join" name="branch">
-   <column name="BRANCHID"/>
-  </many-to-one>
-  <set lazy="true" name="salaries" sort="unsorted" table="SALARY">
-   <key>
-    <column name="TEACHERID"/>
-   </key>
-   <one-to-many class="model.Salary"/>
-  </set>
-  <set lazy="true" name="teacherCourses" sort="unsorted" table="TEACHERCOURSE">
-   <key>
-    <column name="TEACHERID"/>
-   </key>
-   <one-to-many class="model.TeacherCourse"/>
-  </set>
-  <set lazy="true" name="pointEvents" sort="unsorted" table="POINTEVENT">
-   <key>
-    <column name="TEACHERID"/>
-   </key>
-   <one-to-many class="model.PointEvent"/>
-  </set>
- </class>
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.Teacher" table="TEACHER">
+        <id name="teacherId" type="long">
+            <column name="TEACHERID" />
+            <generator class="increment" />
+        </id>
+        <property name="name" type="java.lang.String">
+            <column name="NAME" />
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="EMAIL" />
+        </property>
+        <property name="passwordSalt" type="java.lang.String">
+            <column name="PASSWORDSALT" />
+        </property>
+        <property name="passwordHash" type="java.lang.String">
+            <column name="PASSWORDHASH" />
+        </property>
+        <property name="contact" type="java.lang.String">
+            <column name="CONTACT" />
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="ADDRESS" />
+        </property>
+        <property name="qualification" type="java.lang.String">
+            <column name="QUALIFICATION" />
+        </property>
+        <property name="teacherNric" type="java.lang.String">
+            <column name="TEACHERNRIC" />
+        </property>
+        <property name="objStatus" type="long">
+            <column name="OBJSTATUS" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATEDATE" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+        <many-to-one name="branch" class="model.Branch" fetch="join">
+            <column name="BRANCHID" />
+        </many-to-one>
+        <set name="salaries" table="SALARY" inverse="false" lazy="true">
+            <key>
+                <column name="TEACHERID" />
+            </key>
+            <one-to-many class="model.Salary" />
+        </set>
+        <set name="teacherCourses" table="TEACHERCOURSE" inverse="false" lazy="true">
+            <key>
+                <column name="TEACHERID" />
+            </key>
+            <one-to-many class="model.TeacherCourse" />
+        </set>
+        <set name="pointEvents" table="POINTEVENT" inverse="false" lazy="true">
+            <key>
+                <column name="TEACHERID" />
+            </key>
+            <one-to-many class="model.PointEvent" />
+        </set>
+        <set name="teacherStudentCoursess" table="TEACHERSTUDENTCOURSE" inverse="false" lazy="true">
+            <key>
+                <column name="TEACHERID" />
+            </key>
+            <one-to-many class="model.TeacherStudentCourse" />
+        </set>
+    </class>
 </hibernate-mapping>

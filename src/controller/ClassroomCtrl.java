@@ -1,5 +1,6 @@
 package controller;
 
+import model.Attendance;
 import model.Branch;
 import model.Classroom;
 import model.Schedule;
@@ -7,6 +8,7 @@ import model.Schedule;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.AttendanceDAO;
 import dataManager.BranchDAO;
 import dataManager.ClassroomDAO;
 import dataManager.ScheduleDAO;
@@ -160,9 +162,9 @@ public class ClassroomCtrl {
 	public static JSONObject getClassroomByAttendance(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			Schedule schedule = ScheduleDAO.getScheduleById((long)inputJson.get(Key.SCHEDULEID));
-			if (schedule != null) {
-				Classroom classroom = schedule.getClassroom();
+			Attendance attendance = AttendanceDAO.getAttendanceById((long)inputJson.get(Key.ATTENDANCEID));
+			if (attendance != null) {
+				Classroom classroom = attendance.getClassroom();
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, classroom.toJson());
 			} else {

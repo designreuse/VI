@@ -6,9 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import model.Parent;
 import model.Schedule;
-import model.Classroom;
+import model.Student;
 import model.TeacherCourse;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -46,11 +45,11 @@ public class ScheduleDAO {
 	}
 
 	// features
-	//get by classroom
-	public static ArrayList<Schedule> getSchedulesByClassroom(Classroom classroom) {
+	//get by student
+	public static ArrayList<Schedule> getSchedulesByStudent(Student student) {
 		ArrayList<Schedule> results = new ArrayList<Schedule>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
+		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
@@ -72,13 +71,36 @@ public class ScheduleDAO {
 		return results;
 	}
 	
-	//get by classroom and reacherCourse
-	public static ArrayList<Schedule> getSchedulesByClassroomAndTeacherCourse(Classroom classroom, TeacherCourse teacherCourse) {
+	//get by student and teacherCourse
+	public static ArrayList<Schedule> getSchedulesByStudentAndTeacherCourse(Student student, TeacherCourse teacherCourse) {
 		ArrayList<Schedule> results = new ArrayList<Schedule>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
+		
+		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
 		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for (Object o : list) {
+			results.add((Schedule) o);
+		}
+		return results;
+	}
+	
+	//get by planStartDate
+	//TODO make sure the date pass in is correctly parse 
+	public static ArrayList<Schedule> getSchedulesByStudentAndPlanStartDate(Date planStartDate) {
+		ArrayList<Schedule> results = new ArrayList<Schedule>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
+		
+		//TODO implement this method
+
+//		detachedCriteria.add(Restrictions.between("createdAt", startDate, endDate));   
+		
+//		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+//		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
 			results.add((Schedule) o);

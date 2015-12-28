@@ -5,9 +5,8 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Student;
-import model.TeacherCourse;
 import model.Result;
+import model.TeacherStudentCourse;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -44,10 +43,10 @@ public class ResultDAO {
 	}
 	
 	//features
-	public static ArrayList<Result> getResultsByStudent(Student student){
+	public static ArrayList<Result> getResultsByTeacherStudentCourse(TeacherStudentCourse teacherStudentCourse) {
 		ArrayList<Result> results = new ArrayList<Result>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, teacherStudentCourse));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
@@ -55,30 +54,6 @@ public class ResultDAO {
 		}
 		return results;
 	}
-	
-	public static ArrayList<Result> getResultsByTeacherCourse(TeacherCourse teacherCourse){
-		ArrayList<Result> results = new ArrayList<Result>();
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
-		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			results.add((Result) o);
-		}
-		return results;
-	}
-	
-	public static ArrayList<Result> getResultsByTeacherCourseAndStudent(TeacherCourse teacherCourse, Student student){
-		ArrayList<Result> results = new ArrayList<Result>();
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
-		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			results.add((Result) o);
-		}
-		return results;
-	}
+
 
 }

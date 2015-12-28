@@ -32,6 +32,7 @@ public class Teacher {
 	private Set<Salary> salaries;
 	private Set<TeacherCourse> teacherCourses;
 	private Set<PointEvent> pointEvents;
+	private Set<TeacherStudentCourse> teacherStudentCoursess;
 
 	public Teacher() {}
 
@@ -274,6 +275,20 @@ public class Teacher {
 	 */
 	public void setPointEvents(Set<PointEvent> pointEvents) {
 		this.pointEvents = pointEvents;
+	}
+
+	/**
+	 * @return the teacherStudentCoursess
+	 */
+	public Set<TeacherStudentCourse> getTeacherStudentCoursess() {
+		return teacherStudentCoursess;
+	}
+
+	/**
+	 * @param teacherStudentCoursess the teacherStudentCoursess to set
+	 */
+	public void setTeacherStudentCoursess(Set<TeacherStudentCourse> teacherStudentCoursess) {
+		this.teacherStudentCoursess = teacherStudentCoursess;
 	}
 
 	public JSONObject toJson() {

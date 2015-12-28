@@ -3,6 +3,7 @@ package controller;
 import java.util.Date;
 
 import model.Attendance;
+import model.Classroom;
 import model.Parent;
 import model.Schedule;
 import model.Student;
@@ -12,6 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.AttendanceDAO;
+import dataManager.ClassroomDAO;
 import dataManager.ScheduleDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherCourseDAO;
@@ -33,12 +35,12 @@ public class AttendanceCtrl {
 		try {
 			Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
 			if (schedule != null) {
-				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
-				if (student != null) {
+				Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
+				if (classroom != null) {
 //					Date actualStartDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALSTARTDATE));
 //					long attendanceStatus = (long) inputJson.get(Key.ATTENDANCESTATUS);
 					
-					Attendance attendance = new Attendance(schedule, student);
+					Attendance attendance = new Attendance(schedule, classroom);
 					AttendanceDAO.addAttendance(attendance);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -46,7 +48,7 @@ public class AttendanceCtrl {
 					returnJson.put(Key.MESSAGE, attendance.toJson());
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+					returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
@@ -125,11 +127,11 @@ public class AttendanceCtrl {
 				AttendanceDAO.modifyAttendance(attendance);
 
 				attendanceObj = attendance.toJson();
-				Student student = attendance.getStudent();
+				Classroom classroom = attendance.getClassroom();
 				
-				Parent parent = student.getParent();
+//				Parent parent = student.getParent();
 //				System.out.println(parent.getName());
-				attendanceObj.put(Key.PARENT, parent.toJson());
+//				attendanceObj.put(Key.PARENT, parent.toJson());
 				
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS);

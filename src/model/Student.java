@@ -6,9 +6,8 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AttendanceDAO;
+import dataManager.ScheduleDAO;
 import dataManager.PointEventDAO;
-import dataManager.ResultDAO;
 import dataManager.BillDAO;
 import system.Config;
 import system.Key;
@@ -17,22 +16,24 @@ import system.Value;
 public class Student {
 	private long studentId;
 	private String name;
-	private String email;
-	private String passwordSalt;
-	private String passwordHash;
-	private String contact;
+	private String gender;
+	private String birthDate;
+	private String homeContact;
+	private String emergencyContact;
 	private String address;
-	private String studentLevel;
+	private String postalCode;
+	private String schoolName;
+	private String schoolLevel;
 	private String studentNric;
 	private long points;
 
 	private Parent parent;
 	private Branch branch;
 	
-	private Set<Result> results;
 	private Set<Bill> bills;
-	private Set<Attendance> attendances;
+	private Set<Schedule> schedules;
 	private Set<PointEvent> pointEvents;
+	private Set<TeacherStudentCourse> teacherStudentCoursess;
 
 	private long objStatus;
 	private Date createDate;
@@ -41,33 +42,19 @@ public class Student {
 	public Student() {
 	}
 	
-	public Student(String name, String contact, String address,
-			String studentLevel, String studentNric, Parent parent, Branch branch) {
+	public Student(String name, String gender, String birthDate, String homeContact, 
+			String emergencyContact, String address, String postalCode, String schoolName, 
+			String schoolLevel, String studentNric, Parent parent, Branch branch) {
 		super();
 		this.name = name;
-		this.contact = contact;
+		this.gender = gender;
+		this.birthDate = birthDate;
+		this.homeContact = homeContact;
+		this.emergencyContact = emergencyContact;
 		this.address = address;
-		this.studentLevel = studentLevel;
-		this.studentNric = studentNric;
-		this.points = 0L;
-		this.parent = parent;
-		this.branch = branch;
-		this.setObjStatus(Value.ACTIVED);
-		this.setCreateDate(new Date());
-		
-	}
-	
-	public Student(String name, String email, String passwordSalt,
-			String passwordHash, String contact, String address,
-			String studentLevel, String studentNric, Parent parent, Branch branch) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.passwordSalt = passwordSalt;
-		this.passwordHash = passwordHash;
-		this.contact = contact;
-		this.address = address;
-		this.studentLevel = studentLevel;
+		this.postalCode = postalCode;
+		this.schoolName = schoolName;
+		this.schoolLevel = schoolLevel;
 		this.studentNric = studentNric;
 		this.points = 0L;
 		this.parent = parent;
@@ -106,59 +93,59 @@ public class Student {
 	}
 
 	/**
-	 * @return the email
+	 * @return the gender
 	 */
-	public String getEmail() {
-		return email;
+	public String getGender() {
+		return gender;
 	}
 
 	/**
-	 * @param email the email to set
+	 * @param gender the gender to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	/**
-	 * @return the passwordSalt
+	 * @return the birthDate
 	 */
-	public String getPasswordSalt() {
-		return passwordSalt;
+	public String getBirthDate() {
+		return birthDate;
 	}
 
 	/**
-	 * @param passwordSalt the passwordSalt to set
+	 * @param birthDate the birthDate to set
 	 */
-	public void setPasswordSalt(String passwordSalt) {
-		this.passwordSalt = passwordSalt;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	/**
-	 * @return the passwordHash
+	 * @return the homeContact
 	 */
-	public String getPasswordHash() {
-		return passwordHash;
+	public String getHomeContact() {
+		return homeContact;
 	}
 
 	/**
-	 * @param passwordHash the passwordHash to set
+	 * @param homeContact the homeContact to set
 	 */
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setHomeContact(String homeContact) {
+		this.homeContact = homeContact;
 	}
 
 	/**
-	 * @return the contact
+	 * @return the emergencyContact
 	 */
-	public String getContact() {
-		return contact;
+	public String getEmergencyContact() {
+		return emergencyContact;
 	}
 
 	/**
-	 * @param contact the contact to set
+	 * @param emergencyContact the emergencyContact to set
 	 */
-	public void setContact(String contact) {
-		this.contact = contact;
+	public void setEmergencyContact(String emergencyContact) {
+		this.emergencyContact = emergencyContact;
 	}
 
 	/**
@@ -176,17 +163,45 @@ public class Student {
 	}
 
 	/**
-	 * @return the studentLevel
+	 * @return the postalCode
 	 */
-	public String getStudentLevel() {
-		return studentLevel;
+	public String getPostalCode() {
+		return postalCode;
 	}
 
 	/**
-	 * @param studentLevel the studentLevel to set
+	 * @param postalCode the postalCode to set
 	 */
-	public void setStudentLevel(String studentLevel) {
-		this.studentLevel = studentLevel;
+	public void setPostalCode(String postalCode) {
+		this.postalCode = postalCode;
+	}
+
+	/**
+	 * @return the schoolName
+	 */
+	public String getSchoolName() {
+		return schoolName;
+	}
+
+	/**
+	 * @param schoolName the schoolName to set
+	 */
+	public void setSchoolName(String schoolName) {
+		this.schoolName = schoolName;
+	}
+
+	/**
+	 * @return the schoolLevel
+	 */
+	public String getSchoolLevel() {
+		return schoolLevel;
+	}
+
+	/**
+	 * @param schoolLevel the schoolLevel to set
+	 */
+	public void setSchoolLevel(String schoolLevel) {
+		this.schoolLevel = schoolLevel;
 	}
 
 	/**
@@ -246,20 +261,6 @@ public class Student {
 	}
 
 	/**
-	 * @return the results
-	 */
-	public Set<Result> getResults() {
-		return results;
-	}
-
-	/**
-	 * @param results the results to set
-	 */
-	public void setResults(Set<Result> results) {
-		this.results = results;
-	}
-
-	/**
 	 * @return the bills
 	 */
 	public Set<Bill> getBills() {
@@ -274,17 +275,17 @@ public class Student {
 	}
 
 	/**
-	 * @return the attendances
+	 * @return the schedules
 	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
+	public Set<Schedule> getSchedules() {
+		return schedules;
 	}
 
 	/**
-	 * @param attendances the attendances to set
+	 * @param schedules the schedules to set
 	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
+	public void setSchedules(Set<Schedule> schedules) {
+		this.schedules = schedules;
 	}
 
 	/**
@@ -299,6 +300,20 @@ public class Student {
 	 */
 	public void setPointEvents(Set<PointEvent> pointEvents) {
 		this.pointEvents = pointEvents;
+	}
+
+	/**
+	 * @return the teacherStudentCoursess
+	 */
+	public Set<TeacherStudentCourse> getTeacherStudentCoursess() {
+		return teacherStudentCoursess;
+	}
+
+	/**
+	 * @param teacherStudentCoursess the teacherStudentCoursess to set
+	 */
+	public void setTeacherStudentCoursess(Set<TeacherStudentCourse> teacherStudentCoursess) {
+		this.teacherStudentCoursess = teacherStudentCoursess;
 	}
 
 	/**
@@ -348,10 +363,14 @@ public class Student {
 
 		returnJson.put(Key.STUDENTID, this.studentId);
 		returnJson.put(Key.NAME, this.name);
-		returnJson.put(Key.EMAIL, this.email);
-		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.GENDER, this.gender);
+		returnJson.put(Key.BIRTHDATE, this.birthDate);
+		returnJson.put(Key.HOMECONTACT, this.homeContact);
+		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);
-		returnJson.put(Key.STUDENTLEVEL, this.studentLevel);
+		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.SCHOOLNAME, this.schoolName);
+		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
 		returnJson.put(Key.POINTS, this.points);
 
@@ -370,10 +389,14 @@ public class Student {
 
 		returnJson.put(Key.STUDENTID, this.studentId);
 		returnJson.put(Key.NAME, this.name);
-		returnJson.put(Key.EMAIL, this.email);
-		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.GENDER, this.gender);
+		returnJson.put(Key.BIRTHDATE, this.birthDate);
+		returnJson.put(Key.HOMECONTACT, this.homeContact);
+		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);
-		returnJson.put(Key.STUDENTLEVEL, this.studentLevel);
+		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.SCHOOLNAME, this.schoolName);
+		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
 		returnJson.put(Key.POINTS, this.points);
 
@@ -384,23 +407,17 @@ public class Student {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 
-		JSONArray resultArr = new JSONArray();
-		for (Result r : ResultDAO.getResultsByStudent(this)) {
-			resultArr.add(r.toJson());
-		}
-		returnJson.put(Key.RESULTS, resultArr);
-
 		JSONArray billArr = new JSONArray();
 		for (Bill k : BillDAO.getBillsByStudent(this)) {
 			billArr.add(k.toJson());
 		}
 		returnJson.put(Key.BILLS, billArr);
 
-		JSONArray attendanceArr = new JSONArray();
-		for (Attendance a : AttendanceDAO.getAttendancesByStudent(this)) {
-			attendanceArr.add(a.toJson());
+		JSONArray scheduleArr = new JSONArray();
+		for (Schedule a : ScheduleDAO.getSchedulesByStudent(this)) {
+			scheduleArr.add(a.toJson());
 		}
-		returnJson.put(Key.ATTENDANCES, attendanceArr);
+		returnJson.put(Key.SCHEDULES, scheduleArr);
 		
 		JSONArray pointEventArr = new JSONArray();
 		for (PointEvent pe : PointEventDAO.getPointEventsByStudent(this)) {

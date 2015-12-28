@@ -17,9 +17,10 @@ public class Parent {
 	private String passwordSalt;
 	private String passwordHash;
 	private String contact;
-	private String address;
 	private String email;
 	private String parentNric;
+	private String occupation;
+	private String relationship;
 
 	private Set<Student> students;
 	private Branch branch;
@@ -30,15 +31,16 @@ public class Parent {
 
 	public Parent() {}
 
-	public Parent(String name, String passwordSalt, String passwordHash, String contact, String address, String email,
-			String parentNric, Branch branch) {
+	public Parent(String name, String passwordSalt, String passwordHash, String contact, String email,
+			String parentNric, String occupation, String relationship, Branch branch) {
 		this.name = name;
 		this.passwordSalt = passwordSalt;
 		this.passwordHash = passwordHash;
 		this.contact = contact;
-		this.address = address;
 		this.email = email;
 		this.parentNric = parentNric;
+		this.occupation = occupation;
+		this.relationship = relationship;
 		this.branch = branch;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
@@ -114,19 +116,19 @@ public class Parent {
 		this.contact = contact;
 	}
 
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
+//	/**
+//	 * @return the address
+//	 */
+//	public String getAddress() {
+//		return address;
+//	}
+//
+//	/**
+//	 * @param address the address to set
+//	 */
+//	public void setAddress(String address) {
+//		this.address = address;
+//	}
 
 	/**
 	 * @return the email
@@ -156,6 +158,35 @@ public class Parent {
 		this.parentNric = parentNric;
 	}
 
+	/**
+	 * @return the occupation
+	 */
+	public String getOccupation() {
+		return occupation;
+	}
+
+	/**
+	 * @param occupation the occupation to set
+	 */
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
+	/**
+	 * @return the relationship
+	 */
+	public String getRelationship() {
+		return relationship;
+	}
+
+	/**
+	 * @param relationship the relationship to set
+	 */
+	public void setRelationship(String relationship) {
+		this.relationship = relationship;
+	}
+	
+	
 	/**
 	 * @return the students
 	 */
@@ -232,9 +263,10 @@ public class Parent {
 		returnJson.put(Key.PARENTID, this.parentId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.CONTACT, this.contact);
-		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.EMAIL, this.email);
 		returnJson.put(Key.PARENTNRIC, this.parentNric);
+		returnJson.put(Key.OCCUPATION, this.occupation);
+		returnJson.put(Key.RELATIONSHIP, this.relationship);
 		returnJson.put(Key.BRANCH, this.branch.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
@@ -250,9 +282,10 @@ public class Parent {
 		returnJson.put(Key.PARENTID, this.parentId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.CONTACT, this.contact);
-		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.EMAIL, this.email);
 		returnJson.put(Key.PARENTNRIC, this.parentNric);
+		returnJson.put(Key.OCCUPATION, this.occupation);
+		returnJson.put(Key.RELATIONSHIP, this.relationship);
 		returnJson.put(Key.BRANCH, this.branch.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
@@ -267,5 +300,6 @@ public class Parent {
 
 		return returnJson;
 	}
+
 	
 }

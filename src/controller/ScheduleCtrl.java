@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import model.Branch;
-import model.Classroom;
+import model.Student;
 import model.Course;
 import model.Schedule;
 import model.TeacherCourse;
@@ -13,7 +13,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
-import dataManager.ClassroomDAO;
+import dataManager.StudentDAO;
 import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.TeacherCourseDAO;
@@ -34,8 +34,8 @@ public class ScheduleCtrl {
 	public static JSONObject createSchedule(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
-			Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
-			if(classroom != null){
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+			if(student != null){
 				TeacherCourse teachercourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
 				if(teachercourse != null){
 					String name = (String) inputJson.get(Key.NAME);
@@ -43,7 +43,7 @@ public class ScheduleCtrl {
 					Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
 					Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
 					
-					Schedule schedule = new Schedule(name, description, scheduleStartDate, scheduleEndDate, teachercourse, classroom);
+					Schedule schedule = new Schedule(name, description, scheduleStartDate, scheduleEndDate, teachercourse, student);
 					ScheduleDAO.addSchedule(schedule);
 					
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -54,7 +54,7 @@ public class ScheduleCtrl {
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -111,9 +111,9 @@ public class ScheduleCtrl {
 		try{
 			Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
 			if(schedule != null){
-				Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
-				if(classroom != null){
-					schedule.setClassroom(classroom);
+				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+				if(student != null){
+					schedule.setStudent(student);
 				}
 				TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long) inputJson.get(Key.TEACHERCOURSEID));
 				if(teacherCourse != null){
@@ -168,24 +168,21 @@ public class ScheduleCtrl {
 	
 	//features
 	
-	//TODO take note that if we were to get the attendance of all the classroom or other attributes
-	//that first need to get the schedule, use toStrong method of schedule in the attendance ctrl.
-	
-	//Get schedule by classroom
-	public static JSONObject getSchedulesByClassroom (JSONObject inputJson){
+	//Get schedule by student
+	public static JSONObject getSchedulesByStudent (JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
-			Classroom classroom = ClassroomDAO.getClassroomById((long)inputJson.get(Key.CLASSROOMID));
-			if(classroom != null){
+			Student student = StudentDAO.getStudentById((long)inputJson.get(Key.STUDENTID));
+			if(student != null){
 				JSONArray salaryArr = new JSONArray();
-				for (Schedule s : ScheduleDAO.getSchedulesByClassroom(classroom)) {
+				for (Schedule s : ScheduleDAO.getSchedulesByStudent(student)) {
 					salaryArr.add(s.toJson());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, salaryArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -218,15 +215,15 @@ public class ScheduleCtrl {
 		return returnJson;
 	}
 	
-	public static JSONObject getSchedulesByClassroomAndTeacherCourse (JSONObject inputJson){
+	public static JSONObject getSchedulesByStudentAndTeacherCourse (JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
-			Classroom classroom = ClassroomDAO.getClassroomById((long)inputJson.get(Key.CLASSROOMID));
-			if(classroom != null){
+			Student student = StudentDAO.getStudentById((long)inputJson.get(Key.STUDENTID));
+			if(student != null){
 				TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
 				if(teacherCourse != null){
 					JSONArray salaryArr = new JSONArray();
-					for (Schedule s : ScheduleDAO.getSchedulesByClassroomAndTeacherCourse(classroom, teacherCourse)) {
+					for (Schedule s : ScheduleDAO.getSchedulesByStudentAndTeacherCourse(student, teacherCourse)) {
 						salaryArr.add(s.toJson());
 					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -237,7 +234,7 @@ public class ScheduleCtrl {
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -247,36 +244,38 @@ public class ScheduleCtrl {
 		return returnJson;
 	}
 	
-	public static JSONObject getScheduleByTeacherCourseAndScheduleStartDate (JSONObject inputJson){
-		JSONObject returnJson = new JSONObject();
-		try{
-			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
-			if(teacherCourse != null){
-//				JSONArray scheduleArr = new JSONArray();
-				Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
-				if(scheduleStartDate != null){
-					Schedule schedule = ScheduleDAO.getScheduleByTeacherCourseAndScheduleStartDate(teacherCourse, scheduleStartDate);
-					//TODO can i use toJsonStrong method to retrieve the attendance at once also? so only one servlet call will do
-//					scheduleArr.add(s.toJsonStrong());
-//					salaryArr.add(s.toJson());
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, schedule.toJsonStrong());
-				} else {
-					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.SCHEDULESTARTDATEEMPTY);
-				}
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL)  ;
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
+//	public static JSONObject getScheduleByTeacherCourseAndScheduleStartDate (JSONObject inputJson){
+//		JSONObject returnJson = new JSONObject();
+//		try{
+//			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
+//			if(teacherCourse != null){
+////				JSONArray scheduleArr = new JSONArray();
+//				Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
+//				if(scheduleStartDate != null){
+//					Schedule schedule = ScheduleDAO.getScheduleByTeacherCourseAndScheduleStartDate(teacherCourse, scheduleStartDate);
+//					//TODO can i use toJsonStrong method to retrieve the attendance at once also? so only one servlet call will do
+////					scheduleArr.add(s.toJsonStrong());
+////					salaryArr.add(s.toJson());
+//					returnJson.put(Key.STATUS, Value.SUCCESS);
+//					returnJson.put(Key.MESSAGE, schedule.toJsonStrong());
+//				} else {
+//					returnJson.put(Key.STATUS, Value.FAIL);
+//					returnJson.put(Key.MESSAGE, Message.SCHEDULESTARTDATEEMPTY);
+//				}
+//			} else {
+//				returnJson.put(Key.STATUS, Value.FAIL);
+//				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+//			}
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			returnJson.put(Key.STATUS, Value.FAIL)  ;
+//			returnJson.put(Key.MESSAGE, e);
+//		}
+//		return returnJson;
+//	}
 
+	
+	//TODO should return schedules list of attendances list
 	public static JSONObject getSchedulesByCourse(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try{
@@ -344,19 +343,19 @@ public class ScheduleCtrl {
 		try{
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			if(branch != null){
-				ArrayList<Classroom> crList = ClassroomDAO.getClassroomsByBranch(branch);
+				ArrayList<Student> crList = StudentDAO.getStudentsByBranch(branch);
 				if(!crList.isEmpty()){
 					JSONArray scheduleArr = new JSONArray();
-					for (Classroom cr : crList){
-						for (Schedule s : ScheduleDAO.getSchedulesByClassroom(cr)) {
-							scheduleArr.add(s.toCalendarJson());
+					for (Student cr : crList){
+						for (Schedule s : ScheduleDAO.getSchedulesByStudent(cr)) {
+							scheduleArr.add(s.toJson());
 						}
 					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, scheduleArr);
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+					returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);

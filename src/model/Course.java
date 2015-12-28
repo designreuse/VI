@@ -18,12 +18,12 @@ public class Course {
 	private long courseId;
 	private String name;
 	private String description;
-	private String courseLevel;
 	private String courseCost;
 	private long courseCapacity;
 	
 	private Set<TeacherCourse> teacherCourses;
 	private Set<BranchCourse> branchCourses;
+	private Set<TeacherStudentCourse> teacherStudentCourses;
 	
 	private long objStatus;
 	private Date createDate;
@@ -31,11 +31,10 @@ public class Course {
 	
 	public Course(){}
 	
-	public Course(String name, String description, String courseLevel, String courseCost, long courseCapacity) {
+	public Course(String name, String description, String courseCost, long courseCapacity) {
 		super();
 		this.name = name;
 		this.description = description;
-		this.courseLevel = courseLevel;
 		this.courseCost = courseCost;
 		this.courseCapacity = courseCapacity;
 		this.setObjStatus(Value.ACTIVED);
@@ -82,20 +81,6 @@ public class Course {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * @return the courseLevel
-	 */
-	public String getCourseLevel() {
-		return courseLevel;
-	}
-
-	/**
-	 * @param courseLevel the courseLevel to set
-	 */
-	public void setCourseLevel(String courseLevel) {
-		this.courseLevel = courseLevel;
 	}
 
 	/**
@@ -155,6 +140,20 @@ public class Course {
 	}
 
 	/**
+	 * @return the teacherStudentCourses
+	 */
+	public Set<TeacherStudentCourse> getTeacherStudentCourses() {
+		return teacherStudentCourses;
+	}
+
+	/**
+	 * @param teacherStudentCourses the teacherStudentCourses to set
+	 */
+	public void setTeacherStudentCourses(Set<TeacherStudentCourse> teacherStudentCourses) {
+		this.teacherStudentCourses = teacherStudentCourses;
+	}
+
+	/**
 	 * @return the objStatus
 	 */
 	public long getObjStatus() {
@@ -201,7 +200,6 @@ public class Course {
 		returnJson.put(Key.COURSEID, this.courseId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.DESCRIPTION, this.description);
-		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.COURSECOST, this.courseCost);
 		returnJson.put(Key.COURSECAPACITY, this.courseCapacity);
 		
@@ -217,7 +215,6 @@ public class Course {
 		returnJson.put(Key.COURSEID, this.courseId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.DESCRIPTION, this.description);
-		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.COURSECOST, this.courseCost);
 		returnJson.put(Key.COURSECAPACITY, this.courseCapacity);
 		

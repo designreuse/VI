@@ -45,22 +45,6 @@ public class StudentDAO {
 	}
 	
 	//features
-	public static Student getStudentByEmail(String email){
-		Student student = null;
-		Student tempStudent = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Student.class);
-		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for(Object o : list){
-			tempStudent = (Student)o;
-			if(tempStudent.getEmail().equals(email)){
-				student = tempStudent;
-				break;
-			}
-		}
-		return student;
-	}
 	
 	public static Student getStudentByNric(String studentNric){
 		Student student = null;

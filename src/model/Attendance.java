@@ -18,7 +18,7 @@ public class Attendance {
 	private long attendanceStatus;
 	
 	private Schedule schedule;
-	private Student student;
+	private Classroom classroom;
 	
 	private long objStatus;
 	private Date createDate;
@@ -26,11 +26,22 @@ public class Attendance {
 	
 	public Attendance(){}
 
-	public Attendance(Schedule schedule, Student student) {
+	public Attendance(Schedule schedule, Classroom classroom) {
 		super();
 		this.attendanceStatus = 0;
 		this.schedule = schedule;
-		this.student = student;
+		this.classroom = classroom;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
+	}
+	
+	public Attendance(Date planStartDate, Date planEndDate, Schedule schedule, Classroom classroom) {
+		super();
+		this.attendanceStatus = 0;
+		this.planStartDate = planStartDate;
+		this.planEndDate = planEndDate;
+		this.schedule = schedule;
+		this.classroom = classroom;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -134,17 +145,17 @@ public class Attendance {
 	}
 
 	/**
-	 * @return the student
+	 * @return the classroom
 	 */
-	public Student getStudent() {
-		return student;
+	public Classroom getClassroom() {
+		return classroom;
 	}
 
 	/**
-	 * @param student the student to set
+	 * @param classroom the classroom to set
 	 */
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
 	}
 
 	/**
@@ -198,7 +209,7 @@ public class Attendance {
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 		
 		returnJson.put(Key.SCHEDULE, this.schedule.toJson());
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.STUDENT, this.classroom.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -215,7 +226,7 @@ public class Attendance {
 		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
 
 		returnJson.put(Key.SCHEDULE, this.schedule.toJson());
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.STUDENT, this.classroom.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -248,7 +259,7 @@ public class Attendance {
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
 
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.STUDENT, this.classroom.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

@@ -3,9 +3,9 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="model.TeacherCourse" table="TEACHERCOURSE">
-        <id name="teacherCourseId" type="long">
-            <column name="TEACHERCOURSEID" />
+    <class name="model.TeacherStudentCourse" table="TEACHERSTUDENTCOURSE">
+        <id name="teacherStudentCourseId" type="long">
+            <column name="TEACHERSTUDENTCOURSEID" />
             <generator class="increment" />
         </id>
         <many-to-one name="course" class="model.Course" fetch="join">
@@ -14,11 +14,26 @@
         <many-to-one name="teacher" class="model.Teacher" fetch="join">
             <column name="TEACHERID" />
         </many-to-one>
-        <set name="schedules" table="SCHEDULE" inverse="false" lazy="true">
+        <many-to-one name="student" class="model.Student" fetch="join">
+            <column name="STUDENTID" />
+        </many-to-one>
+        <property name="courseLevel" type="long">
+            <column name="COURSELEVEL" />
+        </property>
+        <property name="bookletLevel" type="long">
+            <column name="BOOKLETLEVEL" />
+        </property>
+        <set name="results" table="RESULT" inverse="false" lazy="true">
             <key>
-                <column name="TEACHERCOURSEID" />
+                <column name="TEACHERSTUDENTCOURSEID" />
             </key>
-            <one-to-many class="model.Schedule" />
+            <one-to-many class="model.Result" />
+        </set>
+        <set name="teacherFeedbacks" table="TEACHERFEEDBACK" inverse="false" lazy="true">
+            <key>
+                <column name="TEACHERSTUDENTCOURSEID" />
+            </key>
+            <one-to-many class="model.TeacherFeedback" />
         </set>
         <property name="objStatus" type="long">
             <column name="OBJSTATUS" />
