@@ -9,6 +9,7 @@ import model.TeacherFeedback;
 import model.TeacherStudentCourse;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
@@ -55,4 +56,18 @@ public class TeacherFeedbackDAO {
 		return teacherFeedbacks;
 	}
 	
+	public static TeacherFeedback getLatestTeacherFeedbackByTSC(TeacherStudentCourse tsc){
+		TeacherFeedback tf = null;
+		if(tsc != null){
+			DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
+			detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
+			detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
+			detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+			List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 1);
+			for(Object o : list){
+				tf = (TeacherFeedback)o;
+			}
+		}
+		return tf;
+	}
 }

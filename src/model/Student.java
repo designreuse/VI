@@ -34,6 +34,7 @@ public class Student {
 	private Set<Schedule> schedules;
 	private Set<PointEvent> pointEvents;
 	private Set<TeacherStudentCourse> teacherStudentCoursess;
+	private Set<Diagnostic> diagnostics;
 
 	private long objStatus;
 	private Date createDate;
@@ -314,6 +315,20 @@ public class Student {
 	 */
 	public void setTeacherStudentCoursess(Set<TeacherStudentCourse> teacherStudentCoursess) {
 		this.teacherStudentCoursess = teacherStudentCoursess;
+	}
+
+	/**
+	 * @return the diagnostics
+	 */
+	public Set<Diagnostic> getDiagnostics() {
+		return diagnostics;
+	}
+
+	/**
+	 * @param diagnostics the diagnostics to set
+	 */
+	public void setDiagnostics(Set<Diagnostic> diagnostics) {
+		this.diagnostics = diagnostics;
 	}
 
 	/**

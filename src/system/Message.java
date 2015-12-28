@@ -28,7 +28,8 @@ public class Message {
 	public static final String BRANCHCOURSENOTEXIST = "The branchCourse does not exist.";
 	public static final String BOOKLETNOTEXIST = "The booklet does not exist";
 	public static final String COURSELEVELNOTEXIST = "The course level does not exist";
-	public static final String TEACHERSTUDENTCOURSENOTEXIST = "The teacher student course doe not exist";
+	public static final String TEACHERSTUDENTCOURSENOTEXIST = "The teacher student course does not exist";
+	public static final String TEACHERFEEDBACKNOTEXIST = "The teacher feedback does not exist";
 	
 	public static final String TEACHERCOURSEDELETED = "The teacher course has been successfully deleted.";
 	public static final String BRANCHCOURSEDELETED = "The branch course has been successfully deleted.";
@@ -45,6 +46,7 @@ public class Message {
 	public static final String WRONGBRANCHMANAGERPASSWORD = "The branch manager password is incorrect.";
 	public static final String PLANSTARTDATEEMPTY = "The plan start date input is empty.";
 	public static final String ATTENDANCESISEMPTY = "The attendances array is empty.";
+	
 	
 	
 	

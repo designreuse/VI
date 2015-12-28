@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.AttendanceCtrl;
+import controller.TeacherFeedbackCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -18,13 +18,13 @@ import system.Value;
 /**
  * @author RaySong
  */
-public class CreateAttendanceServlet extends HttpServlet {
+public class CreateTeacherFeedbackServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateAttendanceServlet() {
+    public CreateTeacherFeedbackServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class CreateAttendanceServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = AttendanceCtrl.createAttendance(inputJson);
+			returnJson = TeacherFeedbackCtrl.createTeacherFeedback(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

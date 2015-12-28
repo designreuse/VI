@@ -29,6 +29,7 @@
 		<mapping resource="model/BranchManager.hbm.xml" />
 		<mapping resource="model/Classroom.hbm.xml" />
 		<mapping resource="model/Course.hbm.xml" />
+		<mapping resource="model/Diagnostic.hbm.xml" />
 		<mapping resource="model/Parent.hbm.xml" />
 		<mapping resource="model/PointEvent.hbm.xml" />
 		<mapping resource="model/Result.hbm.xml" />

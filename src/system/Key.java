@@ -160,6 +160,13 @@ public class Key {
 	public static final String TEACHERFEEDBACKID = "teacherFeedbackId";
 	public static final String CONTENT = "content";
 	
+	public static final String DIAGNOSTIC = "diagnostic";
+	public static final String DIAGNOSTICS = "diagnostics";
+	public static final String DIAGNOSTICID = "diagnosticId";
+	public static final String SUBJECTNAME = "subjectName";
+	public static final String FEEDBACK = "feedback";
+	
+	
 //	public static final String COMMENT = "comment";
 //	public static final String COMMENTS = "comments";
 //	public static final String COMMENTID = "commentId";
