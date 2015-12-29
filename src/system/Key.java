@@ -81,6 +81,7 @@ public class Key {
 	public static final String EMERGENCYCONTACT = "EmergencyContact";
 	public static final String SCHOOLNAME = "schoolName";
 	public static final String SCHOOLLEVEL = "schoolLevel";
+	public static final String TAKENDIAGNOSTIC = "takenDiagnostic";
 	
 	public static final String BILL = "bill";
 	public static final String BILLS = "bills";

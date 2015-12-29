@@ -16,13 +16,13 @@ import system.Config;
 import system.Key;
 import system.Value;
 
-public class GetBranchManagersByBranch extends HttpServlet {
+public class GetBranchManagersByBranchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetBranchManagersByBranch() {
+    public GetBranchManagersByBranchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

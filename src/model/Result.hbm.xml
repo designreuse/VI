@@ -1,30 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Dec 29, 2015 11:14:21 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="model.Result" table="RESULT">
   <id name="resultId" type="long">
    <column name="RESULTID"/>
    <generator class="increment"/>
   </id>
-  <property generated="never" lazy="false" name="name" type="java.lang.String">
-   <column name="NAME"/>
-  </property>
-  <property generated="never" lazy="false" name="description" type="java.lang.String">
-   <column name="DESCRIPTION"/>
-  </property>
   <property generated="never" lazy="false" name="courseLevel" type="long">
    <column name="COURSELEVEL"/>
   </property>
   <property generated="never" lazy="false" name="bookletLevel" type="long">
    <column name="BOOKLETLEVEL"/>
-  </property>
-  <property generated="never" lazy="false" name="bookletName" type="java.lang.String">
-   <column name="BOOKLETNAME"/>
-  </property>
-  <property generated="never" lazy="false" name="bookletDescription" type="java.lang.String">
-   <column name="BOOKLETDESCRIPTION"/>
   </property>
   <property generated="never" lazy="false" name="resultValue" type="java.lang.String">
    <column name="RESULTVALUE"/>

@@ -50,9 +50,10 @@ public class StudentCtrl {
 					String schoolName = (String) inputJson.get(Key.SCHOOLNAME);
 					String schoolLevel = (String) inputJson.get(Key.SCHOOLLEVEL);
 					String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
+					boolean takenDiagnostic = (boolean) inputJson.get(Key.TAKENDIAGNOSTIC);
 
 					Student student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, 
-							schoolName, schoolLevel, studentNric, parent, branch);
+							schoolName, schoolLevel, studentNric, takenDiagnostic, parent, branch);
 					StudentDAO.addStudent(student);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -131,6 +132,7 @@ public class StudentCtrl {
 				String schoolName = (String) inputJson.get(Key.SCHOOLNAME);
 				String schoolLevel = (String) inputJson.get(Key.SCHOOLLEVEL);
 				String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
+				boolean takenDiagnostic = (boolean) inputJson.get(Key.TAKENDIAGNOSTIC);
 				
 //				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 //				if(branch != null){
@@ -151,6 +153,7 @@ public class StudentCtrl {
 				student.setSchoolName(schoolName);
 				student.setSchoolLevel(schoolLevel);
 				student.setStudentNric(studentNric);
+				student.setTakenDiagnostic(takenDiagnostic);
 
 				StudentDAO.modifyStudent(student);
 

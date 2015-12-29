@@ -26,6 +26,7 @@ public class Student {
 	private String schoolLevel;
 	private String studentNric;
 	private long points;
+	private boolean takenDiagnostic;
 
 	private Parent parent;
 	private Branch branch;
@@ -45,7 +46,7 @@ public class Student {
 	
 	public Student(String name, String gender, String birthDate, String homeContact, 
 			String emergencyContact, String address, String postalCode, String schoolName, 
-			String schoolLevel, String studentNric, Parent parent, Branch branch) {
+			String schoolLevel, String studentNric, boolean takenDiagnostic, Parent parent, Branch branch) {
 		super();
 		this.name = name;
 		this.gender = gender;
@@ -60,6 +61,7 @@ public class Student {
 		this.points = 0L;
 		this.parent = parent;
 		this.branch = branch;
+		this.takenDiagnostic = takenDiagnostic;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 		
@@ -234,6 +236,20 @@ public class Student {
 	}
 
 	/**
+	 * @return the takenDiagnostic
+	 */
+	public boolean isTakenDiagnostic() {
+		return takenDiagnostic;
+	}
+
+	/**
+	 * @param takenDiagnostic the takenDiagnostic to set
+	 */
+	public void setTakenDiagnostic(boolean takenDiagnostic) {
+		this.takenDiagnostic = takenDiagnostic;
+	}
+
+	/**
 	 * @return the parent
 	 */
 	public Parent getParent() {
@@ -388,6 +404,7 @@ public class Student {
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
 		returnJson.put(Key.POINTS, this.points);
+		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
 
 		returnJson.put(Key.PARENT, this.parent.toJson());
 		returnJson.put(Key.BRANCH, this.branch.toJson());
@@ -414,6 +431,7 @@ public class Student {
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
 		returnJson.put(Key.POINTS, this.points);
+		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
 
 		returnJson.put(Key.PARENT, this.parent.toJson());
 		returnJson.put(Key.BRANCH, this.branch.toJson());
