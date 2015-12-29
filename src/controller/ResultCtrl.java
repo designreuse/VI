@@ -1,9 +1,8 @@
 package controller;
 
-import model.Course;
 import model.Result;
 import model.Student;
-import model.TeacherCourse;
+import model.TeacherFeedback;
 import model.TeacherStudentCourse;
 
 import java.util.Date;
@@ -11,10 +10,9 @@ import java.util.Date;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.CourseDAO;
 import dataManager.ResultDAO;
 import dataManager.StudentDAO;
-import dataManager.TeacherCourseDAO;
+import dataManager.TeacherFeedbackDAO;
 import dataManager.TeacherStudentCourseDAO;
 import system.Config;
 import system.Key;
@@ -31,18 +29,14 @@ public class ResultCtrl {
 		try{
 			TeacherStudentCourse teacherStudentCourse = TeacherStudentCourseDAO.getTeacherStudentCourseById((long) inputJson.get(Key.TEACHERSTUDENTCOURSEID));
 			if(teacherStudentCourse != null){
-				String name = (String) inputJson.get(Key.NAME);
-				String description = (String) inputJson.get(Key.DESCRIPTION);
 				long courseLevel =  (long) inputJson.get(Key.COURSELEVEL);
 				long bookletLevel = (long) inputJson.get(Key.BOOKLETLEVEL);
-				String bookletName = (String) inputJson.get(Key.BOOKLETNAME);
-				String bookletDescription = (String) inputJson.get(Key.BOOKLETDESCRIPTION);
 				String resultValue = (String) inputJson.get(Key.RESULTVALUE);
 				Date resultDate = Config.SDF.parse((String) inputJson.get(Key.RESULTDATE));
 				long pointAmount = (long) inputJson.get(Key.POINTAMOUNT);
 				
-				Result result = new Result(name, description, courseLevel, bookletLevel,bookletName, 
-											bookletDescription, resultValue, resultDate, pointAmount, teacherStudentCourse);
+				Result result = new Result(courseLevel, bookletLevel,resultValue, resultDate, 
+											pointAmount, teacherStudentCourse);
 				ResultDAO.addResult(result);
 				
 				returnJson.put(Key.STATUS, Value.SUCCESS) ;
@@ -102,22 +96,14 @@ public class ResultCtrl {
 		try{
 			Result result = ResultDAO.getResultById((long) inputJson.get(Key.RESULTID));
 			if(result != null){
-				String name = (String) inputJson.get(Key.NAME);
-				String description = (String) inputJson.get(Key.DESCRIPTION);
 				long courseLevel =  (long) inputJson.get(Key.COURSELEVEL);
 				long bookletLevel = (long) inputJson.get(Key.BOOKLETLEVEL);
-				String bookletName = (String) inputJson.get(Key.BOOKLETNAME);
-				String bookletDescription = (String) inputJson.get(Key.BOOKLETDESCRIPTION);
 				String resultValue = (String) inputJson.get(Key.RESULTVALUE);
 				Date resultDate = Config.SDF.parse((String) inputJson.get(Key.RESULTDATE));
 				long pointAmount = (long) inputJson.get(Key.POINTAMOUNT);
 				
-				result.setName(name);
-				result.setDescription(description);
 				result.setCourseLevel(courseLevel);
 				result.setBookletLevel(bookletLevel);
-				result.setBookletName(bookletName);
-				result.setBookletDescription(bookletDescription);
 				result.setResultValue(resultValue);
 				result.setResultDate(resultDate);
 				result.setPointAmount(pointAmount);
@@ -184,4 +170,49 @@ public class ResultCtrl {
 		}
 		return returnJson;
 	}
+	
+	//Generate result and feedback
+	public static JSONObject generateResultAndFeedback(JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			TeacherStudentCourse teacherStudentCourse = TeacherStudentCourseDAO.getTeacherStudentCourseById((long) inputJson.get(Key.TEACHERSTUDENTCOURSEID));
+			if(teacherStudentCourse != null){
+				JSONObject messageJson = new JSONObject();
+				
+				long courseLevel =  (long) inputJson.get(Key.COURSELEVEL);
+				long bookletLevel = (long) inputJson.get(Key.BOOKLETLEVEL);
+				String resultValue = (String) inputJson.get(Key.RESULTVALUE);
+				long pointAmount = (long) inputJson.get(Key.POINTAMOUNT);
+				
+				Result result = new Result(courseLevel, bookletLevel,resultValue, 
+											pointAmount, teacherStudentCourse);
+				ResultDAO.addResult(result);
+				messageJson.put(Key.RESULT, result.toJson());
+				
+				String feedback = (String) inputJson.get(Key.FEEDBACK);
+				TeacherFeedback fb = new TeacherFeedback(feedback, teacherStudentCourse);
+				TeacherFeedbackDAO.addTeacherFeedback(fb);
+				messageJson.put(Key.TEACHERFEEDBACK, fb.toJson());
+				
+				//update student point
+				Student s = teacherStudentCourse.getStudent();
+				long newPoint = s.getPoints() + pointAmount;
+				s.setPoints(newPoint);
+				StudentDAO.modifyStudent(s);
+				messageJson.put(Key.STUDENT, s.toJson());
+				
+				returnJson.put(Key.STATUS, Value.SUCCESS) ;
+				returnJson.put(Key.MESSAGE, messageJson);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+			}		
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 }

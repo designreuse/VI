@@ -13,18 +13,18 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.TeacherFeedbackCtrl;
+import controller.ResultCtrl;
 
 /**
  * @author RaySong
  */
-public class GetFeedbackByStudentServlet extends HttpServlet {
+public class GenerateResultServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetFeedbackByStudentServlet() {
+    public GenerateResultServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class GetFeedbackByStudentServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = TeacherFeedbackCtrl.getTeacherFeedbacksByStudent(inputJson);
+			returnJson = ResultCtrl.generateResultAndFeedback(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
