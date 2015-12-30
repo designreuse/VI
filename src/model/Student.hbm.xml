@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 29, 2015 11:14:21 AM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Dec 30, 2015 4:55:14 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Student" table="STUDENT">
         <id name="studentId" type="long">
@@ -14,7 +14,7 @@
         <property name="gender" type="java.lang.String">
             <column name="GENDER" />
         </property>
-        <property name="birthDate" type="java.lang.String">
+        <property name="birthDate" type="java.util.Date">
             <column name="BIRTHDATE" />
         </property>
         <property name="homeContact" type="java.lang.String">
@@ -41,7 +41,7 @@
         <property name="points" type="long">
             <column name="POINTS" />
         </property>
-        <property name="takenDiagnostic" type="boolean">
+        <property name="takenDiagnostic" type="long">
             <column name="TAKENDIAGNOSTIC" />
         </property>
         <many-to-one name="parent" class="model.Parent" fetch="join">
@@ -56,11 +56,11 @@
             </key>
             <one-to-many class="model.Bill" />
         </set>
-        <set name="schedules" table="SCHEDULE" inverse="false" lazy="true">
+        <set name="studentSchedules" table="STUDENTSCHEDULE" inverse="false" lazy="true">
             <key>
                 <column name="STUDENTID" />
             </key>
-            <one-to-many class="model.Schedule" />
+            <one-to-many class="model.StudentSchedule" />
         </set>
         <set name="pointEvents" table="POINTEVENT" inverse="false" lazy="true">
             <key>

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
                                    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Dec 30, 2015 4:55:14 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping default-lazy="false">
  <class name="model.Course" table="COURSE">
   <id name="courseId" type="long">
@@ -20,11 +20,11 @@
   <property generated="never" lazy="false" name="courseCapacity" type="long">
    <column name="COURSECAPACITY"/>
   </property>
-  <set lazy="true" name="teacherCourses" sort="unsorted" table="TEACHERCOURSE">
+  <set lazy="true" name="schedules" sort="unsorted" table="SCHEDULE">
    <key>
     <column name="COURSEID"/>
    </key>
-   <one-to-many class="model.TeacherCourse"/>
+   <one-to-many class="model.Schedule"/>
   </set>
   <set lazy="true" name="branchCourses" sort="unsorted" table="BRANCHCOURSE">
    <key>

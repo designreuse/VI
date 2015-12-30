@@ -6,7 +6,6 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AttendanceDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -15,13 +14,15 @@ public class Schedule {
 	private long scheduleId;
 	private String name;
 	private String description;
+	private long dayOfWeek; //1-Mon, 2-Tue ...
 	private Date scheduleStartDate;
 	private Date scheduleEndDate;
 	
-	private TeacherCourse teacherCourse;
-	private Student student;
+	private Course course;
+	private Teacher teacher;
+	private Classroom classroom;
 	
-	private Set<Attendance> attendances; 
+	private Set<StudentSchedule> studentSchedules; 
 	
 	private long objStatus;
 	private Date createDate;
@@ -29,15 +30,17 @@ public class Schedule {
 	
 	public Schedule(){}
 
-	public Schedule(String name, String description, Date scheduleStartDate, Date scheduleEndDate, TeacherCourse teacherCourse,
-			Student student) {
+	public Schedule(String name, String description, long dayOfWeek, Date scheduleStartDate,
+					Date scheduleEndDate, Course course, Teacher teacher, Classroom classroom) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
+		this.setDayOfWeek(dayOfWeek);
 		this.setScheduleStartDate(scheduleStartDate);
 		this.setScheduleEndDate(scheduleEndDate);
-		this.setTeacherCourse(teacherCourse);
-		this.setStudent(student);
+		this.setTeacher(teacher);
+		this.setCourse(course);
+		this.setClassroom(classroom);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -85,6 +88,20 @@ public class Schedule {
 	}
 
 	/**
+	 * @return the dayOfWeek
+	 */
+	public long getDayOfWeek() {
+		return dayOfWeek;
+	}
+
+	/**
+	 * @param dayOfWeek the dayOfWeek to set
+	 */
+	public void setDayOfWeek(long dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
+	}
+
+	/**
 	 * @return the scheduleStartDate
 	 */
 	public Date getScheduleStartDate() {
@@ -113,45 +130,59 @@ public class Schedule {
 	}
 
 	/**
-	 * @return the teacherCourse
+	 * @return the course
 	 */
-	public TeacherCourse getTeacherCourse() {
-		return teacherCourse;
+	public Course getCourse() {
+		return course;
 	}
 
 	/**
-	 * @param teacherCourse the teacherCourse to set
+	 * @param course the course to set
 	 */
-	public void setTeacherCourse(TeacherCourse teacherCourse) {
-		this.teacherCourse = teacherCourse;
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 
 	/**
-	 * @return the student
+	 * @return the teacher
 	 */
-	public Student getStudent() {
-		return student;
+	public Teacher getTeacher() {
+		return teacher;
 	}
 
 	/**
-	 * @param student the student to set
+	 * @param teacher the teacher to set
 	 */
-	public void setStudent(Student student) {
-		this.student = student;
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 
 	/**
-	 * @return the attendances
+	 * @return the classroom
 	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
+	public Classroom getClassroom() {
+		return classroom;
 	}
 
 	/**
-	 * @param attendances the attendances to set
+	 * @param classroom the classroom to set
 	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
+
+	/**
+	 * @return the studentSchedules
+	 */
+	public Set<StudentSchedule> getStudentSchedules() {
+		return studentSchedules;
+	}
+
+	/**
+	 * @param studentSchedules the studentSchedules to set
+	 */
+	public void setStudentSchedules(Set<StudentSchedule> studentSchedules) {
+		this.studentSchedules = studentSchedules;
 	}
 
 	/**
@@ -201,11 +232,13 @@ public class Schedule {
 		returnJson.put(Key.SCHEDULEID, this.scheduleId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.DESCRIPTION, description);
+		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
 		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
 		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
 		
-		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.TEACHER, this.teacher.toJson());
+		returnJson.put(Key.COURSE, this.course.toJson());
+		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

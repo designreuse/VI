@@ -30,6 +30,7 @@ public class Message {
 	public static final String COURSELEVELNOTEXIST = "The course level does not exist";
 	public static final String TEACHERSTUDENTCOURSENOTEXIST = "The teacher student course does not exist";
 	public static final String TEACHERFEEDBACKNOTEXIST = "The teacher feedback does not exist";
+	public static final String STUDENTSCHEDULENOTEXIST = "The student schedule does not exist.";
 	
 	public static final String TEACHERCOURSEDELETED = "The teacher course has been successfully deleted.";
 	public static final String BRANCHCOURSEDELETED = "The branch course has been successfully deleted.";

@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import model.Course;
 import model.Schedule;
 import model.Student;
+import model.Teacher;
 import model.TeacherCourse;
 
 import org.hibernate.criterion.DetachedCriteria;
@@ -45,11 +47,11 @@ public class ScheduleDAO {
 	}
 
 	// features
-	//get by student
-	public static ArrayList<Schedule> getSchedulesByStudent(Student student) {
+	//get by teacher
+	public static ArrayList<Schedule> getSchedulesByTeacher(Teacher teacher) {
 		ArrayList<Schedule> results = new ArrayList<Schedule>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
@@ -58,11 +60,11 @@ public class ScheduleDAO {
 		return results;
 	}
 	
-	//get by teacherCourse
-	public static ArrayList<Schedule> getSchedulesByTeacherCourse(TeacherCourse teacherCourse) {
+	//get by course
+	public static ArrayList<Schedule> getSchedulesByCourse(Course course) {
 		ArrayList<Schedule> results = new ArrayList<Schedule>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
+		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {
@@ -71,21 +73,19 @@ public class ScheduleDAO {
 		return results;
 	}
 	
-	//get by student and teacherCourse
-	public static ArrayList<Schedule> getSchedulesByStudentAndTeacherCourse(Student student, TeacherCourse teacherCourse) {
-		ArrayList<Schedule> results = new ArrayList<Schedule>();
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
-		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for (Object o : list) {
-			results.add((Schedule) o);
+	//get by teacher and course
+		public static ArrayList<Schedule> getSchedulesByTeacherCourse(Teacher teacher, Course course) {
+			ArrayList<Schedule> results = new ArrayList<Schedule>();
+			DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
+			detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+			detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+			detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+			List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+			for (Object o : list) {
+				results.add((Schedule) o);
+			}
+			return results;
 		}
-		return results;
-	}
 	
 	//get by planStartDate
 	//TODO make sure the date pass in is correctly parse 
@@ -140,36 +140,5 @@ public class ScheduleDAO {
 		}
 		return schedule;
 	}
-	
-	
-//	public static Schedule getScheduleByEmail(String email) {
-//		Schedule schedule = null;
-//		Schedule tempSchedule = null;
-//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-//		detachedCriteria.add(Restrictions.eq(Key.EMAIL, email));
-//		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-//		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-//		for (Object o : list) {
-//			tempSchedule = (Schedule) o;
-//			if (tempSchedule.getEmail().equals(email)) {
-//				schedule = tempSchedule;
-//				break;
-//			}
-//		}
-//		return schedule;
-//	}
-//	
-//	public static Salary getLatestSalaryByTeacher(Teacher teacher){
-//		Salary salary = null;
-//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Salary.class);
-//		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
-//		detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
-//		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 1);
-//		if(!list.isEmpty()){
-//			for(Object o : list){
-//				return salary = (Salary) o;
-//			}
-//		} 
-//		return salary;
-//	}
+
 }

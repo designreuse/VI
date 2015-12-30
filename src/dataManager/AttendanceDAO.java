@@ -8,7 +8,6 @@ import java.util.List;
 import model.Attendance;
 import model.Classroom;
 import model.Schedule;
-import model.Student;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -58,10 +57,10 @@ public class AttendanceDAO {
 		return results;
 	}
 	
-	public static ArrayList<Attendance> getAttendancesByStudent(Student student){
+	public static ArrayList<Attendance> getAttendancesByClassroom(Classroom classroom){
 		ArrayList<Attendance> results = new ArrayList<Attendance>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Attendance.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
@@ -70,10 +69,10 @@ public class AttendanceDAO {
 		return results;
 	}
 	
-	public static Attendance getAttendanceByStudentAndSchedule(Student student, Schedule schedule){
+	public static Attendance getAttendanceByClassroomAndSchedule(Classroom classroom, Schedule schedule){
 		Attendance attendance = null;
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Attendance.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
 		detachedCriteria.add(Restrictions.eq(Key.SCHEDULE, schedule));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
@@ -83,10 +82,10 @@ public class AttendanceDAO {
 		return attendance;
 	}
 	
-	public static ArrayList<Attendance> getAttendancesByStudentAndSchedule(Student student, Schedule schedule){
+	public static ArrayList<Attendance> getAttendancesByClassroomAndSchedule(Classroom classroom, Schedule schedule){
 		ArrayList<Attendance> results = new ArrayList<Attendance>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Attendance.class);
-		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
 		detachedCriteria.add(Restrictions.eq(Key.SCHEDULE, schedule));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
@@ -96,15 +95,4 @@ public class AttendanceDAO {
 		return results;
 	}
 
-	public static ArrayList<Attendance> getAttendancesByClassroom(Classroom classroom) {
-		ArrayList<Attendance> results = new ArrayList<Attendance>();
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		detachedCriteria.add(Restrictions.eq(Key.CLASSROOM, classroom));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for (Object o : list) {
-			results.add((Attendance) o);
-		}
-		return results;
-	}
 }

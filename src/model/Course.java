@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import dataManager.CourseDAO;
 import dataManager.ResultDAO;
 import dataManager.SalaryDAO;
+import dataManager.ScheduleDAO;
 import dataManager.TeacherCourseDAO;
 import system.Config;
 import system.Key;
@@ -21,7 +22,7 @@ public class Course {
 	private String courseCost;
 	private long courseCapacity;
 	
-	private Set<TeacherCourse> teacherCourses;
+	private Set<Schedule> schedules;
 	private Set<BranchCourse> branchCourses;
 	private Set<TeacherStudentCourse> teacherStudentCourses;
 	
@@ -110,21 +111,21 @@ public class Course {
 	public void setCourseCapacity(long courseCapacity) {
 		this.courseCapacity = courseCapacity;
 	}
-
-	/**
-	 * @return the teacherCourses
-	 */
-	public Set<TeacherCourse> getTeacherCourses() {
-		return teacherCourses;
-	}
-
-	/**
-	 * @param teacherCourses the teacherCourses to set
-	 */
-	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
-		this.teacherCourses = teacherCourses;
-	}
 	
+	/**
+	 * @return the schedules
+	 */
+	public Set<Schedule> getSchedules() {
+		return schedules;
+	}
+
+	/**
+	 * @param schedules the schedules to set
+	 */
+	public void setSchedules(Set<Schedule> schedules) {
+		this.schedules = schedules;
+	}
+
 	/**
 	 * @return the branchCourses
 	 */
@@ -222,11 +223,11 @@ public class Course {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-		JSONArray teacherCourseArr = new JSONArray();
-		for(TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByCourse(this)){
-			teacherCourseArr.add(tc.toJson());
+		JSONArray scheduleArr = new JSONArray();
+		for (Schedule s : ScheduleDAO.getSchedulesByCourse(this)) {
+			scheduleArr.add(s.toJson());
 		}
-		returnJson.put(Key.TEACHERCOURSES, teacherCourseArr);
+		returnJson.put(Key.SCHEDULES, scheduleArr);
 		
 		//TODO implement it if necessary
 //		JSONArray branchCourseArr = new JSONArray();

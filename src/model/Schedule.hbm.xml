@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Dec 30, 2015 4:55:14 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Schedule" table="SCHEDULE">
         <id name="scheduleId" type="long">
@@ -14,23 +14,29 @@
         <property name="description" type="java.lang.String">
             <column name="DESCRIPTION" />
         </property>
+        <property name="dayOfWeek" type="long">
+            <column name="DAYOFWEEK" />
+        </property>
         <property name="scheduleStartDate" type="java.util.Date">
             <column name="SCHEDULESTARTDATE" />
         </property>
         <property name="scheduleEndDate" type="java.util.Date">
             <column name="SCHEDULEENDDATE" />
         </property>
-        <many-to-one name="teacherCourse" class="model.TeacherCourse" fetch="join">
-            <column name="TEACHERCOURSEID" />
+        <many-to-one name="course" class="model.Course" fetch="join">
+            <column name="COURSEID" />
         </many-to-one>
-        <many-to-one name="student" class="model.Student" fetch="join">
-            <column name="STUDENTID" />
+        <many-to-one name="teacher" class="model.Teacher" fetch="join">
+            <column name="TEACHERID" />
         </many-to-one>
-        <set name="attendances" table="ATTENDANCE" inverse="false" lazy="true">
+        <many-to-one name="classroom" class="model.Classroom" fetch="join">
+            <column name="CLASSROOMID" />
+        </many-to-one>
+        <set name="studentSchedules" table="STUDENTSCHEDULE" inverse="false" lazy="true">
             <key>
                 <column name="SCHEDULEID" />
             </key>
-            <one-to-many class="model.Attendance" />
+            <one-to-many class="model.StudentSchedule" />
         </set>
         <property name="objStatus" type="long">
             <column name="OBJSTATUS" />

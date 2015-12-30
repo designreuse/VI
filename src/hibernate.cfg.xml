@@ -36,8 +36,8 @@
 		<mapping resource="model/Salary.hbm.xml" />
 		<mapping resource="model/Schedule.hbm.xml" />
 		<mapping resource="model/Student.hbm.xml" />
+		<mapping resource="model/StudentSchedule.hbm.xml" />
 		<mapping resource="model/Teacher.hbm.xml" />
-		<mapping resource="model/TeacherCourse.hbm.xml" />
 		<mapping resource="model/TeacherFeedback.hbm.xml" />
 		<mapping resource="model/TeacherStudentCourse.hbm.xml" />
 	</session-factory>

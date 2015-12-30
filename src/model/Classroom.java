@@ -6,11 +6,7 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.BranchManagerDAO;
-import dataManager.ClassroomDAO;
-import dataManager.AttendanceDAO;
-import dataManager.StudentDAO;
-import dataManager.TeacherDAO;
+import dataManager.ScheduleDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -25,7 +21,7 @@ public class Classroom {
 	private String remark;
 	
 	private Branch branch;
-	private Set<Attendance> attendances;
+	private Set<Schedule> schedules;
 	
 	public Classroom(){}
 	
@@ -137,17 +133,17 @@ public class Classroom {
 	}
 
 	/**
-	 * @return the attendances
+	 * @return the schedules
 	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
+	public Set<Schedule> getSchedules() {
+		return schedules;
 	}
 
 	/**
-	 * @param attendances the attendances to set
+	 * @param schedules the schedules to set
 	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
+	public void setSchedules(Set<Schedule> schedules) {
+		this.schedules = schedules;
 	}
 
 	public JSONObject toJson(){
@@ -179,11 +175,11 @@ public class Classroom {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-		JSONArray attendanceArr = new JSONArray();
-		for(Attendance s: AttendanceDAO.getAttendancesByClassroom(this)){
-			attendanceArr.add(s.toJson());
-		}
-		returnJson.put(Key.ATTENDANCES, attendanceArr);
+//		JSONArray scheduleArr = new JSONArray();
+//		for(Schedule s: ScheduleDAO.getSchedulesByClassroom(this)){
+//			scheduleArr.add(s.toJson());
+//		}
+//		returnJson.put(Key.SCHEDULES, scheduleArr);
 		
 		return returnJson;
 	}

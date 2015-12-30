@@ -17,7 +17,7 @@ public class Student {
 	private long studentId;
 	private String name;
 	private String gender;
-	private String birthDate;
+	private Date birthDate;
 	private String homeContact;
 	private String emergencyContact;
 	private String address;
@@ -26,13 +26,13 @@ public class Student {
 	private String schoolLevel;
 	private String studentNric;
 	private long points;
-	private boolean takenDiagnostic;
+	private long takenDiagnostic;
 
 	private Parent parent;
 	private Branch branch;
 	
 	private Set<Bill> bills;
-	private Set<Schedule> schedules;
+	private Set<StudentSchedule> studentSchedules;
 	private Set<PointEvent> pointEvents;
 	private Set<TeacherStudentCourse> teacherStudentCoursess;
 	private Set<Diagnostic> diagnostics;
@@ -44,9 +44,9 @@ public class Student {
 	public Student() {
 	}
 	
-	public Student(String name, String gender, String birthDate, String homeContact, 
+	public Student(String name, String gender, Date birthDate, String homeContact, 
 			String emergencyContact, String address, String postalCode, String schoolName, 
-			String schoolLevel, String studentNric, boolean takenDiagnostic, Parent parent, Branch branch) {
+			String schoolLevel, String studentNric, long takenDiagnostic, Parent parent, Branch branch) {
 		super();
 		this.name = name;
 		this.gender = gender;
@@ -112,14 +112,14 @@ public class Student {
 	/**
 	 * @return the birthDate
 	 */
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
 	/**
 	 * @param birthDate the birthDate to set
 	 */
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -238,14 +238,14 @@ public class Student {
 	/**
 	 * @return the takenDiagnostic
 	 */
-	public boolean isTakenDiagnostic() {
+	public long isTakenDiagnostic() {
 		return takenDiagnostic;
 	}
 
 	/**
 	 * @param takenDiagnostic the takenDiagnostic to set
 	 */
-	public void setTakenDiagnostic(boolean takenDiagnostic) {
+	public void setTakenDiagnostic(long takenDiagnostic) {
 		this.takenDiagnostic = takenDiagnostic;
 	}
 
@@ -292,17 +292,24 @@ public class Student {
 	}
 
 	/**
-	 * @return the schedules
+	 * @return the studentSchedules
 	 */
-	public Set<Schedule> getSchedules() {
-		return schedules;
+	public Set<StudentSchedule> getStudentSchedules() {
+		return studentSchedules;
 	}
 
 	/**
-	 * @param schedules the schedules to set
+	 * @param studentSchedules the studentSchedules to set
 	 */
-	public void setSchedules(Set<Schedule> schedules) {
-		this.schedules = schedules;
+	public void setStudentSchedules(Set<StudentSchedule> studentSchedules) {
+		this.studentSchedules = studentSchedules;
+	}
+
+	/**
+	 * @return the takenDiagnostic
+	 */
+	public long getTakenDiagnostic() {
+		return takenDiagnostic;
 	}
 
 	/**
@@ -422,7 +429,7 @@ public class Student {
 		returnJson.put(Key.STUDENTID, this.studentId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.GENDER, this.gender);
-		returnJson.put(Key.BIRTHDATE, this.birthDate);
+		returnJson.put(Key.BIRTHDATE, Config.BIRTHDATE.format(this.birthDate));
 		returnJson.put(Key.HOMECONTACT, this.homeContact);
 		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);
@@ -445,12 +452,6 @@ public class Student {
 			billArr.add(k.toJson());
 		}
 		returnJson.put(Key.BILLS, billArr);
-
-		JSONArray scheduleArr = new JSONArray();
-		for (Schedule a : ScheduleDAO.getSchedulesByStudent(this)) {
-			scheduleArr.add(a.toJson());
-		}
-		returnJson.put(Key.SCHEDULES, scheduleArr);
 		
 		JSONArray pointEventArr = new JSONArray();
 		for (PointEvent pe : PointEventDAO.getPointEventsByStudent(this)) {

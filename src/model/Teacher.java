@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.PointEventDAO;
 import dataManager.SalaryDAO;
+import dataManager.ScheduleDAO;
 import dataManager.TeacherCourseDAO;
 import system.Config;
 import system.Key;
@@ -30,7 +31,7 @@ public class Teacher {
 
 	private Branch branch;
 	private Set<Salary> salaries;
-	private Set<TeacherCourse> teacherCourses;
+	private Set<Schedule> schedules;
 	private Set<PointEvent> pointEvents;
 	private Set<TeacherStudentCourse> teacherStudentCoursess;
 
@@ -250,17 +251,17 @@ public class Teacher {
 	}
 
 	/**
-	 * @return the teacherCourses
+	 * @return the schedules
 	 */
-	public Set<TeacherCourse> getTeacherCourses() {
-		return teacherCourses;
+	public Set<Schedule> getSchedules() {
+		return schedules;
 	}
 
 	/**
-	 * @param teacherCourses the teacherCourses to set
+	 * @param schedules the schedules to set
 	 */
-	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
-		this.teacherCourses = teacherCourses;
+	public void setSchedules(Set<Schedule> schedules) {
+		this.schedules = schedules;
 	}
 
 	/**
@@ -331,11 +332,11 @@ public class Teacher {
 		}
 		returnJson.put(Key.SALARYS, salaryArr);
 		
-		JSONArray teacherCourseArr = new JSONArray();
-		for (TeacherCourse tc : TeacherCourseDAO.getTeacherCoursesByTeacher(this)) {
-			teacherCourseArr.add(tc.toJsonStrong());
+		JSONArray scheduleArr = new JSONArray();
+		for (Schedule s : ScheduleDAO.getSchedulesByTeacher(this)) {
+			scheduleArr.add(s.toJson());
 		}
-		returnJson.put(Key.TEACHERCOURSES, teacherCourseArr);
+		returnJson.put(Key.SCHEDULES, scheduleArr);
 		
 //		JSONArray pointEventArr = new JSONArray();
 //		for (PointEvent pe : PointEventDAO.getPointEventsByTeacher(this)) {

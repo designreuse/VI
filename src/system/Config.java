@@ -7,6 +7,7 @@ import org.json.simple.parser.JSONParser;
 public class Config {
 	public static final JSONParser JPARSER = new JSONParser();
 	public static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+	public static final SimpleDateFormat BIRTHDATE = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public static final String TIMEZONE = "Singapore";
 	

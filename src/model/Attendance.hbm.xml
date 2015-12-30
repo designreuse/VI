@@ -1,42 +1,39 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Dec 30, 2015 4:55:14 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
- <class name="model.Attendance" table="ATTENDANCE">
-  <id name="attendanceId" type="long">
-   <column name="ATTENDANCEID"/>
-   <generator class="increment"/>
-  </id>
-  <property generated="never" lazy="false" name="actualStartDate" type="java.util.Date">
-   <column name="ACTUALSTARTDATE"/>
-  </property>
-  <property generated="never" lazy="false" name="actualEndDate" type="java.util.Date">
-   <column name="ACTUALENDDATE"/>
-  </property>
-  <property generated="never" lazy="false" name="planStartDate" type="java.util.Date">
-   <column name="PLANSTARTDATE"/>
-  </property>
-  <property generated="never" lazy="false" name="planEndDate" type="java.util.Date">
-   <column name="PLANENDDATE"/>
-  </property>
-  <property generated="never" lazy="false" name="attendanceStatus" type="long">
-   <column name="ATTENDANCESTATUS"/>
-  </property>
-  <many-to-one class="model.Schedule" fetch="join" name="schedule">
-   <column name="SCHEDULEID"/>
-  </many-to-one>
-  <many-to-one class="model.Classroom" fetch="join" name="classroom">
-   <column name="CLASSROOMID"/>
-  </many-to-one>
-  <property generated="never" lazy="false" name="objStatus" type="long">
-   <column name="OBJSTATUS"/>
-  </property>
-  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
-   <column name="CREATEDATE"/>
-  </property>
-  <property generated="never" lazy="false" name="remark" type="java.lang.String">
-   <column name="REMARK"/>
-  </property>
- </class>
+    <class name="model.Attendance" table="ATTENDANCE">
+        <id name="attendanceId" type="long">
+            <column name="ATTENDANCEID" />
+            <generator class="increment" />
+        </id>
+        <property name="actualStartDate" type="java.util.Date">
+            <column name="ACTUALSTARTDATE" />
+        </property>
+        <property name="actualEndDate" type="java.util.Date">
+            <column name="ACTUALENDDATE" />
+        </property>
+        <property name="planStartDate" type="java.util.Date">
+            <column name="PLANSTARTDATE" />
+        </property>
+        <property name="planEndDate" type="java.util.Date">
+            <column name="PLANENDDATE" />
+        </property>
+        <property name="attendanceStatus" type="long">
+            <column name="ATTENDANCESTATUS" />
+        </property>
+        <many-to-one name="studentSchedule" class="model.StudentSchedule" fetch="join">
+            <column name="STUDENTSCHEDULEID" />
+        </many-to-one>
+        <property name="objStatus" type="long">
+            <column name="OBJSTATUS" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATEDATE" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+    </class>
 </hibernate-mapping>

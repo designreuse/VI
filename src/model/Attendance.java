@@ -14,11 +14,8 @@ public class Attendance {
 	private Date actualEndDate;
 	private Date planStartDate;
 	private Date planEndDate;
-	
 	private long attendanceStatus;
-	
-	private Schedule schedule;
-	private Classroom classroom;
+	private StudentSchedule studentSchedule;
 	
 	private long objStatus;
 	private Date createDate;
@@ -26,22 +23,20 @@ public class Attendance {
 	
 	public Attendance(){}
 
-	public Attendance(Schedule schedule, Classroom classroom) {
+	public Attendance(StudentSchedule studentSchedule) {
 		super();
 		this.attendanceStatus = 0;
-		this.schedule = schedule;
-		this.classroom = classroom;
+		this.setStudentSchedule(studentSchedule);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
 	
-	public Attendance(Date planStartDate, Date planEndDate, Schedule schedule, Classroom classroom) {
+	public Attendance(Date planStartDate, Date planEndDate, StudentSchedule studentSchedule) {
 		super();
 		this.attendanceStatus = 0;
 		this.planStartDate = planStartDate;
 		this.planEndDate = planEndDate;
-		this.schedule = schedule;
-		this.classroom = classroom;
+		this.setStudentSchedule(studentSchedule);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -131,31 +126,17 @@ public class Attendance {
 	}
 
 	/**
-	 * @return the schedule
+	 * @return the studentSchedule
 	 */
-	public Schedule getSchedule() {
-		return schedule;
+	public StudentSchedule getStudentSchedule() {
+		return studentSchedule;
 	}
 
 	/**
-	 * @param schedule the schedule to set
+	 * @param studentSchedule the studentSchedule to set
 	 */
-	public void setSchedule(Schedule schedule) {
-		this.schedule = schedule;
-	}
-
-	/**
-	 * @return the classroom
-	 */
-	public Classroom getClassroom() {
-		return classroom;
-	}
-
-	/**
-	 * @param classroom the classroom to set
-	 */
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
+	public void setStudentSchedule(StudentSchedule studentSchedule) {
+		this.studentSchedule = studentSchedule;
 	}
 
 	/**
@@ -208,8 +189,7 @@ public class Attendance {
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 		
-		returnJson.put(Key.SCHEDULE, this.schedule.toJson());
-		returnJson.put(Key.STUDENT, this.classroom.toJson());
+		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -225,8 +205,7 @@ public class Attendance {
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
 
-		returnJson.put(Key.SCHEDULE, this.schedule.toJson());
-		returnJson.put(Key.STUDENT, this.classroom.toJson());
+		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -241,9 +220,8 @@ public class Attendance {
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.PLANSTARTDATE, this.planStartDate);
 		returnJson.put(Key.PLANENDDATE, this.planEndDate);
-		returnJson.put(Key.SCHEDULEID, this.schedule.getScheduleId());
-		returnJson.put(Key.SCHEDULENAME, this.schedule.getName());
-		returnJson.put(Key.SCHEDULEDESCRIPTION, this.schedule.getDescription());
+		
+		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -252,19 +230,19 @@ public class Attendance {
 		return returnJson;
 	}
 	
-	public JSONObject toScheduleJsonMark(){
-		JSONObject returnJson = new JSONObject();
-				
-		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
-
-		returnJson.put(Key.STUDENT, this.classroom.toJson());
-
-		returnJson.put(Key.OBJSTATUS, this.objStatus);
-		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-		returnJson.put(Key.REMARK, this.remark);
-		
-		return returnJson;
-	}
+//	public JSONObject toScheduleJsonMark(){
+//		JSONObject returnJson = new JSONObject();
+//				
+//		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+//		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+//		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
+//
+//		returnJson.put(Key.STUDENT, this.classroom.toJson());
+//
+//		returnJson.put(Key.OBJSTATUS, this.objStatus);
+//		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+//		returnJson.put(Key.REMARK, this.remark);
+//		
+//		return returnJson;
+//	}
 }
