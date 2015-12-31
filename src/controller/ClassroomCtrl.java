@@ -159,23 +159,23 @@ public class ClassroomCtrl {
 	}
 
 	// Get classroom by attendance
-	public static JSONObject getClassroomByAttendance(JSONObject inputJson) {
-		JSONObject returnJson = new JSONObject();
-		try {
-			Attendance attendance = AttendanceDAO.getAttendanceById((long)inputJson.get(Key.ATTENDANCEID));
-			if (attendance != null) {
-				Classroom classroom = attendance.getClassroom();
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, classroom.toJson());
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL);
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
+//	public static JSONObject getClassroomByAttendance(JSONObject inputJson) {
+//		JSONObject returnJson = new JSONObject();
+//		try {
+//			Attendance attendance = AttendanceDAO.getAttendanceById((long)inputJson.get(Key.ATTENDANCEID));
+//			if (attendance != null) {
+//				Classroom classroom = attendance.getClassroom();
+//				returnJson.put(Key.STATUS, Value.SUCCESS);
+//				returnJson.put(Key.MESSAGE, classroom.toJson());
+//			} else {
+//				returnJson.put(Key.STATUS, Value.FAIL);
+//				returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			returnJson.put(Key.STATUS, Value.FAIL);
+//			returnJson.put(Key.MESSAGE, e);
+//		}
+//		return returnJson;
+//	}
 }

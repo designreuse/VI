@@ -2,11 +2,16 @@ package controller;
 
 import model.Course;
 import model.Result;
+import model.Teacher;
+import model.TeacherStudentCourse;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.CourseDAO;
 import dataManager.ResultDAO;
+import dataManager.TeacherDAO;
+import dataManager.TeacherStudentCourseDAO;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -150,4 +155,27 @@ public class CourseCtrl {
 		return returnJson;
 	}
 	
+	//Get courses by teacher
+	public static JSONObject getCoursesByTeacher (JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try {
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				JSONArray courseArr = new JSONArray();
+				for (Course c : CourseDAO.getCoursesByTeacher(teacher)) {
+					courseArr.add(c.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, courseArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 }

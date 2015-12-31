@@ -8,9 +8,7 @@ import java.util.List;
 
 import model.Course;
 import model.Schedule;
-import model.Student;
 import model.Teacher;
-import model.TeacherCourse;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
@@ -123,22 +121,22 @@ public class ScheduleDAO {
 	}
 	
 	//TODO create the method to retrieve base on plan start date, teacherCourse
-	public static Schedule getScheduleByTeacherCourseAndPlanStartDate(TeacherCourse teacherCourse, Date planStartDate) {
-		Schedule schedule = null;
-		Schedule tempSchedule = null;
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
-		detachedCriteria.add(Restrictions.eq(Key.PLANSTARTDATE, planStartDate));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-		for (Object o : list) {
-			tempSchedule = (Schedule)o;
-			if(tempSchedule != null){
-				schedule = tempSchedule;
-				break;
-			}
-		}
-		return schedule;
-	}
+//	public static Schedule getScheduleByTeacherCourseAndPlanStartDate(TeacherCourse teacherCourse, Date planStartDate) {
+//		Schedule schedule = null;
+//		Schedule tempSchedule = null;
+//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
+//		detachedCriteria.add(Restrictions.eq(Key.TEACHERCOURSE, teacherCourse));
+//		detachedCriteria.add(Restrictions.eq(Key.PLANSTARTDATE, planStartDate));
+//		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+//		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+//		for (Object o : list) {
+//			tempSchedule = (Schedule)o;
+//			if(tempSchedule != null){
+//				schedule = tempSchedule;
+//				break;
+//			}
+//		}
+//		return schedule;
+//	}
 
 }

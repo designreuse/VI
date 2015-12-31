@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Date;
+
 import model.Schedule;
 import model.Bill;
 import model.Branch;
@@ -18,6 +20,7 @@ import dataManager.ParentDAO;
 import dataManager.PointEventDAO;
 import dataManager.ResultDAO;
 import dataManager.StudentDAO;
+import system.Config;
 import system.Encrypt;
 import system.Key;
 import system.Message;
@@ -42,7 +45,7 @@ public class StudentCtrl {
 //					String passwordSalt = Encrypt.nextSalt();
 //					String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 					String gender = (String) inputJson.get(Key.GENDER);
-					String birthDate = (String) inputJson.get(Key.BIRTHDATE);
+					Date birthDate = Config.BIRTHDATE.parse((String) inputJson.get(Key.BIRTHDATE));
 					String homeContact = (String) inputJson.get(Key.HOMECONTACT);
 					String emergencyContact = (String) inputJson.get(Key.EMERGENCYCONTACT);
 					String address = (String) inputJson.get(Key.ADDRESS);
@@ -50,7 +53,7 @@ public class StudentCtrl {
 					String schoolName = (String) inputJson.get(Key.SCHOOLNAME);
 					String schoolLevel = (String) inputJson.get(Key.SCHOOLLEVEL);
 					String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
-					boolean takenDiagnostic = (boolean) inputJson.get(Key.TAKENDIAGNOSTIC);
+					long takenDiagnostic = (long) inputJson.get(Key.TAKENDIAGNOSTIC);
 
 					Student student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, 
 							schoolName, schoolLevel, studentNric, takenDiagnostic, parent, branch);
@@ -124,7 +127,7 @@ public class StudentCtrl {
 //				String passwordSalt = Encrypt.nextSalt();
 //				String passwordHash = Encrypt.generateSaltedHash(password, passwordSalt);
 				String gender = (String) inputJson.get(Key.GENDER);
-				String birthDate = (String) inputJson.get(Key.BIRTHDATE);
+				Date birthDate = Config.BIRTHDATE.parse((String) inputJson.get(Key.BIRTHDATE));
 				String homeContact = (String) inputJson.get(Key.HOMECONTACT);
 				String emergencyContact = (String) inputJson.get(Key.EMERGENCYCONTACT);
 				String address = (String) inputJson.get(Key.ADDRESS);
@@ -132,7 +135,7 @@ public class StudentCtrl {
 				String schoolName = (String) inputJson.get(Key.SCHOOLNAME);
 				String schoolLevel = (String) inputJson.get(Key.SCHOOLLEVEL);
 				String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
-				boolean takenDiagnostic = (boolean) inputJson.get(Key.TAKENDIAGNOSTIC);
+				long takenDiagnostic = (long) inputJson.get(Key.TAKENDIAGNOSTIC);
 				
 //				Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 //				if(branch != null){
@@ -318,27 +321,6 @@ public class StudentCtrl {
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.BILLNOTEXIST);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL);
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
-
-	// Get student by schedule
-	public static JSONObject getStudentBySchedule(JSONObject inputJson) {
-		JSONObject returnJson = new JSONObject();
-		try {
-			Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
-			if (schedule != null) {
-				Student student = schedule.getStudent();
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, student.toJson());
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.SCHEDULENOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

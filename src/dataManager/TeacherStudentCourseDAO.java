@@ -45,6 +45,7 @@ public class TeacherStudentCourseDAO {
 	}
 
 	// features
+	//get by teacher
 	public static ArrayList<TeacherStudentCourse> getTeacherStudentCoursesByTeacher(Teacher teacher) {
 		ArrayList<TeacherStudentCourse> teacherStudentCourses = new ArrayList<TeacherStudentCourse>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherStudentCourse.class);
@@ -56,7 +57,7 @@ public class TeacherStudentCourseDAO {
 		}
 		return teacherStudentCourses;
 	}
-	
+	//get by course
 	public static ArrayList<TeacherStudentCourse> getTeacherStudentCoursesByCourse(Course course) {
 		ArrayList<TeacherStudentCourse> teacherStudentCourses = new ArrayList<TeacherStudentCourse>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherStudentCourse.class);
@@ -68,11 +69,24 @@ public class TeacherStudentCourseDAO {
 		}
 		return teacherStudentCourses;
 	}
-	
+	//get by student
 	public static ArrayList<TeacherStudentCourse> getTeacherStudentCoursesByStudent(Student student) {
 		ArrayList<TeacherStudentCourse> teacherStudentCourses = new ArrayList<TeacherStudentCourse>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherStudentCourse.class);
 		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for (Object o : list) {
+			teacherStudentCourses.add((TeacherStudentCourse) o);
+		}
+		return teacherStudentCourses;
+	}
+	//get by teacher and course
+	public static ArrayList<TeacherStudentCourse> getTeacherStudentCoursesByTeacherAndCourse(Teacher teacher, Course course) {
+		ArrayList<TeacherStudentCourse> teacherStudentCourses = new ArrayList<TeacherStudentCourse>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherStudentCourse.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for (Object o : list) {

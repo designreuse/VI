@@ -147,150 +147,6 @@
     <url-pattern>/GetAllTeachersServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>RegisterParentServlet</servlet-name>
-    <servlet-class>service.RegisterParentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterParentServlet</servlet-name>
-    <url-pattern>/RegisterParentServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>RegisterStudentServlet</servlet-name>
-    <servlet-class>service.RegisterStudentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterStudentServlet</servlet-name>
-    <url-pattern>/RegisterStudentServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>RegisterTeacherServlet</servlet-name>
-    <servlet-class>service.RegisterTeacherServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterTeacherServlet</servlet-name>
-    <url-pattern>/RegisterTeacherServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateAttendanceServlet</servlet-name>
-    <servlet-class>service.UpdateAttendanceServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateAttendanceServlet</servlet-name>
-    <url-pattern>/UpdateAttendanceServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateAttendanceWithQRServlet</servlet-name>
-    <servlet-class>service.UpdateAttendanceWithQRServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateAttendanceWithQRServlet</servlet-name>
-    <url-pattern>/UpdateAttendanceWithQRServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateBillServlet</servlet-name>
-    <servlet-class>service.UpdateBillServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateBillServlet</servlet-name>
-    <url-pattern>/UpdateBillServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateBranchServlet</servlet-name>
-    <servlet-class>service.UpdateBranchServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateBranchServlet</servlet-name>
-    <url-pattern>/UpdateBranchServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateBranchManagerServlet</servlet-name>
-    <servlet-class>service.UpdateBranchManagerServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateBranchManagerServlet</servlet-name>
-    <url-pattern>/UpdateBranchManagerServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateClassroomServlet</servlet-name>
-    <servlet-class>service.UpdateClassroomServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateClassroomServlet</servlet-name>
-    <url-pattern>/UpdateClassroomServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateCourseServlet</servlet-name>
-    <servlet-class>service.UpdateCourseServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateCourseServlet</servlet-name>
-    <url-pattern>/UpdateCourseServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateParentServlet</servlet-name>
-    <servlet-class>service.UpdateParentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateParentServlet</servlet-name>
-    <url-pattern>/UpdateParentServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdatePointEventServlet</servlet-name>
-    <servlet-class>service.UpdatePointEventServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdatePointEventServlet</servlet-name>
-    <url-pattern>/UpdatePointEventServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateResultServlet</servlet-name>
-    <servlet-class>service.UpdateResultServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateResultServlet</servlet-name>
-    <url-pattern>/UpdateResultServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateStudentServlet</servlet-name>
-    <servlet-class>service.UpdateStudentServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateStudentServlet</servlet-name>
-    <url-pattern>/UpdateStudentServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateSalaryServlet</servlet-name>
-    <servlet-class>service.UpdateSalaryServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateSalaryServlet</servlet-name>
-    <url-pattern>/UpdateSalaryServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateScheduleServlet</servlet-name>
-    <servlet-class>service.UpdateScheduleServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateScheduleServlet</servlet-name>
-    <url-pattern>/UpdateScheduleServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateTeacherServlet</servlet-name>
-    <servlet-class>service.UpdateTeacherServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateTeacherServlet</servlet-name>
-    <url-pattern>/UpdateTeacherServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>UpdateTeacherCourseServlet</servlet-name>
-    <servlet-class>service.UpdateTeacherCourseServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UpdateTeacherCourseServlet</servlet-name>
-    <url-pattern>/UpdateTeacherCourseServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>GetAttendancesByStudentServlet</servlet-name>
     <servlet-class>service.GetAttendancesByStudentServlet</servlet-class>
   </servlet>
@@ -347,14 +203,6 @@
     <url-pattern>/GetBranchByTeacher</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetBranchesByAdmin</servlet-name>
-    <servlet-class>service.GetBranchesByAdmin</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetBranchesByAdmin</servlet-name>
-    <url-pattern>/GetBranchesByAdmin</url-pattern>
-  </servlet-mapping>
-  <servlet>
     <servlet-name>GetBranchCoursesByBranchServlet</servlet-name>
     <servlet-class>service.GetBranchCoursesByBranchServlet</servlet-class>
   </servlet>
@@ -363,12 +211,20 @@
     <url-pattern>/GetBranchCoursesByBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetBranchManagersByBranch</servlet-name>
-    <servlet-class>service.GetBranchManagersByBranch</servlet-class>
+    <servlet-name>GetBranchesByAdminServlet</servlet-name>
+    <servlet-class>service.GetBranchesByAdminServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetBranchManagersByBranch</servlet-name>
-    <url-pattern>/GetBranchManagersByBranch</url-pattern>
+    <servlet-name>GetBranchesByAdminServlet</servlet-name>
+    <url-pattern>/GetBranchesByAdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>GetBranchManagersByBranchServlet</servlet-name>
+    <servlet-class>service.GetBranchManagersByBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetBranchManagersByBranchServlet</servlet-name>
+    <url-pattern>/GetBranchManagersByBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetClassroomByAttendance</servlet-name>
@@ -387,12 +243,12 @@
     <url-pattern>/GetClassroomsByBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetCourseByResult</servlet-name>
-    <servlet-class>service.GetCourseByResult</servlet-class>
+    <servlet-name>GetCoursesByTeacherServlet</servlet-name>
+    <servlet-class>service.GetCoursesByTeacherServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetCourseByResult</servlet-name>
-    <url-pattern>/GetCourseByResult</url-pattern>
+    <servlet-name>GetCoursesByTeacherServlet</servlet-name>
+    <url-pattern>/GetCoursesByTeacherServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetParentById</servlet-name>
@@ -617,6 +473,150 @@
   <servlet-mapping>
     <servlet-name>GetPointEventsByTeacher</servlet-name>
     <url-pattern>/GetPointEventsByTeacher</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegisterParentServlet</servlet-name>
+    <servlet-class>service.RegisterParentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterParentServlet</servlet-name>
+    <url-pattern>/RegisterParentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegisterStudentServlet</servlet-name>
+    <servlet-class>service.RegisterStudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterStudentServlet</servlet-name>
+    <url-pattern>/RegisterStudentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>RegisterTeacherServlet</servlet-name>
+    <servlet-class>service.RegisterTeacherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterTeacherServlet</servlet-name>
+    <url-pattern>/RegisterTeacherServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateAttendanceServlet</servlet-name>
+    <servlet-class>service.UpdateAttendanceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAttendanceServlet</servlet-name>
+    <url-pattern>/UpdateAttendanceServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateAttendanceWithQRServlet</servlet-name>
+    <servlet-class>service.UpdateAttendanceWithQRServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateAttendanceWithQRServlet</servlet-name>
+    <url-pattern>/UpdateAttendanceWithQRServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateBillServlet</servlet-name>
+    <servlet-class>service.UpdateBillServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateBillServlet</servlet-name>
+    <url-pattern>/UpdateBillServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateBranchServlet</servlet-name>
+    <servlet-class>service.UpdateBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateBranchServlet</servlet-name>
+    <url-pattern>/UpdateBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateBranchManagerServlet</servlet-name>
+    <servlet-class>service.UpdateBranchManagerServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateBranchManagerServlet</servlet-name>
+    <url-pattern>/UpdateBranchManagerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateClassroomServlet</servlet-name>
+    <servlet-class>service.UpdateClassroomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateClassroomServlet</servlet-name>
+    <url-pattern>/UpdateClassroomServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateCourseServlet</servlet-name>
+    <servlet-class>service.UpdateCourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateCourseServlet</servlet-name>
+    <url-pattern>/UpdateCourseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateParentServlet</servlet-name>
+    <servlet-class>service.UpdateParentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateParentServlet</servlet-name>
+    <url-pattern>/UpdateParentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdatePointEventServlet</servlet-name>
+    <servlet-class>service.UpdatePointEventServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdatePointEventServlet</servlet-name>
+    <url-pattern>/UpdatePointEventServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateResultServlet</servlet-name>
+    <servlet-class>service.UpdateResultServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateResultServlet</servlet-name>
+    <url-pattern>/UpdateResultServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateStudentServlet</servlet-name>
+    <servlet-class>service.UpdateStudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateStudentServlet</servlet-name>
+    <url-pattern>/UpdateStudentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateSalaryServlet</servlet-name>
+    <servlet-class>service.UpdateSalaryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateSalaryServlet</servlet-name>
+    <url-pattern>/UpdateSalaryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateScheduleServlet</servlet-name>
+    <servlet-class>service.UpdateScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateScheduleServlet</servlet-name>
+    <url-pattern>/UpdateScheduleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateTeacherServlet</servlet-name>
+    <servlet-class>service.UpdateTeacherServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateTeacherServlet</servlet-name>
+    <url-pattern>/UpdateTeacherServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>UpdateTeacherCourseServlet</servlet-name>
+    <servlet-class>service.UpdateTeacherCourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateTeacherCourseServlet</servlet-name>
+    <url-pattern>/UpdateTeacherCourseServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>SendEmailServlet</servlet-name>

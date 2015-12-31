@@ -5,7 +5,6 @@ import model.Parent;
 import model.PointEvent;
 import model.Salary;
 import model.Teacher;
-import model.TeacherCourse;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,7 +13,6 @@ import dataManager.BranchDAO;
 import dataManager.ParentDAO;
 import dataManager.PointEventDAO;
 import dataManager.SalaryDAO;
-import dataManager.TeacherCourseDAO;
 import dataManager.TeacherDAO;
 import system.Encrypt;
 import system.Key;
@@ -335,24 +333,5 @@ public class TeacherCtrl {
 		}
 		return returnJson;
 	}
-	// Get teacher by teachercourse
-	public static JSONObject getTeacherByTeacherCourse(JSONObject inputJson) {
-		JSONObject returnJson = new JSONObject();
-		try {
-			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
-			if (teacherCourse != null) {
-				Teacher teacher = teacherCourse.getTeacher();
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, teacher.toJson());
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL);
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
+
 }

@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Course;
+import model.Teacher;
+import model.TeacherStudentCourse;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -41,10 +46,10 @@ public class CourseDAO {
 	}
 	
 	//features
-//	public static ArrayList<Course> getCoursesByTeacher(Teacher teacher){
+//	public static ArrayList<Course> getCoursesByTeacher(ArrayList<TeacherStudentCourse> tsc){
 //		ArrayList<Course> courses = new ArrayList<Course>();
-//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Course.class);
-//		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Course.class).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+//		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
 //		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 //		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 //		for(Object o : list){
@@ -52,6 +57,20 @@ public class CourseDAO {
 //		}
 //		return courses;
 //	}
+	
+	public static ArrayList<Course> getCoursesByTeacher(Teacher teacher){
+		ArrayList<Course> courses = new ArrayList<Course>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<Object> list = session.createQuery("select c from Course c join c.teacherStudentCourses tsc where tsc.teacher = :teacher")
+				.setParameter("teacher", teacher).list();
+		session.getTransaction().commit();
+		session.close();
+		for(Object o : list){
+			courses.add((Course) o);
+		}
+		return courses;
+	}
 	
 	public static Course getCourseByName(String name) {
 		Course course = null;
