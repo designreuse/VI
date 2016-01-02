@@ -54,21 +54,40 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="box box-success">
+							<div class="box-header with-border">
+								<h4 class="box-title">Search Courses</h4>
+							</div>
 							<div class="box-body">
+							
 								<div class="row">
-									<div class="col-md-12" id="dynamicStudentList">
-										<!-- for the accordion -->
+									<div class="col-md-8">
+										<select class="form-control" id="coursesDDL"></select>
 									</div>
-								</div>
-								
-								<div class="row">
-									<div class="col-md-12">
-										<input class="btn btn-primary submit" type="button" value="Search" onclick="searchByCourse();">
+									<div class="col-md-4">
+										<input class="btn btn-primary submit" type="button" value="Show List" onclick="populateStudents();">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+				</div>
+				
+				<div class="row">
+					<div class = "collapse">
+						<div class="col-md-12">
+							<div class="box box-success">
+							<div class="box-header with-border">
+								<h4 class="box-title">Student List</h4>
+							</div>
+							
+							<div class="box-body">
+								<div class="col-md-12" id="dynamicStudentList">
+								</div>
+						<!-- for the accordion -->
+						</div>
+					</div>
+				</div>
+				</div>
 				</div>
 
 				<!-- end of displaying parents panel -->
