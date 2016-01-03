@@ -34,7 +34,7 @@ public class Student {
 	private Set<Bill> bills;
 	private Set<StudentSchedule> studentSchedules;
 	private Set<PointEvent> pointEvents;
-	private Set<TeacherStudentCourse> teacherStudentCoursess;
+	private Set<TeacherStudentCourse> teacherStudentCourses;
 	private Set<Diagnostic> diagnostics;
 
 	private long objStatus;
@@ -327,17 +327,17 @@ public class Student {
 	}
 
 	/**
-	 * @return the teacherStudentCoursess
+	 * @return the teacherStudentCourses
 	 */
-	public Set<TeacherStudentCourse> getTeacherStudentCoursess() {
-		return teacherStudentCoursess;
+	public Set<TeacherStudentCourse> getTeacherStudentCourses() {
+		return teacherStudentCourses;
 	}
 
 	/**
-	 * @param teacherStudentCoursess the teacherStudentCoursess to set
+	 * @param teacherStudentCourses the teacherStudentCourses to set
 	 */
-	public void setTeacherStudentCoursess(Set<TeacherStudentCourse> teacherStudentCoursess) {
-		this.teacherStudentCoursess = teacherStudentCoursess;
+	public void setTeacherStudentCoursess(Set<TeacherStudentCourse> teacherStudentCourses) {
+		this.teacherStudentCourses = teacherStudentCourses;
 	}
 
 	/**
@@ -395,14 +395,38 @@ public class Student {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	
+	public JSONObject toJsonStudent() {
+		JSONObject returnJson = new JSONObject();
 
+		returnJson.put(Key.STUDENTID, this.studentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.GENDER, this.gender);
+		returnJson.put(Key.BIRTHDATE, Config.SDF.format(this.birthDate));
+		returnJson.put(Key.HOMECONTACT, this.homeContact);
+		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.SCHOOLNAME, this.schoolName);
+		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
+		returnJson.put(Key.STUDENTNRIC, this.studentNric);
+		returnJson.put(Key.POINTS, this.points);
+		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 
 		returnJson.put(Key.STUDENTID, this.studentId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.GENDER, this.gender);
-		returnJson.put(Key.BIRTHDATE, this.birthDate);
+		returnJson.put(Key.BIRTHDATE, Config.SDF.format(this.birthDate));
 		returnJson.put(Key.HOMECONTACT, this.homeContact);
 		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);

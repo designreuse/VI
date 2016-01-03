@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Date;
 
+import model.Course;
 import model.Schedule;
 import model.Bill;
 import model.Branch;
@@ -9,10 +10,12 @@ import model.Parent;
 import model.PointEvent;
 import model.Result;
 import model.Student;
+import model.Teacher;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.BillDAO;
 import dataManager.BranchDAO;
@@ -20,6 +23,7 @@ import dataManager.ParentDAO;
 import dataManager.PointEventDAO;
 import dataManager.ResultDAO;
 import dataManager.StudentDAO;
+import dataManager.TeacherDAO;
 import system.Config;
 import system.Encrypt;
 import system.Key;
@@ -350,4 +354,34 @@ public class StudentCtrl {
 		}
 		return returnJson;
 	}
+	
+	public static JSONObject getStudentByTeacherAndCourse(JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+				if(course != null){
+					JSONArray studentArr = new JSONArray();
+					for (Student s : StudentDAO.getStudentsByTeacherAndCourse(teacher, course)) {
+						studentArr.add(s.toJsonStudent());
+					}
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, studentArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 }

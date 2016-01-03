@@ -6,9 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Branch;
+import model.Course;
 import model.Parent;
 import model.Student;
+import model.Teacher;
 
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -87,5 +90,20 @@ public class StudentDAO {
 		return students;
 	}
 	
+	public static ArrayList<Student> getStudentsByTeacherAndCourse(Teacher teacher, Course course){
+		ArrayList<Student> students = new ArrayList<Student>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<Object> list = session.createQuery("select s from Student s join s.teacherStudentCourses tsc where tsc.teacher = :teacher and tsc.course = :course")
+				.setParameter("teacher", teacher)
+				.setParameter("course", course)
+				.list();
+		session.getTransaction().commit();
+		session.close();
+		for(Object o : list){
+			students.add((Student) o);
+		}
+		return students;
+	}
 	
 }
