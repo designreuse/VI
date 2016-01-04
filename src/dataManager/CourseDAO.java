@@ -72,6 +72,20 @@ public class CourseDAO {
 		return courses;
 	}
 	
+	public static ArrayList<Course> getCoursesScheduleByTeacher(Teacher teacher){
+		ArrayList<Course> courses = new ArrayList<Course>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<Object> list = session.createQuery("select c from Course c join c.schedules s where s.teacher = :teacher")
+				.setParameter("teacher", teacher).list();
+		session.getTransaction().commit();
+		session.close();
+		for(Object o : list){
+			courses.add((Course) o);
+		}
+		return courses;
+	}
+	
 	public static Course getCourseByName(String name) {
 		Course course = null;
 		Course tempCourse = null;

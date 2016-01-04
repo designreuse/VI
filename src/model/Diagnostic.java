@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 
 import system.Config;
 import system.Key;
+import system.Value;
 
 public class Diagnostic {
 	private long diagnosticId;
@@ -21,18 +22,14 @@ public class Diagnostic {
 	
 	public Diagnostic(){}
 
-	public Diagnostic(long diagnosticId, String subjectName,
-			String resultValue, String feedback, Student student,
-			long objStatus, Date createDate, String remark) {
+	public Diagnostic(String subjectName, String resultValue, String feedback, Student student) {
 		super();
-		this.diagnosticId = diagnosticId;
 		this.subjectName = subjectName;
 		this.resultValue = resultValue;
 		this.feedback = feedback;
 		this.student = student;
-		this.objStatus = objStatus;
-		this.createDate = createDate;
-		this.remark = remark;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
 	}
 	
 	/**

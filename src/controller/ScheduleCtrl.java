@@ -60,11 +60,11 @@ public class ScheduleCtrl {
 					}
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -171,31 +171,8 @@ public class ScheduleCtrl {
 	}
 	
 	//features
-	//Get schedule by student
-//	public static JSONObject getSchedulesByStudent (JSONObject inputJson){
-//		JSONObject returnJson = new JSONObject();
-//		try{
-//			Student student = StudentDAO.getStudentById((long)inputJson.get(Key.STUDENTID));
-//			if(student != null){
-//				JSONArray salaryArr = new JSONArray();
-//				for (Schedule s : ScheduleDAO.getSchedulesByStudent(student)) {
-//					salaryArr.add(s.toJson());
-//				}
-//				returnJson.put(Key.STATUS, Value.SUCCESS);
-//				returnJson.put(Key.MESSAGE, salaryArr);
-//			} else {
-//				returnJson.put(Key.STATUS, Value.FAIL);
-//				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
-//			}
-//		}catch(Exception e){
-//			e.printStackTrace();
-//			returnJson.put(Key.STATUS, Value.FAIL)  ;
-//			returnJson.put(Key.MESSAGE, e);
-//		}
-//		return returnJson;
-//	}
 	
-	//Get schedule by teacher
+	//Get schedule by teacher id
 	public static JSONObject getSchedulesByTeacher (JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
@@ -219,7 +196,7 @@ public class ScheduleCtrl {
 		return returnJson;
 	}
 	
-	//Get schedule by course
+	//Get schedule by course id
 	public static JSONObject getSchedulesByCourse (JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
@@ -233,7 +210,7 @@ public class ScheduleCtrl {
 				returnJson.put(Key.MESSAGE, salaryArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -242,6 +219,110 @@ public class ScheduleCtrl {
 		}
 		return returnJson;
 	}
+	
+	//Get schedule by course name
+	public static JSONObject getSchedulesByCourseName(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try{
+			Course course = CourseDAO.getCourseByName((String) inputJson.get(Key.COURSENAME));
+			if (course != null) {
+				JSONArray scheduleArr = new JSONArray();
+				for (Schedule s : ScheduleDAO.getSchedulesByCourse(course)) {
+					scheduleArr.add(s.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, scheduleArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+			} 
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	//Get schedule by teacher id and course id
+	public static JSONObject getSchedulesByTeacherAndCourse (JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			Teacher teacher = TeacherDAO.getTeacherById((long)inputJson.get(Key.TEACHERID));
+			if(teacher != null){
+				Course course = CourseDAO.getCourseById((long)inputJson.get(Key.COURSEID));
+				if(course != null){
+					JSONArray salaryArr = new JSONArray();
+					for (Schedule s : ScheduleDAO.getSchedulesByTeacherCourse(teacher, course)) {
+						salaryArr.add(s.toJson());
+					}
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, salaryArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	//Get courses schedule by teacher id
+//	public static JSONObject getCoursesScheulesByTeacher (JSONObject inputJson){
+//		JSONObject returnJson = new JSONObject();
+//		try{
+//			Teacher teacher = TeacherDAO.getTeacherById((long)inputJson.get(Key.TEACHERID));
+//			if(teacher != null){
+//				JSONArray salaryArr = new JSONArray();
+//				for (Schedule s : ScheduleDAO.getCoursesScheduleByTeacherCourse(teacher) {
+//					salaryArr.add(s.toJson());
+//				}
+//				returnJson.put(Key.STATUS, Value.SUCCESS);
+//				returnJson.put(Key.MESSAGE, salaryArr);
+//			} else {
+//				returnJson.put(Key.STATUS, Value.FAIL);
+//				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+//			}
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			returnJson.put(Key.STATUS, Value.FAIL)  ;
+//			returnJson.put(Key.MESSAGE, e);
+//		}
+//		
+//		return returnJson;
+//	}
+	
+	
+	//Get schedule by student
+//	public static JSONObject getSchedulesByStudent (JSONObject inputJson){
+//		JSONObject returnJson = new JSONObject();
+//		try{
+//			Student student = StudentDAO.getStudentById((long)inputJson.get(Key.STUDENTID));
+//			if(student != null){
+//				JSONArray salaryArr = new JSONArray();
+//				for (Schedule s : ScheduleDAO.getSchedulesByStudent(student)) {
+//					salaryArr.add(s.toJson());
+//				}
+//				returnJson.put(Key.STATUS, Value.SUCCESS);
+//				returnJson.put(Key.MESSAGE, salaryArr);
+//			} else {
+//				returnJson.put(Key.STATUS, Value.FAIL);
+//				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+//			}
+//		}catch(Exception e){
+//			e.printStackTrace();
+//			returnJson.put(Key.STATUS, Value.FAIL)  ;
+//			returnJson.put(Key.MESSAGE, e);
+//		}
+//		return returnJson;
+//	}
 	
 //	public static JSONObject getSchedulesByStudentAndTeacherCourse (JSONObject inputJson){
 //		JSONObject returnJson = new JSONObject();
@@ -301,37 +382,6 @@ public class ScheduleCtrl {
 //		}
 //		return returnJson;
 //	}
-	
-	public static JSONObject getSchedulesByCourseName(JSONObject inputJson) {
-		JSONObject returnJson = new JSONObject();
-		try{
-			Course course = CourseDAO.getCourseByName((String) inputJson.get(Key.COURSENAME));
-			if (course != null) {
-				ArrayList<TeacherCourse> tcList = TeacherCourseDAO.getTeacherCoursesByCourse(course);
-				if(!tcList.isEmpty()){
-					JSONArray scheduleArr = new JSONArray();
-					for (TeacherCourse tc : tcList) {
-						for (Schedule s : ScheduleDAO.getSchedulesByTeacherCourse(tc)) {
-							scheduleArr.add(s.toJson());
-						}
-					}
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, scheduleArr);
-				} else {
-					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
-				}
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
-			} 
-		}catch(Exception e){
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL)  ;
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
 	
 	//TODO get through classroom
 //	public static JSONObject getSchedulesByBranch (JSONObject inputJson){

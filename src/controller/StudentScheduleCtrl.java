@@ -1,7 +1,5 @@
 package controller;
 
-import java.util.Date;
-
 import model.Schedule;
 import model.StudentSchedule;
 import model.Student;
@@ -12,7 +10,6 @@ import org.json.simple.JSONObject;
 import dataManager.ScheduleDAO;
 import dataManager.StudentScheduleDAO;
 import dataManager.StudentDAO;
-import system.Config;
 import system.Key;
 import system.Message;
 import system.Value;
@@ -164,13 +161,39 @@ public class StudentScheduleCtrl {
 	}
 	
 	// Get studentSchedules by schedule
-		public static JSONObject getStudentSchedulesBySchedule(JSONObject inputJson) {
-			JSONObject returnJson = new JSONObject();
-			try {
-				Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
+	public static JSONObject getStudentSchedulesBySchedule(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
+			if (schedule != null) {
+				JSONArray studentScheduleArr = new JSONArray();
+				for (StudentSchedule ss : StudentScheduleDAO.getStudentSchedulesBySchedule(schedule)) {
+					studentScheduleArr.add(ss.toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, studentScheduleArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.SCHEDULENOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get studentSchedules by student and schedule
+	public static JSONObject getStudentSchedulesByStudentAndSchedule(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+			if (student != null) {
+			Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
 				if (schedule != null) {
 					JSONArray studentScheduleArr = new JSONArray();
-					for (StudentSchedule ss : StudentScheduleDAO.getStudentSchedulesBySchedule(schedule)) {
+					for (StudentSchedule ss : StudentScheduleDAO.getStudentSchedulesByStudentAndSchedule(student, schedule)) {
 						studentScheduleArr.add(ss.toJson());
 					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -179,12 +202,16 @@ public class StudentScheduleCtrl {
 					returnJson.put(Key.STATUS, Value.FAIL);
 					returnJson.put(Key.MESSAGE, Message.SCHEDULENOTEXIST);
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
-			return returnJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
 		}
+		return returnJson;
+	}
 
 }

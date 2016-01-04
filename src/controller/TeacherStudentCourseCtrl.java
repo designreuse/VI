@@ -72,7 +72,7 @@ public class TeacherStudentCourseCtrl {
 				returnJson.put(Key.MESSAGE, teacherStudentCourse.toJson());
 			}else{
 				returnJson.put(Key.STATUS, Value.FAIL)  ;
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -127,7 +127,7 @@ public class TeacherStudentCourseCtrl {
 				returnJson.put(Key.MESSAGE, teacherStudentCourse.toJson());
 			}else{
 				returnJson.put(Key.STATUS, Value.FAIL)  ;
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -149,7 +149,7 @@ public class TeacherStudentCourseCtrl {
 				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSEDELETED);
 			}else{
 				returnJson.put(Key.STATUS, Value.FAIL)  ;
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST);
 			}
 		}catch(Exception e){
 			e.printStackTrace();

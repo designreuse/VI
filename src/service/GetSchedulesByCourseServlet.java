@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,20 +13,18 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.BranchCourseCtrl;
 import controller.ScheduleCtrl;
 
 /**
- * Servlet implementation class GetSchedulesByCourse
+ * @author RaySong
  */
-@WebServlet("/GetSchedulesByCourse")
-public class GetSchedulesByCourse extends HttpServlet {
+public class GetSchedulesByCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetSchedulesByCourse() {
+    public GetSchedulesByCourseServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

@@ -4,28 +4,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.BillCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
+import controller.ClassroomCtrl;
 
 /**
- * 
+ * @author RaySong
  */
-public class GetBillsByStudent extends HttpServlet {
+public class CreateClassroomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetBillsByStudent() {
+    public CreateClassroomServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +32,7 @@ public class GetBillsByStudent extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -47,6 +46,7 @@ public class GetBillsByStudent extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -58,7 +58,7 @@ public class GetBillsByStudent extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = BillCtrl.getBillsByStudent(inputJson);
+			returnJson = ClassroomCtrl.createClassroom(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -66,6 +66,4 @@ public class GetBillsByStudent extends HttpServlet {
 		}
 		out.println(returnJson.toJSONString());
 	}
-
-
 }

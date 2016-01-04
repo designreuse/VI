@@ -72,18 +72,20 @@ public class ScheduleDAO {
 	}
 	
 	//get by teacher and course
-		public static ArrayList<Schedule> getSchedulesByTeacherCourse(Teacher teacher, Course course) {
-			ArrayList<Schedule> results = new ArrayList<Schedule>();
-			DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
-			detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
-			detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
-			detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-			List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
-			for (Object o : list) {
-				results.add((Schedule) o);
-			}
-			return results;
+	public static ArrayList<Schedule> getSchedulesByTeacherCourse(Teacher teacher, Course course) {
+		ArrayList<Schedule> results = new ArrayList<Schedule>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Schedule.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for (Object o : list) {
+			results.add((Schedule) o);
 		}
+		return results;
+	}
+	
+	//get by teacher
 	
 	//get by planStartDate
 	//TODO make sure the date pass in is correctly parse 

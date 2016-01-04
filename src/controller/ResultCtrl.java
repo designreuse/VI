@@ -43,7 +43,7 @@ public class ResultCtrl {
 				returnJson.put(Key.MESSAGE, result.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST);
 			}		
 		}catch(Exception e){
 			e.printStackTrace();
@@ -205,7 +205,7 @@ public class ResultCtrl {
 				returnJson.put(Key.MESSAGE, messageJson);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERCOURSENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST);
 			}		
 		}catch(Exception e){
 			e.printStackTrace();

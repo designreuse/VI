@@ -68,4 +68,17 @@ public class StudentScheduleDAO {
 		return studentSchedules;
 	}
 	
+	public static ArrayList<StudentSchedule> getStudentSchedulesByStudentAndSchedule(Student student, Schedule schedule){
+		ArrayList<StudentSchedule> studentSchedules = new ArrayList<StudentSchedule>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(StudentSchedule.class);
+		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.SCHEDULE, schedule));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			studentSchedules.add((StudentSchedule) o);
+		}
+		return studentSchedules;
+	}
+	
 }
