@@ -211,7 +211,7 @@ public class Result {
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
 		returnJson.put(Key.RESULTVALUE, this.resultValue);
-		returnJson.put(Key.RESULTDATE, Config.SDF.format(this.resultDate));
+//		returnJson.put(Key.RESULTDATE, Config.SDF.format(this.resultDate));
 		returnJson.put(Key.POINTAMOUNT, this.pointAmount);
 
 		returnJson.put(Key.TEACHERSTUDENTCOURSE,

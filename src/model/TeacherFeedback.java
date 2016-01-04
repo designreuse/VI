@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 
 import system.Config;
 import system.Key;
+import system.Value;
 
 public class TeacherFeedback {
 	private long teacherFeedbackId;
@@ -24,6 +25,8 @@ public class TeacherFeedback {
 		super();
 		this.content = content;
 		this.teacherStudentCourse = teacherStudentCourse;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
 	}
 	
 	/**

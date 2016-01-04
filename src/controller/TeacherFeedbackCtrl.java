@@ -3,6 +3,7 @@ package controller;
 import java.util.ArrayList;
 import java.util.Date;
 
+import model.Teacher;
 import model.TeacherFeedback;
 import model.Student;
 import model.TeacherStudentCourse;
@@ -10,6 +11,7 @@ import model.TeacherStudentCourse;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.TeacherDAO;
 import dataManager.TeacherFeedbackDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherStudentCourseDAO;
@@ -163,15 +165,44 @@ public class TeacherFeedbackCtrl {
 	}
 	
 	// Get latest teacherFeedbacks by student
-		public static JSONObject getLatestTeacherFeedbacksByStudent(JSONObject inputJson) {
-			JSONObject returnJson = new JSONObject();
-			try {
+	public static JSONObject getLatestTeacherFeedbacksByStudent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+			if (student != null) {
+				JSONArray teacherFeedbackArr = new JSONArray();
+				ArrayList<TeacherStudentCourse> tscs = TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(student);
+				for(TeacherStudentCourse tsc : tscs){
+					teacherFeedbackArr.add(TeacherFeedbackDAO.getLatestTeacherFeedbackByTSC(tsc).toJson());
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, teacherFeedbackArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get teacherFeedbacks by teacher and student
+	public static JSONObject getTeacherFeedbacksByTeacherAndStudent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if(teacher != null){
 				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 				if (student != null) {
 					JSONArray teacherFeedbackArr = new JSONArray();
 					ArrayList<TeacherStudentCourse> tscs = TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(student);
 					for(TeacherStudentCourse tsc : tscs){
-						teacherFeedbackArr.add(TeacherFeedbackDAO.getLatestTeacherFeedbackByTSC(tsc).toJson());
+						for (TeacherFeedback b : TeacherFeedbackDAO.getTeacherFeedbacksByTeacherStudentCourse(tsc)) {
+							teacherFeedbackArr.add(b.toJson());
+						}
 					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, teacherFeedbackArr);
@@ -179,12 +210,16 @@ public class TeacherFeedbackCtrl {
 					returnJson.put(Key.STATUS, Value.FAIL);
 					returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
-			return returnJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
 		}
+		return returnJson;
+	}
 
 }
