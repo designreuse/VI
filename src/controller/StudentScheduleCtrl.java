@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Date;
+
 import model.Schedule;
 import model.StudentSchedule;
 import model.Student;
@@ -136,6 +138,45 @@ public class StudentScheduleCtrl {
 	}
 
 	// features
+	//create student schedules and attendances
+	public static JSONObject createStudentScheduleAndAttendances(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		JSONObject messageJson = new JSONObject();
+		try {
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+			if (student != null) {
+				Schedule schedule = ScheduleDAO.getScheduleById((long) inputJson.get(Key.SCHEDULEID));
+				if (schedule != null) {
+					StudentSchedule studentSchedule = new StudentSchedule(student, schedule);
+					StudentScheduleDAO.addStudentSchedule(studentSchedule);
+					messageJson.put(Key.STUDENTSCHEDULE, studentSchedule.toJson());
+					
+					//create the attendances
+					Date startDate = schedule.getScheduleStartDate();
+					Date endDate = schedule.getScheduleEndDate();
+					
+					
+					
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, messageJson);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.SCHEDULENOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+
+		return returnJson;
+	}
+	
+	
 	// Get studentSchedules by student
 	public static JSONObject getStudentSchedulesByStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();

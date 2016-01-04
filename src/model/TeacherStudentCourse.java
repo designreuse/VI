@@ -190,6 +190,18 @@ public class TeacherStudentCourse {
 		this.remark = remark;
 	}
 
+	public JSONObject toJsonSimple() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 
@@ -197,6 +209,51 @@ public class TeacherStudentCourse {
 		returnJson.put(Key.COURSE, this.course.toJson());
 		returnJson.put(Key.TEACHER, this.teacher.toJson());
 		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStudent() {
+		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
+		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
+	public JSONObject toJsonTeacher() {
+		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
+		returnJson.put(Key.TEACHER, this.teacher.toJson());
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
+	public JSONObject toJsonCourse() {
+		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
+		returnJson.put(Key.COURSE, this.course.toJson());
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
 

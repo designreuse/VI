@@ -290,7 +290,23 @@ public class Teacher {
 	public void setTeacherStudentCoursess(Set<TeacherStudentCourse> teacherStudentCoursess) {
 		this.teacherStudentCoursess = teacherStudentCoursess;
 	}
+	
+	public JSONObject toJsonSimple(){
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.TEACHERID, this.teacherId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.QUALIFICATION, this.qualification);
+		returnJson.put(Key.TEACHERNRIC, this.teacherNric);
 
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.TEACHERID, this.teacherId);

@@ -113,6 +113,18 @@ public class TeacherFeedback {
 		this.remark = remark;
 	}
 
+	public JSONObject toJsonSimple(){
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.TEACHERFEEDBACKID, this.teacherFeedbackId);
+		returnJson.put(Key.CONTENT, this.content);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.TEACHERFEEDBACKID, this.teacherFeedbackId);

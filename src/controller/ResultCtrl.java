@@ -174,39 +174,44 @@ public class ResultCtrl {
 	//Generate result and feedback
 	public static JSONObject generateResultAndFeedback(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
+		JSONArray messageArray = new JSONArray();
 		try{
-			TeacherStudentCourse teacherStudentCourse = TeacherStudentCourseDAO.getTeacherStudentCourseById((long) inputJson.get(Key.TEACHERSTUDENTCOURSEID));
-			if(teacherStudentCourse != null){
+			JSONArray feedbackArray = (JSONArray) inputJson.get(Key.FEEDBACKS);
+			for(int i = 0; i < feedbackArray.size(); i++){
 				JSONObject messageJson = new JSONObject();
-				
-				long courseLevel =  (long) inputJson.get(Key.COURSELEVEL);
-				long bookletLevel = (long) inputJson.get(Key.BOOKLETLEVEL);
-				String resultValue = (String) inputJson.get(Key.RESULTVALUE);
-				long pointAmount = (long) inputJson.get(Key.POINTAMOUNT);
-				
-				Result result = new Result(courseLevel, bookletLevel,resultValue, 
-											pointAmount, teacherStudentCourse);
-				ResultDAO.addResult(result);
-				messageJson.put(Key.RESULT, result.toJson());
-				
-				String feedback = (String) inputJson.get(Key.FEEDBACK);
-				TeacherFeedback fb = new TeacherFeedback(feedback, teacherStudentCourse);
-				TeacherFeedbackDAO.addTeacherFeedback(fb);
-				messageJson.put(Key.TEACHERFEEDBACK, fb.toJson());
-				
-				//update student point
-				Student s = teacherStudentCourse.getStudent();
-				long newPoint = s.getPoints() + pointAmount;
-				s.setPoints(newPoint);
-				StudentDAO.modifyStudent(s);
-				messageJson.put(Key.STUDENT, s.toJson());
-				
-				returnJson.put(Key.STATUS, Value.SUCCESS) ;
-				returnJson.put(Key.MESSAGE, messageJson);
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST);
-			}		
+				JSONObject feedback = (JSONObject) feedbackArray.get(i);
+				TeacherStudentCourse teacherStudentCourse = TeacherStudentCourseDAO.getTeacherStudentCourseById((long) feedback.get(Key.TEACHERSTUDENTCOURSEID));
+				if(teacherStudentCourse != null){
+					long courseLevel =  (long) feedback.get(Key.COURSELEVEL);
+					long bookletLevel = (long) feedback.get(Key.BOOKLETLEVEL);
+					String resultValue = (String) feedback.get(Key.RESULTVALUE);
+					long pointAmount = (long) feedback.get(Key.POINTAMOUNT);
+					
+					Result result = new Result(courseLevel, bookletLevel,resultValue, 
+												pointAmount, teacherStudentCourse);
+					ResultDAO.addResult(result);
+					messageJson.put(Key.RESULT, result.toJsonSimple());
+					
+					String content = (String) feedback.get(Key.CONTENT);
+					TeacherFeedback fb = new TeacherFeedback(content, teacherStudentCourse);
+					TeacherFeedbackDAO.addTeacherFeedback(fb);
+					messageJson.put(Key.TEACHERFEEDBACK, fb.toJsonSimple());
+					
+					//update student point
+					Student s = teacherStudentCourse.getStudent();
+					long newPoint = s.getPoints() + pointAmount;
+					s.setPoints(newPoint);
+					StudentDAO.modifyStudent(s);
+					messageJson.put(Key.STUDENT, s.toJsonSimple());
+					
+					messageJson.put(Key.STATUS, Value.SUCCESS);
+				} else {
+					messageJson.put(Key.STATUS, Value.FAIL);
+					messageJson.put(Key.MESSAGE, "ID: " + feedback.get(Key.TEACHERSTUDENTCOURSEID) + ". " + Message.TEACHERSTUDENTCOURSENOTEXIST);
+				}
+				messageArray.add(messageJson);
+			}
+			returnJson.put(Key.MESSAGE, messageArray);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL)  ;

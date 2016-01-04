@@ -194,7 +194,7 @@ public class Course {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-
+	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.COURSEID, this.courseId);

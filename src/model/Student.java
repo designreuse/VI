@@ -396,7 +396,7 @@ public class Student {
 		this.remark = remark;
 	}
 	
-	public JSONObject toJsonStudent() {
+	public JSONObject toJsonSimple() {
 		JSONObject returnJson = new JSONObject();
 
 		returnJson.put(Key.STUDENTID, this.studentId);

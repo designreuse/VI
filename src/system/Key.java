@@ -167,10 +167,12 @@ public class Key {
 	public static final String DIAGNOSTICID = "diagnosticId";
 	public static final String SUBJECTNAME = "subjectName";
 	public static final String FEEDBACK = "feedback";
+	public static final String FEEDBACKS = "feedbacks";
 	
 	public static final String STUDENTSCHEDULE = "studentSchedule";
 	public static final String STUDENTSCHEDULES = "studentSchedules";
 	public static final String STUDENTSCHEDULEID = "studentScheduleId";
+	
 	
 	
 	

@@ -32,10 +32,10 @@ public class AttendanceCtrl {
 			StudentSchedule studentSchedule = StudentScheduleDAO.getStudentScheduleById((long) inputJson.get(Key.STUDENTSCHEDULEID));
 			if (studentSchedule != null) {
 				
-//				Date actualStartDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALSTARTDATE));
-//				long attendanceStatus = (long) inputJson.get(Key.ATTENDANCESTATUS);
+				Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
+				Date planEndDate = Config.SDF.parse((String) inputJson.get(Key.PLANENDDATE));
 				
-				Attendance attendance = new Attendance(studentSchedule);
+				Attendance attendance = new Attendance(planStartDate, planEndDate, studentSchedule);
 				AttendanceDAO.addAttendance(attendance);
 
 				returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -97,6 +97,7 @@ public class AttendanceCtrl {
 		return returnJson;
 	}
 
+	//TODO convert back to normal update and create a new method for marking attendance
 	public static JSONObject updateAttendance(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		JSONObject attendanceObj = new JSONObject();

@@ -2,11 +2,8 @@ package model;
 
 import java.util.Date;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.CourseDAO;
-import dataManager.SalaryDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -204,7 +201,23 @@ public class Result {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	
+	public JSONObject toJsonSimple() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.RESULTID, this.resultId);
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+		returnJson.put(Key.RESULTVALUE, this.resultValue);
+//		returnJson.put(Key.RESULTDATE, Config.SDF.format(this.resultDate));
+		returnJson.put(Key.POINTAMOUNT, this.pointAmount);
 
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.RESULTID, this.resultId);
