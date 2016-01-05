@@ -155,6 +155,9 @@ public class StudentScheduleCtrl {
 					Date startDate = schedule.getScheduleStartDate();
 					Date endDate = schedule.getScheduleEndDate();
 					
+					while(){
+						
+					}
 					
 					
 					returnJson.put(Key.STATUS, Value.SUCCESS);

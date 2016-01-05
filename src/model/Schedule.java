@@ -20,7 +20,6 @@ public class Schedule {
 	
 	private Course course;
 	private Teacher teacher;
-	private Classroom classroom;
 	
 	private Set<StudentSchedule> studentSchedules; 
 	
@@ -31,7 +30,7 @@ public class Schedule {
 	public Schedule(){}
 
 	public Schedule(String name, String description, long dayOfWeek, Date scheduleStartDate,
-					Date scheduleEndDate, Course course, Teacher teacher, Classroom classroom) {
+					Date scheduleEndDate, Course course, Teacher teacher) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
@@ -40,7 +39,6 @@ public class Schedule {
 		this.setScheduleEndDate(scheduleEndDate);
 		this.setTeacher(teacher);
 		this.setCourse(course);
-		this.setClassroom(classroom);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -158,20 +156,6 @@ public class Schedule {
 	}
 
 	/**
-	 * @return the classroom
-	 */
-	public Classroom getClassroom() {
-		return classroom;
-	}
-
-	/**
-	 * @param classroom the classroom to set
-	 */
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
-	}
-
-	/**
 	 * @return the studentSchedules
 	 */
 	public Set<StudentSchedule> getStudentSchedules() {
@@ -227,6 +211,22 @@ public class Schedule {
 		this.remark = remark;
 	}
 
+	public JSONObject toJsonSimple(){
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.SCHEDULEID, this.scheduleId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, description);
+		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
+		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
+		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.SCHEDULEID, this.scheduleId);
@@ -238,7 +238,6 @@ public class Schedule {
 		
 		returnJson.put(Key.TEACHER, this.teacher.toJson());
 		returnJson.put(Key.COURSE, this.course.toJson());
-		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

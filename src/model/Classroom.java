@@ -21,7 +21,7 @@ public class Classroom {
 	private String remark;
 	
 	private Branch branch;
-	private Set<Schedule> schedules;
+	private Set<Attendance> attendances;
 	
 	public Classroom(){}
 	
@@ -133,19 +133,33 @@ public class Classroom {
 	}
 
 	/**
-	 * @return the schedules
+	 * @return the attendances
 	 */
-	public Set<Schedule> getSchedules() {
-		return schedules;
+	public Set<Attendance> getAttendances() {
+		return attendances;
 	}
 
 	/**
-	 * @param schedules the schedules to set
+	 * @param attendances the attendances to set
 	 */
-	public void setSchedules(Set<Schedule> schedules) {
-		this.schedules = schedules;
+	public void setAttendances(Set<Attendance> attendances) {
+		this.attendances = attendances;
 	}
 
+	public JSONObject toJsonSimple(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.CLASSROOMID, this.classroomId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.ROOMCAPACITY, this.roomCapacity);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		

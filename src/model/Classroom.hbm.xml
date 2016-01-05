@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 30, 2015 4:55:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Jan 5, 2016 11:07:29 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Classroom" table="CLASSROOM">
         <id name="classroomId" type="long">
@@ -26,11 +26,11 @@
         <many-to-one name="branch" class="model.Branch" fetch="join">
             <column name="BRANCHID" />
         </many-to-one>
-        <set name="schedules" table="SCHEDULE" inverse="false" lazy="true">
+        <set name="attendances" table="ATTENDANCE" inverse="false" lazy="true">
             <key>
                 <column name="CLASSROOMID" />
             </key>
-            <one-to-many class="model.Schedule" />
+            <one-to-many class="model.Attendance" />
         </set>
     </class>
 </hibernate-mapping>

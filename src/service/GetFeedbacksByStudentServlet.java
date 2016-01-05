@@ -18,13 +18,13 @@ import controller.TeacherFeedbackCtrl;
 /**
  * @author RaySong
  */
-public class GetFeedbackByStudentServlet extends HttpServlet {
+public class GetFeedbacksByStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetFeedbackByStudentServlet() {
+    public GetFeedbacksByStudentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }

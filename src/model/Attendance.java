@@ -16,6 +16,7 @@ public class Attendance {
 	private Date planEndDate;
 	private long attendanceStatus;
 	private StudentSchedule studentSchedule;
+	private Classroom classroom;
 	
 	private long objStatus;
 	private Date createDate;
@@ -23,20 +24,22 @@ public class Attendance {
 	
 	public Attendance(){}
 
-	public Attendance(StudentSchedule studentSchedule) {
+	public Attendance(StudentSchedule studentSchedule, Classroom classroom) {
 		super();
 		this.attendanceStatus = 0;
 		this.setStudentSchedule(studentSchedule);
+		this.setClassroom(classroom);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
 	
-	public Attendance(Date planStartDate, Date planEndDate, StudentSchedule studentSchedule) {
+	public Attendance(Date planStartDate, Date planEndDate, StudentSchedule studentSchedule, Classroom classroom) {
 		super();
 		this.attendanceStatus = 0;
 		this.planStartDate = planStartDate;
 		this.planEndDate = planEndDate;
 		this.setStudentSchedule(studentSchedule);
+		this.setClassroom(classroom);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -140,6 +143,20 @@ public class Attendance {
 	}
 
 	/**
+	 * @return the classroom
+	 */
+	public Classroom getClassroom() {
+		return classroom;
+	}
+
+	/**
+	 * @param classroom the classroom to set
+	 */
+	public void setClassroom(Classroom classroom) {
+		this.classroom = classroom;
+	}
+
+	/**
 	 * @return the objStatus
 	 */
 	public long getObjStatus() {
@@ -181,6 +198,21 @@ public class Attendance {
 		this.remark = remark;
 	}
 	
+	public JSONObject toJsonSimple(){
+		JSONObject returnJson = new JSONObject();
+				
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		returnJson.put(Key.PLANSTARTDATE, this.planStartDate);
+		returnJson.put(Key.PLANENDDATE, this.planEndDate);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
 	//shall i add in a checker to return actual date?
 	//no, the logic checking is handle in the controller.
 	public JSONObject toJson(){
@@ -188,8 +220,11 @@ public class Attendance {
 				
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		returnJson.put(Key.PLANSTARTDATE, this.planStartDate);
+		returnJson.put(Key.PLANENDDATE, this.planEndDate);
 		
 		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
+		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

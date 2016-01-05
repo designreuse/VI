@@ -1,6 +1,9 @@
 package system;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.json.simple.parser.JSONParser;
 
@@ -10,6 +13,18 @@ public class Config {
 	public static final SimpleDateFormat BIRTHDATE = new SimpleDateFormat("yyyy-MM-dd");
 	
 	public static final String TIMEZONE = "Singapore";
+	
+	//Add x days to a Date
+	public static Date addDaysToDate(final Date date, int noOfDays) {
+	    Date newDate = new Date(date.getTime());
+
+	    GregorianCalendar calendar = new GregorianCalendar();
+	    calendar.setTime(newDate);
+	    calendar.add(Calendar.DATE, noOfDays);
+	    newDate.setTime(calendar.getTime().getTime());
+
+	    return newDate;
+	}
 	
 	public static final String ROOT = "VI";
 	

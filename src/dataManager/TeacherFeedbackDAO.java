@@ -5,9 +5,13 @@ import hibernate.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Course;
+import model.Student;
+import model.Teacher;
 import model.TeacherFeedback;
 import model.TeacherStudentCourse;
 
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -70,4 +74,20 @@ public class TeacherFeedbackDAO {
 		}
 		return tf;
 	}
+	
+	public static ArrayList<TeacherFeedback> getFeedbacksByStudent(Student student){
+		ArrayList<TeacherFeedback> feedbacks = new ArrayList<TeacherFeedback>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<Object> list = session.createQuery("select tf from TeacherFeedback tf join tf.teacherStudentCourses tsc join tsc.Student s where s.student = :student")
+				.setParameter("student", student).list();
+		session.getTransaction().commit();
+		session.close();
+		for(Object o : list){
+			feedbacks.add((TeacherFeedback) o);
+		}
+		return feedbacks;
+	}
+	
+	
 }

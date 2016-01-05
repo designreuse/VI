@@ -40,24 +40,18 @@ public class ScheduleCtrl {
 			if(teacher != null){
 				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
 				if(course != null){
-					Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
-					if(classroom != null){
-						String name = (String) inputJson.get(Key.NAME);
-						String description = (String) inputJson.get(Key.DESCRIPTION);
-						long dayOfWeek = (long) inputJson.get(Key.DAYOFWEEK);
-						Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
-						Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
-						
-						Schedule schedule = new Schedule(name, description, dayOfWeek, scheduleStartDate, 
-															scheduleEndDate, course, teacher, classroom);
-						ScheduleDAO.addSchedule(schedule);
-						
-						returnJson.put(Key.STATUS, Value.SUCCESS);
-						returnJson.put(Key.MESSAGE, schedule.toJson());
-					} else {
-						returnJson.put(Key.STATUS, Value.FAIL);
-						returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
-					}
+					String name = (String) inputJson.get(Key.NAME);
+					String description = (String) inputJson.get(Key.DESCRIPTION);
+					long dayOfWeek = (long) inputJson.get(Key.DAYOFWEEK);
+					Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
+					Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
+					
+					Schedule schedule = new Schedule(name, description, dayOfWeek, scheduleStartDate, 
+														scheduleEndDate, course, teacher);
+					ScheduleDAO.addSchedule(schedule);
+					
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, schedule.toJson());
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
 					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
