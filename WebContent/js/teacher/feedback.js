@@ -136,7 +136,7 @@ function submitFeedback(){
 			"content": $("#feedback" + id).val(),
 			"courseLevel": Number($("#courseLevel" + id).val()),
 			"bookletLevel": Number($("#bookLevel" + id).val()),
-			"pointsValue": Number($("#pointAmt" + id).val()),
+			"pointAmount": Number($("#pointAmt" + id).val()),
 			"resultValue": $("#result" + id).val()
 		};
 		
@@ -147,6 +147,8 @@ function submitFeedback(){
 	input.feedbacks = feedbacks;
 	input.teacherId = Number(localStorage.getItem("teacherId"));
 	input.courseId = Number(localStorage.getItem("courseId"));
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
 	
 	$.ajax({
 		url : '../VI/GenerateResultServlet?input=' + inputStr, //this part sends to the servlet
@@ -160,7 +162,6 @@ function submitFeedback(){
 			var message = data.message;
 			
 			if (status == 1) {	
-				console.log(message);
 				alert("Created successfully");	
 			} else{
 				console.log(message);
