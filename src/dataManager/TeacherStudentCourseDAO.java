@@ -94,4 +94,20 @@ public class TeacherStudentCourseDAO {
 		}
 		return teacherStudentCourses;
 	}
+	
+	//get by teacher, student and course
+	public static TeacherStudentCourse getTeacherStudentCoursesByTeacherStudentAndCourse(Teacher teacher, Student student, Course course) {
+		TeacherStudentCourse tsc = null;
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherStudentCourse.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHER, teacher));
+		detachedCriteria.add(Restrictions.eq(Key.STUDENT, student));
+		detachedCriteria.add(Restrictions.eq(Key.COURSE, course));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for (Object o : list) {
+			tsc = (TeacherStudentCourse) o;
+			
+		}
+		return tsc;
+	}
 }

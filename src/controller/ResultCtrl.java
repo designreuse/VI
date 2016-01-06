@@ -1,7 +1,9 @@
 package controller;
 
+import model.Course;
 import model.Result;
 import model.Student;
+import model.Teacher;
 import model.TeacherFeedback;
 import model.TeacherStudentCourse;
 
@@ -10,8 +12,10 @@ import java.util.Date;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.CourseDAO;
 import dataManager.ResultDAO;
 import dataManager.StudentDAO;
+import dataManager.TeacherDAO;
 import dataManager.TeacherFeedbackDAO;
 import dataManager.TeacherStudentCourseDAO;
 import system.Config;
@@ -176,11 +180,14 @@ public class ResultCtrl {
 		JSONObject returnJson = new JSONObject();
 		JSONArray messageArray = new JSONArray();
 		try{
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
 			JSONArray feedbackArray = (JSONArray) inputJson.get(Key.FEEDBACKS);
 			for(int i = 0; i < feedbackArray.size(); i++){
 				JSONObject messageJson = new JSONObject();
 				JSONObject feedback = (JSONObject) feedbackArray.get(i);
-				TeacherStudentCourse teacherStudentCourse = TeacherStudentCourseDAO.getTeacherStudentCourseById((long) feedback.get(Key.TEACHERSTUDENTCOURSEID));
+				Student student = StudentDAO.getStudentById((long) feedback.get(Key.STUDENTID));
+				TeacherStudentCourse teacherStudentCourse = TeacherStudentCourseDAO.getTeacherStudentCoursesByTeacherStudentAndCourse(teacher, student, course);
 				if(teacherStudentCourse != null){
 					long courseLevel =  (long) feedback.get(Key.COURSELEVEL);
 					long bookletLevel = (long) feedback.get(Key.BOOKLETLEVEL);
