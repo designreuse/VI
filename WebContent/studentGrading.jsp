@@ -81,8 +81,17 @@
 							</div>
 							
 							<div class="box-body">
-								<div class="col-md-12" id="dynamicStudentList">
+								<div class = "row">
+									<div class="col-md-12" id="dynamicStudentList">
+									</div>
 								</div>
+								
+								<div class="row">
+									<div class="col-md-12">
+										<input class="btn btn-primary submit" type="button" value="Submit" onclick="submitFeedback();">
+									</div>
+								</div>
+								
 						<!-- for the accordion -->
 						</div>
 					</div>
@@ -120,6 +129,7 @@
 <script src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
 
+<script src="./js/fullcalendar/lib/moment.min.js"></script>
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
