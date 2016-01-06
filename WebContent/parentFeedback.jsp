@@ -45,7 +45,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        View User Profile
+        View Feedback
       </h1>
     </section>
 
@@ -57,49 +57,17 @@
 							<div class="box-header" id="name"><h3 class="box-title">User Profile</h3></div>
 							<div class="box-body">
 								<div class="row">
-									<div class="col-md-3 col-lg-3" align="center">
-										<img alt="User Pic" src="dist/img/user5-128x128.jpg" class="img-circle img-responsive">
-									</div>
 									
 									<div class="col-md-6 col-lg-6">
 										<table class="table table-user-information">
 											<tbody>
 												<tr>
-													<td><strong>Home Address:</strong></td>
-													<td id="address"></td>
-												</tr>
-												
-												<tr>
-													<td><strong>Phone Number:</strong></td>
-													<td id="phone"></td>
+													<td><strong>Feedback:</strong></td>
+													<td id="feedback"></td>
 												</tr>
 											</tbody>
 										</table>
 										
-										<button type="button" class="btn btn-primary view" data-toggle="collapse" data-target="#viewChildren"> View Children</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- end of displaying parents panel -->
-
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="collapse" id="viewChildren">
-							<div class="panel panel-info">
-								<div class="panel-heading">Child(ren)</div>
-								<div class="panel-body">
-
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="col-md-3 col-lg-3" align="center">
-											</div>
-											<div class="col-md-6 col-lg-6" id="test">
-											</div>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -149,6 +117,6 @@
 
 <script src="./js/bootbox.min.js"></script>
 
-<script src="./js/parent/parent.js"></script>
+<script src="./js/parent/feedback.js"></script>
 </body>
 </html>

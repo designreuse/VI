@@ -20,7 +20,7 @@
         
         <li class="active"><a href="parentProfile.jsp"><i class="fa fa-link"></i> <span>Profile</span></a></li>
         
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Feedback</span></a></li>
+        <li class="active"><a href="parentFeedback.jsp"><i class="fa fa-link"></i> <span>Feedback</span></a></li>
 
         
       </ul>

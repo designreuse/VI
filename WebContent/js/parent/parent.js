@@ -67,12 +67,19 @@ function viewChildren() {
 					
 					if (status == 1) {
 						var childrenTable = document.getElementById("test");
+						
+						var studentIds = [];
+						
 						for (var i = 0; i < data.message.length; i++) {
 							var obj = data.message[i];
+							
+							studentIds.push(obj.studentId);
+							//console.log(studentIds);
+							localStorage["studentIds"] = JSON.stringify(studentIds);
+							
 							var name = obj.name;
 							var course = "";
 							var grades = "";
-							var feedback ="";
 							
 						    var table = document.createElement('TABLE');
 						    table.className = "table table-information";
@@ -90,9 +97,9 @@ function viewChildren() {
 						    var gradesHeader = document.createElement('TD');
 						    var gradesValue = document.createElement('TD');
 						    
-						    var feedbackRow = document.createElement('TR');
-						    var feedbackHeader = document.createElement('TD');
-						    var feedbackValue = document.createElement('TD');
+						    var optionRow = document.createElement('TR');
+						    var optionHeader = document.createElement('TD');
+						    var optionValue = document.createElement('TD');
 						    
 						    var bold = document.createElement("b");
 						    bold.appendChild(document.createTextNode("Name"));
@@ -113,15 +120,108 @@ function viewChildren() {
 						    gradesRow.appendChild(gradesHeader);
 						    gradesRow.appendChild(gradesValue);
 						    
-						    feedbackHeader.appendChild(document.createTextNode("Feedback"));
-						    feedbackValue.appendChild(document.createTextNode(feedback));
-						    feedbackRow.appendChild(feedbackHeader);
-						    feedbackRow.appendChild(feedbackValue);
+						    //insert option to edit child
+						    var a = document.createElement('a');
+						    var linkText = document.createTextNode("Edit");
+						    a.onclick = function() {
+
+						    	var table = $('#studentTable').DataTable();
+						    	$('#table table-information tbody').off('click').on( 'click', 'button', function () {
+						    		var tr = $(this).closest('tr');
+						    	    var row = table.row( tr );
+						    	   
+						    	    bootbox.dialog({
+						    	    	title: "Edit Details",
+						    			message: '<div class="row">  ' +
+						    			'<div class="col-md-12"> ' +
+						    			'<form class="form-horizontal" method="post"> ' +
+						    			'<div class="form-group"> ' +
+						    			'<div><font color="red" id="updatedMessage"></font></div>'+
+						    			'<label class="col-md-2 control-label" for="name">Name</label> ' +
+						    			'<div class="col-md-10"> ' +
+						    			'<input id="name" name="name" type="text" class="form-control input-md" value= ' + row.data().name + '> ' +
+						    			'</div> ' +
+						    			'<label class="col-md-2 control-label" for="nric">NRIC</label> ' +
+						    			'<div class="col-md-10"> ' +
+						    				'<input id="nric" name="nric" type="text" class="form-control input-md" value= ' + row.data().studentNric + '> ' +
+						    			'</div> ' +
+						    			'<label class="col-md-2 control-label" for="contact">Contact</label> ' +
+						    			'<div class="col-md-10"> ' +
+						    			'<input id="contact" name="contact" type="text" class="form-control input-md" value= ' + row.data().contact + '> ' +
+						    			'</div> ' +
+						    			'<label class="col-md-2 control-label" for="address">Address</label> ' +
+						    			'<div class="col-md-10"> ' +
+						    			'<input id="address" name="address" type="text" class="form-control input-md" value= ' + row.data().address + '> ' +
+						    			'</div> ' +
+						    			'</div> ' +
+						    			'</form> ' +
+						    			'</div> ' +
+						    			'</div>',
+						    			onEscape: function() {},
+						    			buttons: {
+						    				success:{
+						    					label: "Save!",
+						    					className: "btn-success",
+						    					
+						    					callback: function(){
+						    						var studentId = row.data().studentId;
+						    						var updatedName = $("#name").val();
+						    						var updatedNric = $("#nric").val();
+						    						var updatedContact = $("#contact").val();
+						    						var updatedAddress = $("#address").val();
+						    						var updatedEmail = $("#email").val();
+						    						
+						    						var input = {}
+						    						input.studentId = Number(studentId);
+						    						input.name = updatedName;
+						    						input.studentNric = updatedNric;
+						    						input.contact = updatedContact;
+						    						input.address = updatedAddress;
+						    						input.email = updatedEmail;
+						    						var inputStr = JSON.stringify(input);
+						    						
+						    						inputStr = encodeURIComponent(inputStr);
+						    						$.ajax({
+						    							url : '../VI/UpdateStudentServlet?input=' + inputStr, //this part sends to the servlet
+						    							method : 'POST',
+						    							dataType : 'json',
+						    							error : function(err) {
+						    								console.log(err);
+						    								$("#message").html("System has some error. Please try again.");
+						    							},
+						    							success : function(data) {
+						    								console.log(data);
+						    								var status = data.status; 
+						    								var message = data.message;
+						    								
+						    								if (status == 1) {
+						    									bootbox.alert("Update is successful!")
+						    									table.ajax.reload();
+						    									
+						    								} else {
+						    									$("#message").html("Something's wrong, please try again!");
+						    								}
+						    							}
+						    						});
+						    					}
+						    			
+						    				}
+						    			}	
+						    		}); 
+						    	});
+
+						    };
+						    a.appendChild(linkText);
+						    
+						    optionHeader.appendChild(document.createTextNode("Option"));
+						    optionValue.appendChild(a);
+						    optionRow.appendChild(optionHeader);
+						    optionRow.appendChild(optionValue);
 						    
 						    tableBody.appendChild(nameRow);
 						    tableBody.appendChild(courseRow);
 						    tableBody.appendChild(gradesRow);
-						    tableBody.appendChild(feedbackRow);
+						    tableBody.appendChild(optionRow);
 						    
 						    table.appendChild(tableBody);
 						    
@@ -129,8 +229,7 @@ function viewChildren() {
 						    
 							childrenTable.appendChild(table);
 						}
-						
-						
+						//console.log(studentIds);
 					} else {
 						console.log(message);
 					}
@@ -257,4 +356,91 @@ function editParent() {
 									}
 								});
 					});
+}
+
+function editStudent(){
+var table = $('#studentTable').DataTable();
+$('#table table-information tbody').off('click').on( 'click', 'button', function () {
+	var tr = $(this).closest('tr');
+    var row = table.row( tr );
+   
+    bootbox.dialog({
+    	title: "Edit Details",
+		message: '<div class="row">  ' +
+		'<div class="col-md-12"> ' +
+		'<form class="form-horizontal" method="post"> ' +
+		'<div class="form-group"> ' +
+		'<div><font color="red" id="updatedMessage"></font></div>'+
+		'<label class="col-md-2 control-label" for="name">Name</label> ' +
+		'<div class="col-md-10"> ' +
+		'<input id="name" name="name" type="text" class="form-control input-md" value= ' + row.data().name + '> ' +
+		'</div> ' +
+		'<label class="col-md-2 control-label" for="nric">NRIC</label> ' +
+		'<div class="col-md-10"> ' +
+			'<input id="nric" name="nric" type="text" class="form-control input-md" value= ' + row.data().studentNric + '> ' +
+		'</div> ' +
+		'<label class="col-md-2 control-label" for="contact">Contact</label> ' +
+		'<div class="col-md-10"> ' +
+		'<input id="contact" name="contact" type="text" class="form-control input-md" value= ' + row.data().contact + '> ' +
+		'</div> ' +
+		'<label class="col-md-2 control-label" for="address">Address</label> ' +
+		'<div class="col-md-10"> ' +
+		'<input id="address" name="address" type="text" class="form-control input-md" value= ' + row.data().address + '> ' +
+		'</div> ' +
+		'</div> ' +
+		'</form> ' +
+		'</div> ' +
+		'</div>',
+		onEscape: function() {},
+		buttons: {
+			success:{
+				label: "Save!",
+				className: "btn-success",
+				
+				callback: function(){
+					var studentId = row.data().studentId;
+					var updatedName = $("#name").val();
+					var updatedNric = $("#nric").val();
+					var updatedContact = $("#contact").val();
+					var updatedAddress = $("#address").val();
+					var updatedEmail = $("#email").val();
+					
+					var input = {}
+					input.studentId = Number(studentId);
+					input.name = updatedName;
+					input.studentNric = updatedNric;
+					input.contact = updatedContact;
+					input.address = updatedAddress;
+					input.email = updatedEmail;
+					var inputStr = JSON.stringify(input);
+					
+					inputStr = encodeURIComponent(inputStr);
+					$.ajax({
+						url : '../VI/UpdateStudentServlet?input=' + inputStr, //this part sends to the servlet
+						method : 'POST',
+						dataType : 'json',
+						error : function(err) {
+							console.log(err);
+							$("#message").html("System has some error. Please try again.");
+						},
+						success : function(data) {
+							console.log(data);
+							var status = data.status; 
+							var message = data.message;
+							
+							if (status == 1) {
+								bootbox.alert("Update is successful!")
+								table.ajax.reload();
+								
+							} else {
+								$("#message").html("Something's wrong, please try again!");
+							}
+						}
+					});
+				}
+		
+			}
+		}	
+	}); 
+});
 }
