@@ -38,6 +38,9 @@
           </ul>
         </li>
         
+        <li class="active"><a href="diagnosticTest.jsp"><i class="fa fa-link"></i> <span>Diagnostic Results</span></a></li>
+        
+        
       </ul>
       
     </section>

@@ -55,7 +55,7 @@
 			<section class="content">
 				<div class="row">
 					<div class="col-md-12">
-						<form class="form-validate form-horizontal" id="feedback_form"
+						<form class="form-validate form-horizontal" id="registerStudent"
 							method="post" onsubmit="registerStudent();return false;">
 							<div>
 								<font color="red" id="message"></font>
@@ -97,9 +97,10 @@
 											Enrolled<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="checkbox" name="course" value="Math">Math
-											<input type="checkbox" name="course" value="English">English
-											<input type="checkbox" name="course" value="Korean">Korean
+											<input type="checkbox" id="course" name="course" value="Math">Math
+											<input type="checkbox" id="course" name="course"
+												value="English">English <input type="checkbox"
+												id="course" name="course" value="Korean">Korean
 										</div>
 									</div>
 									<div class="form-group ">
@@ -112,19 +113,27 @@
 												title="Letters only" required />
 										</div>
 									</div>
-
+									<div class="form-group ">
+										<label for="sName" class="control-label col-lg-2">NRIC<span
+											class="required">*</span>
+										</label>
+										<div class="col-lg-10">
+											<input class="form-control " id="studentNric" type="text"
+												name="sName" pattern="^[SFTG]\d{7}[A-Z]$" title="NRIC only"
+												required />
+										</div>
+									</div>
 									<!-- add in gender -->
 									<div class="form-group ">
 										<label for="gender" class="control-label col-lg-2">Gender<span
 											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="checkbox" name="gender" value="male">Male
-											<input type="checkbox" name="gender" value="female">Female
+											<input type="radio" id="gender" name="gender" value="male">Male
+											<input type="radio" id="gender" name="gender" value="female">Female
 										</div>
 									</div>
 
-									<!-- removed NRIC -->
 
 									<div class="form-group">
 										<label for="birthdate" class="control-label col-lg-2">Birth
@@ -132,7 +141,7 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="birthDate" name="birthdate"
-												type="text" title="birthdate" required />
+												type="date" title="birthdate" required />
 										</div>
 									</div>
 									<div class="form-group ">
@@ -141,7 +150,7 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="homeContact"
-												name="homeContact" type="text" required />
+												name="homeContact" type="text" pattern="[0-9]{8}" required />
 										</div>
 									</div>
 									<div class="form-group ">
@@ -150,7 +159,8 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="emergencyContact"
-												name="emergencyContact" type="text" required />
+												name="emergencyContact" type="text" pattern="[0-9]{8}"
+												required />
 										</div>
 									</div>
 									<div class="form-group ">
@@ -168,7 +178,7 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="postalCode" name="postalCode"
-												type="text" required />
+												type="text" pattern="[0-9]{6}" required />
 										</div>
 									</div>
 								</div>
@@ -179,8 +189,8 @@
 								</div>
 								<div class="box-body">
 									<div class="form-group ">
-										<label for="sName" class="control-label col-lg-2">Name
-											of School<span class="required">*</span>
+										<label for="sName" class="control-label col-lg-2">School
+											Name <span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="schoolName" name="schoolName"
@@ -190,12 +200,12 @@
 								</div>
 								<div class="box-body">
 									<div class="form-group ">
-										<label for="grade" class="control-label col-lg-2">Grade<span
-											class="required">*</span>
+										<label for="level" class="control-label col-lg-2">School
+											Level<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="grade" name="grade"
-												type="text" required />
+											<input class="form-control" id="schoolLevel"
+												name="schoolLevel" type="text" required />
 										</div>
 									</div>
 									<div class="form-group">
@@ -204,9 +214,7 @@
 										</div>
 									</div>
 								</div>
-
 							</div>
-
 						</form>
 					</div>
 				</div>

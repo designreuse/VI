@@ -135,8 +135,12 @@
 											<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="relationship" name="relation"
-												type="text" required />
+											<select name="relationship" id="relationship">
+												<option value="mother">Mother</option>
+												<option value="father">Father</option>
+												<option value="guardian">Guardian</option>
+												<option value="sibling">Sibling</option>
+											</select>
 										</div>
 									</div>
 									<!-- added in relationship -->
@@ -146,8 +150,8 @@
 											<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="occupation" name="occup"
-												type="text" required />
+											<input class="form-control" type="text" name="pOccupation"
+												id="occupation" />
 										</div>
 									</div>
 									<!-- added in occupation -->
@@ -158,19 +162,17 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="contactNumber" name="contact"
-												type="text" required />
+												type="[0-9]{8}"required />
 										</div>
 									</div>
 									<!--  removed address -->
-								<div class="form-group">
-									<div class="col-lg-offset-2 col-lg-10">
-										<button class="btn btn-primary" type="submit">Register</button>
+									<div class="form-group">
+										<div class="col-lg-offset-2 col-lg-10">
+											<button class="btn btn-primary" type="submit">Register</button>
+										</div>
 									</div>
 								</div>
-								</div>
 							</div>
-
-
 						</form>
 					</div>
 				</div>

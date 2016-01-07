@@ -105,39 +105,46 @@
 										</label>
 										<div class="col-lg-10">
 											<div id="course_points">
-												<input type="checkbox" class="enable_cb" name="course1"
+												<input type="checkbox" id="course" class="enable_cb" name="course1"
 													value="Math">Math
-												
+
 												<div class="enter_text">
-													Starting Point: 
-													<input type='button' value='-' class='qtyminus' field='math' /> 
-													<input type='text' name='math' value='0' class='qty' /> 
-													<input type='button' value='+' class='qtyplus' field='math' />
+													Starting Point: <input type='button' value='-'
+														class='qtyminus' field='math' /> <input type='text'
+														name='math' value='0' class='qty' /> <input type='button'
+														value='+' class='qtyplus' field='math' />
 												</div>
-												
-												<input type="checkbox" class="enable_cb" name="course2"
+
+												<input type="checkbox" id="course" class="enable_cb" name="course2"
 													value="English">English
-												
+
 												<div class="enter_text">
-													Starting Point: 
-													<input type='button' value='-' class='qtyminus' field='eng' /> 
-													<input type='text' name='eng' value='0' class='qty' /> 
-													<input type='button' value='+' class='qtyplus' field='eng' />
+													Starting Point: <input type='button' value='-'
+														class='qtyminus' field='eng' /> <input type='text'
+														name='eng' value='0' class='qty' /> <input type='button'
+														value='+' class='qtyplus' field='eng' />
 												</div>
-												
-												<input type="checkbox" class="enable_cb" name="course3"
+
+												<input type="checkbox" id="course" class="enable_cb" name="course3"
 													value="Korean">Korean
-												
+
 												<div class="enter_text">
-													Starting Point: 
-													<input type='button' value='-' class='qtyminus' field='korean' /> 
-													<input type='text' name='korean' value='0' class='qty' /> 
-													<input type='button' value='+' class='qtyplus' field='korean' />
+													Starting Point: <input type='button' value='-'
+														class='qtyminus' field='korean' /> <input type='text'
+														name='korean' value='0' class='qty' /> <input
+														type='button' value='+' class='qtyplus' field='korean' />
 												</div>
 											</div>
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="col-lg-offset-2 col-lg-10">
+											<button class="btn btn-primary" type="submit">Register</button>
+										</div>
+									</div>
 								</div>
+
+							</div>
 						</form>
 					</div>
 				</div>

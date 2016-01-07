@@ -8,30 +8,47 @@
 //}
 
 function registerStudent() {
-//	var studentEmail = $("#studentEmail").val();
-//	var studentPassword = $("#studentPassword").val();
+	// Parent's details 
+	var parentName = $("#parentName").val();
+	var parentNric = $("#parentNric").val();
+	
+	// student details
 	var studentName = $("#studentName").val();
 	var studentNric = $("#studentNric").val();
-	var contactNumber = $("#contactNumber").val();
+	var gender = $("#gender").val();
+	var birthDate = $("#birthDate").val();
+	var homeContact = $("#homeContact").val();
+	var emergencyContact = $("#emergencyContact").val();
 	var studentAddress = $("#studentAddress").val();
+	var postalCode = $("#postalCode").val();
 	
-	var parentNric = $("#parentNric").val();
+	// student education details 
+	var schoolName = $("#schoolName").val();
+	var schoolLevel = $("#schoolLevel").val()
 	
 	var branchId = localStorage.getItem("branchId");
 	console.log(branchId);
 	
 	var input = {};
-//	input.email = studentEmail;
-//	input.password = studentPassword;
-	input.name = studentName;
-	input.contact = contactNumber;
-	input.address = studentAddress;
-	input.studentNric = studentNric;
+	
 	input.parentNric = parentNric;
+	
+	input.name = studentName;
+	input.studentNric = studentNric;
+	input.gender = gender;
+	input.birthDate = birthDate;
+	input.homeContact = homeContact;
+	input.emergencyContact = emergencyContact;
+	input.postalCode = postalCode;
+	input.address = studentAddress;
+	
+	input.schoolName = schoolName;
+	input.schoolLevel = schoolLevel;
+	
+	input.takenDiagnotic = "1";
 	input.branchId = Number(branchId);
+	
 	var inputStr = JSON.stringify(input);
-	
-	
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
 		url : '../VI/RegisterStudentServlet?input=' + inputStr, //this part sends to the servlet
@@ -45,7 +62,7 @@ function registerStudent() {
 			console.log(data);
 			var status = data.status; //shows the  success/failure of the servlet request
 			var message = data.message;
-			// if status == 1, it means that it is successful. else it will fail
+			// if status == 1, it means that it is successful, else it will fail.
 			if (status == 1) {
 				alert("Created successfully");
 				
@@ -97,16 +114,20 @@ function getStudentsByBranch(branchId) {
 		 columns: [
 			 {"data": "studentId"},
 			 {"data": 'name'},
+			 {"data": 'gender'},
 			 {"data": 'studentNric'},
-			 {"data": 'contact'},
+			 {"data": 'homeContact'},
+			 {"data": 'emergencyContact'},
 			 {"data": 'address'},
+			 {"data": 'postalCode'},
+			 {"data": 'schoolName'},
+			 {"data": 'schoolLevel'},
 			 {"data": 'points'},
 			 {"data": 'createDate'},
 			 {"data": null, "defaultContent":'<button class="btn btn-sm btn-warning fa" onclick="editStudent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteStudent();" title="Delete"><i class="fa fa-trash-o"></i></button>'}
 			]
     });
 }
-
 function editStudent(){
 	var table = $('#studentTable').DataTable();
 	$('#studentTable tbody').off('click').on( 'click', 'button', function () {
@@ -207,7 +228,7 @@ function deleteStudent(){
 							'<form class="form-horizontal" method="post"> ' +
 								'<div class="form-group"> ' +
 									'<label class="col-md-1 control-label"></label> ' +
-									'<div>Please enter the student name to confirm delete</div></br>'+
+									'<div>Please enter the student name to confirm deletion.</div></br>'+
 									'<div><font color="red" id="deleteMessage"></font></div>'+
 									'<label class="col-md-2 control-label" for="name">Name</label> ' +
 									'<div class="col-md-10"> ' +
@@ -247,7 +268,7 @@ function deleteStudent(){
         							var message = data.message;
         							
         							if (status == 1) {
-        								bootbox.alert("Delete is successful!")
+        								bootbox.alert("Student has been successfully deleted!")
         								table.ajax.reload();
         								
         							} else {
