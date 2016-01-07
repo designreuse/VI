@@ -54,19 +54,23 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="box">
-							<div class="box-header" id="name"><h3 class="box-title">User Profile</h3></div>
+<!-- 							<div class="box-header" id="name"><h3 class="box-title">User Profile</h3></div> -->
 							<div class="box-body">
 								<div class="row">
 									
 									<div class="col-md-6 col-lg-6">
-										<table class="table table-user-information">
-											<tbody>
-												<tr>
-													<td><strong>Feedback:</strong></td>
-													<td id="feedback"></td>
-												</tr>
-											</tbody>
-										</table>
+									
+									<div class="col-md-6 col-lg-6" id="test">
+											</div>
+									
+<!-- 										<table class="table table-user-information"> -->
+<!-- 											<tbody> -->
+<!-- 												<tr> -->
+<!-- 													<td><strong>Feedback:</strong></td> -->
+<!-- 													<td id="feedback"></td> -->
+<!-- 												</tr> -->
+<!-- 											</tbody> -->
+<!-- 										</table> -->
 										
 									</div>
 								</div>
