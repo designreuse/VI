@@ -1,7 +1,6 @@
 package controller;
 
-import java.util.Date;
-
+import model.Classroom;
 import model.Schedule;
 import model.StudentSchedule;
 import model.Student;
@@ -9,6 +8,7 @@ import model.Student;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.ClassroomDAO;
 import dataManager.ScheduleDAO;
 import dataManager.StudentScheduleDAO;
 import dataManager.StudentDAO;
@@ -150,15 +150,10 @@ public class StudentScheduleCtrl {
 					StudentSchedule studentSchedule = new StudentSchedule(student, schedule);
 					StudentScheduleDAO.addStudentSchedule(studentSchedule);
 					messageJson.put(Key.STUDENTSCHEDULE, studentSchedule.toJson());
+					Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
 					
-					//create the attendances
-					Date startDate = schedule.getScheduleStartDate();
-					Date endDate = schedule.getScheduleEndDate();
-					
-					while(){
-						
-					}
-					
+					JSONObject attendancesObj = AttendanceCtrl.createAttendancesBySchedule(studentSchedule, classroom);
+					messageJson.put(Key.STUDENTATTENDANCES, attendancesObj);
 					
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, messageJson);

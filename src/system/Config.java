@@ -25,6 +25,8 @@ public class Config {
 
 	    return newDate;
 	}
+	public static final int ONEWEEK = 7;
+	public static final int TWOWEEK = 7;
 	
 	public static final String ROOT = "VI";
 	

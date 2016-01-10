@@ -35,6 +35,14 @@
     <url-pattern>/CreateScheduleServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>CreateStudentScheduleAndAttendancesServlet</servlet-name>
+    <servlet-class>service.CreateStudentScheduleAndAttendancesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateStudentScheduleAndAttendancesServlet</servlet-name>
+    <url-pattern>/CreateStudentScheduleAndAttendancesServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>CreateTeacherFeedbackServlet</servlet-name>
     <servlet-class>service.CreateTeacherFeedbackServlet</servlet-class>
   </servlet>
@@ -266,13 +274,23 @@
     <servlet-name>GetDiagnosticsByStudentServlet</servlet-name>
     <url-pattern>/GetDiagnosticsByStudentServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet>
-    <servlet-name>GetFeedbackByStudentServlet</servlet-name>
-    <servlet-class>service.GetFeedbackByStudentServlet</servlet-class>
+    <servlet-name>GetFeedbacksAndResultsByStudentServlet</servlet-name>
+    <servlet-class>service.GetFeedbacksAndResultsByStudentServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetFeedbackByStudentServlet</servlet-name>
-    <url-pattern>/GetFeedbackByStudentServlet</url-pattern>
+    <servlet-name>GetFeedbacksAndResultsByStudentServlet</servlet-name>
+    <url-pattern>/GetFeedbacksAndResultsByStudentServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetFeedbacksByStudentServlet</servlet-name>
+    <servlet-class>service.GetFeedbacksByStudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetFeedbacksByStudentServlet</servlet-name>
+    <url-pattern>/GetFeedbacksByStudentServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetFeedbacksByTeacherAndStudentServlet</servlet-name>

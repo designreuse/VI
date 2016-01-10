@@ -7,6 +7,7 @@ import model.Teacher;
 import model.TeacherFeedback;
 import model.TeacherStudentCourse;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.json.simple.JSONArray;
@@ -166,6 +167,33 @@ public class ResultCtrl {
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	//Get results by student
+	public static JSONObject getResultsByStudent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+			if (student != null) {
+				JSONArray resultArr = new JSONArray();
+				ArrayList<TeacherStudentCourse> tscs = TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(student);
+				for(TeacherStudentCourse tsc : tscs){
+					for (Result r : ResultDAO.getResultsByTeacherStudentCourse(tsc)) {
+						resultArr.add(r.toJsonShowStudentAndTeacher());
+					}
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, resultArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

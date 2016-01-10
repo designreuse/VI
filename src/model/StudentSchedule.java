@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 
 import system.Config;
 import system.Key;
+import system.Value;
 
 public class StudentSchedule {
 	private long studentScheduleId;
@@ -26,6 +27,8 @@ public class StudentSchedule {
 		super();
 		this.student = student;
 		this.schedule = schedule;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
 	}
 	
 	/**

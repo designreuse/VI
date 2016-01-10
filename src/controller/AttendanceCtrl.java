@@ -1,5 +1,8 @@
 package controller;
 
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import model.Attendance;
@@ -168,21 +171,29 @@ public class AttendanceCtrl {
 	//Create attendance based on the start and end date of a schedule
 	public static JSONObject createAttendancesBySchedule(StudentSchedule studentSchedule, Classroom classroom){
 		JSONObject returnJson = new JSONObject();
+		JSONArray returnArray = new JSONArray();
 		try{
 			Schedule schedule = studentSchedule.getSchedule();
-			
+			long duration = schedule.getDuration();
 			Date scheduleStartDate = schedule.getScheduleStartDate();
 			Date compareDate = scheduleStartDate;
 			Date scheduleEndDate = schedule.getScheduleEndDate();
-			
+			//continue looping until the end date is been surpass
 			while(compareDate.compareTo(scheduleEndDate)<=0){
 				
+				Instant instant = compareDate.toInstant();
+				ZoneId zoneId = ZoneId.of(Config.TIMEZONE);
+				ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+				ZonedDateTime later = zdt.plusHours(duration);
+				java.util.Date date = java.util.Date.from(later.toInstant());
+				
+				Attendance attendance = new Attendance(compareDate, date, studentSchedule, classroom);
+				AttendanceDAO.addAttendance(attendance);
+				returnArray.add(attendance.toJsonSimple());
+				compareDate = Config.addDaysToDate(compareDate, Config.ONEWEEK);
 			}
-			
-			Attendance attendance = new Attendance(planStartDate, planEndDate, studentSchedule, classroom);
-			AttendanceDAO.addAttendance(attendance);
-			
-			
+			returnJson.put(Key.START, Value.SUCCESS);
+			returnJson.put(Key.ATTENDANCES, returnArray);
 		} catch(Exception e) {
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

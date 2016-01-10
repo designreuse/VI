@@ -1,11 +1,7 @@
 package controller;
 
-import java.util.ArrayList;
 import java.util.Date;
 
-import model.Branch;
-import model.Classroom;
-import model.Student;
 import model.Course;
 import model.Schedule;
 import model.Teacher;
@@ -13,9 +9,6 @@ import model.Teacher;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.BranchDAO;
-import dataManager.ClassroomDAO;
-import dataManager.StudentDAO;
 import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.TeacherDAO;
@@ -45,9 +38,10 @@ public class ScheduleCtrl {
 					long dayOfWeek = (long) inputJson.get(Key.DAYOFWEEK);
 					Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
 					Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
+					long duration = (long) inputJson.get(Key.DURATION);
 					
 					Schedule schedule = new Schedule(name, description, dayOfWeek, scheduleStartDate, 
-														scheduleEndDate, course, teacher);
+														scheduleEndDate, duration, course, teacher);
 					ScheduleDAO.addSchedule(schedule);
 					
 					returnJson.put(Key.STATUS, Value.SUCCESS);

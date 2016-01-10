@@ -17,6 +17,7 @@ public class Schedule {
 	private long dayOfWeek; //1-Mon, 2-Tue ...
 	private Date scheduleStartDate;
 	private Date scheduleEndDate;
+	private long duration;
 	
 	private Course course;
 	private Teacher teacher;
@@ -30,7 +31,7 @@ public class Schedule {
 	public Schedule(){}
 
 	public Schedule(String name, String description, long dayOfWeek, Date scheduleStartDate,
-					Date scheduleEndDate, Course course, Teacher teacher) {
+					Date scheduleEndDate, long duration, Course course, Teacher teacher) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
@@ -39,6 +40,8 @@ public class Schedule {
 		this.setScheduleEndDate(scheduleEndDate);
 		this.setTeacher(teacher);
 		this.setCourse(course);
+		this.setDuration(duration);
+	
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -125,6 +128,20 @@ public class Schedule {
 	 */
 	public void setScheduleEndDate(Date scheduleEndDate) {
 		this.scheduleEndDate = scheduleEndDate;
+	}
+
+	/**
+	 * @return the duration
+	 */
+	public long getDuration() {
+		return duration;
+	}
+
+	/**
+	 * @param duration the duration to set
+	 */
+	public void setDuration(long duration) {
+		this.duration = duration;
 	}
 
 	/**
@@ -219,6 +236,7 @@ public class Schedule {
 		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
 		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
 		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+		returnJson.put(Key.DURATION, this.duration);
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -235,6 +253,7 @@ public class Schedule {
 		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
 		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
 		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+		returnJson.put(Key.DURATION, this.duration);
 		
 		returnJson.put(Key.TEACHER, this.teacher.toJson());
 		returnJson.put(Key.COURSE, this.course.toJson());

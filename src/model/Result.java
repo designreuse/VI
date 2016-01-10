@@ -218,6 +218,25 @@ public class Result {
 		return returnJson;
 	}
 	
+	public JSONObject toJsonShowStudentAndTeacher() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.RESULTID, this.resultId);
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+		returnJson.put(Key.RESULTVALUE, this.resultValue);
+//		returnJson.put(Key.RESULTDATE, Config.SDF.format(this.resultDate));
+		returnJson.put(Key.POINTAMOUNT, this.pointAmount);
+		
+		returnJson.put(Key.TEACHERSTUDENTCOURSE,this.teacherStudentCourse.toJsonShowStudentAndTeacher());
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.RESULTID, this.resultId);
@@ -227,8 +246,7 @@ public class Result {
 //		returnJson.put(Key.RESULTDATE, Config.SDF.format(this.resultDate));
 		returnJson.put(Key.POINTAMOUNT, this.pointAmount);
 
-		returnJson.put(Key.TEACHERSTUDENTCOURSE,
-				this.teacherStudentCourse.toJson());
+		returnJson.put(Key.TEACHERSTUDENTCOURSE,this.teacherStudentCourse.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

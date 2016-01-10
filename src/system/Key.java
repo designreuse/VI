@@ -129,6 +129,7 @@ public class Key {
 	public static final String SCHEDULESTARTDATE = "scheduleStartDate";
 	public static final String SCHEDULEENDDATE = "scheduleEndDate";
 	public static final String DAYOFWEEK = "dayOfWeek";
+	public static final String DURATION = "duration";
 	
 	public static final String TEACHERCOURSE = "teacherCourse";
 	public static final String TEACHERCOURSES = "teacherCourses";
@@ -172,6 +173,8 @@ public class Key {
 	public static final String STUDENTSCHEDULE = "studentSchedule";
 	public static final String STUDENTSCHEDULES = "studentSchedules";
 	public static final String STUDENTSCHEDULEID = "studentScheduleId";
+	public static final String STUDENTATTENDANCES = "studentAttendances";
+	
 	
 	
 	

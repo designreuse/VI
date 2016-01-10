@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,18 +14,19 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.StudentScheduleCtrl;
+import controller.ResultCtrl;
+import controller.TeacherFeedbackCtrl;
 
 /**
  * @author RaySong
  */
-public class CreateStudentScheduleServlet extends HttpServlet {
+public class GetFeedbacksAndResultsByStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateStudentScheduleServlet() {
+    public GetFeedbacksAndResultsByStudentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +34,7 @@ public class CreateStudentScheduleServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
 	}
@@ -46,7 +48,6 @@ public class CreateStudentScheduleServlet extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -58,7 +59,8 @@ public class CreateStudentScheduleServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = StudentScheduleCtrl.createStudentScheduleAndAttendances(inputJson);
+			returnJson.put(Key.TEACHERFEEDBACKS, TeacherFeedbackCtrl.getTeacherFeedbacksByStudent(inputJson));
+			returnJson.put(Key.RESULTS, ResultCtrl.getResultsByStudent(inputJson));
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
