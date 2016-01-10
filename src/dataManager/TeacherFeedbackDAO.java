@@ -75,6 +75,19 @@ public class TeacherFeedbackDAO {
 		return tf;
 	}
 	
+	public static ArrayList<TeacherFeedback> getLatesThreeTeacherFeedbacksByTSC(TeacherStudentCourse tsc){
+		ArrayList<TeacherFeedback> teacherFeedbacks = new ArrayList<TeacherFeedback>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
+		detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 3);
+		for(Object o : list){
+			teacherFeedbacks.add((TeacherFeedback) o);
+		}
+		return teacherFeedbacks;
+	}
+	
 	public static ArrayList<TeacherFeedback> getFeedbacksByStudent(Student student){
 		ArrayList<TeacherFeedback> feedbacks = new ArrayList<TeacherFeedback>();
 		Session session = HibernateUtil.getSessionFactory().openSession();

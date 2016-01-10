@@ -145,7 +145,7 @@ public class TeacherFeedbackCtrl {
 				JSONArray teacherFeedbackArr = new JSONArray();
 				ArrayList<TeacherStudentCourse> tscs = TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(student);
 				for(TeacherStudentCourse tsc : tscs){
-					for (TeacherFeedback tf : TeacherFeedbackDAO.getTeacherFeedbacksByTeacherStudentCourse(tsc)) {
+					for (TeacherFeedback tf : TeacherFeedbackDAO.getLatesThreeTeacherFeedbacksByTSC(tsc)) {
 						teacherFeedbackArr.add(tf.toJsonShowStudentAndTeacher());
 					}
 				}

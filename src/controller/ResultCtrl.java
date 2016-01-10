@@ -185,7 +185,7 @@ public class ResultCtrl {
 				JSONArray resultArr = new JSONArray();
 				ArrayList<TeacherStudentCourse> tscs = TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(student);
 				for(TeacherStudentCourse tsc : tscs){
-					for (Result r : ResultDAO.getResultsByTeacherStudentCourse(tsc)) {
+					for (Result r : ResultDAO.getLatesThreeResultsByTSC(tsc)) {
 						resultArr.add(r.toJsonShowStudentAndTeacher());
 					}
 				}

@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Result;
+import model.Result;
 import model.TeacherStudentCourse;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import system.Key;
@@ -49,6 +51,34 @@ public class ResultDAO {
 		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, teacherStudentCourse));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+		for(Object o : list){
+			results.add((Result) o);
+		}
+		return results;
+	}
+	
+	public static Result getLatestResultByTSC(TeacherStudentCourse tsc){
+		Result result = null;
+		if(tsc != null){
+			DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
+			detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
+			detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
+			detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+			List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 1);
+			for(Object o : list){
+				result = (Result)o;
+			}
+		}
+		return result;
+	}
+	
+	public static ArrayList<Result> getLatesThreeResultsByTSC(TeacherStudentCourse tsc){
+		ArrayList<Result> results = new ArrayList<Result>();
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
+		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
+		detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
+		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 3);
 		for(Object o : list){
 			results.add((Result) o);
 		}
