@@ -203,8 +203,8 @@ public class Attendance {
 				
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.PLANSTARTDATE, this.planStartDate);
-		returnJson.put(Key.PLANENDDATE, this.planEndDate);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -220,8 +220,8 @@ public class Attendance {
 				
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.PLANSTARTDATE, this.planStartDate);
-		returnJson.put(Key.PLANENDDATE, this.planEndDate);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
 		
 		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
 		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
@@ -253,8 +253,8 @@ public class Attendance {
 		JSONObject returnJson = new JSONObject();
 				
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-		returnJson.put(Key.PLANSTARTDATE, this.planStartDate);
-		returnJson.put(Key.PLANENDDATE, this.planEndDate);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
 		
 		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
 		

@@ -3,6 +3,7 @@ package controller;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.Calendar;
 import java.util.Date;
 
 import model.Attendance;
@@ -174,18 +175,16 @@ public class AttendanceCtrl {
 		JSONArray returnArray = new JSONArray();
 		try{
 			Schedule schedule = studentSchedule.getSchedule();
-			long duration = schedule.getDuration();
-			Date scheduleStartDate = schedule.getScheduleStartDate();
-			Date compareDate = scheduleStartDate;
+			int duration = (int) schedule.getDuration();
+			Date startDate = schedule.getScheduleStartDate();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(startDate);
+			Date compareDate = calendar.getTime();
 			Date scheduleEndDate = schedule.getScheduleEndDate();
 			//continue looping until the end date is been surpass
 			while(compareDate.compareTo(scheduleEndDate)<=0){
-				
-				Instant instant = compareDate.toInstant();
-				ZoneId zoneId = ZoneId.of(Config.TIMEZONE);
-				ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
-				ZonedDateTime later = zdt.plusHours(duration);
-				java.util.Date date = java.util.Date.from(later.toInstant());
+				calendar.add(Calendar.HOUR_OF_DAY, duration);
+				Date date = calendar.getTime();
 				
 				Attendance attendance = new Attendance(compareDate, date, studentSchedule, classroom);
 				AttendanceDAO.addAttendance(attendance);

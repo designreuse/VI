@@ -242,7 +242,8 @@ public class ResultCtrl {
 					messageJson.put(Key.STATUS, Value.SUCCESS);
 				} else {
 					messageJson.put(Key.STATUS, Value.FAIL);
-					messageJson.put(Key.MESSAGE, "ID: " + feedback.get(Key.TEACHERSTUDENTCOURSEID) + ". " + Message.TEACHERSTUDENTCOURSENOTEXIST);
+					messageJson.put(Key.MESSAGE, Message.TEACHERSTUDENTCOURSENOTEXIST + " for teacherId: " + inputJson.get(Key.TEACHERID) + ", "
+							+ "studentId: " + feedback.get(Key.STUDENTID) + " and courseId: " + inputJson.get(Key.COURSEID));
 				}
 				messageArray.add(messageJson);
 			}
