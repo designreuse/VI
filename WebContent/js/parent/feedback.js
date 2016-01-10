@@ -16,7 +16,7 @@ function getFeedback(){
 	var i = encodeURIComponent(inputStr);
 
 	$.ajax({
-		url : '../VI/GetFeedbacksByStudentServlet?input=' + inputStr, // this part sends to
+		url : '../VI/GetFeedbacksAndResultsByStudentServlet?input=' + inputStr, // this part sends to
 		// the servlet
 		method : 'POST',
 		dataType : 'json',
@@ -25,17 +25,22 @@ function getFeedback(){
 		},
 		success : function(data) {
 			;
-			var status = data.status; // shows the success/failure of the
+			var feedbackStatus = data.teacherFeedbacks.status; // to modify for both status
+			var resultsStatus = data.results.status;
 			// servlet request
-			if (status == 1) {
-				for (var i = 0; i < data.message.length; i++) {
+			if (feedbackStatus == 1 && resultsStatus == 1) {
+				//length of for loop -- different lengths for teacherFeedbacks and results
+				//display NIL if no feedback
+				for (var i = 0; i < data.teacherFeedbacks.message.length; i++) {
 					var feedbackTable = document.getElementById("test");
 					
-					var name = data.message[i].teacherStudentCourse.student.name;
-					var feedback = data.message[i].content;
-	//				document.getElementById('name').innerHTML = name;
-	//				document.getElementById('feedback').innerHTML = feedback;
-	//				
+					var name = data.teacherFeedbacks.message[i].teacherStudentCourse.student.name;
+					var feedback = data.teacherFeedbacks.message[i].content;
+					//console.log(data.results.message[i].resultValue);
+					var result = data.results.message[i].resultValue;
+					var courseLevel = data.results.message[i].courseLevel;
+					var bookletLevel = data.results.message[i].bookletLevel;
+					
 					var table = document.createElement('TABLE');
 				    table.className = "table table-information";
 				    var tableBody = document.createElement('TBODY');
@@ -47,6 +52,18 @@ function getFeedback(){
 				    var feedbackRow = document.createElement('TR');
 				    var feedbackHeader = document.createElement('TD');
 				    var feedbackValue = document.createElement('TD');
+				    
+				    var resultRow = document.createElement('TR');
+				    var resultHeader = document.createElement('TD');
+				    var resultValue = document.createElement('TD');
+				    
+				    var courseLevelRow = document.createElement('TR');
+				    var courseLevelHeader = document.createElement('TD');
+				    var courseLevelValue = document.createElement('TD');
+				    
+				    var bookletLevelRow = document.createElement('TR');
+				    var bookletLevelHeader = document.createElement('TD');
+				    var bookletLevelValue = document.createElement('TD');
 				    
 				    var bold = document.createElement("b");
 				    bold.appendChild(document.createTextNode("Name"));
@@ -62,8 +79,26 @@ function getFeedback(){
 				    feedbackRow.appendChild(feedbackHeader);
 				    feedbackRow.appendChild(feedbackValue);
 				    
+				    resultHeader.appendChild(document.createTextNode("Result"));
+				    resultValue.appendChild(document.createTextNode(result));
+				    resultRow.appendChild(resultHeader);
+				    resultRow.appendChild(resultValue);
+				    
+				    courseLevelHeader.appendChild(document.createTextNode("Course Level"));
+				    courseLevelValue.appendChild(document.createTextNode(courseLevel));
+				    courseLevelRow.appendChild(courseLevelHeader);
+				    courseLevelRow.appendChild(courseLevelValue);
+				    
+				    bookletLevelHeader.appendChild(document.createTextNode("Booklet Level"));
+				    bookletLevelValue.appendChild(document.createTextNode(bookletLevel));
+				    bookletLevelRow.appendChild(bookletLevelHeader);
+				    bookletLevelRow.appendChild(bookletLevelValue);
+				    
 				    tableBody.appendChild(nameRow);
 				    tableBody.appendChild(feedbackRow);
+				    tableBody.appendChild(resultRow);
+				    tableBody.appendChild(courseLevelRow);
+				    tableBody.appendChild(bookletLevelRow);
 				    
 				    table.appendChild(tableBody);
 				    
@@ -72,7 +107,7 @@ function getFeedback(){
 				}
 			
 			} else {
-				console.log(message);
+				//console.log(message);
 			}
 		}
 	});
