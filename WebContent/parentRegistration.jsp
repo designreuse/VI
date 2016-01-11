@@ -162,7 +162,7 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="contactNumber" name="contact"
-												type="[0-9]{8}"required />
+												type="text"required />
 										</div>
 									</div>
 									<!--  removed address -->

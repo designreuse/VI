@@ -20,7 +20,7 @@ function submitDiagnostic(){
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
 		// need to add in the servlet name 
-		url : '../VI/Servlet?input=' + inputStr, //this part sends to the servlet
+		url : '../VI/GetStudentById?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {

@@ -22,39 +22,37 @@ function validatePassword(){
 }
 
 function registerParent() {
-	var parentEmail = $("#parentEmail").val();
-	var parentPassword = $("#parentPassword").val();
 	var parentName = $("#parentName").val();
+	var contact = $("#contactNumber").val();
+	var parentEmail = $("#parentEmail").val();
 	var parentNric = $("#parentNric").val();
-	var relationship = $("#relationship").val();
 	var occupation = $("#occupation").val();
-	var contact = $("#contact").val();
-
+	var relationship = $("#relationship").val();
+	var parentPassword = $("#parentPassword").val();
 
 	var branchId = localStorage.getItem("branchId");
+	var numBranchId = Number(branchId);
 	console.log(branchId);
 
 	var input = {};
-	input.email = parentEmail;
-	input.password = parentPassword;
 	input.name = parentName;
+	input.contact = contact;
+	input.email = parentEmail;
 	input.parentNric = parentNric;
-	input.relationship = relationship;
 	input.occupation = occupation;
-	input.contact = contactNumber;
+	input.relationship = relationship;
+	input.password = parentPassword;
+	input.branchId = numBranchId;
 
-	input.branchId = Number(branchId);
-
+	console.log(input);
 	var inputStr = JSON.stringify(input);
+
 	inputStr = encodeURIComponent(inputStr);
+
 	$.ajax({
 		url : '../VI/RegisterParentServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
 		dataType : 'json',
-		error : function(err) {
-			console.log(err);
-			$("#message").html("System has some error. Please try again.");
-		},
 		success : function(data) {
 			console.log(data);
 			var status = data.status; //shows the  success/failure of the servlet request
@@ -68,9 +66,14 @@ function registerParent() {
 			} else {
 				$("#message").html(message);
 			}
+		},
+		error : function(err) {
+			console.log(err);
+			$("#message").html("System has some error. Please try again.");
 		}
 	});
 }
+
 
 function getParentsByBranch(branchId) {
 	$.fn.dataTable.ext.errMode = 'none';

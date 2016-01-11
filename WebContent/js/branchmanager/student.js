@@ -13,6 +13,7 @@ function registerStudent() {
 	var parentNric = $("#parentNric").val();
 	
 	// student details
+	var taken = $("#diagnostic").val();
 	var studentName = $("#studentName").val();
 	var studentNric = $("#studentNric").val();
 	var gender = $("#gender").val();
@@ -28,6 +29,7 @@ function registerStudent() {
 	
 	var branchId = localStorage.getItem("branchId");
 	console.log(branchId);
+	console.log(taken);
 	
 	var input = {};
 	
@@ -45,10 +47,11 @@ function registerStudent() {
 	input.schoolName = schoolName;
 	input.schoolLevel = schoolLevel;
 	
-	input.takenDiagnotic = "1";
+	input.takenDiagnostic = Number(taken);
 	input.branchId = Number(branchId);
 	
 	var inputStr = JSON.stringify(input);
+	
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
 		url : '../VI/RegisterStudentServlet?input=' + inputStr, //this part sends to the servlet
@@ -104,6 +107,7 @@ function getStudentsByBranch(branchId) {
 	input.branchId = Number(branchId);
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
+	console.log(inputStr);
 	var table =  $('#studentTable').on( 'error.dt', function ( e, settings, techNote, message ) {
         console.log( 'An error has been reported by DataTables: ', message );
     }).DataTable({
@@ -116,12 +120,14 @@ function getStudentsByBranch(branchId) {
 			 {"data": 'name'},
 			 {"data": 'gender'},
 			 {"data": 'studentNric'},
+			 {"data": 'birthDate'},
 			 {"data": 'homeContact'},
 			 {"data": 'emergencyContact'},
-			 {"data": 'address'},
+			 {"data": 'studentAddress'},
 			 {"data": 'postalCode'},
 			 {"data": 'schoolName'},
 			 {"data": 'schoolLevel'},
+			 {"data": 'takenDiagnostic'},
 			 {"data": 'points'},
 			 {"data": 'createDate'},
 			 {"data": null, "defaultContent":'<button class="btn btn-sm btn-warning fa" onclick="editStudent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteStudent();" title="Delete"><i class="fa fa-trash-o"></i></button>'}

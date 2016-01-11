@@ -104,6 +104,16 @@
 										</div>
 									</div>
 									<div class="form-group ">
+										<label for="gender" class="control-label col-lg-2">Taken Diagnostic<span
+											class="required">*</span>
+										</label>
+										<div class="col-lg-10">
+											<input type="radio" id="diagnostic" name="diagnostic" value="0">No
+											<input type="radio" id="diagnostic" name="diagnostic" value="1">Yes
+										</div>
+									</div>
+
+									<div class="form-group ">
 										<label for="sName" class="control-label col-lg-2">Name<span
 											class="required">*</span>
 										</label>
