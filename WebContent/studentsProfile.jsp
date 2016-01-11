@@ -67,9 +67,15 @@
 									<tr>
 										<th>Student ID</th>
 										<th>Name</th>
-										<th>Nric</th>
-										<th>Contact</th>
+										<th>Gender</th>
+										<th>NRIC</th>
+										<th>Home Contact</th>
+										<th>Emergency Contact</th>
 										<th>Address</th>
+										<th>Postal Code</th>
+										<th>School Name</th>
+										<th>School Level</th>
+										<th>Taken Diagnostic</th>
 										<th>Points</th>
 										<th>Create Date</th>
 										<th>Options</th>

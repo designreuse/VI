@@ -62,15 +62,15 @@
 						<tr>
 							<th>Parent ID</th>
 							<th>Name</th>
-							<th>Nric</th>
+							<th>NRIC</th>
 							<th>Contact</th>
 							<th>Email</th>
-							<th>Address</th>
+							<th>Relationship</th>
+							<th>Occupation</th>
 							<th>Create Date</th>
 							<th>Options</th>
 						</tr>
 					</thead>
-					
 					<tbody>
 					</tbody>
 				</table>
