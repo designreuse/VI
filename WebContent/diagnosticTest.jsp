@@ -95,7 +95,7 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control " id="studentNric" type="text"
-												name="sName" pattern="^([a-zA-Z\s]{1,255})$"
+												name="sName" pattern="^[SFTG]\d{7}[A-Z]$"
 												title="Letters only" required />
 										</div>
 									</div>
@@ -105,8 +105,8 @@
 										</label>
 										<div class="col-lg-10">
 											<div id="course_points">
-												<input type="checkbox" id="course" class="enable_cb" name="course1"
-													value="Math">Math
+												<input type="checkbox" id="course" class="enable_cb"
+													name="course1" value="Math">Math
 
 												<div class="enter_text">
 													Starting Point: <input type='button' value='-'
@@ -115,8 +115,8 @@
 														value='+' class='qtyplus' field='math' />
 												</div>
 
-												<input type="checkbox" id="course" class="enable_cb" name="course2"
-													value="English">English
+												<input type="checkbox" id="course" class="enable_cb"
+													name="course2" value="English">English
 
 												<div class="enter_text">
 													Starting Point: <input type='button' value='-'
@@ -125,8 +125,8 @@
 														value='+' class='qtyplus' field='eng' />
 												</div>
 
-												<input type="checkbox" id="course" class="enable_cb" name="course3"
-													value="Korean">Korean
+												<input type="checkbox" id="course" class="enable_cb"
+													name="course3" value="Korean">Korean
 
 												<div class="enter_text">
 													Starting Point: <input type='button' value='-'
@@ -142,6 +142,7 @@
 											<button class="btn btn-primary" type="submit">Register</button>
 										</div>
 									</div>
+
 								</div>
 
 							</div>

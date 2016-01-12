@@ -131,10 +131,11 @@ function editParent(){
 			'<div class="col-md-10"> ' +
 			'<input id="email" name="email" type="text" class="form-control input-md" value= ' + row.data().email + '> ' +
 			'</div> ' +
-			'<label class="col-md-2 control-label" for="address">Address</label> ' +
+			'<label class="col-md-2 control-label" for="relationship">Relationship</label> ' +
 			'<div class="col-md-10"> ' +
 			'<input id="relationship" name="relationship" type="text" class="form-control input-md" value= ' + row.data().relationship + '> ' +
 			'</div> ' +
+			'<label class="col-md-2 control-label" for="occupation">Occupation</label> ' +
 			'<div class="col-md-10"> ' +
 			'<input id="occupation" name="occupation" type="text" class="form-control input-md" value= ' + row.data().occupation + '> ' +
 			'</div> ' +
@@ -153,7 +154,8 @@ function editParent(){
 						var updatedName = $("#name").val();
 						var updatedNric = $("#nric").val();
 						var updatedContact = $("#contact").val();
-						var updatedAddress = $("#address").val();
+						var updatedRelationship = $("#relationship").val();
+						var updatedOccupation = $("#occupation").val();
 						var updatedEmail = $("#email").val();
 
 						var input = {}
@@ -161,7 +163,7 @@ function editParent(){
 						input.name = updatedName;
 						input.parentNric = updatedNric;
 						input.contact = updatedContact;
-						input.address = updatedAddress;
+						input.relationship = updatedRelationship;
 						input.email = updatedEmail;
 						var inputStr = JSON.stringify(input);
 

@@ -9,6 +9,11 @@
 
 function registerStudent() {
 	// Parent's details 
+	jQuery('#parentNric').on('input', function() {
+		var pNric = $("#parentNric").val();
+	    console.log(pNric);
+	});
+	
 	var parentName = $("#parentName").val();
 	var parentNric = $("#parentNric").val();
 	
@@ -20,6 +25,7 @@ function registerStudent() {
 	var birthDate = $("#birthDate").val();
 	var homeContact = $("#homeContact").val();
 	var emergencyContact = $("#emergencyContact").val();
+	console.log(emergencyContact);
 	var studentAddress = $("#studentAddress").val();
 	var postalCode = $("#postalCode").val();
 	
@@ -40,7 +46,7 @@ function registerStudent() {
 	input.gender = gender;
 	input.birthDate = birthDate;
 	input.homeContact = homeContact;
-	input.emergencyContact = emergencyContact;
+	input.EmergencyContact = emergencyContact;
 	input.postalCode = postalCode;
 	input.address = studentAddress;
 	
@@ -106,8 +112,8 @@ function getStudentsByBranch(branchId) {
 	var input = {};
 	input.branchId = Number(branchId);
 	var inputStr = JSON.stringify(input);
-	inputStr = encodeURIComponent(inputStr);
 	console.log(inputStr);
+	inputStr = encodeURIComponent(inputStr);
 	var table =  $('#studentTable').on( 'error.dt', function ( e, settings, techNote, message ) {
         console.log( 'An error has been reported by DataTables: ', message );
     }).DataTable({
@@ -122,8 +128,8 @@ function getStudentsByBranch(branchId) {
 			 {"data": 'studentNric'},
 			 {"data": 'birthDate'},
 			 {"data": 'homeContact'},
-			 {"data": 'emergencyContact'},
-			 {"data": 'studentAddress'},
+			 {"data": 'EmergencyContact'},
+			 {"data": 'address'},
 			 {"data": 'postalCode'},
 			 {"data": 'schoolName'},
 			 {"data": 'schoolLevel'},

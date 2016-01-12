@@ -13,7 +13,7 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   
-  <link rel="stylesheet" href="../../plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
   
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -69,6 +69,7 @@
 										<th>Name</th>
 										<th>Gender</th>
 										<th>NRIC</th>
+										<th>DoB</th>
 										<th>Home Contact</th>
 										<th>Emergency Contact</th>
 										<th>Address</th>

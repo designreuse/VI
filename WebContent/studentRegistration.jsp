@@ -97,9 +97,8 @@
 											Enrolled<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="checkbox" id="course" name="course" value="Math">Math
-											<input type="checkbox" id="course" name="course"
-												value="English">English <input type="checkbox"
+											<input type="checkbox" id="course" name="course" value="Math" required>Math
+											<input type="checkbox" id="course" name="course"value="English">English <input type="checkbox"
 												id="course" name="course" value="Korean">Korean
 										</div>
 									</div>
@@ -108,7 +107,7 @@
 											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="radio" id="diagnostic" name="diagnostic" value="0">No
+											<input type="radio" id="diagnostic" name="diagnostic" value="0" required>No
 											<input type="radio" id="diagnostic" name="diagnostic" value="1">Yes
 										</div>
 									</div>
@@ -139,7 +138,7 @@
 											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="radio" id="gender" name="gender" value="male">Male
+											<input type="radio" id="gender" name="gender" value="male" required>Male
 											<input type="radio" id="gender" name="gender" value="female">Female
 										</div>
 									</div>
