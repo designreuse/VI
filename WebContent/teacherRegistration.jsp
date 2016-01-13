@@ -193,6 +193,14 @@
 										<label for="school" class="control-label col-lg-2">Course(s)<span
 											class="required">*</span></label>
 										<div class="col-lg-10">
+										
+<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
+<!-- 													name="course1"">Math -->
+<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
+<!-- 													name="course2">English -->
+<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
+<!-- 													name="course3" >Korean -->
+										
 											<input type="checkbox" name="course" value="Math">
 											Math <input type="checkbox" name="course" value="English">
 											English <input type="checkbox" name="course" value="Korean">

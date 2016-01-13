@@ -4,6 +4,8 @@
 //} else {
     $(document).ready(function() {
     	getTeachersByBranch(localStorage.getItem('branchId'));
+    	
+//    	checkbox();
     });
 //}
     
@@ -22,7 +24,7 @@
 	//empty string means no validation error
 	}
 
-    
+	
 function registerTeacher() {
 	var teacherEmail = $("#teacherEmail").val();
 	var teacherPassword = $("#teacherPassword").val();
@@ -268,3 +270,13 @@ function deleteTeacher(){
     	}); 
 	});
 }
+
+//function checkbox(){
+//	$('input.enable_cb').keyup(function(){
+//		if ($(this).is(':checked')){ 
+//			$('button[type="submit"]').prop("disabled, false");
+//		}else {
+//			$('input[type="submit"]').prop("disabled, true");
+//		}
+//	}).change();
+//}

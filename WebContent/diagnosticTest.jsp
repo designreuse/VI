@@ -96,7 +96,7 @@
 										<div class="col-lg-10">
 											<input class="form-control " id="studentNric" type="text"
 												name="sName" pattern="^[SFTG]\d{7}[A-Z]$"
-												title="Letters only" required />
+												title="NRIC only" required />
 										</div>
 									</div>
 									<div class="form-group ">
@@ -110,7 +110,7 @@
 
 												<div class="enter_text">
 													Starting Point: <input type='button' value='-'
-														class='qtyminus' field='math' /> <input type='text'
+														class='qtyminus' field='math' /> <input type='number'
 														name='math' value='0' class='qty' /> <input type='button'
 														value='+' class='qtyplus' field='math' />
 												</div>
@@ -120,7 +120,7 @@
 
 												<div class="enter_text">
 													Starting Point: <input type='button' value='-'
-														class='qtyminus' field='eng' /> <input type='text'
+														class='qtyminus' field='eng' /> <input type='number'
 														name='eng' value='0' class='qty' /> <input type='button'
 														value='+' class='qtyplus' field='eng' />
 												</div>
@@ -130,7 +130,7 @@
 
 												<div class="enter_text">
 													Starting Point: <input type='button' value='-'
-														class='qtyminus' field='korean' /> <input type='text'
+														class='qtyminus' field='korean' /> <input type='number'
 														name='korean' value='0' class='qty' /> <input
 														type='button' value='+' class='qtyplus' field='korean' />
 												</div>

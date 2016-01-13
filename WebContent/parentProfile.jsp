@@ -65,8 +65,8 @@
 										<table class="table table-user-information">
 											<tbody>
 												<tr>
-													<td><strong>Home Address:</strong></td>
-													<td id="address"></td>
+													<td><strong>Email:</strong></td>
+													<td id="email"></td>
 												</tr>
 												
 												<tr>

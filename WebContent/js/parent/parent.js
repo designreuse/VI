@@ -30,10 +30,10 @@ function getParent() {
 			// servlet request
 			if (status == 1) {
 				var name = data.message.name;
-				var address = data.message.address;
+				var email = data.message.email;
 				var contact = data.message.contact;
 				document.getElementById('name').innerHTML = name;
-				document.getElementById('address').innerHTML = address;
+				document.getElementById('email').innerHTML = email;
 				document.getElementById('phone').innerHTML = contact;
 
 			} else {

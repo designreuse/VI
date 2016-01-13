@@ -162,7 +162,7 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="contactNumber" name="contact"
-												type="text"required />
+												type="text" pattern="^[+]?\d*$" title="Numbers only"required />
 										</div>
 									</div>
 									<!--  removed address -->
