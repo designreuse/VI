@@ -1,22 +1,31 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 30, 2015 4:55:14 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Jan 14, 2016 2:31:44 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
-    <class name="model.StudentSchedule" table="STUDENTSCHEDULE">
-        <id name="studentScheduleId" type="long">
-            <column name="STUDENTSCHEDULEID" />
+    <class name="model.ScheduleEvent" table="SCHEDULEEVENT">
+        <id name="scheduleEventId" type="long">
+            <column name="SCHEDULEEVENTID" />
             <generator class="increment" />
         </id>
-        <many-to-one name="student" class="model.Student" fetch="join">
-            <column name="STUDENTID" />
-        </many-to-one>
+        <property name="planStartDate" type="java.util.Date">
+            <column name="PLANSTARTDATE" />
+        </property>
+        <property name="planEndDate" type="java.util.Date">
+            <column name="PLANENDDATE" />
+        </property>
+        <property name="studentAmount" type="long">
+            <column name="STUDENTAMOUNT" />
+        </property>
         <many-to-one name="schedule" class="model.Schedule" fetch="join">
             <column name="SCHEDULEID" />
         </many-to-one>
+        <many-to-one name="classroom" class="model.Classroom" fetch="join">
+            <column name="CLASSROOMID" />
+        </many-to-one>
         <set name="attendances" table="ATTENDANCE" inverse="false" lazy="true">
             <key>
-                <column name="STUDENTSCHEDULEID" />
+                <column name="SCHEDULEEVENTID" />
             </key>
             <one-to-many class="model.Attendance" />
         </set>

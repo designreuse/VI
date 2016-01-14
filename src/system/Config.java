@@ -15,12 +15,12 @@ public class Config {
 	public static final String TIMEZONE = "Singapore";
 	
 	//Add x days to a Date
-	public static Date addDaysToDate(final Date date, int noOfDays) {
+	public static Date addDaysToDate(final Date date, long noOfDays) {
 	    Date newDate = new Date(date.getTime());
 
 	    GregorianCalendar calendar = new GregorianCalendar();
 	    calendar.setTime(newDate);
-	    calendar.add(Calendar.DATE, noOfDays);
+	    calendar.add(Calendar.DATE, (int)noOfDays);
 	    newDate.setTime(calendar.getTime().getTime());
 
 	    return newDate;

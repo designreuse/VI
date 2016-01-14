@@ -12,34 +12,34 @@ public class Attendance {
 	private long attendanceId;
 	private Date actualStartDate;
 	private Date actualEndDate;
-	private Date planStartDate;
-	private Date planEndDate;
 	private long attendanceStatus;
-	private StudentSchedule studentSchedule;
-	private Classroom classroom;
-	
+	private ScheduleEvent scheduleEvent;
+	private Student student;
+
 	private long objStatus;
 	private Date createDate;
 	private String remark;
-	
-	public Attendance(){}
 
-	public Attendance(StudentSchedule studentSchedule, Classroom classroom) {
+	public Attendance() {
+	}
+
+	public Attendance(ScheduleEvent scheduleEvent, Student student) {
 		super();
 		this.attendanceStatus = 0;
-		this.setStudentSchedule(studentSchedule);
-		this.setClassroom(classroom);
+		this.setScheduleEvent(scheduleEvent);
+		this.setStudent(student);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
-	
-	public Attendance(Date planStartDate, Date planEndDate, StudentSchedule studentSchedule, Classroom classroom) {
+
+	public Attendance(Date actualStartDate, Date actualEndDate,
+			ScheduleEvent scheduleEvent, Student student) {
 		super();
 		this.attendanceStatus = 0;
-		this.planStartDate = planStartDate;
-		this.planEndDate = planEndDate;
-		this.setStudentSchedule(studentSchedule);
-		this.setClassroom(classroom);
+		this.actualStartDate = actualStartDate;
+		this.actualEndDate = actualEndDate;
+		this.setScheduleEvent(scheduleEvent);
+		this.setStudent(student);
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -52,7 +52,8 @@ public class Attendance {
 	}
 
 	/**
-	 * @param attendanceId the attendanceId to set
+	 * @param attendanceId
+	 *            the attendanceId to set
 	 */
 	public void setAttendanceId(long attendanceId) {
 		this.attendanceId = attendanceId;
@@ -66,7 +67,8 @@ public class Attendance {
 	}
 
 	/**
-	 * @param actualStartDate the actualStartDate to set
+	 * @param actualStartDate
+	 *            the actualStartDate to set
 	 */
 	public void setActualStartDate(Date actualStartDate) {
 		this.actualStartDate = actualStartDate;
@@ -80,38 +82,11 @@ public class Attendance {
 	}
 
 	/**
-	 * @param actualEndDate the actualEndDate to set
+	 * @param actualEndDate
+	 *            the actualEndDate to set
 	 */
 	public void setActualEndDate(Date actualEndDate) {
 		this.actualEndDate = actualEndDate;
-	}
-
-	/**
-	 * @return the planStartDate
-	 */
-	public Date getPlanStartDate() {
-		return planStartDate;
-	}
-
-	/**
-	 * @param planStartDate the planStartDate to set
-	 */
-	public void setPlanStartDate(Date planStartDate) {
-		this.planStartDate = planStartDate;
-	}
-
-	/**
-	 * @return the planEndDate
-	 */
-	public Date getPlanEndDate() {
-		return planEndDate;
-	}
-
-	/**
-	 * @param planEndDate the planEndDate to set
-	 */
-	public void setPlanEndDate(Date planEndDate) {
-		this.planEndDate = planEndDate;
 	}
 
 	/**
@@ -122,38 +97,40 @@ public class Attendance {
 	}
 
 	/**
-	 * @param attendanceStatus the attendanceStatus to set
+	 * @param attendanceStatus
+	 *            the attendanceStatus to set
 	 */
 	public void setAttendanceStatus(long attendanceStatus) {
 		this.attendanceStatus = attendanceStatus;
 	}
 
 	/**
-	 * @return the studentSchedule
+	 * @return the scheduleEvent
 	 */
-	public StudentSchedule getStudentSchedule() {
-		return studentSchedule;
+	public ScheduleEvent getScheduleEvent() {
+		return scheduleEvent;
 	}
 
 	/**
-	 * @param studentSchedule the studentSchedule to set
+	 * @param scheduleEvent
+	 *            the scheduleEvent to set
 	 */
-	public void setStudentSchedule(StudentSchedule studentSchedule) {
-		this.studentSchedule = studentSchedule;
+	public void setScheduleEvent(ScheduleEvent scheduleEvent) {
+		this.scheduleEvent = scheduleEvent;
 	}
 
 	/**
-	 * @return the classroom
+	 * @return the student
 	 */
-	public Classroom getClassroom() {
-		return classroom;
+	public Student getStudent() {
+		return student;
 	}
 
 	/**
-	 * @param classroom the classroom to set
+	 * @param student the student to set
 	 */
-	public void setClassroom(Classroom classroom) {
-		this.classroom = classroom;
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	/**
@@ -164,7 +141,8 @@ public class Attendance {
 	}
 
 	/**
-	 * @param objStatus the objStatus to set
+	 * @param objStatus
+	 *            the objStatus to set
 	 */
 	public void setObjStatus(long objStatus) {
 		this.objStatus = objStatus;
@@ -178,7 +156,8 @@ public class Attendance {
 	}
 
 	/**
-	 * @param createDate the createDate to set
+	 * @param createDate
+	 *            the createDate to set
 	 */
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
@@ -192,92 +171,86 @@ public class Attendance {
 	}
 
 	/**
-	 * @param remark the remark to set
+	 * @param remark
+	 *            the remark to set
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
-	public JSONObject toJsonSimple(){
-		JSONObject returnJson = new JSONObject();
-				
-		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
-		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
-		
-		returnJson.put(Key.OBJSTATUS, this.objStatus);
-		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-		returnJson.put(Key.REMARK, this.remark);
-		
-		return returnJson;
-	}
-	
-	//shall i add in a checker to return actual date?
-	//no, the logic checking is handle in the controller.
-	public JSONObject toJson(){
-		JSONObject returnJson = new JSONObject();
-				
-		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
-		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
-		
-		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
-		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
-		
-		returnJson.put(Key.OBJSTATUS, this.objStatus);
-		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-		returnJson.put(Key.REMARK, this.remark);
-		
-		return returnJson;
-	}
-	
-	public JSONObject toJsonMark(){
-		JSONObject returnJson = new JSONObject();
-				
-		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
 
-		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
+	public JSONObject toJsonSimple() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
-		
+
 		return returnJson;
 	}
-	
-	public JSONObject toScheduleJson(){
+
+	// shall i add in a checker to return actual date?
+	// no, the logic checking is handle in the controller.
+	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
-				
+
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
-		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
-		
-		returnJson.put(Key.STUDENTSCHEDULE, this.studentSchedule.toJson());
-		
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJson());
+		returnJson.put(Key.STUDENT, this.student.toJson());
+
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
-		
+
 		return returnJson;
 	}
-	
-//	public JSONObject toScheduleJsonMark(){
-//		JSONObject returnJson = new JSONObject();
-//				
-//		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-//		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-//		returnJson.put(Key.ACTUALSTARTDATE, Config.SDF.format(this.actualStartDate));
-//
-//		returnJson.put(Key.STUDENT, this.classroom.toJson());
-//
-//		returnJson.put(Key.OBJSTATUS, this.objStatus);
-//		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-//		returnJson.put(Key.REMARK, this.remark);
-//		
-//		return returnJson;
-//	}
+
+	public JSONObject toJsonMark() {
+		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		returnJson.put(Key.ACTUALSTARTDATE,
+				Config.SDF.format(this.actualStartDate));
+
+		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJson());
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+
+	public JSONObject toScheduleJson() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+
+		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJson());
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+
+	// public JSONObject toScheduleJsonMark(){
+	// JSONObject returnJson = new JSONObject();
+	//
+	// returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+	// returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+	// returnJson.put(Key.ACTUALSTARTDATE,
+	// Config.SDF.format(this.actualStartDate));
+	//
+	// returnJson.put(Key.STUDENT, this.classroom.toJson());
+	//
+	// returnJson.put(Key.OBJSTATUS, this.objStatus);
+	// returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+	// returnJson.put(Key.REMARK, this.remark);
+	//
+	// return returnJson;
+	// }
 }

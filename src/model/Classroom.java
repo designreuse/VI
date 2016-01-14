@@ -21,7 +21,7 @@ public class Classroom {
 	private String remark;
 	
 	private Branch branch;
-	private Set<Attendance> attendances;
+	private Set<ScheduleEvent> scheduleEvents;
 	
 	public Classroom(){}
 	
@@ -133,17 +133,17 @@ public class Classroom {
 	}
 
 	/**
-	 * @return the attendances
+	 * @return the scheduleEvents
 	 */
-	public Set<Attendance> getAttendances() {
-		return attendances;
+	public Set<ScheduleEvent> getScheduleEvents() {
+		return scheduleEvents;
 	}
 
 	/**
-	 * @param attendances the attendances to set
+	 * @param scheduleEvents the scheduleEvents to set
 	 */
-	public void setAttendances(Set<Attendance> attendances) {
-		this.attendances = attendances;
+	public void setScheduleEvents(Set<ScheduleEvent> scheduleEvents) {
+		this.scheduleEvents = scheduleEvents;
 	}
 
 	public JSONObject toJsonSimple(){
@@ -189,11 +189,11 @@ public class Classroom {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-//		JSONArray scheduleArr = new JSONArray();
-//		for(Schedule s: ScheduleDAO.getSchedulesByClassroom(this)){
-//			scheduleArr.add(s.toJson());
+//		JSONArray scheduleEventArr = new JSONArray();
+//		for(ScheduleEvent se: ScheduleEventDAO.getScheduleEventsByClassroom(this)){
+//			scheduleArr.add(se.toJson());
 //		}
-//		returnJson.put(Key.SCHEDULES, scheduleArr);
+//		returnJson.put(Key.SCHEDULEEVENTS, scheduleEventArr);
 		
 		return returnJson;
 	}

@@ -17,12 +17,13 @@ public class Schedule {
 	private long dayOfWeek; //1-Mon, 2-Tue ...
 	private Date scheduleStartDate;
 	private Date scheduleEndDate;
+	private long recFrequency;
 	private long duration;
 	
 	private Course course;
 	private Teacher teacher;
 	
-	private Set<StudentSchedule> studentSchedules; 
+	private Set<ScheduleEvent> scheduleEvents; 
 	
 	private long objStatus;
 	private Date createDate;
@@ -31,7 +32,7 @@ public class Schedule {
 	public Schedule(){}
 
 	public Schedule(String name, String description, long dayOfWeek, Date scheduleStartDate,
-					Date scheduleEndDate, long duration, Course course, Teacher teacher) {
+					Date scheduleEndDate,long recFrequency, long duration, Course course, Teacher teacher) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
@@ -40,6 +41,7 @@ public class Schedule {
 		this.setScheduleEndDate(scheduleEndDate);
 		this.setTeacher(teacher);
 		this.setCourse(course);
+		this.setRecFrequency(recFrequency);
 		this.setDuration(duration);
 	
 		this.setObjStatus(Value.ACTIVED);
@@ -131,6 +133,20 @@ public class Schedule {
 	}
 
 	/**
+	 * @return the recFrequency
+	 */
+	public long getRecFrequency() {
+		return recFrequency;
+	}
+
+	/**
+	 * @param recFrequency the recFrequency to set
+	 */
+	public void setRecFrequency(long recFrequency) {
+		this.recFrequency = recFrequency;
+	}
+
+	/**
 	 * @return the duration
 	 */
 	public long getDuration() {
@@ -173,17 +189,17 @@ public class Schedule {
 	}
 
 	/**
-	 * @return the studentSchedules
+	 * @return the scheduleEvents
 	 */
-	public Set<StudentSchedule> getStudentSchedules() {
-		return studentSchedules;
+	public Set<ScheduleEvent> getScheduleEvents() {
+		return scheduleEvents;
 	}
 
 	/**
-	 * @param studentSchedules the studentSchedules to set
+	 * @param scheduleEvents the scheduleEvents to set
 	 */
-	public void setStudentSchedules(Set<StudentSchedule> studentSchedules) {
-		this.studentSchedules = studentSchedules;
+	public void setScheduleEvents(Set<ScheduleEvent> scheduleEvents) {
+		this.scheduleEvents = scheduleEvents;
 	}
 
 	/**
@@ -236,6 +252,7 @@ public class Schedule {
 		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
 		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
 		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+		returnJson.put(Key.RECFREQUENCY, this.recFrequency);
 		returnJson.put(Key.DURATION, this.duration);
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
@@ -253,6 +270,7 @@ public class Schedule {
 		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
 		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
 		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+		returnJson.put(Key.RECFREQUENCY, this.recFrequency);
 		returnJson.put(Key.DURATION, this.duration);
 		
 		returnJson.put(Key.TEACHER, this.teacher.toJson());
@@ -286,32 +304,35 @@ public class Schedule {
 //	}
 	
 	//TODO finish the method
-//	public JSONObject toJsonStrong() {
-//		JSONObject returnJson = new JSONObject();
-//		returnJson.put(Key.SCHEDULEID, this.scheduleId);
-//		returnJson.put(Key.NAME, this.name);
-//		returnJson.put(Key.DESCRIPTION, description);
-//		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
-//		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
-//		
-//		returnJson.put(Key.TEACHERCOURSE, this.teacherCourse.toJson());
-//		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
-//		
-//		returnJson.put(Key.OBJSTATUS, this.objStatus);
-//		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-//		returnJson.put(Key.REMARK, this.remark);
-//		
-//		JSONArray attendanceArr = new JSONArray();
-//		for (Attendance a : AttendanceDAO.getAttendancesBySchedule(this)) {
+	public JSONObject toJsonStrong() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.SCHEDULEID, this.scheduleId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, description);
+		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
+		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
+		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+		returnJson.put(Key.RECFREQUENCY, this.recFrequency);
+		returnJson.put(Key.DURATION, this.duration);
+		
+		returnJson.put(Key.TEACHER, this.teacher.toJson());
+		returnJson.put(Key.COURSE, this.course.toJson());
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+//		JSONArray scheduleEventArr = new JSONArray();
+//		for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(this)) {
 //			if(a.getActualStartDate() != null){
-//				attendanceArr.add(a.toScheduleJsonMark());
+//				scheduleEventArr.add(se.toScheduleJsonMark());
 //			} else {
-//				attendanceArr.add(a.toScheduleJson());
+//				scheduleEventArr.add(se.toScheduleJson());
 //			}
-////			attendanceArr.add(a.toJson());
+////			scheduleEventArr.add(a.toJson());
 //		}
-//		returnJson.put(Key.ATTENDANCES, attendanceArr);
+//		returnJson.put(Key.ATTENDANCES, scheduleEventArr);
 //		
-//		return returnJson;
-//	}
+		return returnJson;
+	}
 }

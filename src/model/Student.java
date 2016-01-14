@@ -32,7 +32,7 @@ public class Student {
 	private Branch branch;
 	
 	private Set<Bill> bills;
-	private Set<StudentSchedule> studentSchedules;
+	private Set<Attendance> attendances;
 	private Set<PointEvent> pointEvents;
 	private Set<TeacherStudentCourse> teacherStudentCourses;
 	private Set<Diagnostic> diagnostics;
@@ -63,10 +63,9 @@ public class Student {
 		this.branch = branch;
 		this.takenDiagnostic = takenDiagnostic;
 		this.setObjStatus(Value.ACTIVED);
-		this.setCreateDate(new Date());
-		
+		this.setCreateDate(new Date());	
 	}
-
+	
 	/**
 	 * @return the studentId
 	 */
@@ -238,7 +237,7 @@ public class Student {
 	/**
 	 * @return the takenDiagnostic
 	 */
-	public long isTakenDiagnostic() {
+	public long getTakenDiagnostic() {
 		return takenDiagnostic;
 	}
 
@@ -292,24 +291,17 @@ public class Student {
 	}
 
 	/**
-	 * @return the studentSchedules
+	 * @return the attendances
 	 */
-	public Set<StudentSchedule> getStudentSchedules() {
-		return studentSchedules;
+	public Set<Attendance> getAttendances() {
+		return attendances;
 	}
 
 	/**
-	 * @param studentSchedules the studentSchedules to set
+	 * @param attendances the attendances to set
 	 */
-	public void setStudentSchedules(Set<StudentSchedule> studentSchedules) {
-		this.studentSchedules = studentSchedules;
-	}
-
-	/**
-	 * @return the takenDiagnostic
-	 */
-	public long getTakenDiagnostic() {
-		return takenDiagnostic;
+	public void setAttendances(Set<Attendance> attendances) {
+		this.attendances = attendances;
 	}
 
 	/**
@@ -336,7 +328,8 @@ public class Student {
 	/**
 	 * @param teacherStudentCourses the teacherStudentCourses to set
 	 */
-	public void setTeacherStudentCoursess(Set<TeacherStudentCourse> teacherStudentCourses) {
+	public void setTeacherStudentCourses(
+			Set<TeacherStudentCourse> teacherStudentCourses) {
 		this.teacherStudentCourses = teacherStudentCourses;
 	}
 
@@ -395,7 +388,7 @@ public class Student {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	
+
 	public JSONObject toJsonSimple() {
 		JSONObject returnJson = new JSONObject();
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 3, 2016 5:01:06 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Jan 14, 2016 2:31:44 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Student" table="STUDENT">
         <id name="studentId" type="long">
@@ -56,11 +56,11 @@
             </key>
             <one-to-many class="model.Bill" />
         </set>
-        <set name="studentSchedules" table="STUDENTSCHEDULE" inverse="false" lazy="true">
+        <set name="attendances" table="ATTENDANCE" inverse="false" lazy="true">
             <key>
                 <column name="STUDENTID" />
             </key>
-            <one-to-many class="model.StudentSchedule" />
+            <one-to-many class="model.Attendance" />
         </set>
         <set name="pointEvents" table="POINTEVENT" inverse="false" lazy="true">
             <key>
@@ -68,7 +68,7 @@
             </key>
             <one-to-many class="model.PointEvent" />
         </set>
-        <set name="teacherStudentCourses" table="TEACHERSTUDENTCOURSE" inverse="false" lazy="true" access="field">
+        <set name="teacherStudentCourses" table="TEACHERSTUDENTCOURSE" inverse="false" lazy="true">
             <key>
                 <column name="STUDENTID" />
             </key>

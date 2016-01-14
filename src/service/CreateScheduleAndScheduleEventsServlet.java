@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import controller.ScheduleCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.StudentScheduleCtrl;
 
 /**
  * @author RaySong
  */
-public class CreateStudentScheduleAndAttendancesServlet extends HttpServlet {
+public class CreateScheduleAndScheduleEventsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateStudentScheduleAndAttendancesServlet() {
+    public CreateScheduleAndScheduleEventsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class CreateStudentScheduleAndAttendancesServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = StudentScheduleCtrl.createStudentScheduleAndAttendances(inputJson);
+			returnJson = ScheduleCtrl.createScheduleAndScheduleEvents(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

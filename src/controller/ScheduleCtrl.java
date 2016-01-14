@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Date;
 
+import model.Classroom;
 import model.Course;
 import model.Schedule;
 import model.Teacher;
@@ -9,6 +10,7 @@ import model.Teacher;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.ClassroomDAO;
 import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.TeacherDAO;
@@ -38,10 +40,11 @@ public class ScheduleCtrl {
 					long dayOfWeek = (long) inputJson.get(Key.DAYOFWEEK);
 					Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
 					Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
+					long recFrequency = (long) inputJson.get(Key.RECFREQUENCY);
 					long duration = (long) inputJson.get(Key.DURATION);
 					
 					Schedule schedule = new Schedule(name, description, dayOfWeek, scheduleStartDate, 
-														scheduleEndDate, duration, course, teacher);
+														scheduleEndDate, recFrequency, duration, course, teacher);
 					ScheduleDAO.addSchedule(schedule);
 					
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -86,7 +89,6 @@ public class ScheduleCtrl {
 	}
 	
 	//Get all schedule
-	//TODO later may need to add in get all schedule based on a particular date
 	public static JSONObject getAllSchedules(){
 		JSONObject returnJson = new JSONObject();
 		try{
@@ -185,7 +187,7 @@ public class ScheduleCtrl {
 	}
 	
 	//Get schedule by course id
-	public static JSONObject getSchedulesByCourse (JSONObject inputJson){
+	public static JSONObject getSchedulesByCourse(JSONObject inputJson){
 		JSONObject returnJson = new JSONObject();
 		try{
 			Course course = CourseDAO.getCourseById((long)inputJson.get(Key.COURSEID));
@@ -246,6 +248,55 @@ public class ScheduleCtrl {
 					}
 					returnJson.put(Key.STATUS, Value.SUCCESS);
 					returnJson.put(Key.MESSAGE, salaryArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+				}
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	//Create schedule and schedule events together
+	public static JSONObject createScheduleAndScheduleEvents(JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		JSONObject messageJson = new JSONObject();
+		try{
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if(teacher != null){
+				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+				if(course != null){
+					String name = (String) inputJson.get(Key.NAME);
+					String description = (String) inputJson.get(Key.DESCRIPTION);
+					long dayOfWeek = (long) inputJson.get(Key.DAYOFWEEK);
+					Date scheduleStartDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULESTARTDATE));
+					Date scheduleEndDate = Config.SDF.parse((String) inputJson.get(Key.SCHEDULEENDDATE));
+					long recFrequency = (long) inputJson.get(Key.RECFREQUENCY);
+					long duration = (long) inputJson.get(Key.DURATION);
+					
+					Schedule schedule = new Schedule(name, description, dayOfWeek, scheduleStartDate, 
+														scheduleEndDate, recFrequency, duration, course, teacher);
+					ScheduleDAO.addSchedule(schedule);
+					messageJson.put(Key.SCHEDULE, schedule.toJson());
+					
+					Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
+					if (classroom != null) {
+						JSONObject scheduleEventsObj = ScheduleEventCtrl.createScheduleEventsBySchedule(schedule, classroom);
+						messageJson.put(Key.SCHEDULEEVENTS, scheduleEventsObj);
+						
+						returnJson.put(Key.STATUS, Value.SUCCESS);
+						returnJson.put(Key.MESSAGE, messageJson);
+					} else {
+						returnJson.put(Key.STATUS, Value.FAIL);
+						returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+					}
 				} else {
 					returnJson.put(Key.STATUS, Value.FAIL);
 					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);

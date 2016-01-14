@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 5, 2016 11:07:29 AM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Jan 15, 2016 4:31:02 AM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Schedule" table="SCHEDULE">
         <id name="scheduleId" type="long">
@@ -23,17 +23,23 @@
         <property name="scheduleEndDate" type="java.util.Date">
             <column name="SCHEDULEENDDATE" />
         </property>
+        <property name="recFrequency" type="long">
+            <column name="RECFREQUENCY" />
+        </property>
+        <property name="duration" type="long">
+            <column name="DURATION" />
+        </property>
         <many-to-one name="course" class="model.Course" fetch="join">
             <column name="COURSEID" />
         </many-to-one>
         <many-to-one name="teacher" class="model.Teacher" fetch="join">
             <column name="TEACHERID" />
         </many-to-one>
-        <set name="studentSchedules" table="STUDENTSCHEDULE" inverse="false" lazy="true">
+        <set name="scheduleEvents" table="SCHEDULEEVENT" inverse="false" lazy="true">
             <key>
                 <column name="SCHEDULEID" />
             </key>
-            <one-to-many class="model.StudentSchedule" />
+            <one-to-many class="model.ScheduleEvent" />
         </set>
         <property name="objStatus" type="long">
             <column name="OBJSTATUS" />

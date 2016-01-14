@@ -7,17 +7,17 @@ import java.util.Calendar;
 import java.util.Date;
 
 import model.Attendance;
-import model.Classroom;
+import model.Student;
 import model.Parent;
 import model.Schedule;
-import model.StudentSchedule;
+import model.ScheduleEvent;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.AttendanceDAO;
-import dataManager.ClassroomDAO;
-import dataManager.StudentScheduleDAO;
+import dataManager.StudentDAO;
+import dataManager.ScheduleEventDAO;
 import system.Config;
 import system.Key;
 import system.Message;
@@ -35,14 +35,14 @@ public class AttendanceCtrl {
 	public static JSONObject createAttendance(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			StudentSchedule studentSchedule = StudentScheduleDAO.getStudentScheduleById((long) inputJson.get(Key.STUDENTSCHEDULEID));
-			if (studentSchedule != null) {
-				Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.CLASSROOMID));
-				if(classroom != null){
+			ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
+			if (scheduleEvent != null) {
+				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.CLASSROOMID));
+				if(student != null){
 					Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
 					Date planEndDate = Config.SDF.parse((String) inputJson.get(Key.PLANENDDATE));
 					
-					Attendance attendance = new Attendance(planStartDate, planEndDate, studentSchedule, classroom);
+					Attendance attendance = new Attendance(scheduleEvent, student);
 					AttendanceDAO.addAttendance(attendance);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);
@@ -54,7 +54,7 @@ public class AttendanceCtrl {
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.STUDENTSCHEDULENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -117,13 +117,13 @@ public class AttendanceCtrl {
 				Date actualStartDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALSTARTDATE));
 				Date actualEndDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALENDDATE));
 				long attendanceStatus = (long) inputJson.get(Key.ATTENDANCESTATUS);
-//				Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.STUDENTID));
-//				if(classroom != null){
-//					attendance.setClassroom(classroom);
+//				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+//				if(student != null){
+//					attendance.setStudent(student);
 //				}
-//				StudentSchedule studentSchedule = StudentScheduleDAO.getStudentScheduleById((long) inputJson.get(Key.STUDENTSCHEDULEID));
-//				if(studentSchedule != null){
-//					attendance.setStudentSchedule(studentSchedule);
+//				ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
+//				if(scheduleEvent != null){
+//					attendance.setScheduleEvent(scheduleEvent);
 //				}
 				attendance.setActualStartDate(actualStartDate);
 				attendance.setActualEndDate(actualEndDate);
@@ -170,11 +170,11 @@ public class AttendanceCtrl {
 
 	// features
 	//Create attendance based on the start and end date of a schedule
-	public static JSONObject createAttendancesBySchedule(StudentSchedule studentSchedule, Classroom classroom){
+	public static JSONObject createAttendancesBySchedule(ScheduleEvent scheduleEvent, Student student){
 		JSONObject returnJson = new JSONObject();
 		JSONArray returnArray = new JSONArray();
 		try{
-			Schedule schedule = studentSchedule.getSchedule();
+			Schedule schedule = scheduleEvent.getSchedule();
 			int duration = (int) schedule.getDuration();
 			Date startDate = schedule.getScheduleStartDate();
 			Calendar calendar = Calendar.getInstance();
@@ -186,7 +186,7 @@ public class AttendanceCtrl {
 				calendar.add(Calendar.HOUR_OF_DAY, duration);
 				Date date = calendar.getTime();
 				
-				Attendance attendance = new Attendance(compareDate, date, studentSchedule, classroom);
+				Attendance attendance = new Attendance(compareDate, date, scheduleEvent, student);
 				AttendanceDAO.addAttendance(attendance);
 				returnArray.add(attendance.toJsonSimple());
 				compareDate = Config.addDaysToDate(compareDate, Config.ONEWEEK);
@@ -202,14 +202,14 @@ public class AttendanceCtrl {
 	}
 	
 	
-	// Get attendances by studentSchedule
-	public static JSONObject getAttendancesByStudentSchedule(JSONObject inputJson) {
+	// Get attendances by scheduleEvent
+	public static JSONObject getAttendancesByScheduleEvent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			StudentSchedule studentSchedule = StudentScheduleDAO.getStudentScheduleById((long) inputJson.get(Key.STUDENTSCHEDULEID));
-			if (studentSchedule != null) {
+			ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
+			if (scheduleEvent != null) {
 				JSONArray attendanceArr = new JSONArray();
-				for (Attendance a : AttendanceDAO.getAttendancesByStudentSchedule(studentSchedule)) {
+				for (Attendance a : AttendanceDAO.getAttendancesByScheduleEvent(scheduleEvent)) {
 					if(a.getActualStartDate() != null){
 						attendanceArr.add(a.toJsonMark());
 					} else {
@@ -221,7 +221,7 @@ public class AttendanceCtrl {
 				returnJson.put(Key.MESSAGE, attendanceArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.SCHEDULENOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -232,16 +232,16 @@ public class AttendanceCtrl {
 	}
 
 	
-	// Get attendances by classroom and studentSchedule
-//	public static JSONObject getAttendancesByClassroomAndStudentSchedule(JSONObject inputJson) {
+	// Get attendances by student and scheduleEvent
+//	public static JSONObject getAttendancesByStudentAndScheduleEvent(JSONObject inputJson) {
 //		JSONObject returnJson = new JSONObject();
 //		try {
-//			Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.STUDENTID));
-//			if (classroom != null) {
-//				StudentSchedule studentSchedule = StudentScheduleDAO.getStudentScheduleById((long) inputJson.get(Key.STUDENTSCHEDULEID));
-//				if(studentSchedule != null){
+//			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+//			if (student != null) {
+//				ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
+//				if(scheduleEvent != null){
 //					JSONArray attendanceArr = new JSONArray();
-//					for (Attendance a : AttendanceDAO.getAttendancesByClassroomAndStudentSchedule(classroom, studentSchedule)) {//TODO after validating the above get attendance by id method, change the code below to match the fetching logic
+//					for (Attendance a : AttendanceDAO.getAttendancesByStudentAndScheduleEvent(student, scheduleEvent)) {//TODO after validating the above get attendance by id method, change the code below to match the fetching logic
 //						if(a.getActualStartDate() != null){
 //							attendanceArr.add(a.toJsonMark());
 //						} else {
@@ -287,7 +287,7 @@ public class AttendanceCtrl {
 					
 					AttendanceDAO.modifyAttendance(attendance);
 					
-					returnArr.add(attendance.toStudentScheduleJsonMark());
+					returnArr.add(attendance.toJsonMark());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, returnArr);
@@ -307,11 +307,12 @@ public class AttendanceCtrl {
 		JSONObject returnJson = new JSONObject();
 		JSONObject attendanceObj = new JSONObject();
 		try {
-			Classroom classroom = ClassroomDAO.getClassroomById((long) inputJson.get(Key.STUDENTID));
-			if (classroom != null) {
-				StudentSchedule studentSchedule = StudentScheduleDAO.getStudentScheduleById((long) inputJson.get(Key.STUDENTSCHEDULEID));
-				if(studentSchedule != null){
-					Attendance attendance = AttendanceDAO.getAttendanceByClassroomAndStudentSchedule(classroom, studentSchedule);
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.CLASSROOMID));
+			if (student != null) {
+				ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
+				if(scheduleEvent != null){
+					
+					Attendance attendance = AttendanceDAO.getAttendanceByStudentAndScheduleEvent(student, scheduleEvent);
 					Date actualStartDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALSTARTDATE));
 					long attendanceStatus = (long) inputJson.get(Key.ATTENDANCESTATUS);
 
@@ -326,7 +327,7 @@ public class AttendanceCtrl {
 						attendanceObj = attendance.toJson();
 					}
 					
-					Parent parent = classroom.getParent();
+					Parent parent = student.getParent();
 //					System.out.println(parent.getName());
 					attendanceObj.put(Key.PARENT, parent.toJson());
 					
@@ -338,7 +339,7 @@ public class AttendanceCtrl {
 				}
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -348,25 +349,25 @@ public class AttendanceCtrl {
 		return returnJson;
 	}
 	
-//	public static JSONObject getAttendancesByStudentSchedules (JSONObject inputJson){
+//	public static JSONObject getAttendancesByScheduleEvents (JSONObject inputJson){
 //		JSONObject returnJson = new JSONObject();
 //		try{
-////			JSONObject resultObj = StudentScheduleCtrl.getStudentSchedulesByTeacherCourseAndPlanStartDate(inputJson);
+////			JSONObject resultObj = ScheduleEventCtrl.getScheduleEventsByTeacherCourseAndPlanStartDate(inputJson);
 //			TeacherCourse teacherCourse = TeacherCourseDAO.getTeacherCourseById((long)inputJson.get(Key.TEACHERCOURSEID));
 //			if(teacherCourse != null){
 //				//TODO do i need to add in checker to verified the date?
-//				JSONArray studentScheduleArr = new JSONArray();
+//				JSONArray scheduleEventArr = new JSONArray();
 //				Date planStartDate = Config.SDF.parse((String) inputJson.get(Key.PLANSTARTDATE));
-//				for (StudentSchedule s : StudentScheduleDAO.getStudentSchedulesByTeacherCourseAndPlanStartDate(teacherCourse, planStartDate)) {
+//				for (ScheduleEvent s : ScheduleEventDAO.getScheduleEventsByTeacherCourseAndPlanStartDate(teacherCourse, planStartDate)) {
 //					//TODO can i use toJsonStrong method to retrieve the attendance at once also? so only one servlet call will do
-//					studentScheduleArr.add(s.toJsonStrong());
+//					scheduleEventArr.add(s.toJsonStrong());
 ////					salaryArr.add(s.toJson());
 //				}
-//				//TODO add in a checker for the studentScheduleArr
+//				//TODO add in a checker for the scheduleEventArr
 //				
 //				JSONArray attendanceArr = new JSONArray();
-//				//loop through the studentScheduleArr to find all the attendance
-//				studentScheduleArr
+//				//loop through the scheduleEventArr to find all the attendance
+//				scheduleEventArr
 //				
 //				returnJson.put(Key.STATUS, Value.SUCCESS);
 //				returnJson.put(Key.MESSAGE, attendanceArr);
