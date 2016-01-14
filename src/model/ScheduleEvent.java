@@ -3,8 +3,10 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.AttendanceDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -23,7 +25,9 @@ public class ScheduleEvent {
 	private long objStatus;
 	private Date createDate;
 	private String remark;
-
+	
+	public ScheduleEvent(){}
+	
 	public ScheduleEvent(Date planStartDate, Date planEndDate,
 			Schedule schedule, Classroom classroom) {
 		super();
@@ -201,6 +205,30 @@ public class ScheduleEvent {
 		
 		returnJson.put(Key.SCHEDULE, this.schedule.toJson());
 		returnJson.put(Key.CLASSROOM, this.classroom.toJson());
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
+	public JSONObject toJsonStrong(){
+		JSONObject returnJson = new JSONObject();
+				
+		returnJson.put(Key.SCHEDULEEVENTID, this.scheduleEventId);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
+		returnJson.put(Key.STUDENTAMOUNT, this.studentAmount);
+		
+		returnJson.put(Key.SCHEDULE, this.schedule.toJsonSimpleTeacher());
+		returnJson.put(Key.CLASSROOM, this.classroom.toJsonSimple());
+		
+		JSONArray attendanceArr = new JSONArray();
+		for (Attendance a : AttendanceDAO.getAttendancesByScheduleEvent(this)) {
+			attendanceArr.add(a.toJson());
+		}
+		returnJson.put(Key.ATTENDANCES, attendanceArr);
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

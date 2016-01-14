@@ -394,22 +394,16 @@
     <servlet-name>GetStudentsByTeacherAndCourseServlet</servlet-name>
     <url-pattern>/GetStudentsByTeacherAndCourseServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>GetSchedulesByBranchServlet</servlet-name>
-    <servlet-class>service.GetSchedulesByBranchServlet</servlet-class>
+  
+   <servlet>
+    <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
+    <servlet-class>service.GetScheduleEventsByBranchServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetSchedulesByBranchServlet</servlet-name>
-    <url-pattern>/GetSchedulesByBranchServlet</url-pattern>
+    <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
+    <url-pattern>/GetScheduleEventsByBranchServlet</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>GetSchedulesByCourseName</servlet-name>
-    <servlet-class>service.GetSchedulesByCourseName</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetSchedulesByCourseName</servlet-name>
-    <url-pattern>/GetSchedulesByCourseName</url-pattern>
-  </servlet-mapping>
+  
   <servlet>
     <servlet-name>GetSchedulesByCourseServlet</servlet-name>
     <servlet-class>service.GetSchedulesByCourseServlet</servlet-class>

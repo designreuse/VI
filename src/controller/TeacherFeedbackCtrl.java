@@ -143,6 +143,7 @@ public class TeacherFeedbackCtrl {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 			if (student != null) {
 				JSONArray teacherFeedbackArr = new JSONArray();
+//				ArrayList<TeacherFeedback> tf = TeacherFeedbackDAO.getFeedbacksByStudent(student);
 				ArrayList<TeacherStudentCourse> tscs = TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(student);
 				for(TeacherStudentCourse tsc : tscs){
 					for (TeacherFeedback tf : TeacherFeedbackDAO.getLatesThreeTeacherFeedbacksByTSC(tsc)) {

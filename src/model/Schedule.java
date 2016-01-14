@@ -262,6 +262,27 @@ public class Schedule {
 		return returnJson;
 	}
 	
+	public JSONObject toJsonSimpleTeacher(){
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.SCHEDULEID, this.scheduleId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.DESCRIPTION, description);
+		returnJson.put(Key.DAYOFWEEK, dayOfWeek);
+		returnJson.put(Key.SCHEDULESTARTDATE, Config.SDF.format(this.scheduleStartDate));
+		returnJson.put(Key.SCHEDULEENDDATE, Config.SDF.format(this.scheduleEndDate));
+		returnJson.put(Key.RECFREQUENCY, this.recFrequency);
+		returnJson.put(Key.DURATION, this.duration);
+		
+		returnJson.put(Key.TEACHER, this.teacher.toJsonSimple());
+		returnJson.put(Key.COURSE, this.course.toJson());
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.SCHEDULEID, this.scheduleId);

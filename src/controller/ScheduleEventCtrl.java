@@ -1,9 +1,10 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import model.Attendance;
+import model.Branch;
 import model.Classroom;
 import model.Schedule;
 import model.ScheduleEvent;
@@ -11,7 +12,7 @@ import model.ScheduleEvent;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.AttendanceDAO;
+import dataManager.BranchDAO;
 import dataManager.ClassroomDAO;
 import dataManager.ScheduleDAO;
 import dataManager.ScheduleEventDAO;
@@ -248,6 +249,32 @@ public class ScheduleEventCtrl {
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.CLASSROOMNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	// Get schedule events by branch
+	public static JSONObject getScheduleEventsByBranch(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
+			if (branch != null) {
+				JSONArray scheduleEventArr = new JSONArray();
+				for (Classroom classroom : ClassroomDAO.getClassroomsByBranch(branch)) {
+					for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsByClassroom(classroom)){
+						scheduleEventArr.add(se.toJsonStrong());
+					}
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, scheduleEventArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

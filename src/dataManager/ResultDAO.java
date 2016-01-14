@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Result;
-import model.Result;
 import model.TeacherStudentCourse;
 
 import org.hibernate.criterion.DetachedCriteria;
