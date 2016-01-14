@@ -9,6 +9,9 @@
   
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.0.0/css/responsive.bootstrap.min.css">
+  
   
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -57,7 +60,7 @@
             <div class="box-header"><h3 class="box-title">Bukit Batok Branch</h3></div>
 
             <div class="box-body">
-				<table id="parentTable" class="table table-bordered dt-responsive display nowrap">
+				<table id="parentTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
 					<thead>
 						<tr>
 							<th>Parent ID</th>
@@ -101,11 +104,12 @@
 <!-- jQuery 2.1.4 -->
 <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
-<script src="js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<script src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
+
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script>
 
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>

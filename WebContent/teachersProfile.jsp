@@ -16,6 +16,11 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   
+  <!-- datatables css -->
+  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.0.0/css/responsive.bootstrap.min.css">
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   
@@ -59,25 +64,28 @@
 						</div>
 
 						<div class="box-body">
-							<table id="teacherTable"
-								class="table table-bordered dt-responsive display nowrap">
-								<thead>
-									<tr>
-												<th>Teacher ID</th>
-												<th>Name</th>
-												<th>Contact</th>
-												<th>Email</th>
-												<th>Address</th>
-												<th>Nric</th>
-												<th>Qualification</th>
-												<th>Create Date</th>
-												<th>Options</th>
-									</tr>
-								</thead>
-
-								<tbody>
-								</tbody>
-							</table>
+							<div class="row">
+								<div class="col-md-12">
+								<table id="teacherTable"
+									class="table table-striped table-bordered dt-responsive nowrap" width="100%">
+									<thead>
+										<tr>
+													<th>Teacher ID</th>
+													<th>Name</th>
+													<th>Contact</th>
+													<th>Email</th>
+													<th>Address</th>
+													<th>Nric</th>
+													<th>Qualification</th>
+													<th>Options</th>
+										</tr>
+									</thead>
+	
+									<tbody>
+									</tbody>
+								</table>
+							</div>
+							</div>
 						</div>
 						</div>
 					</div>
@@ -105,11 +113,13 @@
 <!-- jQuery 2.1.4 -->
 <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
-<script src="js/jquery.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
-<script src="js/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="./js/datatables/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<script src="./js/datatables/datatables-responsive/js/dataTables.responsive.js"></script>
+
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script>
+
 
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>

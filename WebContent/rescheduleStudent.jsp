@@ -13,10 +13,6 @@
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   
-  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.0.0/css/responsive.bootstrap.min.css">
-  
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   
@@ -39,6 +35,7 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
+
 <div class="wrapper">
 	<!-- including navBar and sideBar -->
 	<%@include file="navBar.jsp"%>
@@ -49,53 +46,56 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Student List
+        Reschedule Student
       </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
     </section>
 
     <!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-md-12">
-					<div class="box">
-						<div class="box-header">
-							<h3 class="box-title">Bukit Batok Branch</h3>
-						</div>
-
-						<div class="box-body">
-							<table id="studentTable"
-								class="table table-striped table-bordered dt-responsive nowrap" width="100%">
-								<thead>
-									<tr>
-										<th>Student ID</th>
-										<th>Name</th>
-										<th>Gender</th>
-										<th>NRIC</th>
-										<th>DoB</th>
-										<th>Home Contact</th>
-										<th>Emergency Contact</th>
-										<th>Address</th>
-										<th>Postal Code</th>
-										<th>School Name</th>
-										<th>School Level</th>
-										<th>Taken Diagnostic</th>
-										<th>Points</th>
-										<th>Create Date</th>
-										<th>Options</th>
-									</tr>
-								</thead>
-
-								<tbody>
-								</tbody>
-							</table>
+					<div class="col-md-4">
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">Student Details</h3>
+							</div>
+							<div class="box-body">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="info-box">
+											<span class="info-box-icon bg-aqua">
+												<i class="fa fa-male"></i>
+											</span>
+											<div class="info-box-content">
+												<p>Name:</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
+					
+					<div class="col-md-8">
+						<div class="box box-primary">
+							<div class="box-header with-border">
+								<h3 class="box-title">Available Rescheduled Timings</h3>
+							</div>
+							<div class="box-body">
+								<div class="row">
+									<div class="col-md-12">
+										
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</section>
-
 		</div>
-
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
@@ -115,12 +115,15 @@
 <!-- jQuery 2.1.4 -->
 <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
 
+<!-- Bootstrap 3.3.5 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<!-- fullCalender.io -->
+<script src="./js/fullcalendar/lib/moment.min.js"></script>
+<script src="./js/fullcalendar/fullcalendar.min.js"></script>
 
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
@@ -134,8 +137,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
-<script src="./js/bootbox.min.js"></script>
+<script src="./js/bootbox.min.js"></script>	
 
-<script src="./js/branchmanager/student.js"></script>
+<script src="./js/branchmanager/calendar.js"></script>
 </body>
 </html>

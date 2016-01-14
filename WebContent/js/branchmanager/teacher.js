@@ -103,7 +103,6 @@ function getTeachersByBranch(branchId){
 				 {"data": 'address'},
 				 {"data": 'teacherNric'},
 				 {"data": 'qualification'},
-				 {"data": 'createDate'},
 				 {"data": null, "defaultContent":'<button class="btn btn-sm btn-warning fa" onclick="editTeacher();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteTeacher();" title="Delete"><i class="fa fa-trash-o"></i></button>'}
 				]
 	    });	
