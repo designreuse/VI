@@ -119,6 +119,9 @@ public class AttendanceCtrl {
 //				ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
 //				if(scheduleEvent != null){
 //					attendance.setScheduleEvent(scheduleEvent);
+//				}else{
+//					returnJson.put(Key.STATUS, Value.FAIL);
+//					returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);
 //				}
 				attendance.setActualStartDate(actualStartDate);
 				attendance.setActualEndDate(actualEndDate);
@@ -341,6 +344,39 @@ public class AttendanceCtrl {
 		}
 		return returnJson;
 	}
+	
+	public static JSONObject changeScheduleEventInAttendance(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Attendance attendance = AttendanceDAO.getAttendanceById((long) inputJson.get(Key.ATTENDANCEID));
+			if (attendance != null) {
+//				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+//				if(student != null){
+//					attendance.setStudent(student);
+//				}
+				ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
+				if(scheduleEvent != null){
+					attendance.setScheduleEvent(scheduleEvent);
+				}else{
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);
+				}
+				AttendanceDAO.modifyAttendance(attendance);
+				
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, attendance.toJson());
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.ATTENDANCENOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
 	
 //	public static JSONObject getAttendancesByScheduleEvents (JSONObject inputJson){
 //		JSONObject returnJson = new JSONObject();

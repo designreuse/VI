@@ -2,6 +2,7 @@ package controller;
 
 import model.Course;
 import model.Result;
+import model.Student;
 import model.Teacher;
 import model.TeacherStudentCourse;
 
@@ -10,6 +11,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.CourseDAO;
 import dataManager.ResultDAO;
+import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
 import dataManager.TeacherStudentCourseDAO;
 import system.Key;
@@ -179,27 +181,27 @@ public class CourseCtrl {
 		return returnJson;
 	}
 	
-	//Get courses schedule by teacher
-		public static JSONObject getCoursesScheduleByTeacher (JSONObject inputJson){
-			JSONObject returnJson = new JSONObject();
-			try {
-				Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
-				if (teacher != null) {
-					JSONArray courseArr = new JSONArray();
-					for (Course c : CourseDAO.getCoursesByTeacher(teacher)) {
-						courseArr.add(c.toJson());
-					}
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, courseArr);
-				} else {
-					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
+	//Get courses by student
+	public static JSONObject getCoursesByStudent (JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try {
+			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
+			if (student != null) {
+				JSONArray courseArr = new JSONArray();
+				for (Course c : CourseDAO.getCoursesByStudent(student)) {
+					courseArr.add(c.toJson());
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, courseArr);
+			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.TEACHERNOTEXIST);
 			}
-			return returnJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
 		}
+		return returnJson;
+	}
 }

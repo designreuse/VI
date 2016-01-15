@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,16 +16,15 @@ import system.Key;
 import system.Value;
 
 /**
- * 
+ * @author RaySong
  */
-
-public class GetStudentByBill extends HttpServlet {
+public class GetStudentByNricServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetStudentByBill() {
+    public GetStudentByNricServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -53,13 +51,12 @@ public class GetStudentByBill extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		JSONObject returnJson = new JSONObject();
-		
 		try{
 			String inputStr = request.getParameter(Key.INPUT);
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = StudentCtrl.getStudentByBill(inputJson);
+			returnJson = StudentCtrl.getStudentByNric(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

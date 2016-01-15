@@ -7,9 +7,12 @@ import java.util.List;
 
 import model.Branch;
 import model.Classroom;
+import model.Course;
 import model.Schedule;
 import model.ScheduleEvent;
+import model.Student;
 
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 
@@ -86,6 +89,20 @@ public class ScheduleEventDAO {
 	public static ArrayList<ScheduleEvent> getShceduleEventsByBranch(Branch branch){
 		ArrayList<ScheduleEvent> scheduleEvents = new ArrayList<ScheduleEvent>();
 		
+		return scheduleEvents;
+	}
+
+	public static ArrayList<ScheduleEvent> getScheduleEventsByStudent(Student student) {
+		ArrayList<ScheduleEvent> scheduleEvents = new ArrayList<ScheduleEvent>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<Object> list = session.createQuery("select se from ScheduleEvent se join se.attendances a where a.student = :student")
+				.setParameter("student", student).list();
+		session.getTransaction().commit();
+		session.close();
+		for(Object o : list){
+			scheduleEvents.add((ScheduleEvent) o);
+		}
 		return scheduleEvents;
 	}
 	

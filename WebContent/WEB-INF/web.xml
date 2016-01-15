@@ -10,6 +10,16 @@
     <servlet-name>InstallServlet</servlet-name>
     <url-pattern>/InstallServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ChangeScheduleEventInAttendanceServlet</servlet-name>
+    <servlet-class>service.ChangeScheduleEventInAttendanceServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeScheduleEventInAttendanceServlet</servlet-name>
+    <url-pattern>/ChangeScheduleEventInAttendanceServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>CreateAttendanceServlet</servlet-name>
     <servlet-class>service.CreateAttendanceServlet</servlet-class>
@@ -259,6 +269,14 @@
     <url-pattern>/GetClassroomsByBranchServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetCoursesByStudentServlet</servlet-name>
+    <servlet-class>service.GetCoursesByStudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetCoursesByStudentServlet</servlet-name>
+    <url-pattern>/GetCoursesByStudentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetCoursesByTeacherServlet</servlet-name>
     <servlet-class>service.GetCoursesByTeacherServlet</servlet-class>
   </servlet>
@@ -339,36 +357,12 @@
     <url-pattern>/GetSalariesByTeacher</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetStudentByAttendance</servlet-name>
-    <servlet-class>service.GetStudentByAttendance</servlet-class>
+    <servlet-name>GetStudentByNricServlet</servlet-name>
+    <servlet-class>service.GetStudentByNricServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetStudentByAttendance</servlet-name>
-    <url-pattern>/GetStudentByAttendance</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>GetStudentByBill</servlet-name>
-    <servlet-class>service.GetStudentByBill</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetStudentByBill</servlet-name>
-    <url-pattern>/GetStudentByBill</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>GetStudentById</servlet-name>
-    <servlet-class>service.GetStudentById</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetStudentById</servlet-name>
-    <url-pattern>/GetStudentById</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>GetStudentByResult</servlet-name>
-    <servlet-class>service.GetStudentByResult</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetStudentByResult</servlet-name>
-    <url-pattern>/GetStudentByResult</url-pattern>
+    <servlet-name>GetStudentByNricServlet</servlet-name>
+    <url-pattern>/GetStudentByNricServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetStudentsByBranchServlet</servlet-name>
@@ -394,8 +388,7 @@
     <servlet-name>GetStudentsByTeacherAndCourseServlet</servlet-name>
     <url-pattern>/GetStudentsByTeacherAndCourseServlet</url-pattern>
   </servlet-mapping>
-  
-   <servlet>
+  <servlet>
     <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByBranchServlet</servlet-class>
   </servlet>
@@ -403,7 +396,14 @@
     <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
     <url-pattern>/GetScheduleEventsByBranchServlet</url-pattern>
   </servlet-mapping>
-  
+  <servlet>
+    <servlet-name>GetScheduleEventsByStudentServlet</servlet-name>
+    <servlet-class>service.GetScheduleEventsByStudentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetScheduleEventsByStudentServlet</servlet-name>
+    <url-pattern>/GetScheduleEventsByStudentServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>GetSchedulesByCourseServlet</servlet-name>
     <servlet-class>service.GetSchedulesByCourseServlet</servlet-class>
@@ -515,14 +515,6 @@
   <servlet-mapping>
     <servlet-name>GetTeacherByTeacherCourse</servlet-name>
     <url-pattern>/GetTeacherByTeacherCourse</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <servlet-name>GetStudentByPointEvent</servlet-name>
-    <servlet-class>service.GetStudentByPointEvent</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>GetStudentByPointEvent</servlet-name>
-    <url-pattern>/GetStudentByPointEvent</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetPointEventsByStudent</servlet-name>

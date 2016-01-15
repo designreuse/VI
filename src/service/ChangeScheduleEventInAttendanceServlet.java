@@ -4,35 +4,31 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.StudentCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
+import controller.AttendanceCtrl;
 
 /**
- * 
+ * @author RaySong
  */
-public class GetStudentByPointEvent extends HttpServlet {
+public class ChangeScheduleEventInAttendanceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetStudentByPointEvent() {
+    public ChangeScheduleEventInAttendanceServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		process(request, response);
@@ -47,6 +43,7 @@ public class GetStudentByPointEvent extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -58,7 +55,7 @@ public class GetStudentByPointEvent extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = StudentCtrl.getStudentByPointEvent(inputJson);
+			returnJson = AttendanceCtrl.changeScheduleEventInAttendance(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);
@@ -66,4 +63,5 @@ public class GetStudentByPointEvent extends HttpServlet {
 		}
 		out.println(returnJson.toJSONString());
 	}
+
 }

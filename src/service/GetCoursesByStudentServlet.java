@@ -4,29 +4,27 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
-import controller.AdminCtrl;
-import controller.StudentCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
+import controller.CourseCtrl;
 
 /**
- * Servlet implementation class GetStudentById
+ * @author RaySong
  */
-public class GetStudentById extends HttpServlet {
+public class GetCoursesByStudentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetStudentById() {
+    public GetCoursesByStudentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,7 +57,7 @@ public class GetStudentById extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = StudentCtrl.getStudentById(inputJson);
+			returnJson = CourseCtrl.getCoursesByStudent(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

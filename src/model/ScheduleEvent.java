@@ -237,5 +237,21 @@ public class ScheduleEvent {
 		return returnJson;
 	}
 	
-
+	public JSONObject toJsonStudent(){
+		JSONObject returnJson = new JSONObject();
+				
+		returnJson.put(Key.SCHEDULEEVENTID, this.scheduleEventId);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
+		returnJson.put(Key.STUDENTAMOUNT, this.studentAmount);
+		
+		returnJson.put(Key.SCHEDULE, this.schedule.toJsonSimpleTeacher());
+		returnJson.put(Key.CLASSROOM, this.classroom.toJsonSimple());
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
 }

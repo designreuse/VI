@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Course;
+import model.Student;
 import model.Teacher;
 import model.TeacherStudentCourse;
 
@@ -64,6 +65,20 @@ public class CourseDAO {
 		session.beginTransaction();
 		List<Object> list = session.createQuery("select c from Course c join c.teacherStudentCourses tsc where tsc.teacher = :teacher")
 				.setParameter("teacher", teacher).list();
+		session.getTransaction().commit();
+		session.close();
+		for(Object o : list){
+			courses.add((Course) o);
+		}
+		return courses;
+	}
+	
+	public static ArrayList<Course> getCoursesByStudent(Student student){
+		ArrayList<Course> courses = new ArrayList<Course>();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		session.beginTransaction();
+		List<Object> list = session.createQuery("select c from Course c join c.teacherStudentCourses tsc where tsc.student = :student")
+				.setParameter("student", student).list();
 		session.getTransaction().commit();
 		session.close();
 		for(Object o : list){
