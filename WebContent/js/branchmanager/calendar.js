@@ -1,42 +1,85 @@
 $(document).ready(function() {
+	getSchedules();
 	calendarInitiate();
 	schedulePanelView();
-//	generateTeacherOption();
-//	generateClassroomOption();
+	$('#scheduleRange').daterangepicker({
+		timePicker: true, 
+		timePickerIncrement: 30, 
+		format: 'MM/DD/YYYY h:mm A'
+	});
+	generateTeacherOption();
 });
 
-//function generateTeacherOption(){
-//	var branchId = Number(localStorage.getItem("branchId"));
-//	var $select = $('#teachercourse');
-//	$select.html('');
-//	var input = {};
-//	input.branchId = branchId
-//	var inputStr = JSON.stringify(input);
-//	inputStr = encodeURIComponent(inputStr);
-//	
-//	$.ajax({
-//		url : '../VI/GetTeacherCoursesByBranchServlet?input=' + inputStr, //this part sends to the servlet
-//		method : 'POST',
-//		dataType : 'json',
-//		error : function(err) {
-//			 $select.html('<option id="-1">none available</option>');
-//		},
-//		success : function(data) {
-//			var status = data.status; 
-//			var message = data.message;
-//			
-//			if (status == 1) {
-//				 $select.html('<option id="0"></option>');
+function generateTeacherOption(){
+	var branchId = Number(localStorage.getItem("branchId"));
+	var $teacherDDL = $('#teacherDDL');
+	$teacherDDL.html('');
+	var input = {};
+	input.branchId = branchId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetTeachersByBranchServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			$teacherDDL.html('<option id="-1">No teachers available</option>');
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				$teacherDDL.html('<option id="0">Select Teacher</option>');
+				for (var t = 0; t < message.length; t++){
+					var teacherId = message[t].teacherId;
+					var teacherName = message[t].name;
+					$teacherDDL.append('<option value=' + message[t].teacherId + '>' + teacherName + '</option>' );
+				}
+			} else{
+				$teacherDDL.html('<option id="-1">No teachers available</option>');
+			}
+		}
+	});
+}
+
+function generateCourseOption(elem){
+	var teacherId = elem.selectedIndex;
+	var $courseDDL = $('#courseDDL');
+	$courseDDL.html('');
+	var input = {};
+	input.teacherId = teacherId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetCoursesByTeacherServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			$courseDDL.html('<option id="-1">No course available</option>');
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				console.log(message);
+				$courseDDL.html('<option id="0">Select Teacher</option>');
 //				for (var t = 0; t < message.length; t++){
-//					var selectText = message[t].teacher.name + ' : ' + message[t].course.name;
-//					$select.append('<option value=' + message[t].teacherCourseId + '>' + selectText + '</option>' );
+//					var teacherId = message[t].teacherId;
+//					var teacherName = message[t].name;
+//					$courseDDL.append('<option value=' + message[t].teacherId + '>' + teacherName + '</option>' );
 //				}
-//			} else{
-//				 $select.html('<option id="-1">none available</option>');
-//			}
-//		}
-//	});
-//}
+			} else{
+				$teacherDDL.html('<option id="-1">No course available</option>');
+			}
+		}
+	});
+	
+	document.getElementById('courseDDL').disabled = !elem.selectedIndex;
+}
 //
 //function generateClassroomOption(){
 //	var branchId = Number(localStorage.getItem("branchId"));
@@ -308,22 +351,64 @@ $(document).ready(function() {
 //		});
 //}
 
+var schedules = []; 
+function getSchedules(){
+	var branchId = 1;
+//	var branchId = Number(localStorage.getItem("branchId"));
+	var input = {};
+	input.branchId = branchId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetScheduleEventsByBranchServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			 console.log(err);
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				 for (var e = 0; e < message.length; e++){
+					 var scheduleEventId = message[e].scheduleEventId;
+					 var name = message[e].schedule.name;
+					 var description = message[e].schedule.description;
+					 var start = moment(message[e].planStartDate, "YYYY-MM-DD HH:mm:ss");
+					 var end = moment(message[e].planEndDate, "YYYY-MM-DD HH:mm:ss");
+					 
+					 var scheduleStr = {
+							 id: scheduleEventId,
+							 title: name,
+							 start: start,
+							 end: end,
+							 allDay: false
+							};
+					 
+					 schedules.push(scheduleStr);
+				 }
+				localStorage.setItem("schedules", JSON.stringify(schedules));
+				 
+			} else{
+				console.log(message);
+			}
+		}
+	});
+}
+
 function calendarInitiate(){
+	var ob = JSON.parse(localStorage.getItem("schedules"));
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
 			center: 'title',
-			right: 'month,basicWeek,basicDay'
+			right: 'month,agendaWeek,agendaDay'
 		},
-		defaultDate: '2016-01-12',
-		editable: true,
+		defaultDate: moment(),
 		eventLimit: true, // allow "more" link when too many events
-		events: [
-			{
-				title: 'All Day Event',
-				start: '2016-01-01'
-			}
-		],
+		events: ob,
 		 eventClick: function(calEvent, jsEvent, view) {
 			 bootbox.dialog({
 				 title: "Example",
@@ -347,6 +432,75 @@ function schedulePanelView(){
 	$(".view").click(function() {
 		$(".collapse").collapse('toggle');
 	});
+}
+
+function getStudentId(studentNRIC){
+	var $attendanceDDL = $('#attendanceDDL');
+	$attendanceDDL.html('');
+	var input = {};
+	input.studentNric = studentNRIC
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetStudentByNricServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+			$attendanceDDL.html('<option id="-1">No dates available</option>');
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				retrieveAttendances(message.studentId);
+			} else{
+				$attendanceDDL.html('<option id="-1">No dates available</option>');
+			}
+						
+		}
+	});
+}
+
+function retrieveAttendances(studentId){
+	var $attendanceDDL = $('#attendanceDDL');
+	$attendanceDDL.html('');
+	var input = {};
+	input.studentId = studentId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	//error at retrieveAttendances
+	$.ajax({
+		url : '../VI/GetScheduleEventsByStudentServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+			$attendanceDDL.html('<option id="-1">No dates available</option>');
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				console.log(message);
+				document.getElementById('attendanceDDL').disabled = !studentId;
+				$attendanceDDL.html('<option id="0">Select Date to change</option>');
+//				for (var t = 0; t < message.length; t++){
+//					var teacherId = message[t].teacherId;
+//					var teacherName = message[t].name;
+//					$courseDDL.append('<option value=' + message[t].teacherId + '>' + teacherName + '</option>' );
+//				}
+			} else{
+				$attendanceDDL.html('<option id="-1">No dates available</option>');
+			}
+		}
+	});
+	
+	
 }
 
 function createSchedule(){
@@ -394,12 +548,4 @@ function createSchedule(){
 		
 	});
 	
-//	console.log(scheduleName);
-//	console.log(scheduleDesc);
-//	console.log(scheduleStartDate);
-//	console.log(scheduleStartTime);
-//	console.log(scheduleEndDate);
-//	console.log(scheduleEndTime);
-//	console.log(teacherCourseId);
-//	console.log(classroomId)
 }

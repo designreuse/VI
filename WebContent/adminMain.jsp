@@ -16,6 +16,9 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   
+  <!-- daterange picker -->
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+  
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   
@@ -88,62 +91,42 @@
 
 										<div id="addSched" class="panel-collapse collapse">
 											<div class="box-body">
-<!-- 												<form> -->
-<!-- 													<div class="form-group"> -->
-<!-- 														<label for="scheduleName">Schedule Name</label> -->
-<!-- 														<input class="form-control input-sm" id="scheduleName" -->
-<!-- 														name="scheduleName" type="email" placeholder="Schedule Name" required /> -->
-<!-- 													</div> -->
+												<form>
+													<div class="form-group">
+														<label for="scheduleName">Name</label>
+														<input class="form-control input-sm" id="scheduleName"
+														name="scheduleName" type="text" placeholder="Schedule Name" required />
+													</div>
 													
-<!-- 													<div class="form-group"> -->
-<!-- 														<label for="scheduleDesc">Schedule Description</label> -->
-<!-- 														<input class="form-control input-sm" id="scheduleDesc" -->
-<!-- 														name="scheduleDesc" type="email" placeholder="Schedule Description" required /> -->
-<!-- 													</div>	 -->
+													<div class="form-group">
+														<label for="scheduleDesc">Description</label>
+														<input class="form-control input-sm" id="scheduleDesc"
+														name="scheduleDesc" type="text" placeholder="Schedule Description" required />
+													</div>	
 													
-<!-- 													<div class="form-group"> -->
-<!-- 														<div class="col-lg-6"> -->
-<!-- 															<label for="scheduleStartDate">Schedule Start Date</label>											 -->
-<!-- 															<input class="form-control input-sm" id="scheduleStartDate" -->
-<!-- 															name="scheduleStartDate" type="date" placeholder="Start Date" required /> -->
-<!-- 														</div> -->
-														
-<!-- 														<div class="col-lg-6"> -->
-<!-- 															<label for="scheduleStartTime">Schedule Start Time</label>	 -->
-<!-- 															<input class="form-control input-sm" id="scheduleStartTime" -->
-<!-- 															name="scheduleStartTime" type="time" placeholder="Start Time" required /> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
+													<div class="form-group">
+														<label for="scheduleStartDate">Schedule Date Range</label>											
+														<input class="form-control pull-right input-sm" id="scheduleRange"
+															name="scheduleRange" type="text" placeholder="Start Date" required />
+													</div>
 													
-<!-- 													<div class="form-group"> -->
-<!-- 														<div class="col-lg-6"> -->
-<!-- 															<label for="scheduleEndDate">Schedule End Date</label>	 -->
-<!-- 															<input class="form-control input-sm" id="scheduleEndDate" -->
-<!-- 															name="scheduleEndDate" type="date" placeholder="End Date" required /> -->
-<!-- 														</div> -->
-<!-- 														<div class="col-lg-6"> -->
-<!-- 															<label for="scheduleEndTime">Schedule End Time</label>	 -->
-<!-- 															<input class="form-control input-sm" id="scheduleEndTime" -->
-<!-- 															name="scheduleEndTime" type="time" placeholder="End Time" required /> -->
-<!-- 														</div> -->
-<!-- 													</div> -->
 													
-<!-- 													<div class="form-group"> -->
-<!-- 														<label for="teachercourse">Select Teacher</label> -->
-<!-- 														<select class="form-control input-sm" id="teachercourse"> -->
-<!-- 														</select> -->
-<!-- 													</div> -->
+													<div class="form-group">
+														<label for="teachercourse">Select Teacher</label>
+														<select class="form-control input-sm" id="teacherDDL" onChange="generateCourseOption(this);">
+														</select>
+													</div>
 													
-<!-- 													<div class="form-group"> -->
-<!-- 														<label for="teachercourse">Select Classroom</label> -->
-<!-- 														<select class="form-control input-sm" id="classroom"> -->
-<!-- 														</select> -->
-<!-- 													</div> -->
+													<div class="form-group">
+														<label for="teachercourse">Select Course</label>
+														<select class="form-control input-sm" id="courseDDL" disabled="disabled">
+														</select>
+													</div>
 													
-<!-- 													<input class="btn btn-primary btn-block submit" -->
-<!-- 														type="button" value="Create Schedule" -->
-<!-- 														onclick="createSchedule();">	 -->
-<!-- 											</form> -->
+													<input class="btn btn-primary btn-block submit"
+														type="button" value="Create Schedule"
+														onclick="testing();">	
+											</form>
 											</div>
 										</div>
 									</div>
@@ -187,24 +170,36 @@
 
 										<div id="collapseTwo" class="panel-collapse collapse">
 											<div class="box-body">
-												<div class="row"><div class="col-md-12">
-													<div class="input-group">
-														<span class="input-group-addon"><i class="fa fa-search"></i></span> 
-														<input type="email" class="form-control" placeholder="Student Name">
+												<div class="row">
+													<div class="col-md-12">
+													
+														<div class="form-group">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-male"></i></span> 
+																<input type="text" class="form-control" placeholder="Student Name">
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-male"></i></span> 
+																<input type="text" class="form-control" placeholder="Student NRIC" onChange="getStudentId(this.value);">
+															</div>
+														</div>
+													
+														<div class="form-group">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+																<select class="form-control input-sm" id="attendanceDDL" disabled="disabled"></select>
+															</div>
+														</div>
+														
+														
+														<div class="form-group">
+															<input class="btn btn-primary submit" type="button" onclick="" value="Search">
+														</div>
 													</div>
-												</div></div>
-												
-												<div class = "row"><div class="col-md-12">
-													<div class="input-group">
-														<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-														<select class="form-control" id="attendances"></select>
-													</div>
-												</div></div>
-												<br>
-												
-												<div class="row"><div class="col-md-12">
-													<input class="btn btn-primary submit" type="button" value="Search">
-												</div></div>
+												</div>
 											</div>
 											
 										</div>
@@ -284,6 +279,9 @@
 <!-- fullCalender.io -->
 <script src="./js/fullcalendar/lib/moment.min.js"></script>
 <script src="./js/fullcalendar/fullcalendar.min.js"></script>
+
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
 
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
