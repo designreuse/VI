@@ -6,9 +6,7 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import dataManager.BillDAO;
 import dataManager.BranchDAO;
-import dataManager.ResultDAO;
 import system.Config;
 import system.Key;
 import system.Value;

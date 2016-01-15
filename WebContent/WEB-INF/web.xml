@@ -10,7 +10,6 @@
     <servlet-name>InstallServlet</servlet-name>
     <url-pattern>/InstallServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>ChangeScheduleEventInAttendanceServlet</servlet-name>
     <servlet-class>service.ChangeScheduleEventInAttendanceServlet</servlet-class>
@@ -19,7 +18,6 @@
     <servlet-name>ChangeScheduleEventInAttendanceServlet</servlet-name>
     <url-pattern>/ChangeScheduleEventInAttendanceServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CreateAttendanceServlet</servlet-name>
     <servlet-class>service.CreateAttendanceServlet</servlet-class>
@@ -28,6 +26,16 @@
     <servlet-name>CreateAttendanceServlet</servlet-name>
     <url-pattern>/CreateAttendanceServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CreateAttendancesForStudentByScheduleServlet</servlet-name>
+    <servlet-class>service.CreateAttendancesForStudentByScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateAttendancesForStudentByScheduleServlet</servlet-name>
+    <url-pattern>/CreateAttendancesForStudentByScheduleServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>CreateClassroomServlet</servlet-name>
     <servlet-class>service.CreateClassroomServlet</servlet-class>

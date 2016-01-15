@@ -465,13 +465,13 @@ public class Student {
 		returnJson.put(Key.REMARK, this.remark);
 
 		JSONArray billArr = new JSONArray();
-		for (Bill k : BillDAO.getBillsByStudent(this)) {
+		for (Bill k : this.bills) {
 			billArr.add(k.toJson());
 		}
 		returnJson.put(Key.BILLS, billArr);
 		
 		JSONArray pointEventArr = new JSONArray();
-		for (PointEvent pe : PointEventDAO.getPointEventsByStudent(this)) {
+		for (PointEvent pe : this.pointEvents) {
 			pointEventArr.add(pe.toJson());
 		}
 		returnJson.put(Key.POINTEVENTS, pointEventArr);

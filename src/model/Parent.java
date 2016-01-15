@@ -256,10 +256,26 @@ public class Parent {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	
+	public JSONObject toJsonSimple() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.PARENTID, this.parentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.CONTACT, this.contact);
+		returnJson.put(Key.EMAIL, this.email);
+		returnJson.put(Key.PARENTNRIC, this.parentNric);
+		returnJson.put(Key.OCCUPATION, this.occupation);
+		returnJson.put(Key.RELATIONSHIP, this.relationship);
 
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
-
 		returnJson.put(Key.PARENTID, this.parentId);
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.CONTACT, this.contact);

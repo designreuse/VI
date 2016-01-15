@@ -197,8 +197,8 @@ public class Attendance {
 
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJson());
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJsonSimple());
+		returnJson.put(Key.STUDENT, this.student.toJsonSimple());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -212,10 +212,10 @@ public class Attendance {
 
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-		returnJson.put(Key.ACTUALSTARTDATE,
-				Config.SDF.format(this.actualStartDate));
+		returnJson.put(Key.ACTUALSTARTDATE,Config.SDF.format(this.actualStartDate));
 
-		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJson());
+		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJsonSimple());
+		returnJson.put(Key.STUDENT, this.student.toJsonSimple());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -237,20 +237,18 @@ public class Attendance {
 		return returnJson;
 	}
 
-	// public JSONObject toScheduleJsonMark(){
-	// JSONObject returnJson = new JSONObject();
-	//
-	// returnJson.put(Key.ATTENDANCEID, this.attendanceId);
-	// returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
-	// returnJson.put(Key.ACTUALSTARTDATE,
-	// Config.SDF.format(this.actualStartDate));
-	//
-	// returnJson.put(Key.STUDENT, this.classroom.toJson());
-	//
-	// returnJson.put(Key.OBJSTATUS, this.objStatus);
-	// returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-	// returnJson.put(Key.REMARK, this.remark);
-	//
-	// return returnJson;
-	// }
+//	 public JSONObject toScheduleJsonMark(){
+//		 JSONObject returnJson = new JSONObject();
+//		
+//		 returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+//		 returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+//		 returnJson.put(Key.ACTUALSTARTDATE,
+//		 Config.SDF.format(this.actualStartDate));
+//		
+//		 returnJson.put(Key.OBJSTATUS, this.objStatus);
+//		 returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+//		 returnJson.put(Key.REMARK, this.remark);
+//		
+//		 return returnJson;
+//	 }
 }

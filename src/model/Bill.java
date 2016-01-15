@@ -115,6 +115,20 @@ public class Bill {
 		this.remark = remark;
 	}
 	
+	public JSONObject toJsonSimple(){
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.BILLID, this.billId);
+		returnJson.put(Key.BILLAMOUNT, this.billAmount);
+		returnJson.put(Key.DUEDATE, this.dueDate);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		
