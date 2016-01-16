@@ -75,8 +75,6 @@
 												</tr>
 											</tbody>
 										</table>
-										
-										<button type="button" class="btn btn-primary view" data-toggle="collapse" data-target="#viewChildren"> View Children</button>
 									</div>
 								</div>
 							</div>
@@ -84,29 +82,6 @@
 					</div>
 				</div>
 
-				<!-- end of displaying parents panel -->
-
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="collapse" id="viewChildren">
-							<div class="panel panel-info">
-								<div class="panel-heading">Child(ren)</div>
-								<div class="panel-body">
-
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="col-md-3 col-lg-3" align="center">
-												<img alt="User Pic" src="./img/avatar1.jpg"
-													class="img-circle img-responsive">
-											</div>
-											<div class="col-md-6 col-lg-6" id="test"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</section>
 
 		</div>

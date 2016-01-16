@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
   
   <!-- Skin Designs-->
-  <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="dist/css/skins/skin-green.min.css">
   
 	<link href="css/fullcalendar.min.css" rel="stylesheet">
 	<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
@@ -34,18 +34,18 @@
   
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 	<!-- including navBar and sideBar -->
-	<%@include file="navBar.jsp"%>
-	<%@include file="sideBar.jsp"%>
+	<%@include file="teacherNavBar.jsp"%>
+	<%@include file="teacherSideBar.jsp"%>
   
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Teacher List
+        Manual Attendance
       </h1>
     </section>
 

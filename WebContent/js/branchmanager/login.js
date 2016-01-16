@@ -67,18 +67,22 @@ function loginTeacher() {
 			$("#message").html("system failed to login in");
 		},
 		success : function(data) {
-			console.log(data);
+			//console.log(data);
 			var status = data.status; //shows the  success/failure of the servlet request
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
-				var teacher = message;
-				var teacherCourse = data.message.teacherCourses;
-
-				localStorage.setItem("teacherId", teacher.teacherId);
-				localStorage.setItem("teacherCourseId", teacherCourse[0].teacherCourseId);
-				localStorage.setItem("planStartDate", teacherCourse[0].schedules[0].planStartDate);
-				console.log(teacherCourse[0].schedules[0].planStartDate);
+				//store teacherId and courseIds 
+				localStorage.setItem("teacherId", message.teacherId);
+				var courseIds = [];
+				for (var i = 0; i < message.schedules.length; i++) {
+					var obj = message.schedules[i];
+					//console.log(obj.course.courseId);
+					courseIds.push(obj.course.courseId);
+					//console.log(courseIds);
+					localStorage["courseIds"] = JSON.stringify(courseIds);
+				}
+				
 				window.location = "teacherProfile.jsp";
 			} else {
 				$("#message").html("Invalid Email/Password, Account does not exist.");
