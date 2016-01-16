@@ -2,12 +2,14 @@ $(document).ready(function() {
 	getSchedules();
 	calendarInitiate();
 	schedulePanelView();
-	$('#scheduleRange').daterangepicker({
-		timePicker: true, 
-		timePickerIncrement: 30, 
-		format: 'MM/DD/YYYY h:mm A'
-	});
+//	$('#scheduleRange').daterangepicker({
+//		timePicker: true, 
+//		timePickerIncrement: 30, 
+//		format: 'MM/DD/YYYY h:mm A'
+//	});
 	generateTeacherOption();
+	populateNewSchedules();
+	
 });
 
 function generateTeacherOption(){
@@ -389,6 +391,7 @@ function getSchedules(){
 					 
 					 schedules.push(scheduleStr);
 				 }
+				localStorage.setItem("scheduleMsg", JSON.stringify(message));
 				localStorage.setItem("schedules", JSON.stringify(schedules));
 				 
 			} else{
@@ -399,7 +402,7 @@ function getSchedules(){
 }
 
 function calendarInitiate(){
-	var ob = JSON.parse(localStorage.getItem("schedules"));
+	var scheduleEvents = JSON.parse(localStorage.getItem("schedules"));
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
@@ -408,7 +411,7 @@ function calendarInitiate(){
 		},
 		defaultDate: moment(),
 		eventLimit: true, // allow "more" link when too many events
-		events: ob,
+		events: scheduleEvents,
 		 eventClick: function(calEvent, jsEvent, view) {
 			 bootbox.dialog({
 				 title: "Example",
@@ -499,6 +502,65 @@ function retrieveAttendances(studentId){
 			}
 		}
 	});
+	
+}
+
+function populateNewSchedules(){
+	var dateSelected = "2016-01-15T15:00:00"
+//	document.getElementById('studentName').innerHTML = "Bobby";
+//	document.getElementById('studentNRIC').innerHTML = "S9312345A";
+//	document.getElementById('dateSelected').innerHTML = "1";
+	
+	$.fn.dataTable.ext.errMode = 'none';
+	var branchId = 1;
+//	var branchId = Number(localStorage.getItem("branchId"));
+	var input = {};
+	input.branchId = branchId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	var table = $('#scheduleTable')
+			.on('error.dt', function(e, settings, techNote, message) {
+					console.log('An error has been reported by DataTables: ',message);
+			}).DataTable(
+					{
+					ajax : {
+							url : '../VI/GetScheduleEventsByBranchServlet?input='+ inputStr,
+							// dataSrc: 'message'
+							dataSrc : function(json) {
+								var message = json.message;
+								console.log(message);
+								
+								var return_data = new Array();
+								for (var i = 0; i < message.length; i++) {
+									var selectedDateM = moment(dateSelected);
+									var planM = moment(message[i].planStartDate);
+									var plandateM = moment(planM, "DD-MM-YYYY");
+									if (message[i].planStartDate != dateSelected && planM > selectedDateM && planM <= selectedDateM.add(7,'days')){
+										var sched = {	
+												'scheduleId':message[i].scheduleEventId,
+												'courseName':message[i].schedule.name,
+												'scheduleDate': moment(message[i].planStartDate).format("dddd, MMMM Do YYYY, h:mm a"),
+												'teacherName':message[i].schedule.teacher.name,
+												'button' : "<button class='btn btn-sm btn-success fa fa-check'></button>"
+												
+										}
+										return_data.push(sched)
+									}
+								}
+								return return_data;
+							}
+						},
+						columns : [ 
+						            {"data" : 'scheduleId'}, 
+						            {"data" : 'courseName'}, 
+						            {"data" : 'scheduleDate'}, 
+						            {"data" : 'teacherName'}, 
+						            {"data" : 'button'}
+						]
+					});
+	
+//	console.log(JSON.parse(localStorage.getItem("scheduleMsg")));
 	
 	
 }

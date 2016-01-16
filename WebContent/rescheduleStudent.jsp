@@ -10,6 +10,11 @@
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
   
+  <!-- DataTables css -->
+  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.0.0/css/responsive.bootstrap.min.css">
+  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   
@@ -57,39 +62,43 @@
     <!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="box box-primary">
 							<div class="box-header with-border">
 								<h3 class="box-title">Student Details</h3>
 							</div>
 							<div class="box-body">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="info-box">
-											<span class="info-box-icon bg-aqua">
-												<i class="fa fa-male"></i>
-											</span>
-											<div class="info-box-content">
-												<p>Name:</p>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+								<dl>
+						          <dt>Name:</dt>
+						          <dd id="studentName">The student's name.</dd><br>
+						          <dt>NRIC:</dt>
+						          <dd id="studentNRIC">The student NRIC</dd><br>
+						          <dt>Date selected to reschedule:</dt>
+						          <dd id="dateSelected">This is the date selected by the student</dd>
+						       </dl>
 						</div>
 					</div>
-					
-					<div class="col-md-8">
+					</div>
+					<div class="col-md-9">
 						<div class="box box-primary">
 							<div class="box-header with-border">
 								<h3 class="box-title">Available Rescheduled Timings</h3>
 							</div>
+							
 							<div class="box-body">
-								<div class="row">
-									<div class="col-md-12">
-										
-									</div>
-								</div>
+								<table id="scheduleTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
+									<thead>
+										<tr>
+											<th>Schedule Id</th>
+											<th>Course Name</th>
+											<th>Date </th>
+											<th>Teacher</th>
+											<th>Options</th>
+										</tr>
+									</thead>
+	
+									<tbody></tbody>
+								</table>
 							</div>
 						</div>
 					</div>
@@ -120,6 +129,12 @@
 
 <!-- jQuery UI 1.11.4 -->
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+<!-- DataTables -->
+<script src="plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.0.0/js/dataTables.responsive.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.0.0/js/responsive.bootstrap.min.js"></script>
 
 <!-- fullCalender.io -->
 <script src="./js/fullcalendar/lib/moment.min.js"></script>
