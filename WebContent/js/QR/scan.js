@@ -189,6 +189,7 @@ function displayScheduleEvents() {
 	var storedIds = JSON.parse(localStorage["scheduleEventIds"]);
 	var options = [];
 	for(var j = 0; j < storedIds.length; j++){
+		console.log(storedIds[j])
 		var scheduleEventId = Number(storedIds[j]);
 		options.push(scheduleEventId);
 	}
@@ -209,14 +210,14 @@ function getScheduleEvents() {
 	var storedIds = JSON.parse(localStorage["scheduleIds"]);
 	for(var j = 0; j < storedIds.length; j++){
 		var scheduleId = Number(storedIds[j]);
-	}
+	
 	var input = {};
 	input.scheduleId = scheduleId;
 	var inputStr = JSON.stringify(input);
 	var i = encodeURIComponent(inputStr);
 
 	$.ajax({
-		url : '../VI/GetScheduleEventsBySchedule?input=' + inputStr, // this part sends to
+		url : '../VI/GetScheduleEventsByScheduleServlet?input=' + inputStr, // this part sends to
 		// the servlet
 		method : 'POST',
 		dataType : 'json',
@@ -234,14 +235,15 @@ function getScheduleEvents() {
 				for (var i = 0; i < data.message.length; i++) {
 					var obj = data.message[i];
 					
-					scheduleEventIds.push(obj.scheduleEventIds);
-					console.log(scheduleEventIds);
-					localStorage["scheduleEventIds"] = JSON.stringify(scheduleEventIds);
-					displayScheduleEvents();
+					scheduleEventIds.push(obj.scheduleEventId);
+					//console.log(obj.scheduleEventId);
+					localStorage["scheduleEventIds"] = JSON.stringify(scheduleEventIds);	
 				}
+				displayScheduleEvents();
 			} else {
 				console.log(message);
 			}
 		}
 	});
+	}
 }
