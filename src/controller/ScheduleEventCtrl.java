@@ -6,6 +6,7 @@ import java.util.Date;
 
 import model.Branch;
 import model.Classroom;
+import model.Course;
 import model.Schedule;
 import model.ScheduleEvent;
 import model.Student;
@@ -15,6 +16,7 @@ import org.json.simple.JSONObject;
 
 import dataManager.BranchDAO;
 import dataManager.ClassroomDAO;
+import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.ScheduleEventDAO;
 import dataManager.StudentDAO;
@@ -286,6 +288,32 @@ public class ScheduleEventCtrl {
 		return returnJson;
 	}
 	
+	// Get schedule events by branch
+		public static JSONObject getScheduleEventsByCourse(JSONObject inputJson) {
+			JSONObject returnJson = new JSONObject();
+			try {
+				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+				if (course != null) {
+					JSONArray scheduleEventArr = new JSONArray();
+					for (Schedule schedule : ScheduleDAO.getSchedulesByCourse(course)) {
+						for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(schedule)){
+							scheduleEventArr.add(se.toJsonStrong());
+						}
+					}
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, scheduleEventArr);
+				} else {
+					returnJson.put(Key.STATUS, Value.FAIL);
+					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, e);
+			}
+			return returnJson;
+		}
+	
 	// Get schedule events by student
 	public static JSONObject getScheduleEventsByStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
@@ -294,7 +322,7 @@ public class ScheduleEventCtrl {
 			if (student != null) {
 				JSONArray scheduleEventArr = new JSONArray();
 				for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsByStudent(student)){
-					scheduleEventArr.add(se.toJsonStudent());
+					scheduleEventArr.add(se.toJsonStrong());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, scheduleEventArr);
