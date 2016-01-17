@@ -26,7 +26,6 @@
     <servlet-name>CreateAttendanceServlet</servlet-name>
     <url-pattern>/CreateAttendanceServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CreateAttendancesForStudentByScheduleServlet</servlet-name>
     <servlet-class>service.CreateAttendancesForStudentByScheduleServlet</servlet-class>
@@ -35,7 +34,6 @@
     <servlet-name>CreateAttendancesForStudentByScheduleServlet</servlet-name>
     <url-pattern>/CreateAttendancesForStudentByScheduleServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>CreateClassroomServlet</servlet-name>
     <servlet-class>service.CreateClassroomServlet</servlet-class>
@@ -404,6 +402,16 @@
     <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
     <url-pattern>/GetScheduleEventsByBranchServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetScheduleEventsByScheduleServlet</servlet-name>
+    <servlet-class>service.GetScheduleEventsByScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetScheduleEventsByScheduleServlet</servlet-name>
+    <url-pattern>/GetScheduleEventsByScheduleServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>GetScheduleEventsByStudentServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByStudentServlet</servlet-class>

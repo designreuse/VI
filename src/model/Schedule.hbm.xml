@@ -1,54 +1,54 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Jan 15, 2016 4:31:02 AM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping>
-    <class name="model.Schedule" table="SCHEDULE">
-        <id name="scheduleId" type="long">
-            <column name="SCHEDULEID" />
-            <generator class="increment" />
-        </id>
-        <property name="name" type="java.lang.String">
-            <column name="NAME" />
-        </property>
-        <property name="description" type="java.lang.String">
-            <column name="DESCRIPTION" />
-        </property>
-        <property name="dayOfWeek" type="long">
-            <column name="DAYOFWEEK" />
-        </property>
-        <property name="scheduleStartDate" type="java.util.Date">
-            <column name="SCHEDULESTARTDATE" />
-        </property>
-        <property name="scheduleEndDate" type="java.util.Date">
-            <column name="SCHEDULEENDDATE" />
-        </property>
-        <property name="recFrequency" type="long">
-            <column name="RECFREQUENCY" />
-        </property>
-        <property name="duration" type="long">
-            <column name="DURATION" />
-        </property>
-        <many-to-one name="course" class="model.Course" fetch="join">
-            <column name="COURSEID" />
-        </many-to-one>
-        <many-to-one name="teacher" class="model.Teacher" fetch="join">
-            <column name="TEACHERID" />
-        </many-to-one>
-        <set name="scheduleEvents" table="SCHEDULEEVENT" inverse="false" lazy="true">
-            <key>
-                <column name="SCHEDULEID" />
-            </key>
-            <one-to-many class="model.ScheduleEvent" />
-        </set>
-        <property name="objStatus" type="long">
-            <column name="OBJSTATUS" />
-        </property>
-        <property name="createDate" type="java.util.Date">
-            <column name="CREATEDATE" />
-        </property>
-        <property name="remark" type="java.lang.String">
-            <column name="REMARK" />
-        </property>
-    </class>
+<hibernate-mapping default-lazy="false">
+ <class name="model.Schedule" table="SCHEDULE">
+  <id name="scheduleId" type="long">
+   <column name="SCHEDULEID"/>
+   <generator class="increment"/>
+  </id>
+  <property generated="never" lazy="false" name="name" type="java.lang.String">
+   <column name="NAME"/>
+  </property>
+  <property generated="never" lazy="false" name="description" type="java.lang.String">
+   <column name="DESCRIPTION"/>
+  </property>
+  <property generated="never" lazy="false" name="dayOfWeek" type="long">
+   <column name="DAYOFWEEK"/>
+  </property>
+  <property generated="never" lazy="false" name="scheduleStartDate" type="java.util.Date">
+   <column name="SCHEDULESTARTDATE"/>
+  </property>
+  <property generated="never" lazy="false" name="scheduleEndDate" type="java.util.Date">
+   <column name="SCHEDULEENDDATE"/>
+  </property>
+  <property generated="never" lazy="false" name="recFrequency" type="long">
+   <column name="RECFREQUENCY"/>
+  </property>
+  <property generated="never" lazy="false" name="duration" type="long">
+   <column name="DURATION"/>
+  </property>
+  <many-to-one class="model.Course" fetch="join" name="course">
+   <column name="COURSEID"/>
+  </many-to-one>
+  <many-to-one class="model.Teacher" fetch="join" name="teacher">
+   <column name="TEACHERID"/>
+  </many-to-one>
+  <set lazy="true" name="scheduleEvents" sort="unsorted" table="SCHEDULEEVENT">
+   <key>
+    <column name="SCHEDULEID"/>
+   </key>
+   <one-to-many class="model.ScheduleEvent"/>
+  </set>
+  <property generated="never" lazy="false" name="objStatus" type="long">
+   <column name="OBJSTATUS"/>
+  </property>
+  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
+   <column name="CREATEDATE"/>
+  </property>
+  <property generated="never" lazy="false" name="remark" type="java.lang.String">
+   <column name="REMARK"/>
+  </property>
+ </class>
 </hibernate-mapping>
