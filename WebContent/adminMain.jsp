@@ -61,7 +61,7 @@
     <!-- Main content -->
 			<section class="content">
 				<div class="row">
-					<div class="col-md-7">
+					<div class="col-md-8">
 						<div class="box box-primary">
 							<div class="box-body">
 								<div id="calendar"></div>
@@ -69,7 +69,7 @@
 						</div>
 					</div>
 
-					<div class="col-md-5">
+					<div class="col-md-4">
 						<div class="row">
 							<div class = "col-md-12">
 								<div class="box box-solid">
@@ -176,14 +176,21 @@
 														<div class="form-group">
 															<div class="input-group">
 																<span class="input-group-addon"><i class="fa fa-male"></i></span> 
-																<input type="text" class="form-control" placeholder="Student Name">
+																<input type="text" class="form-control" placeholder="Student Name" id="reschedStudentName">
 															</div>
 														</div>
 														
 														<div class="form-group">
 															<div class="input-group">
 																<span class="input-group-addon"><i class="fa fa-male"></i></span> 
-																<input type="text" class="form-control" placeholder="Student NRIC" onChange="getStudentId(this.value);">
+																<input type="text" class="form-control" placeholder="Student NRIC" onChange="getStudentId(this.value);" id="reschedStudentNric">
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<div class="input-group">
+																<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+																<select class="form-control input-sm" id="studentCourseDDl" disabled="disabled" onChange="getCourseValue()"></select>
 															</div>
 														</div>
 													
@@ -196,7 +203,7 @@
 														
 														
 														<div class="form-group">
-															<input class="btn btn-primary submit" type="button" onclick="" value="Search">
+															<input class="btn btn-primary submit" type="button" onclick="tryrandom()" value="Search">
 														</div>
 													</div>
 												</div>

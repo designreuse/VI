@@ -403,6 +403,15 @@
     <url-pattern>/GetScheduleEventsByBranchServlet</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>GetScheduleEventsByCourseServlet</servlet-name>
+    <servlet-class>service.GetScheduleEventsByCourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetScheduleEventsByCourseServlet</servlet-name>
+    <url-pattern>/GetScheduleEventsByCourseServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>GetScheduleEventsByScheduleServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByScheduleServlet</servlet-class>

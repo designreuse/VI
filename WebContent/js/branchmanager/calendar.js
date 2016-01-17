@@ -2,11 +2,11 @@ $(document).ready(function() {
 	getSchedules();
 	calendarInitiate();
 	schedulePanelView();
-//	$('#scheduleRange').daterangepicker({
-//		timePicker: true, 
-//		timePickerIncrement: 30, 
-//		format: 'MM/DD/YYYY h:mm A'
-//	});
+	$('#scheduleRange').daterangepicker({
+		timePicker: true, 
+		timePickerIncrement: 30, 
+		format: 'MM/DD/YYYY h:mm A'
+	});
 	generateTeacherOption();
 	populateNewSchedules();
 	
@@ -403,6 +403,10 @@ function getSchedules(){
 
 function calendarInitiate(){
 	var scheduleEvents = JSON.parse(localStorage.getItem("schedules"));
+	var message = JSON.parse(localStorage.getItem("scheduleMsg"));
+	
+	
+	console.log(message);
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
@@ -415,7 +419,9 @@ function calendarInitiate(){
 		 eventClick: function(calEvent, jsEvent, view) {
 			 bootbox.dialog({
 				 title: "Example",
-				 message: "display current details " + calEvent.title,
+				 message: function (message){
+					 return "last edited till here. manipulate the message."
+				 },
 				 onEscape: function() {},
 				 buttons:{
 					main: {
@@ -458,7 +464,9 @@ function getStudentId(studentNRIC){
 			var message = data.message;
 			
 			if (status == 1) {
-				retrieveAttendances(message.studentId);
+				localStorage.setItem("studentIdResched", message.studentId);
+				localStorage.setItem("studentNRICResched", studentNRIC);
+				retrieveCourse(message.studentId);
 			} else{
 				$attendanceDDL.html('<option id="-1">No dates available</option>');
 			}
@@ -467,7 +475,60 @@ function getStudentId(studentNRIC){
 	});
 }
 
-function retrieveAttendances(studentId){
+function retrieveCourse(studentId){
+	var $studentCourseDDL = $('#studentCourseDDl');
+	$studentCourseDDL.html('');
+	var input = {};
+	input.studentId = studentId
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	//error at retrieveAttendances
+	$.ajax({
+		url : '../VI/GetCoursesByStudentServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+			$studentCourseDDL.html('<option id="-1">No courses available</option>');
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				document.getElementById('studentCourseDDl').disabled = !studentId;
+				$studentCourseDDL.html('<option id="0">Select Course</option>');
+				
+				for (var a = 0; a < message.length; a++){
+					var courseId = message[a].courseId;
+					var courseName = message[a].name
+					$studentCourseDDL.append('<option value=' + courseId + '>' + courseName + '</option>' );
+				}
+				
+			} else{
+				$studentCourseDDL.html('<option id="-1">No dates available</option>');
+			}
+		}
+	});
+}
+
+function getCourseValue(){
+	var course = document.getElementById("studentCourseDDl");
+	var cId = Number(course.options[course.selectedIndex].value);
+	var courseName = course.options[course.selectedIndex].text;
+	var sId = Number(localStorage.getItem("studentIdResched"));
+	
+	console.log("value of course: " + cId)
+	
+	localStorage.setItem("rescheduleCourse", cId);
+	localStorage.setItem("rescheduleCourseName", courseName);
+	retrieveAttendances(sId, cId);
+}
+
+function retrieveAttendances(studentId, courseId){
+	console.log(courseId);
+	
 	var $attendanceDDL = $('#attendanceDDL');
 	$attendanceDDL.html('');
 	var input = {};
@@ -475,7 +536,8 @@ function retrieveAttendances(studentId){
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 	
-	//error at retrieveAttendances
+	//error at retrieveAttendances. need to ask song rui to fix
+	
 	$.ajax({
 		url : '../VI/GetScheduleEventsByStudentServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
@@ -489,14 +551,19 @@ function retrieveAttendances(studentId){
 			var message = data.message;
 			
 			if (status == 1) {
-				console.log(message);
 				document.getElementById('attendanceDDL').disabled = !studentId;
 				$attendanceDDL.html('<option id="0">Select Date to change</option>');
-//				for (var t = 0; t < message.length; t++){
-//					var teacherId = message[t].teacherId;
-//					var teacherName = message[t].name;
-//					$courseDDL.append('<option value=' + message[t].teacherId + '>' + teacherName + '</option>' );
-//				}
+				
+				console.log(message);
+				for (var a = 0; a < message.length; a++){
+					var startDate = moment(message[a].planStartDate);
+					
+					if (startDate >= moment() && message[a].schedule.course.courseId === courseId){
+						var attendanceId = a;
+						$attendanceDDL.append('<option value=' + attendanceId + '>' + message[a].planStartDate + '</option>' );
+					}
+				}
+				
 			} else{
 				$attendanceDDL.html('<option id="-1">No dates available</option>');
 			}
@@ -505,17 +572,41 @@ function retrieveAttendances(studentId){
 	
 }
 
+function tryrandom(){	
+	var studentName = $("#reschedStudentName").val();
+	localStorage.setItem("studentReschedName", studentName);
+	
+	var selectedAttendance = document.getElementById("attendanceDDL");
+	var selectedAttendanceId = Number(selectedAttendance.options[selectedAttendance.selectedIndex].value);
+	var selectedAttendanceDate = selectedAttendance.options[selectedAttendance.selectedIndex].text;
+	
+	localStorage.setItem("reschedAId", selectedAttendanceId);
+	localStorage.setItem("reschedADate", selectedAttendanceDate);
+
+// ---------------- to retrieve your data --------------------------	
+//	console.log(localStorage.getItem("studentReschedName"));
+//	console.log(localStorage.getItem("rescheduleCourse"));
+//	console.log(localStorage.getItem("rescheduleCourseName"));
+//	console.log(localStorage.getItem("studentIdResched"));
+//	console.log(localStorage.getItem("studentNRICResched"));
+//	console.log(localStorage.getItem("reschedAId"));
+//	console.log(localStorage.getItem("reschedADate"));
+
+	window.location = "rescheduleStudent.jsp";
+}
+
 function populateNewSchedules(){
-	var dateSelected = "2016-01-15T15:00:00"
-//	document.getElementById('studentName').innerHTML = "Bobby";
-//	document.getElementById('studentNRIC').innerHTML = "S9312345A";
-//	document.getElementById('dateSelected').innerHTML = "1";
+	document.getElementById("studentName").innerHTML = localStorage.getItem("studentReschedName");
+	document.getElementById("studentNRIC").innerHTML = localStorage.getItem("studentNRICResched");
+	document.getElementById("courseSelected").innerHTML = localStorage.getItem("rescheduleCourseName");
+	var selectedDate =  moment(localStorage.getItem("reschedADate"));
+	document.getElementById("dateSelected").innerHTML = selectedDate;
 	
 	$.fn.dataTable.ext.errMode = 'none';
-	var branchId = 1;
 //	var branchId = Number(localStorage.getItem("branchId"));
+	var courseId = Number(localStorage.getItem("rescheduleCourse"));
 	var input = {};
-	input.branchId = branchId
+	input.courseId = courseId;
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 	
@@ -525,28 +616,29 @@ function populateNewSchedules(){
 			}).DataTable(
 					{
 					ajax : {
-							url : '../VI/GetScheduleEventsByBranchServlet?input='+ inputStr,
+							url : '../VI/GetScheduleEventsByCourseServlet?input='+ inputStr,
 							// dataSrc: 'message'
 							dataSrc : function(json) {
 								var message = json.message;
 								console.log(message);
 								
 								var return_data = new Array();
+								
 								for (var i = 0; i < message.length; i++) {
-									var selectedDateM = moment(dateSelected);
 									var planM = moment(message[i].planStartDate);
 									var plandateM = moment(planM, "DD-MM-YYYY");
-									if (message[i].planStartDate != dateSelected && planM > selectedDateM && planM <= selectedDateM.add(7,'days')){
+									
+									if (message[i].planStartDate > localStorage.getItem("reschedADate")){
 										var sched = {	
 												'scheduleId':message[i].scheduleEventId,
 												'courseName':message[i].schedule.name,
 												'scheduleDate': moment(message[i].planStartDate).format("dddd, MMMM Do YYYY, h:mm a"),
 												'teacherName':message[i].schedule.teacher.name,
-												'button' : "<button class='btn btn-sm btn-success fa fa-check'></button>"
+												'button' : "<button class='btn btn-sm btn-success' onclick='reschedStudent()'>Reschedule</button>"
 												
 										}
 										return_data.push(sched)
-									}
+								}
 								}
 								return return_data;
 							}
@@ -560,9 +652,60 @@ function populateNewSchedules(){
 						]
 					});
 	
-//	console.log(JSON.parse(localStorage.getItem("scheduleMsg")));
-	
-	
+}
+
+function reschedStudent(){
+	var table = $('#scheduleTable').DataTable();
+	$('#scheduleTable tbody').off('click').on( 'click', 'button', function () {
+		var tr = $(this).closest('tr');
+		var row = table.row( tr );
+
+		bootbox.dialog({
+			title: "Confirm reschedule",
+			message: "Do you want to reschedule " + localStorage.getItem("studentReschedName") + "'s schedule to <u>" + row.data().scheduleDate + "</u>?",
+			onEscape: function() {},
+			buttons: {
+				success:{
+					label: "Save!",
+					className: "btn-success",
+
+					callback: function(){
+    					var input = {};
+    					input.scheduleEventId = Number(row.data().scheduleId);
+    					input.attendanceId = 9; //change this please!!!!! when servlet is updated
+    					var inputStr = JSON.stringify(input);
+    					inputStr = encodeURIComponent(inputStr);
+    					
+    					$.ajax({
+    						url : '../VI/ChangeScheduleEventInAttendanceServlet?input=' + inputStr, //this part sends to the servlet
+    						method : 'POST',
+    						dataType : 'json',
+    						error : function(err) {
+    							console.log(err);
+    						},
+    						success : function(data) {
+    							console.log(data);
+    							var status = data.status; 
+    							var message = data.message;
+    							
+    							if (status == 1) {
+    								console.log(message);
+    								bootbox.dialog({
+    									title: "Reschedule confirmed!",
+    									message: "Updated!"
+    									
+    								})
+    								window.location = "adminMain.jsp";
+    							} else {
+    								$("#message").html("Something's wrong, please try again!");
+    							}
+    						}
+    					});
+					}
+				}
+			}	
+		}); 
+	});
 }
 
 function createSchedule(){

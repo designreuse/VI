@@ -70,11 +70,13 @@
 							<div class="box-body">
 								<dl>
 						          <dt>Name:</dt>
-						          <dd id="studentName">The student's name.</dd><br>
+						          <dd id="studentName"></dd><br>
 						          <dt>NRIC:</dt>
-						          <dd id="studentNRIC">The student NRIC</dd><br>
+						          <dd id="studentNRIC"></dd><br>
+						          <dt>Course selected:</dt>
+						          <dd id="courseSelected"></dd><br>
 						          <dt>Date selected to reschedule:</dt>
-						          <dd id="dateSelected">This is the date selected by the student</dd>
+						          <dd id="dateSelected"></dd>
 						       </dl>
 						</div>
 					</div>
@@ -139,6 +141,9 @@
 <!-- fullCalender.io -->
 <script src="./js/fullcalendar/lib/moment.min.js"></script>
 <script src="./js/fullcalendar/fullcalendar.min.js"></script>
+
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
 
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
