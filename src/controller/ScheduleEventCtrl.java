@@ -216,7 +216,7 @@ public class ScheduleEventCtrl {
 			if (schedule != null) {
 				JSONArray scheduleEventArr = new JSONArray();
 				for (ScheduleEvent ss : ScheduleEventDAO.getScheduleEventsBySchedule(schedule)) {
-					scheduleEventArr.add(ss.toJson());
+					scheduleEventArr.add(ss.toJsonAttendances());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, scheduleEventArr);

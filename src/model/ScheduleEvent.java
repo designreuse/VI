@@ -254,4 +254,25 @@ public class ScheduleEvent {
 		
 		return returnJson;
 	}
+	
+	public JSONObject toJsonAttendances(){
+		JSONObject returnJson = new JSONObject();
+				
+		returnJson.put(Key.SCHEDULEEVENTID, this.scheduleEventId);
+		returnJson.put(Key.PLANSTARTDATE, Config.SDF.format(this.planStartDate));
+		returnJson.put(Key.PLANENDDATE, Config.SDF.format(this.planEndDate));
+		returnJson.put(Key.STUDENTAMOUNT, this.studentAmount);
+		
+		JSONArray attendanceArr = new JSONArray();
+		for (Attendance a : AttendanceDAO.getAttendancesByScheduleEvent(this)) {
+			attendanceArr.add(a.toJson());
+		}
+		returnJson.put(Key.ATTENDANCES, attendanceArr);
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
 }
