@@ -90,8 +90,8 @@ function updateQRAttendance(studentId){
 				//call the send email servlet to send the email
 				console.log("here!!!");
 				var studentName = message.student.name;
-				var parentName = message.student.parent.name;
-				var email = message.student.parent.email;
+				var parentName = message.parent.name;
+				var email = message.parent.email;
 				
 				var input = {};
 				input.studentName = studentName;
@@ -141,6 +141,39 @@ function displayCourses() {
 	    el.value = opt;
 	    select.appendChild(el);
 	}
+}
+
+function getCourseName(courseId){
+	var input = {}
+	input.courseId = Number(courseId);
+
+	var inputStr = JSON.stringify(input);
+
+	inputStr = encodeURIComponent(inputStr);
+
+	$.ajax({
+		url : '../VI/GetCourseNameByCourseId?input=' + inputStr, // this part sends to
+														// the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+			$("#message").html("System has some error. Please try again.");
+		},
+		success : function(data) {
+			console.log(data);
+			var status = data.status; // shows the success/failure of the
+										// servlet request
+			var message = data.message;
+			// if status == 1, it means that it is successful. else it will fail
+			if (status == 1) {
+				// console.log(message);
+				return(message.name);
+			} else {
+				$("#message").html("Something's wrong, please try again!");
+			}
+		}
+	});
 }
 
 function getSchedules() {
