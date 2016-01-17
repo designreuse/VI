@@ -244,6 +244,8 @@ function deleteParent(){
 								error : function(err) {
 									console.log(err);
 									$("#deleteMessage").html("System has some error. Please try again.");
+									
+									
 								},
 								success : function(data) {
 									console.log(data);
@@ -256,11 +258,13 @@ function deleteParent(){
 
 									} else {
 										$("#deleteMessage").html("Something's wrong, please try again!");
+								
 									}
 								}
 							});
 						} else {
 							$("#deleteMessage").html("The entered name does not match, please try again.");
+							return false;
 						}
 					}    		
 				}

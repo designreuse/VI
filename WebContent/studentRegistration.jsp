@@ -55,7 +55,7 @@
 			<section class="content">
 				<div class="row">
 					<div class="col-md-12">
-						<form class="form-validate form-horizontal" id="registerStudent"
+						<form class="form-validate form-horizontal" id="register_form"
 							method="post" onsubmit="registerStudent();return false;">
 							<div>
 								<font color="red" id="message"></font>
@@ -82,7 +82,7 @@
 										<div class="col-lg-10">
 											<input class="form-control" id="parentNric" name="pNric"
 												type="text" pattern="^[SFTG]\d{7}[A-Z]$" title="NRIC only"
-												required />
+												required onChange="valid(this.form)" />
 										</div>
 									</div>
 								</div>
@@ -97,18 +97,20 @@
 											Enrolled<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="checkbox" id="course" name="course" value="Math" required>Math
-											<input type="checkbox" id="course" name="course"value="English">English <input type="checkbox"
-												id="course" name="course" value="Korean">Korean
+											<input type="checkbox" id="course" name="course" value="Math"
+												required>Math <input type="checkbox" id="course"
+												name="course" value="English">English <input
+												type="checkbox" id="course" name="course" value="Korean">Korean
 										</div>
 									</div>
 									<div class="form-group ">
-										<label for="gender" class="control-label col-lg-2">Taken Diagnostic<span
-											class="required">*</span>
+										<label for="gender" class="control-label col-lg-2">Taken
+											Diagnostic<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="radio" id="diagnostic" name="diagnostic" value="0" required>No
-											<input type="radio" id="diagnostic" name="diagnostic" value="1">Yes
+											<input type="radio" id="diagnostic" name="diagnostic"
+												value="0" required>No <input type="radio"
+												id="diagnostic" name="diagnostic" value="1">Yes
 										</div>
 									</div>
 
@@ -138,19 +140,19 @@
 											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="radio" id="gender" name="gender" value="male" required>Male
-											<input type="radio" id="gender" name="gender" value="female">Female
+											<input type="radio" id="gender" name="gender" value="male"
+												required>Male <input type="radio" id="gender"
+												name="gender" value="female">Female
 										</div>
 									</div>
-
-
 									<div class="form-group">
 										<label for="birthdate" class="control-label col-lg-2">Birth
 											Date <span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="birthDate" name="birthdate"
-												type="date" title="birthdate" required />
+												type="date" pattern="/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/"
+												title="Birthdate in the format dd/mm/yyyy" required />
 										</div>
 									</div>
 									<div class="form-group ">
@@ -213,34 +215,46 @@
 											Level<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="schoolLevel"
-												name="schoolLevel" type="text" required />
+											<!-- 											<input class="form-control" id="schoolLevel"
+												name="schoolLevel" type="text" required /> -->
 										</div>
+										<select id="schoolLevel" name="schoolLevel" required />
+										<option value="Nursery">Nursery</option>
+										<option value="Kindergarten 1">Kindergarten 1</option>
+										<option value="Kindergarten 2">Kindergarten 2</option>
+										<option value="Primary 1">Primary 1</option>
+										<option value="Primary 2">Primary 2</option>
+										<option value="Primary 3">Primary 3</option>
+										<option value="Primary 4">Primary 4</option>
+										<option value="Primary 5">Primary 5</option>
+										<option value="Primary 6">Primary 6</option>
+										</select>
 									</div>
-									<div class="form-group">
-										<div class="col-lg-offset-2 col-lg-10">
-											<button class="btn btn-primary" type="submit">Register</button>
-										</div>
+								</div>
+								<div class="form-group">
+									<div class="col-lg-offset-2 col-lg-10">
+										<button class="btn btn-primary" type="submit">Register</button>
 									</div>
 								</div>
 							</div>
-						</form>
 					</div>
+					</form>
 				</div>
-			</section>
-
 		</div>
+		</section>
 
-		<!-- /.content-wrapper -->
+	</div>
 
-		<!-- Main Footer -->
-		<footer class="main-footer">
-			<!-- To the right -->
-			<div class="pull-right hidden-xs">Anything you want</div>
-			<!-- Default to the left -->
-			<strong>Copyright &copy; 2015 <a href="#">Company</a>.
-			</strong> All rights reserved.
-		</footer>
+	<!-- /.content-wrapper -->
+
+	<!-- Main Footer -->
+	<footer class="main-footer">
+		<!-- To the right -->
+		<div class="pull-right hidden-xs">Anything you want</div>
+		<!-- Default to the left -->
+		<strong>Copyright &copy; 2015 <a href="#">Company</a>.
+		</strong> All rights reserved.
+	</footer>
 
 	</div>
 	<!-- ./wrapper -->
@@ -268,5 +282,7 @@
 	<script src="dist/js/demo.js"></script>
 
 	<script src="./js/branchmanager/student.js"></script>
+	
+	<script src=".js/form-validation-script.js"></script>
 </body>
 </html>
