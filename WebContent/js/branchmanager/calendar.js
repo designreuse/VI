@@ -420,7 +420,7 @@ function calendarInitiate(){
 			 bootbox.dialog({
 				 title: "Example",
 				 message: function (message){
-					 return "last edited till here. manipulate the message."
+					 return JSON.stringify(message)
 				 },
 				 onEscape: function() {},
 				 buttons:{
@@ -437,10 +437,99 @@ function calendarInitiate(){
 	});
 }
 
+
 function schedulePanelView(){
 	$(".view").click(function() {
 		$(".collapse").collapse('toggle');
 	});
+}
+
+function searchStudent(){
+	var studentNRIC = $("#NRIC").val();
+	var input = {};
+	input.studentNric = studentNRIC;
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetStudentByNricServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+				retrieveStudentSchedule(message.studentId);	
+			} else{
+				$attendanceDDL.html('<option id="-1">No dates available</option>');
+			}
+						
+		}
+	});
+};
+
+function retrieveStudentSchedule(id){
+	var input = {};
+	input.studentId = id;
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	
+	$.ajax({
+		url : '../VI/GetScheduleEventsByStudentServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+			if (status == 1) {
+//				console.log(message);
+//				var startDate = "";
+//				var courseName = "";
+//				for (var a = 0; a < message.length; a++){
+//					startDate = moment(message[a].planStartDate);
+//					courseName = message[a].schedule.course.name
+//					
+//					console.log(startDate);
+//					console.log(courseName);
+//					
+////					var bbMsg = "<dl><dt>Course</dt><dd>" + courseName + "</dd> <dt>Date</dt><dd>" + startDate + "</dd>"
+//					
+////					if (startDate >= moment() && message[a].schedule.course.courseId === courseId){
+////						var attendanceId = a;
+////						$attendanceDDL.append('<option value=' + attendanceId + '>' + message[a].planStartDate + '</option>' );
+////					}
+//				}
+				
+				bootbox.dialog({
+					 title: "View Student Schedule", 
+					 message: "<dl><dt>Course</dt><dd>Mathematics</dd> <dt>2016-01-29 15:00</dt><dd></dd>",
+					 onEscape: function() {},
+					 buttons:{
+						main: {
+							label: "Okay",
+							className:"btn-primary",
+							callback: function(){
+								console.log("clicked on okay.");
+							}
+						}
+					 }
+				 });
+				
+			} else{
+				console.log(message);
+			}
+		}
+	});
+	
+
 }
 
 function getStudentId(studentNRIC){
@@ -467,6 +556,7 @@ function getStudentId(studentNRIC){
 				localStorage.setItem("studentIdResched", message.studentId);
 				localStorage.setItem("studentNRICResched", studentNRIC);
 				retrieveCourse(message.studentId);
+					
 			} else{
 				$attendanceDDL.html('<option id="-1">No dates available</option>');
 			}
