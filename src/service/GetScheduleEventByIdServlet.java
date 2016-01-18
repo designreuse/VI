@@ -13,18 +13,18 @@ import org.json.simple.JSONObject;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.ParentCtrl;
+import controller.ScheduleEventCtrl;
 
 /**
  * @author RaySong
  */
-public class GetParentByIdServlet extends HttpServlet {
+public class GetScheduleEventByIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetParentByIdServlet() {
+    public GetScheduleEventByIdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,7 +55,7 @@ public class GetParentByIdServlet extends HttpServlet {
 			String inputStr = request.getParameter(Key.INPUT);
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
-			returnJson = ParentCtrl.getParentById(inputJson);
+			returnJson = ScheduleEventCtrl.getScheduleEventById(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

@@ -394,6 +394,16 @@
     <servlet-name>GetStudentsByTeacherAndCourseServlet</servlet-name>
     <url-pattern>/GetStudentsByTeacherAndCourseServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>GetScheduleEventByIdServlet</servlet-name>
+    <servlet-class>service.GetScheduleEventByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetScheduleEventByIdServlet</servlet-name>
+    <url-pattern>/GetScheduleEventByIdServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByBranchServlet</servlet-class>
