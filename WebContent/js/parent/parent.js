@@ -17,7 +17,7 @@ function getParent() {
 	var i = encodeURIComponent(inputStr);
 
 	$.ajax({
-		url : '../VI/GetParentById?input=' + inputStr, // this part sends to
+		url : '../VI/GetParentByIdServlet?input=' + inputStr, // this part sends to
 		// the servlet
 		method : 'POST',
 		dataType : 'json',

@@ -74,13 +74,13 @@ function loginTeacher() {
 			if (status == 1) {
 				//store teacherId and courseIds 
 				localStorage.setItem("teacherId", message.teacherId);
-				var courseIds = [];
+				var courses = [];
 				for (var i = 0; i < message.schedules.length; i++) {
 					var obj = message.schedules[i];
 					//console.log(obj.course.courseId);
-					courseIds.push(obj.course.courseId);
-					//console.log(courseIds);
-					localStorage["courseIds"] = JSON.stringify(courseIds);
+					courses.push(obj.course);
+					//console.log(courses);
+					localStorage["courses"] = JSON.stringify(courses);
 				}
 				
 				window.location = "teacherProfile.jsp";

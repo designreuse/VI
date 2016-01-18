@@ -69,7 +69,7 @@ public class ScheduleEventCtrl {
 			ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
 			if (scheduleEvent != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, scheduleEvent.toJson());
+				returnJson.put(Key.MESSAGE, scheduleEvent.toJsonStrong());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);

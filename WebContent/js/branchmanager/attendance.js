@@ -15,70 +15,77 @@ $(document).ready(function() {
 
 function getStudents() {
 	$.fn.dataTable.ext.errMode = 'none';
-	var scheduleEventId = $("#selectScheduleEvent").val();
+	var scheduleEventPlanStartDate = $("#selectScheduleEvent").val();
+	for(var j = 0; j < SCHEDULEEVENTS.length; j++){
+//		console.log(SCHEDULEEVENTS[j].name);
+		if(scheduleEventPlanStartDate == SCHEDULEEVENTS[j].planStartDate){
+			var scheduleEventId = SCHEDULEEVENTS[j].scheduleEventId;
 
-	var input = {};
-	input.scheduleEventId = scheduleEventId;
-
-	var inputStr = JSON.stringify(input);
-	inputStr = encodeURIComponent(inputStr);
-
-	var table = $('#attendanceTable')
-			.on(
-					'error.dt',
-					function(e, settings, techNote, message) {
-						console.log(
-								'An error has been reported by DataTables: ',
-								message);
-					})
-			.DataTable(
-					{
-						ajax : {
-							url : '../VI/GetAttendancesByScheduleEventServlet?input='
-									+ inputStr,
-							// dataSrc: 'message'
-							dataSrc : function(json) {
-								var attendances = json.message.attendances;
-								console.log(attendances);
-								var return_data = new Array();
-								for (var i = 0; i < attendances.length; i++) {
-									if (attendances[i].attendanceStatus == 0) {
-										return_data
-												.push({
-													'attendanceId' : attendances[i].attendanceId,
-													'studentName' : attendances[i].student.name,
-													'studentNric' : attendances[i].student.studentNric,
-													'attendanceStatus' : attendances[i].attendanceStatus,
-													'button' : "<button class='btn btn-sm btn-success fa fa-check' onclick='getValue();'></button>"
-												})
-									} else {
-										return_data
-												.push({
-													'attendanceId' : attendances[i].attendanceId,
-													'studentName' : attendances[i].student.name,
-													'studentNric' : attendances[i].student.studentNric,
-													'attendanceStatus' : attendances[i].attendanceStatus,
-													'button' : "present"
-												})
+			var input = {};
+			input.scheduleEventId = Number(scheduleEventId);
+		
+			var inputStr = JSON.stringify(input);
+			inputStr = encodeURIComponent(inputStr);
+		
+			var table = $('#attendanceTable')
+					.on(
+							'error.dt',
+							function(e, settings, techNote, message) {
+								console.log(
+										'An error has been reported by DataTables: ',
+										message);
+							})
+					.DataTable(
+							{
+								ajax : {
+									url : '../VI/GetScheduleEventByIdServlet?input='
+											+ inputStr,
+									// dataSrc: 'message'
+									dataSrc : function(json) {
+										var attendances = json.message.attendances;
+										console.log(attendances);
+										var return_data = new Array();
+										//attendance (not array)
+										for (var i = 0; i < attendances.length; i++) {
+											if (attendances[i].attendanceStatus == 0) {
+												return_data
+														.push({
+															'attendanceId' : attendances[i].attendanceId,
+															'studentName' : attendances[i].student.name,
+															'studentNric' : attendances[i].student.studentNric,
+															'attendanceStatus' : attendances[i].attendanceStatus,
+															'button' : "<button class='btn btn-sm btn-success fa fa-check' onclick='getValue();'></button>"
+														})
+											} else {
+												return_data
+														.push({
+															'attendanceId' : attendances[i].attendanceId,
+															'studentName' : attendances[i].student.name,
+															'studentNric' : attendances[i].student.studentNric,
+															'attendanceStatus' : attendances[i].attendanceStatus,
+															'button' : "present"
+														})
+											}
+										}
+										return return_data;
 									}
+								},
+								columns : [ {
+									"data" : 'attendanceId'
+								}, {
+									"data" : 'studentName'
+								}, {
+									"data" : 'studentNric'
+								}, {
+									"data" : 'attendanceStatus'
+								}, {
+									"data" : 'button'
 								}
-								return return_data;
-							}
-						},
-						columns : [ {
-							"data" : 'attendanceId'
-						}, {
-							"data" : 'studentName'
-						}, {
-							"data" : 'studentNric'
-						}, {
-							"data" : 'attendanceStatus'
-						}, {
-							"data" : 'button'
-						}
-
-						]
-					});
+		
+								]
+							});
+		}
+	}
 }
 
 function getValue() {
@@ -261,16 +268,18 @@ function updateAttendance() {
 function displayCourses() {
 	var select = document.getElementById("selectCourse");
 	
-	var storedIds = JSON.parse(localStorage["courseIds"]);
+	var storedCourses = JSON.parse(localStorage["courses"]);
+	//console.log(storedCourses);
 	var options = [];
-	for(var j = 0; j < storedIds.length; j++){
-		var courseId = Number(storedIds[j]);
-		options.push(courseId);
+	for(var j = 0; j < storedCourses.length; j++){
+		var course = storedCourses[j];
+		options.push(course);
 	}
-	
+	COURSES = storedCourses;
+	//console.log(COURSES);
 
 	for(var i = 0; i < options.length; i++) {
-	    var opt = options[i];
+	    var opt = options[i].name;
 	    var el = document.createElement("option");
 	    el.textContent = opt;
 	    el.value = opt;
@@ -280,58 +289,65 @@ function displayCourses() {
 
 function getSchedules() {
 	//scheduleid - courseid, teacherid (GetSchedulesByTeacherAndCourseServlet)
-	var courseId = Number($("#selectCourse").val());
-	var teacherId = Number(localStorage.getItem("teacherId"));
-	var input = {};
-	input.courseId = courseId;
-	input.teacherId = teacherId;
-	var inputStr = JSON.stringify(input);
-	var i = encodeURIComponent(inputStr);
-
-	$.ajax({
-		url : '../VI/GetSchedulesByTeacherAndCourseServlet?input=' + inputStr, // this part sends to
-		// the servlet
-		method : 'POST',
-		dataType : 'json',
-		error : function(err) {
-			console.log(err);
-		},
-		success : function(data) {
-			;
-			var status = data.status; // shows the success/failure of the
-			// servlet request
-			if (status == 1) {
-				// store scheduleIds
-				var scheduleIds = [];
-				
-				for (var i = 0; i < data.message.length; i++) {
-					var obj = data.message[i];
-					
-					scheduleIds.push(obj.scheduleId);
-					//console.log(scheduleIds);
-					localStorage["scheduleIds"] = JSON.stringify(scheduleIds);
-					getScheduleEvents();
+	var courseName = $("#selectCourse").val();
+	for(var j = 0; j < COURSES.length; j++){
+		//console.log(COURSES[j].name);
+		if(courseName == COURSES[j].name){
+			var courseId = COURSES[j].courseId;
+			var teacherId = Number(localStorage.getItem("teacherId"));
+			var input = {};
+			input.courseId = courseId;
+			input.teacherId = teacherId;
+			var inputStr = JSON.stringify(input);
+			var i = encodeURIComponent(inputStr);
+		
+			$.ajax({
+				url : '../VI/GetSchedulesByTeacherAndCourseServlet?input=' + inputStr, // this part sends to
+				// the servlet
+				method : 'POST',
+				dataType : 'json',
+				error : function(err) {
+					console.log(err);
+				},
+				success : function(data) {
+					;
+					var status = data.status; // shows the success/failure of the
+					// servlet request
+					if (status == 1) {
+						// store scheduleIds
+						var scheduleIds = [];
+						
+						for (var i = 0; i < data.message.length; i++) {
+							var obj = data.message[i];
+							
+							scheduleIds.push(obj.scheduleId);
+							//console.log(scheduleIds);
+							localStorage["scheduleIds"] = JSON.stringify(scheduleIds);
+							getScheduleEvents();
+						}
+					} else {
+						console.log(message);
+					}
 				}
-			} else {
-				console.log(message);
-			}
+			});
 		}
-	});
+	}
 }
 
 function displayScheduleEvents() {
 	var select = document.getElementById("selectScheduleEvent");
-	var storedIds = JSON.parse(localStorage["scheduleEventIds"]);
+	var storedEvents = JSON.parse(localStorage["scheduleEvents"]);
 	var options = [];
-	for(var j = 0; j < storedIds.length; j++){
+	for(var j = 0; j < storedEvents.length; j++){
 		//console.log(storedIds[j])
-		var scheduleEventId = Number(storedIds[j]);
-		options.push(scheduleEventId);
+		var scheduleEvent = storedEvents[j];
+		options.push(scheduleEvent);
 	}
 	
+	SCHEDULEEVENTS = storedEvents;
 
 	for(var i = 0; i < options.length; i++) {
-	    var opt = options[i];
+	    var opt = options[i].planStartDate;
 	    var el = document.createElement("option");
 	    el.textContent = opt;
 	    el.value = opt;
@@ -365,14 +381,14 @@ function getScheduleEvents() {
 			// servlet request
 			if (status == 1) {
 				// store scheduleEventIds
-				var scheduleEventIds = [];
+				var scheduleEvents = [];
 				
 				for (var i = 0; i < data.message.length; i++) {
 					var obj = data.message[i];
 					
-					scheduleEventIds.push(obj.scheduleEventId);
+					scheduleEvents.push(obj);
 					//console.log(obj.scheduleEventId);
-					localStorage["scheduleEventIds"] = JSON.stringify(scheduleEventIds);	
+					localStorage["scheduleEvents"] = JSON.stringify(scheduleEvents);	
 				}
 				displayScheduleEvents();
 			} else {
