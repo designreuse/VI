@@ -143,39 +143,6 @@ function displayCourses() {
 	}
 }
 
-function getCourseName(courseId){
-	var input = {}
-	input.courseId = Number(courseId);
-
-	var inputStr = JSON.stringify(input);
-
-	inputStr = encodeURIComponent(inputStr);
-
-	$.ajax({
-		url : '../VI/GetCourseNameByCourseId?input=' + inputStr, // this part sends to
-														// the servlet
-		method : 'POST',
-		dataType : 'json',
-		error : function(err) {
-			console.log(err);
-			$("#message").html("System has some error. Please try again.");
-		},
-		success : function(data) {
-			console.log(data);
-			var status = data.status; // shows the success/failure of the
-										// servlet request
-			var message = data.message;
-			// if status == 1, it means that it is successful. else it will fail
-			if (status == 1) {
-				// console.log(message);
-				return(message.name);
-			} else {
-				$("#message").html("Something's wrong, please try again!");
-			}
-		}
-	});
-}
-
 function getSchedules() {
 	//scheduleid - courseid, teacherid (GetSchedulesByTeacherAndCourseServlet)
 	var courseId = Number($("#selectCourse").val());
@@ -206,7 +173,7 @@ function getSchedules() {
 					var obj = data.message[i];
 					
 					scheduleIds.push(obj.scheduleId);
-					console.log(scheduleIds);
+					//console.log(scheduleIds);
 					localStorage["scheduleIds"] = JSON.stringify(scheduleIds);
 					getScheduleEvents();
 				}
@@ -222,7 +189,7 @@ function displayScheduleEvents() {
 	var storedIds = JSON.parse(localStorage["scheduleEventIds"]);
 	var options = [];
 	for(var j = 0; j < storedIds.length; j++){
-		console.log(storedIds[j])
+		//console.log(storedIds[j])
 		var scheduleEventId = Number(storedIds[j]);
 		options.push(scheduleEventId);
 	}

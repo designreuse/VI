@@ -3,22 +3,22 @@
 //    window.location.replace('../pages/login.html');;
 //} else {
 $(document).ready(function() {
-	getStudents();
+	displayCourses();
+	 $("#selectCourse").change(function () {
+			getSchedules();
+	    });
+	 $("#selectScheduleEvent").change(function () {
+		 getStudents();
+	    });
 });
 // }
 
 function getStudents() {
 	$.fn.dataTable.ext.errMode = 'none';
-	// var planStartDate = moment(localStorage.getItem("planStartDate"),
-	// "DD/MM/YYYY");
-	var planStartDate = localStorage.getItem("planStartDate");
-	console.log(planStartDate);
-	var teacherCourseId = Number(localStorage.getItem("teacherCourseId"));
-	console.log(teacherCourseId);
+	var scheduleEventId = $("#selectScheduleEvent").val();
 
 	var input = {};
-	input.teacherCourseId = teacherCourseId;
-	input.planStartDate = planStartDate;
+	input.scheduleEventId = scheduleEventId;
 
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
@@ -34,7 +34,7 @@ function getStudents() {
 			.DataTable(
 					{
 						ajax : {
-							url : '../VI/GetScheduleByTeacherCourseAndPlanStartDateServlet?input='
+							url : '../VI/GetAttendancesByScheduleEventServlet?input='
 									+ inputStr,
 							// dataSrc: 'message'
 							dataSrc : function(json) {
@@ -258,21 +258,127 @@ function updateAttendance() {
 			});
 }
 
-function deselectAll() {
-	var x = document.getElementsByName("attendance");
-	var i;
-	for (i = 0; i < x.length; i++) {
-		if (x[i].type == "checkbox") {
-			x[i].checked = false;
-		}
+function displayCourses() {
+	var select = document.getElementById("selectCourse");
+	
+	var storedIds = JSON.parse(localStorage["courseIds"]);
+	var options = [];
+	for(var j = 0; j < storedIds.length; j++){
+		var courseId = Number(storedIds[j]);
+		options.push(courseId);
+	}
+	
+
+	for(var i = 0; i < options.length; i++) {
+	    var opt = options[i];
+	    var el = document.createElement("option");
+	    el.textContent = opt;
+	    el.value = opt;
+	    select.appendChild(el);
 	}
 }
 
-function selectAll() {
-	var x = document.getElementsByName("attendance");
-	var i;
-	for (i = 0; i < x.length; i++) {
-		x[i].checked = true;
-	}
+function getSchedules() {
+	//scheduleid - courseid, teacherid (GetSchedulesByTeacherAndCourseServlet)
+	var courseId = Number($("#selectCourse").val());
+	var teacherId = Number(localStorage.getItem("teacherId"));
+	var input = {};
+	input.courseId = courseId;
+	input.teacherId = teacherId;
+	var inputStr = JSON.stringify(input);
+	var i = encodeURIComponent(inputStr);
 
+	$.ajax({
+		url : '../VI/GetSchedulesByTeacherAndCourseServlet?input=' + inputStr, // this part sends to
+		// the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			;
+			var status = data.status; // shows the success/failure of the
+			// servlet request
+			if (status == 1) {
+				// store scheduleIds
+				var scheduleIds = [];
+				
+				for (var i = 0; i < data.message.length; i++) {
+					var obj = data.message[i];
+					
+					scheduleIds.push(obj.scheduleId);
+					//console.log(scheduleIds);
+					localStorage["scheduleIds"] = JSON.stringify(scheduleIds);
+					getScheduleEvents();
+				}
+			} else {
+				console.log(message);
+			}
+		}
+	});
+}
+
+function displayScheduleEvents() {
+	var select = document.getElementById("selectScheduleEvent");
+	var storedIds = JSON.parse(localStorage["scheduleEventIds"]);
+	var options = [];
+	for(var j = 0; j < storedIds.length; j++){
+		//console.log(storedIds[j])
+		var scheduleEventId = Number(storedIds[j]);
+		options.push(scheduleEventId);
+	}
+	
+
+	for(var i = 0; i < options.length; i++) {
+	    var opt = options[i];
+	    var el = document.createElement("option");
+	    el.textContent = opt;
+	    el.value = opt;
+	    select.appendChild(el);
+	}
+}
+
+function getScheduleEvents() {
+	//scheduleeventid - scheduleid (GetScheduleEventsBySchedule)
+	//i have scheduleIds not scheduleId
+	var storedIds = JSON.parse(localStorage["scheduleIds"]);
+	for(var j = 0; j < storedIds.length; j++){
+		var scheduleId = Number(storedIds[j]);
+	
+	var input = {};
+	input.scheduleId = scheduleId;
+	var inputStr = JSON.stringify(input);
+	var i = encodeURIComponent(inputStr);
+
+	$.ajax({
+		url : '../VI/GetScheduleEventsByScheduleServlet?input=' + inputStr, // this part sends to
+		// the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			;
+			var status = data.status; // shows the success/failure of the
+			// servlet request
+			if (status == 1) {
+				// store scheduleEventIds
+				var scheduleEventIds = [];
+				
+				for (var i = 0; i < data.message.length; i++) {
+					var obj = data.message[i];
+					
+					scheduleEventIds.push(obj.scheduleEventId);
+					//console.log(obj.scheduleEventId);
+					localStorage["scheduleEventIds"] = JSON.stringify(scheduleEventIds);	
+				}
+				displayScheduleEvents();
+			} else {
+				console.log(message);
+			}
+		}
+	});
+	}
 }
