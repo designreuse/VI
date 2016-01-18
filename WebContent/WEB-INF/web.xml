@@ -323,12 +323,12 @@
     <url-pattern>/GetFeedbacksByTeacherAndStudentServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>GetParentById</servlet-name>
-    <servlet-class>service.GetParentById</servlet-class>
+    <servlet-name>GetParentByIdServlet</servlet-name>
+    <servlet-class>service.GetParentByIdServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>GetParentById</servlet-name>
-    <url-pattern>/GetParentById</url-pattern>
+    <servlet-name>GetParentByIdServlet</servlet-name>
+    <url-pattern>/GetParentByIdServlet</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>GetParentsByBranchServlet</servlet-name>
@@ -402,8 +402,7 @@
     <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
     <url-pattern>/GetScheduleEventsByBranchServlet</url-pattern>
   </servlet-mapping>
-  
-    <servlet>
+  <servlet>
     <servlet-name>GetScheduleEventsByCourseServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByCourseServlet</servlet-class>
   </servlet>
@@ -411,7 +410,6 @@
     <servlet-name>GetScheduleEventsByCourseServlet</servlet-name>
     <url-pattern>/GetScheduleEventsByCourseServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>GetScheduleEventsByScheduleServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByScheduleServlet</servlet-class>
@@ -420,7 +418,6 @@
     <servlet-name>GetScheduleEventsByScheduleServlet</servlet-name>
     <url-pattern>/GetScheduleEventsByScheduleServlet</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>GetScheduleEventsByStudentServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByStudentServlet</servlet-class>
