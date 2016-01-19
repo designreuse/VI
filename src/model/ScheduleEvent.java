@@ -226,7 +226,7 @@ public class ScheduleEvent {
 		
 		JSONArray attendanceArr = new JSONArray();
 		for (Attendance a : AttendanceDAO.getAttendancesByScheduleEvent(this)) {
-			attendanceArr.add(a.toJson());
+			attendanceArr.add(a.toJsonSimple());
 		}
 		returnJson.put(Key.ATTENDANCES, attendanceArr);
 		

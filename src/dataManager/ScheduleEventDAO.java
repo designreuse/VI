@@ -3,6 +3,7 @@ package dataManager;
 import hibernate.HibernateUtil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import model.Branch;
@@ -98,6 +99,9 @@ public class ScheduleEventDAO {
 		session.beginTransaction();
 		List<Object> list = session.createQuery("select se from ScheduleEvent se join se.attendances a where a.student = :student")
 				.setParameter("student", student).list();
+//		Iterator iter = session.createQuery("select se from ScheduleEvent se join se.attendances a where a.student = :student")
+//				.setParameter("student", student).iterate();
+		
 		session.getTransaction().commit();
 		session.close();
 		for(Object o : list){
