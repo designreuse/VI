@@ -225,25 +225,22 @@ public class AttendanceCtrl {
 		return returnJson;
 	}
 	
-	// Get attendances by student
+	// Get schedule events by student
 	public static JSONObject getAttendancesByStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 			if (student != null) {
-				JSONArray attendanceArr = new JSONArray();
+				JSONArray scheduleEventArr = new JSONArray();
 				for (Attendance a : AttendanceDAO.getAttendancesByStudent(student)) {
-					if(a.getActualStartDate() != null){
-						attendanceArr.add(a.toJsonMark());
-					} else {
-						attendanceArr.add(a.toJson());
-					}
+	//						scheduleEventArr.add(a.getScheduleEvent().toJsonStrong());
+					scheduleEventArr.add(a.toJsonScheduleEvent());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, attendanceArr);
+				returnJson.put(Key.MESSAGE, scheduleEventArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);
+				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

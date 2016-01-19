@@ -71,7 +71,7 @@ public class ScheduleEventCtrl {
 			ScheduleEvent scheduleEvent = ScheduleEventDAO.getScheduleEventById((long) inputJson.get(Key.SCHEDULEEVENTID));
 			if (scheduleEvent != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, scheduleEvent.toJsonStrong());
+				returnJson.put(Key.MESSAGE, scheduleEvent.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);
@@ -325,6 +325,7 @@ public class ScheduleEventCtrl {
 				JSONArray scheduleEventArr = new JSONArray();
 				for (Attendance a : AttendanceDAO.getAttendancesByStudent(student)) {
 					scheduleEventArr.add(a.getScheduleEvent().toJsonStrong());
+//					scheduleEventArr.add(a.toJsonScheduleEvent());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, scheduleEventArr);

@@ -189,6 +189,19 @@ public class Attendance {
 
 		return returnJson;
 	}
+	
+	public JSONObject toJsonScheduleEvent() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJsonStudent());
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
 
 	// shall i add in a checker to return actual date?
 	// no, the logic checking is handle in the controller.
