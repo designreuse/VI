@@ -244,9 +244,6 @@ function getSchedules(){
 
 function calendarInitiate(){
 	var scheduleEvents = JSON.parse(localStorage.getItem("schedules"));
-	var message = JSON.parse(localStorage.getItem("scheduleMsg"));
-	
-	console.log(message);
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
@@ -256,25 +253,48 @@ function calendarInitiate(){
 		defaultDate: moment(),
 		eventLimit: true, // allow "more" link when too many events
 		events: scheduleEvents,
-		 eventClick: function(calEvent, jsEvent, view) {
-			 bootbox.dialog({
-				 title: "Example",
-				 message: function (message){
-					 return JSON.stringify(message)
-				 },
-				 onEscape: function() {},
-				 buttons:{
-					main: {
-						label: "Okay",
-						className:"btn-primary",
-						callback: function(){
-							console.log("clicked on okay.");
-						}
-					}
-				 }
-			 });
+		eventClick: function(calEvent, jsEvent, view) {
+			console.log(calEvent.id);
+			var id = calEvent.id;
+			console.log(id);
+			displayScheduleDetails(id);
 		 }
 	});
+}
+
+function displayScheduleDetails(scheduleEventId){
+	$('#details').html("");
+	 $('#details').append("<dl id='scheduleDetails'>");
+	 var message = JSON.parse(localStorage.getItem("scheduleMsg"));
+	 console.log(message);
+	 var input = {};
+	 input.scheduleEventId = scheduleEventId;
+	 var inputStr = JSON.stringify(input);
+	 inputStr = encodeURIComponent(inputStr);
+	 
+	 for (var s = 0; s < message.length; s++){
+		 if (scheduleEventId === Number(message[s].scheduleEventId)){
+			 var attendances = message[s].attendances
+			 $('#scheduleDetails').append("<dt>Course Name</dt>");
+			 $('#scheduleDetails').append("<dd>"+ message[s].schedule.course.name +"</dd><br>");
+			 
+			 $('#scheduleDetails').append("<dt>Course Start Time</dt>");
+			 $('#scheduleDetails').append("<dd>"+ moment(message[s].planStartDate).format("dddd, MMMM Do YYYY, h:mm:ss a") +"</dd><br>");
+			 
+			 $('#scheduleDetails').append("<dt>Course End Time</dt>");
+			 $('#scheduleDetails').append("<dd>"+ moment(message[s].planEndDate).format("dddd, MMMM Do YYYY, h:mm:ss a") +"</dd><br>");
+			 
+			 $('#scheduleDetails').append("<dt>Teacher Name</dt>");
+			 $('#scheduleDetails').append("<dd>"+ message[s].schedule.teacher.name +"</dd><br>");
+			 
+			 $('#scheduleDetails').append("<dt>Students</dt>");
+			 
+			 for (var a = 0; a < attendances.length; a++){
+				 $('#scheduleDetails').append("<dd>"+ attendances[a].student.name +"</dd>");
+			 }
+			 
+		 }
+	 }
 }
 
 

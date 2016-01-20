@@ -71,184 +71,197 @@
 
 					<div class="col-md-4">
 						<div class="row">
-							<div class = "col-md-12">
+							<div class = "col-md-12">							
 								<div class="box box-solid">
-							
+									<div class="box-header with-border">
+										<h4 class="box-title">Schedule Details</h4>
+									</div>
+									<div class="box-body">
+										<div class="row">
+											<div class="col-md-12" id="details">
+												Select any schedule at the side to view details
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="box box-solid">
 								<div class="box-header with-border">
 									<h4 class="box-title">Action Items</h4>
 								</div>
 								
 								<div class="box-body">
-									<!-- for adding of schedule -->
-								<div class="box-group" id="accordion">
-									<div class="panel box box-primary">
-										<div class="box-header with-border">
-											<h4 class="box-title">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#addSched"> Add Schedule </a>
-											</h4>
-										</div>
-
-										<div id="addSched" class="panel-collapse collapse">
-											<div class="box-body">
-												<form>
-													<div class="form-group">
-														<label for="scheduleName">Name</label>
-														<input class="form-control input-sm" id="scheduleName"
-														name="scheduleName" type="text" placeholder="Schedule Name" required />
-													</div>
-													
-													<div class="form-group">
-														<label for="scheduleDesc">Description</label>
-														<input class="form-control input-sm" id="scheduleDesc"
-														name="scheduleDesc" type="text" placeholder="Schedule Description" required />
-													</div>	
-													
-													<div class="form-group">
-														<label for="scheduleStartDate">Schedule Date Range</label>											
-														<input class="form-control pull-right input-sm" id="scheduleRange"
-															name="scheduleRange" type="text" placeholder="Start Date" required />
-													</div>
-													
-													
-													<div class="form-group">
-														<label for="teachercourse">Select Teacher</label>
-														<select class="form-control input-sm" id="teacherDDL" onChange="generateCourseOption(this);">
-														</select>
-													</div>
-													
-													<div class="form-group">
-														<label for="teachercourse">Select Course</label>
-														<select class="form-control input-sm" id="courseDDL" disabled="disabled">
-														</select>
-													</div>
-													
-													<input class="btn btn-primary btn-block submit"
-														type="button" value="Create Schedule"
-														onclick="testing();">	
-											</form>
+								
+								<!-- for adding of schedule -->
+									<div class="box-group" id="accordion">
+										<div class="panel box box-primary">
+											<div class="box-header with-border">
+												<h4 class="box-title">
+													<a data-toggle="collapse" data-parent="#accordion"
+														href="#addSched"> Add Schedule </a>
+												</h4>
+											</div>
+	
+											<div id="addSched" class="panel-collapse collapse">
+												<div class="box-body">
+													<form>
+														<div class="form-group">
+															<label for="scheduleName">Name</label>
+															<input class="form-control input-sm" id="scheduleName"
+															name="scheduleName" type="text" placeholder="Schedule Name" required />
+														</div>
+														
+														<div class="form-group">
+															<label for="scheduleDesc">Description</label>
+															<input class="form-control input-sm" id="scheduleDesc"
+															name="scheduleDesc" type="text" placeholder="Schedule Description" required />
+														</div>	
+														
+														<div class="form-group">
+															<label for="scheduleStartDate">Schedule Date Range</label>											
+															<input class="form-control pull-right input-sm" id="scheduleRange"
+																name="scheduleRange" type="text" placeholder="Start Date" required />
+														</div>
+														
+														
+														<div class="form-group">
+															<label for="teachercourse">Select Teacher</label>
+															<select class="form-control input-sm" id="teacherDDL" onChange="generateCourseOption(this);">
+															</select>
+														</div>
+														
+														<div class="form-group">
+															<label for="teachercourse">Select Course</label>
+															<select class="form-control input-sm" id="courseDDL" disabled="disabled">
+															</select>
+														</div>
+														
+														<input class="btn btn-primary btn-block submit"
+															type="button" value="Create Schedule"
+															onclick="testing();">	
+												</form>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
 								
 								<!-- for search of teacher -->
-								<div class="box-group" id="accordion">
-									<div class="panel box box-primary">
-										<div class="box-header with-border">
-											<h4 class="box-title">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#collapseThree"> Search Teacher's Schedule </a>
-											</h4>
-										</div>
-
-										<div id="collapseThree" class="panel-collapse collapse">
-											<div class="box-body">
-												<div class="input-group">
-													<span class="input-group-addon"><i
-														class="fa fa-search"></i></span> <input type="email"
-														class="form-control" placeholder="Teacher Name">
-												</div><br>
-												
-												<input class="btn btn-primary submit"
-														type="button" value="Search">
+									<div class="box-group" id="accordion">
+										<div class="panel box box-primary">
+											<div class="box-header with-border">
+												<h4 class="box-title">
+													<a data-toggle="collapse" data-parent="#accordion"
+														href="#collapseThree"> Search Teacher's Schedule </a>
+												</h4>
 											</div>
-											
+	
+											<div id="collapseThree" class="panel-collapse collapse">
+												<div class="box-body">
+													<div class="input-group">
+														<span class="input-group-addon"><i
+															class="fa fa-search"></i></span> <input type="email"
+															class="form-control" placeholder="Teacher Name">
+													</div><br>
+													
+													<input class="btn btn-primary submit"
+															type="button" value="Search">
+												</div>
+												
+											</div>
 										</div>
 									</div>
-								</div>
 								
 								<!-- for rescheduling students-->
-								<div class="box-group" id="accordion">
-									<div class="panel box box-primary">
-										<div class="box-header with-border">
-											<h4 class="box-title">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#collapseTwo"> Reschedule Student </a>
-											</h4>
-										</div>
-
-										<div id="collapseTwo" class="panel-collapse collapse">
-											<div class="box-body">
-												<div class="row">
-													<div class="col-md-12">
-													
-														<div class="form-group">
-															<div class="input-group">
-																<span class="input-group-addon"><i class="fa fa-male"></i></span> 
-																<input type="text" class="form-control" placeholder="Student Name" id="reschedStudentName">
-															</div>
-														</div>
+									<div class="box-group" id="accordion">
+										<div class="panel box box-primary">
+											<div class="box-header with-border">
+												<h4 class="box-title">
+													<a data-toggle="collapse" data-parent="#accordion"
+														href="#collapseTwo"> Reschedule Student </a>
+												</h4>
+											</div>
+	
+											<div id="collapseTwo" class="panel-collapse collapse">
+												<div class="box-body">
+													<div class="row">
+														<div class="col-md-12">
 														
-														<div class="form-group">
-															<div class="input-group">
-																<span class="input-group-addon"><i class="fa fa-male"></i></span> 
-																<input type="text" class="form-control" placeholder="Student NRIC" onChange="getReschedulingStudentId(this.value);" id="reschedStudentNric">
+															<div class="form-group">
+																<div class="input-group">
+																	<span class="input-group-addon"><i class="fa fa-male"></i></span> 
+																	<input type="text" class="form-control" placeholder="Student Name" id="reschedStudentName">
+																</div>
 															</div>
-														</div>
-														
-														<div class="form-group">
-															<div class="input-group">
-																<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-																<select class="form-control input-sm" id="studentCourseDDl" disabled="disabled" onChange="getCourseValue()"></select>
+															
+															<div class="form-group">
+																<div class="input-group">
+																	<span class="input-group-addon"><i class="fa fa-male"></i></span> 
+																	<input type="text" class="form-control" placeholder="Student NRIC" onChange="getReschedulingStudentId(this.value);" id="reschedStudentNric">
+																</div>
 															</div>
-														</div>
-													
-														<div class="form-group">
-															<div class="input-group">
-																<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-																<select class="form-control input-sm" id="attendanceDDL" disabled="disabled"></select>
+															
+															<div class="form-group">
+																<div class="input-group">
+																	<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+																	<select class="form-control input-sm" id="studentCourseDDl" disabled="disabled" onChange="getCourseValue()"></select>
+																</div>
 															</div>
-														</div>
 														
-														
-														<div class="form-group">
-															<input class="btn btn-primary submit" type="button" onclick="redirectReschedule()" value="Search">
+															<div class="form-group">
+																<div class="input-group">
+																	<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+																	<select class="form-control input-sm" id="attendanceDDL" disabled="disabled"></select>
+																</div>
+															</div>
+															
+															
+															<div class="form-group">
+																<input class="btn btn-primary submit" type="button" onclick="redirectReschedule()" value="Search">
+															</div>
 														</div>
 													</div>
 												</div>
+												
 											</div>
-											
 										</div>
 									</div>
-								</div>
 
 								<!-- for changing student's class -->
-								<div class="box-group" id="accordion">
-									<div class="panel box box-primary">
-										<div class="box-header with-border">
-											<h4 class="box-title">
-												<a data-toggle="collapse" data-parent="#accordion"
-													href="#collapseFour"> Search Student's Schedules</a>
-											</h4>
-										</div>
-
-										<div id="collapseFour" class="panel-collapse collapse">
-											<div class="box-body">
-												<div class="row"><div class="col-md-12">
-													<div class="input-group">
-														<span class="input-group-addon"><i class="fa fa-search"></i></span> 
-														<input type="email" class="form-control" placeholder="Student NRIC" id="NRIC">
-													</div>
-												</div></div>
-												<br>
-												
-												<div class="row"><div class="col-md-12">
-													<input class="btn btn-primary submit" type="button" value="Search" onclick="searchStudent();">
-												</div></div>
+									<div class="box-group" id="accordion">
+										<div class="panel box box-primary">
+											<div class="box-header with-border">
+												<h4 class="box-title">
+													<a data-toggle="collapse" data-parent="#accordion"
+														href="#collapseFour"> Search Student's Schedules</a>
+												</h4>
 											</div>
-											
+	
+											<div id="collapseFour" class="panel-collapse collapse">
+												<div class="box-body">
+													<div class="row"><div class="col-md-12">
+														<div class="input-group">
+															<span class="input-group-addon"><i class="fa fa-search"></i></span> 
+															<input type="email" class="form-control" placeholder="Student NRIC" id="NRIC">
+														</div>
+													</div></div>
+													<br>
+													
+													<div class="row"><div class="col-md-12">
+														<input class="btn btn-primary submit" type="button" value="Search" onclick="searchStudent();">
+													</div></div>
+												</div>
+												
+											</div>
 										</div>
-									</div>
-								</div>								
+									</div>								
 								</div>
 								
 								</div>	
 							</div>
 						</div>
+						</div>
 
 					</div>
-				</div>
 			</section>
 		</div>
   <!-- /.content-wrapper -->
