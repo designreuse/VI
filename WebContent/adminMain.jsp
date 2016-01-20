@@ -183,7 +183,7 @@
 														<div class="form-group">
 															<div class="input-group">
 																<span class="input-group-addon"><i class="fa fa-male"></i></span> 
-																<input type="text" class="form-control" placeholder="Student NRIC" onChange="getStudentId(this.value);" id="reschedStudentNric">
+																<input type="text" class="form-control" placeholder="Student NRIC" onChange="getReschedulingStudentId(this.value);" id="reschedStudentNric">
 															</div>
 														</div>
 														
@@ -203,7 +203,7 @@
 														
 														
 														<div class="form-group">
-															<input class="btn btn-primary submit" type="button" onclick="tryrandom()" value="Search">
+															<input class="btn btn-primary submit" type="button" onclick="redirectReschedule()" value="Search">
 														</div>
 													</div>
 												</div>

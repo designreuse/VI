@@ -187,6 +187,14 @@
     <url-pattern>/GetAttendancesByStudentServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetAttendancesByStudentAndScheduleServlet</servlet-name>
+    <servlet-class>service.GetAttendancesByStudentAndScheduleServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetAttendancesByStudentAndScheduleServlet</servlet-name>
+    <url-pattern>/GetAttendancesByStudentAndScheduleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetBillsByStudentServlet</servlet-name>
     <servlet-class>service.GetBillsByStudentServlet</servlet-class>
   </servlet>
@@ -386,6 +394,7 @@
     <servlet-name>GetStudentsByTeacherAndCourseServlet</servlet-name>
     <url-pattern>/GetStudentsByTeacherAndCourseServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>GetScheduleEventByIdServlet</servlet-name>
     <servlet-class>service.GetScheduleEventByIdServlet</servlet-class>
@@ -394,6 +403,7 @@
     <servlet-name>GetScheduleEventByIdServlet</servlet-name>
     <url-pattern>/GetScheduleEventByIdServlet</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>GetScheduleEventsByBranchServlet</servlet-name>
     <servlet-class>service.GetScheduleEventsByBranchServlet</servlet-class>
