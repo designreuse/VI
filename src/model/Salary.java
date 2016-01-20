@@ -121,7 +121,7 @@ public class Salary {
 		
 		returnJson.put(Key.SALARYID, this.salaryId);
 		returnJson.put(Key.SALARYAMOUNT, this.salaryAmount);
-		returnJson.put(Key.DUEDATE, this.dueDate);
+		returnJson.put(Key.DUEDATE, Config.SDF.format(this.dueDate));
 		
 		returnJson.put(Key.TEACHER, this.teacher.toJson());
 		
