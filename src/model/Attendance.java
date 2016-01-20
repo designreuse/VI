@@ -240,8 +240,22 @@ public class Attendance {
 	public JSONObject toScheduleJson() {
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 
 		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJson());
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
+	public JSONObject toStudentJson() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
+		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
+		returnJson.put(Key.STUDENT, this.student.toJsonSimple());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
