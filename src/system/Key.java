@@ -78,7 +78,7 @@ public class Key {
 	public static final String GENDER = "gender";
 	public static final String BIRTHDATE = "birthDate";
 	public static final String HOMECONTACT = "homeContact";
-	public static final String EMERGENCYCONTACT = "EmergencyContact";
+	public static final String EMERGENCYCONTACT = "emergencyContact";
 	public static final String SCHOOLNAME = "schoolName";
 	public static final String SCHOOLLEVEL = "schoolLevel";
 	public static final String TAKENDIAGNOSTIC = "takenDiagnostic";

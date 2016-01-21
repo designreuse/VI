@@ -9,16 +9,12 @@
   
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-  
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-  
   <!-- Skin Designs-->
   <link rel="stylesheet" href="dist/css/skins/skin-yellow.min.css">
   
@@ -40,67 +36,24 @@
 	<%@include file="parentNavBar.jsp"%>
 	<%@include file="parentSideBar.jsp"%>
   
-	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-		<section class="content-header">
-			<h1>
-				Your Profile
-			</h1>
-		</section>
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Your children
+      </h1>
+    </section>
 
     <!-- Main content -->
-		<section class="content">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="box">
-						<div class="box-header">
-							<h2 class="box-title" id="name">User Profile</h2>
-							<button type="button" class="btn btn-default btn-warning btn-flat pull-right" onclick="launchEditParent()" title="Edit Parent Profile">
-								<i class="glyphicon glyphicon-pencil"></i>Edit</button>
-     						</div>
-						<div class="box-body">
-							<div class="row">
-								<div class="col-md-3 col-lg-3" align="center">
-									<img alt="User Pic" src="dist/img/user5-128x128.jpg" class="img-circle img-responsive">
-								</div>
-								
-								<div class="col-md-6 col-lg-6">
-									<table class="table table-user-information">
-										<tbody>
-											<tr>
-												<td><strong>Email:</strong></td>
-												<td id="email"></td>
-											</tr>
-											<tr>
-												<td><strong>Phone Number:</strong></td>
-												<td id="contact"></td>
-											</tr>
-											<tr>
-												<td><strong>NRIC:</strong></td>
-												<td id="nric"></td>
-											</tr>
-											<tr>
-												<td><strong>Occupation:</strong></td>
-												<td id="occupation"></td>
-											</tr>
-											<tr>
-												<td><strong>Kinship:</strong></td>
-												<td id=relationship></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end of displaying parents panel -->
+		<section class="content" id="students">
+			<div>Empty Student List</div>
 		</section>
-		
-		<!-- edit parent form -->
-		<div id='editParent' class='modal fade' tabindex="-1" role='dialog'
+
+	</div>
+	
+	<!-- Edit student form -->
+	<div id='editStudent' class='modal fade' tabindex="-1" role='dialog'
 		 aria-labelledby='myModalLabel' aria-hidden='true'>
 			<div class='modal-dialog'>
 				<div class='modal-content'>
@@ -109,10 +62,10 @@
 							aria-label='Close'>
 							<span aria-hidden='true'>&times;</span>
 						</button>
-						<h4 class='modal-title' id='myModalLabel'>Edit Parent</h4>
+						<h4 class='modal-title' id='myModalLabel'>Edit Student</h4>
 					</div>
 					<div class='modal-body'>
-						<form id='editParentForm' class='form-validate form-horizontal'>
+						<form id='editStudentForm' class='form-validate form-horizontal'>
 							<div class='form-group'>
 								<label for='nameEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Name
 									<span class="required">*</span>
@@ -120,26 +73,7 @@
 								<div class='col-sm-8 col-md-8 col-lh-8'>
 									<input type='text' class='form-control' id='nameEdit'
 										pattern="^([a-zA-Z\s]{1,255})$" title="Letters only" 
-										required placeholder='parent name'>
-								</div>
-							</div>
-							<div class='form-group'>
-								<label for='emailEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Email
-									<span class="required">*</span>
-								</label>
-								<div class='col-sm-8 col-md-8 col-lh-8'>
-									<input type='email' class='form-control' id='emailEdit'
-										pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
-										title="Invalid Email" required placeholder='parent email'>
-								</div>
-							</div>
-							<div class='form-group'>
-								<label for='contactEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Contact Number
-									<span class="required">*</span>
-								</label>
-								<div class='col-sm-8 col-md-8 col-lh-8'>
-									<input type='text' class='form-control' id='contactEdit' pattern="^[+]?\d*$"
-										title="Numbers only" required placeholder='parent contact'>
+										required placeholder='student name'>
 								</div>
 							</div>
 							<div class='form-group'>
@@ -147,32 +81,74 @@
 									<span class="required">*</span>
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
-									<input type='text' class='form-control' id='parentNricEdit' pattern="^[SFTG]\d{7}[A-Z]$"
+									<input type='text' class='form-control' id='nricEdit' pattern="^[SFTG]\d{7}[A-Z]$"
 									title="NRIC only" required placeholder='parent nric'>
 								</div>
 							</div>
 							<div class='form-group'>
-								<label for='occupationEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Occupation
+								<label for='homeContactEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Home Contact
 									<span class="required">*</span>
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
-									<input type='text' class='form-control' id='occupationEdit' pattern="^([a-zA-Z\s]{1,255})$"
-									title="Letters only" required placeholder='parent occupation'>
+									<input type='text' class='form-control' id='homeContactEdit' pattern="^[+]?\d*$"
+										title="Contact Numbers only" required placeholder='student home contact'>
 								</div>
 							</div>
 							<div class='form-group'>
-								<label for='relationshipEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Kinship
+								<label for='emergencyContactEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Emergency Contact
 									<span class="required">*</span>
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
-									<select class='form-control' name="relationship" id="relationshipEdit">
-										<option value="mother">Mother</option>
-										<option value="father">Father</option>
-										<option value="guardian">Guardian</option>
-										<option value="sibling">Sibling</option>
+									<input type='text' class='form-control' id='emergencyContactEdit' pattern="^[+]?\d*$"
+										title="Contact Numbers only" required placeholder='student emergency contact'>
+								</div>
+							</div>
+							<div class='form-group'>
+								<label for='addressEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Address
+									<span class="required">*</span>
+								</label>
+								<div class='col-sm-8 col-md-8 col-lh-8'>
+									<input type='text' class='form-control' id='addressEdit' pattern="^([a-zA-Z\s]{1,255})$"
+									title="Letters only" required placeholder='student address'>
+								</div>
+							</div>
+							<div class='form-group'>
+								<label for='postalCodeEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Postal Code
+									<span class="required">*</span>
+								</label>
+								<div class='col-sm-8 col-md-8 col-lh-8'>
+									<input type='text' class='form-control' id='postalCodeEdit' pattern="[0-9]{6}"
+									title="Letters only" required placeholder='address postal code'>
+								</div>
+							</div>
+							<div class='form-group'>
+								<label for='schoolNameEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>School Name
+									<span class="required">*</span>
+								</label>
+								<div class='col-sm-8 col-md-8 col-lh-8'>
+									<input type='text' class='form-control' id='schoolNameEdit' pattern="^([a-zA-Z\s]{1,255})$"
+									title="Letters only" required placeholder='school name the student study in'>
+								</div>
+							</div>
+							<div class='form-group'>
+								<label for='schoolLevelEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>School Level
+									<span class="required">*</span>
+								</label>
+								<div class='col-sm-8 col-md-8 col-lh-8'>
+									<select class='form-control' name="school level" id="schoolLevelEdit" required>
+										<option value="Nursery">Nursery</option>
+										<option value="Kindergarten 1">Kindergarten 1</option>
+										<option value="Kindergarten 2">Kindergarten 2</option>
+										<option value="Primary 1">Primary 1</option>
+										<option value="Primary 2">Primary 2</option>
+										<option value="Primary 3">Primary 3</option>
+										<option value="Primary 4">Primary 4</option>
+										<option value="Primary 5">Primary 5</option>
+										<option value="Primary 6">Primary 6</option>
 									</select>
 								</div>
 							</div>
+							
 						<!--  upload picture -->
 <!-- 							<div class="form-group col-md-6"> -->
 <!-- 								<label for="imageEdit" -->
@@ -199,8 +175,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
+	
+	
   <!-- /.content-wrapper -->
 
   <!-- Main Footer -->
@@ -240,6 +216,6 @@
 
 <script src="./js/bootbox.min.js"></script>
 
-<script src="./js/parent/setting.js"></script>
+<script src="./js/parent/parent.js"></script>
 </body>
 </html>

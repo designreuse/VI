@@ -45,55 +45,61 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Children Feedback
+        Home Page
       </h1>
     </section>
 
     <!-- Main content -->
-    <section class="content">
-			<div class="row">
-				<div class="collapse">
-					<div class="col-md-12">
-						<div class="box">
-							<div class="box-body">
-								<div class="col-md-12 " id="dynamicStudentList">
-								</div>
-<!-- 									<div class="row"> -->
-<!-- 										<div class="col-md-12"> -->
-<!-- 											<input class="btn btn-primary submit" type="button" value="Submit" onclick="submitFeedback();"> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-							<!-- for the accordion -->
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-    
-    
 			<section class="content">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="box">
-<!-- 							<div class="box-header" id="name"><h3 class="box-title">User Profile</h3></div> -->
+							<div class="box-header" id="name"><h3 class="box-title">User Profile</h3></div>
 							<div class="box-body">
 								<div class="row">
+									<div class="col-md-3 col-lg-3" align="center">
+										<img alt="User Pic" src="dist/img/user5-128x128.jpg" class="img-circle img-responsive">
+									</div>
 									
 									<div class="col-md-6 col-lg-6">
-									
-									<div class="col-md-6 col-lg-6" id="test">
-											</div>
-									
-<!-- 										<table class="table table-user-information"> -->
-<!-- 											<tbody> -->
-<!-- 												<tr> -->
-<!-- 													<td><strong>Feedback:</strong></td> -->
-<!-- 													<td id="feedback"></td> -->
-<!-- 												</tr> -->
-<!-- 											</tbody> -->
-<!-- 										</table> -->
+										<table class="table table-user-information">
+											<tbody>
+												<tr>
+													<td><strong>Email:</strong></td>
+													<td id="email"></td>
+												</tr>
+												
+												<tr>
+													<td><strong>Phone Number:</strong></td>
+													<td id="phone"></td>
+												</tr>
+											</tbody>
+										</table>
 										
+										<button type="button" class="btn btn-primary view" data-toggle="collapse" data-target="#viewChildren"> View Children</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- end of displaying parents panel -->
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="collapse" id="viewChildren">
+							<div class="panel panel-info">
+								<div class="panel-heading">Child(ren)</div>
+								<div class="panel-body">
+
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="col-md-3 col-lg-3" align="center">
+											</div>
+											<div class="col-md-6 col-lg-6" id="test">
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -143,6 +149,6 @@
 
 <script src="./js/bootbox.min.js"></script>
 
-<script src="./js/parent/feedback.js"></script>
+<script src="./js/parent/parent.js"></script>
 </body>
 </html>

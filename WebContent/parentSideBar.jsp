@@ -16,13 +16,10 @@
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">Navigation</li>
-        
-        <li class="active"><a href="parentProfile.jsp"><i class="fa fa-link"></i> <span>Profile</span></a></li>
-        
-        <li class="active"><a href="parentFeedback.jsp"><i class="fa fa-link"></i> <span>Feedback</span></a></li>
-
-        
+        <li class="header"></li>
+        <li class="active"><a href="parentMain.jsp"><i class="fa fa-link"></i> <span>Home</span></a></li>
+        <li class="active"><a href="parentStudent.jsp"><i class="fa fa-link"></i> <span>Children</span></a></li>
+        <li class="active"><a href="parentFeedback.jsp"><i class="fa fa-link"></i> <span>Feedback</span></a></li>       
       </ul>
       
     </section>

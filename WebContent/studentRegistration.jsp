@@ -218,7 +218,7 @@
 											<!-- 											<input class="form-control" id="schoolLevel"
 												name="schoolLevel" type="text" required /> -->
 										</div>
-										<select id="schoolLevel" name="schoolLevel" required />
+										<select id="schoolLevel" name="schoolLevel" required>
 										<option value="Nursery">Nursery</option>
 										<option value="Kindergarten 1">Kindergarten 1</option>
 										<option value="Kindergarten 2">Kindergarten 2</option>

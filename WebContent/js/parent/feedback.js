@@ -113,3 +113,52 @@ function getFeedback(){
 	});
 	}
 }
+
+
+$(".collapse").show();
+if (status == 1) {
+	$('#dynamicStudentList').html("");
+	for (var a = 0; a < message.length; a++){
+		
+		var i = message[a].studentId;
+		var name = message[a].name;
+		
+		$("#dynamicStudentList").append("<div class='box-group header"+ i +"' id='accordion'>");
+		$(".header"+ i ).append("<div class='panel box box-solid box-warning headerpanel"+ i +"'>");
+		$(".headerpanel" + i).append("<div class='box-header with-border headerwords" + i + "'>");
+		$(".headerwords" + i).append("<h4 class='box-title tog" + i + "'>");
+		$(".tog" + i).append("<a data-toggle='collapse' data-parent='#accordion' href='#addSched" + i + "'>" + name + " </a>");
+		
+		//accordion body
+		$(".header"+ i).append("<div id='addSched" + i + "' class='panel-collapse collapse'>");
+		$("#addSched" + i).append("<div class='box-body boxbody" + i + "'>");
+		$(".boxbody" + i ).append("<div class='row' id = 'row" + i + "'>");
+		
+		$("#row" + i ).append("<div class='col-md-3' id='colCourseBookLevel" + i + "'>");
+		$("#colCourseBookLevel" + i ).append("<div class='box box-solid box-warning' id='boxCourseBookLevel" + i + "'>");
+		$("#boxCourseBookLevel" + i ).append("<div class='box-body' id='bodyCourseBookLevel" + i + "'>");
+		$("#bodyCourseBookLevel" + i ).append("<input class='form-control input-sm' id='courseLevel" + i + "' placeholder='Input Course Level' required />");
+		$("#bodyCourseBookLevel" + i ).append("<input class='form-control input-sm' id='bookLevel" + i + "' placeholder='Input Book Level' required />");
+		
+		$("#row" + i ).append("<div class='col-md-3' id='colResult" + i + "'>");
+		$("#colResult" + i ).append("<div class='box box-solid box-warning' id='boxResult" + i + "'>");
+		$("#boxResult" + i ).append("<div class='box-body' id='bodyResult" + i + "'>");
+		$("#bodyResult" + i ).append("<input class='form-control input-sm' id='result" + i + "' placeholder='Input Result' required />");
+		
+		
+		$("#row" + i ).append("<div class='col-md-3' id='colPointAmt" + i + "'>");
+		$("#colPointAmt" + i ).append("<div class='box box-solid box-warning' id='boxPointAmt" + i + "'>");
+		$("#boxPointAmt" + i ).append("<div class='box-body' id='bodyPointAmt" + i + "'>");
+		$("#bodyPointAmt" + i ).append("<input class='form-control input-sm' id='pointAmt" + i + "' placeholder='Input Point Amount' required />");
+		
+		$("#row" + i ).append("<div class='col-md-3' id='colFeedback" + i + "'>");
+		$("#colFeedback" + i ).append("<div class='box box-solid box-warning' id='boxFeedback" + i + "'>");
+		$("#boxFeedback" + i ).append("<div class='box-body' id='bodyFeedback" + i + "'>");
+		$("#bodyFeedback" + i ).append("<input class='form-control input-sm' id='feedback" + i + "' placeholder='Input Feedback' required />");
+	}
+	
+	localStorage.setItem("studentList", JSON.stringify(message));
+
+} else{
+	console.log("Nil")
+}

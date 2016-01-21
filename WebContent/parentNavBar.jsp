@@ -2,7 +2,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="parentMain.jsp" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>E</b>&L</span>
       <!-- logo for regular state and mobile devices -->
@@ -41,8 +41,11 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
+              	<div class="pull-left">
+                  <a href="parentProfile.jsp" class="btn btn-main btn-flat">Setting</a>
+                </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="landingPage.jsp" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
