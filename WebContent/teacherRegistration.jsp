@@ -35,7 +35,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-
+<script src="./js/branchmanager/teacher.js"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -193,14 +193,14 @@
 										<label for="school" class="control-label col-lg-2">Course(s)<span
 											class="required">*</span></label>
 										<div class="col-lg-10">
-										
-<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
-<!-- 													name="course1"">Math -->
-<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
-<!-- 													name="course2">English -->
-<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
-<!-- 													name="course3" >Korean -->
-										
+
+											<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
+											<!-- 													name="course1"">Math -->
+											<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
+											<!-- 													name="course2">English -->
+											<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
+											<!-- 													name="course3" >Korean -->
+
 											<input type="checkbox" name="course" value="Math">
 											Math <input type="checkbox" name="course" value="English">
 											English <input type="checkbox" name="course" value="Korean">
@@ -258,7 +258,5 @@
 
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
-
-	<script src="./js/branchmanager/teacher.js"></script>
 </body>
 </html>

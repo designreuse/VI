@@ -32,6 +32,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   
+  <script src="./js/branchmanager/calendar.js"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -226,6 +227,5 @@
 
 <script src="./js/bootbox.min.js"></script>	
 
-<script src="./js/branchmanager/calendar.js"></script>
 </body>
 </html>

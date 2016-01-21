@@ -1,7 +1,7 @@
-//var adminId = localStorage.getItem('adminId');
-//if (adminId == null) {
-//    window.location.replace('../pages/login.html');;
-//} else {
+var adminId = localStorage.getItem('adminId');
+if (adminId == null) {
+    window.location.replace('adminLogin.jsp');;
+} else {
 $(document).ready(function() {
 	displayCourses();
 	 $("#selectCourse").change(function () {
@@ -11,7 +11,7 @@ $(document).ready(function() {
 		 getStudents();
 	    });
 });
-// }
+ }
 
 function getStudents() {
 	$.fn.dataTable.ext.errMode = 'none';

@@ -36,6 +36,8 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
+	<script src="./js/branchmanager/student.js"></script>
+	
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -280,8 +282,6 @@
 
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
-
-	<script src="./js/branchmanager/student.js"></script>
 	
 	<script src=".js/form-validation-script.js"></script>
 </body>

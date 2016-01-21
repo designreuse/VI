@@ -1,13 +1,12 @@
-//var adminId = localStorage.getItem('adminId');
-//if (adminId == null) {
-//    window.location.replace('../pages/login.html');;
-//} else {
+var adminId = localStorage.getItem('adminId');
+if (adminId == null) {
+    window.location.replace('adminLogin.jsp');;
+} else {
     $(document).ready(function() {
     	getTeachersByBranch(localStorage.getItem('branchId'));
-    	
 //    	checkbox();
     });
-//}
+}
     
 
 	window.onload = function () {
