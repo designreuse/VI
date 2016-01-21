@@ -1,4 +1,6 @@
-  <!-- Main Header -->
+
+  
+   <!-- Main Header -->
   <header class="main-header">
 
     <!-- Logo -->
@@ -27,25 +29,23 @@
               <!-- The user image in the navbar-->
               <img src="dist/img/user5-128x128.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Mallory Tan</span>
+              <span class="hidden-xs" id="navName"></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
                 <img src="dist/img/user5-128x128.jpg" class="img-circle" alt="User Image">
 
-                <p>
-                  Mallory
-                  <small>Member since Nov. 2012</small>
-                </p>
+                <p id="parentName">
+                <small id="parentEmail"></small></p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
               	<div class="pull-left">
-                  <a href="parentProfile.jsp" class="btn btn-main btn-flat">Setting</a>
+                  <a href="parentProfile.jsp" class="btn btn-warning btn-flat">View Details</a>
                 </div>
                 <div class="pull-right">
-                  <a href="landingPage.jsp" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="landingPage.jsp" class="btn btn-default btn-flat" onclick="logout();">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -54,3 +54,10 @@
       </div>
     </nav>
   </header>
+  
+  <script>
+	var parent = JSON.parse(localStorage.getItem("parent"));
+	document.getElementById("parentName").innerHTML = parent.name;
+	document.getElementById("navName").innerHTML = parent.name;
+	document.getElementById("parentEmail").innerHTML = parent.email;
+</script>

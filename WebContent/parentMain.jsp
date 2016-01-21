@@ -53,59 +53,63 @@
 			<section class="content">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="box">
-							<div class="box-header" id="name"><h3 class="box-title">User Profile</h3></div>
+						<div class="box box-warning">
+							<div class="box-header with-border" id="name"><h3 class="box-title">Announcements</h3></div>
 							<div class="box-body">
-								<div class="row">
-									<div class="col-md-3 col-lg-3" align="center">
-										<img alt="User Pic" src="dist/img/user5-128x128.jpg" class="img-circle img-responsive">
+								<div class="col-md-8">
+								    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+						                <ol class="carousel-indicators">
+						                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+						                  <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+						                </ol>
+						                
+						                <div class="carousel-inner">
+						                  <div class="item active">
+						                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="First slide">
+						                  </div>
+						                  
+						                  <div class="item">
+						                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Second slide">
+						                  </div>
+						                  
+						                  <div class="item">
+						                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
+						                  </div>
+						                </div>
+						                
+						          		<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+						                  <span class="fa fa-angle-left"></span>
+						                </a>
+						                
+						                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+						                  <span class="fa fa-angle-right"></span>
+						                </a>
 									</div>
-									
-									<div class="col-md-6 col-lg-6">
-										<table class="table table-user-information">
-											<tbody>
-												<tr>
-													<td><strong>Email:</strong></td>
-													<td id="email"></td>
-												</tr>
-												
-												<tr>
-													<td><strong>Phone Number:</strong></td>
-													<td id="phone"></td>
-												</tr>
-											</tbody>
-										</table>
-										
-										<button type="button" class="btn btn-primary view" data-toggle="collapse" data-target="#viewChildren"> View Children</button>
-									</div>
-								</div>
-							</div>
+						          </div>
+						          
+						          <div class="col-md-4">
+						          	<div class="box box-warning box-solid">
+							          	<div class="box-header with-border"><h3 class="box-title">Happy New Year, 2016!</h3></div>
+							          		<div class="box-body">
+							          			Happy New Year to all parents! Thank you for the tremendous support from all parents. We will do our best!
+							          		</div>
+							          	</div>
+							          	
+							       <div class="box box-warning box-solid">
+							          	<div class="box-header with-border"><h3 class="box-title">Notice to Parents</h3></div>
+							          		<div class="box-body">
+							          			Dear parents, as the new year arrives - please remember to update your particulars, accessible at your <b>profile.</b>
+							          		</div>
+							          	</div>
+						          	</div>
+						          </div>
+						        </div>
 						</div>
 					</div>
-				</div>
+
 
 				<!-- end of displaying parents panel -->
-
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="collapse" id="viewChildren">
-							<div class="panel panel-info">
-								<div class="panel-heading">Child(ren)</div>
-								<div class="panel-body">
-
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="col-md-3 col-lg-3" align="center">
-											</div>
-											<div class="col-md-6 col-lg-6" id="test">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</section>
 
 		</div>
