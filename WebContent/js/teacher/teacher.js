@@ -3,7 +3,6 @@ $(document).ready(function() {
 	if (teacherId == null) {
 		window.location.replace('adminLogin.jsp');
 	} else {
-		console.log("oi");
 		getTeacher();
 	}
 });

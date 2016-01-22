@@ -1,8 +1,12 @@
- $(document).ready(function() {
-	 populateCourseDDL();
-	 localStorage.removeItem("studentList");
- });
-
+$(document).ready(function() {
+	var teacherId = localStorage.getItem('teacherId');
+	if (teacherId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
+		 populateCourseDDL();
+		 localStorage.removeItem("studentList");
+	}
+});
  
 function populateCourseDDL(){
 	var teacherId = 1;
