@@ -1,15 +1,19 @@
 $(document).ready(function() {
-	getSchedules();
-	calendarInitiate();
-	schedulePanelView();
-	$('#scheduleRange').daterangepicker({
-		timePicker: true, 
-		timePickerIncrement: 30, 
-		format: 'MM/DD/YYYY h:mm A'
-	});
-	generateTeacherOption();
-	populateNewSchedules();
-	
+	var branchManagerId = localStorage.getItem('branchManagerId');
+	if (branchManagerId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
+		getSchedules();
+		calendarInitiate();
+		schedulePanelView();
+		$('#scheduleRange').daterangepicker({
+			timePicker : true,
+			timePickerIncrement : 30,
+			format : 'MM/DD/YYYY h:mm A'
+		});
+		generateTeacherOption();
+		populateNewSchedules();
+	}
 });
 
 

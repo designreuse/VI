@@ -1,7 +1,13 @@
-$(document).ready(function(){
-	checkbox();
-	qty();
+$(document).ready(function() {
+	var branchManagerId = localStorage.getItem('branchManagerId');
+	if (branchManagerId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
+		checkbox();
+		qty();
+	}
 });
+
 
 function submitDiagnostic(){
 	var studentName = $("studentName").val();

@@ -44,4 +44,14 @@ public class Config {
 	public static final String S3ROOT = "Sympl";
 	public static final String S3URL = "https://s3-ap-southeast-1.amazonaws.com/";
 	
+	//sms
+	public static final String LOGIN = "";
+	public static final String PASSWORDSMS = "";
+	public static final String URL ="http://www.smsdome.com/api/http/sendsms.aspx";
+	public static final String IP ="202.157.168.87";
+	public static final String PORTSMS = "80";
+//	public static final String PORTSMS = "443";
+	public static final String APPID = "";
+	public static final String APPSECRET = "";
+
 }

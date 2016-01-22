@@ -135,6 +135,7 @@
 
 	<script src="./js/bootbox.min.js"></script>
 
-	<script src="./js/branchmanager/attendance.js"></script>
+<script src="./js/branchmanager/attendance.js"></script>
+
 </body>
 </html>

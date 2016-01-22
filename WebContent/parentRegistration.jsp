@@ -162,7 +162,8 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" id="contactNumber" name="contact"
-												type="text" pattern="^[+]?\d*$" title="Numbers only"required />
+												type="text" pattern="^[+]?\d*$" title="Numbers only"
+												required />
 										</div>
 									</div>
 									<!--  removed address -->
@@ -215,7 +216,8 @@
 
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
+	
+<script src="./js/branchmanager/parent.js"></script>
 
-	<script src="./js/branchmanager/parent.js"></script>
 </body>
 </html>

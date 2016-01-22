@@ -1,14 +1,12 @@
-//var adminId = localStorage.getItem('adminId');
-//if (adminId == null) {
-//    window.location.replace('../pages/login.html');;
-//} else {
-    $(document).ready(function() {
-    	getTeachersByBranch(localStorage.getItem('branchId'));
-    	
-//    	checkbox();
-    });
-//}
-    
+$(document).ready(function() {
+	var branchManagerId = localStorage.getItem('branchManagerId');
+	if (branchManagerId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
+		getTeachersByBranch(localStorage.getItem('branchId'));
+		// checkbox();
+	}
+});
 
 	window.onload = function () {
 		document.getElementById("teacherPassword").onchange = validatePassword;

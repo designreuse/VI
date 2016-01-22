@@ -1,3 +1,5 @@
+<script src="./js/branchmanager/logout.js"></script>
+
   <!-- Main Header -->
   <header class="main-header">
 
@@ -42,7 +44,8 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="landingPage.jsp" class="btn btn-default btn-flat">Sign out</a>
+                  <button class="btn btn-default btn-flat" onclick="logout();return false;">Sign out</button>
+<!--                   <a href="landingPage.jsp" onsubmit="logout()return false;" class="btn btn-default btn-flat">Sign out</a> -->
                 </div>
               </li>
             </ul>

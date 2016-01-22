@@ -1,9 +1,14 @@
 $(document).ready(function() {
-	scan();
-	displayCourses();
-	 $("#selectCourse").change(function () {
-			getSchedules();
-	    });
+	var teacherId = localStorage.getItem('teacherId');
+	if (teacherId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
+		scan();
+		displayCourses();
+		 $("#selectCourse").change(function () {
+				getSchedules();
+		    });
+	}
 });
 
 var COURSES;

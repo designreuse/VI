@@ -1,11 +1,12 @@
-//var adminId = localStorage.getItem('adminId');
-//if (adminId == null) {
-//window.location.replace('../pages/login.html');;
-//} else {
 $(document).ready(function() {
-	getParentsByBranch(localStorage.getItem('branchId'));
+	var branchManagerId = localStorage.getItem('branchManagerId');
+	if (branchManagerId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
+		getParentsByBranch(localStorage.getItem('branchId'));
+	}
 });
-//}
+
 
 window.onload = function () {
 	document.getElementById("parentPassword").onchange = validatePassword;

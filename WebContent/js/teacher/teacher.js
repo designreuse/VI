@@ -1,11 +1,12 @@
-//var adminId = localStorage.getItem('adminId');
-//if (adminId == null) {
-//    window.location.replace('../pages/login.html');;
-//} else {
- $(document).ready(function() {
-    	getTeacher();
-    });
-//}
+$(document).ready(function() {
+	var teacherId = localStorage.getItem('teacherId');
+	if (teacherId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
+		console.log("oi");
+		getTeacher();
+	}
+});
 
 function getTeacher() {
 	
