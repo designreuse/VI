@@ -42,6 +42,7 @@ function getStudents() {
 											+ inputStr,
 									// dataSrc: 'message'
 									dataSrc : function(json) {
+										console.log(json);
 										var attendances = json.message.attendances;
 										console.log(attendances);
 										var return_data = new Array();

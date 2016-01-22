@@ -108,7 +108,7 @@
 									<span class="required">*</span>
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
-									<input type='text' class='form-control' id='addressEdit' pattern="^([a-zA-Z\s]{1,255})$"
+									<input type='text' class='form-control' id='addressEdit' pattern="^([1-zA-Z0-1@.\s]{1,255})$"
 									title="Letters only" required placeholder='student address'>
 								</div>
 							</div>

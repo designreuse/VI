@@ -134,8 +134,8 @@
 	<script src="dist/js/demo.js"></script>
 
 	<script src="./js/bootbox.min.js"></script>
-
-<script src="./js/branchmanager/attendance.js"></script>
+	<script src="./js/moment.js"></script>
+	<script src="./js/branchmanager/attendance.js"></script>
 
 </body>
 </html>

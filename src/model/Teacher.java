@@ -349,7 +349,7 @@ public class Teacher {
 		
 		JSONArray scheduleArr = new JSONArray();
 		for (Schedule s : ScheduleDAO.getSchedulesByTeacher(this)) {
-			scheduleArr.add(s.toJson());
+			scheduleArr.add(s.toJsonCourse());
 		}
 		returnJson.put(Key.SCHEDULES, scheduleArr);
 		
