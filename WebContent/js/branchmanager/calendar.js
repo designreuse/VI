@@ -1,21 +1,16 @@
-var adminId = localStorage.getItem('adminId');
-if (adminId == null) {
-    window.location.replace('adminLogin.jsp');;
-} else {
-	$(document).ready(function() {
-		getSchedules();
-		calendarInitiate();
-		schedulePanelView();
-		$('#scheduleRange').daterangepicker({
-			timePicker: true, 
-			timePickerIncrement: 30, 
-			format: 'MM/DD/YYYY h:mm A'
-		});
-		generateTeacherOption();
-		populateNewSchedules();
-		
+$(document).ready(function() {
+	getSchedules();
+	calendarInitiate();
+	schedulePanelView();
+	$('#scheduleRange').daterangepicker({
+		timePicker: true, 
+		timePickerIncrement: 30, 
+		format: 'MM/DD/YYYY h:mm A'
 	});
-}
+	generateTeacherOption();
+	populateNewSchedules();
+	
+});
 
 
 

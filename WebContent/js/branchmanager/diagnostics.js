@@ -1,12 +1,7 @@
-var adminId = localStorage.getItem('adminId');
-if (adminId == null) {
-    window.location.replace('adminLogin.jsp');;
-} else {
-	$(document).ready(function(){
-		checkbox();
-		qty();
-	});
-}
+$(document).ready(function(){
+	checkbox();
+	qty();
+});
 
 function submitDiagnostic(){
 	var studentName = $("studentName").val();

@@ -24,7 +24,7 @@
 
 <script type="text/javascript"
 	src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
+<script src="./js/branchmanager/login.js"></script>
 <!-- <script src="./js/parent/login.js"></script> -->
 <!-- <script src="./js/teacher/login.js"></script> -->
 <!-- <script src="./js/student/login.js"></script> -->
@@ -34,13 +34,11 @@
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->
-
-<script src="./js/branchmanager/login.js"></script>
 </head>
 
 <body class="login-img3-body">
 	<div class="container">
-		<form class="login-form" action="adminMain.jsp" method="post"
+		<form class="login-form" action="studentRegistration.jsp" method="post"
 			onsubmit="loginBranchManager();return false;">
 			<div class="login-wrap">
 				<p class="login-img">
