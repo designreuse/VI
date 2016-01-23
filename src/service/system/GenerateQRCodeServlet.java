@@ -28,16 +28,16 @@ import system.Key;
 import system.Value;
 
 /**
- * Servlet implementation class GenerateQRCode
+ * 
  */
 @WebServlet("/GenerateQRCode")
-public class GenerateQRCode extends HttpServlet {
+public class GenerateQRCodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GenerateQRCode() {
+	public GenerateQRCodeServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -413,6 +413,32 @@ public class Student {
 		return returnJson;
 	}
 	
+	public JSONObject toJsonParent() {
+		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.STUDENTID, this.studentId);
+		returnJson.put(Key.NAME, this.name);
+		returnJson.put(Key.GENDER, this.gender);
+		returnJson.put(Key.BIRTHDATE, Config.SDF.format(this.birthDate));
+		returnJson.put(Key.HOMECONTACT, this.homeContact);
+		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
+		returnJson.put(Key.ADDRESS, this.address);
+		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.SCHOOLNAME, this.schoolName);
+		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
+		returnJson.put(Key.STUDENTNRIC, this.studentNric);
+		returnJson.put(Key.POINTS, this.points);
+		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
+
+		returnJson.put(Key.PARENT, this.parent.toJson());
+		
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 

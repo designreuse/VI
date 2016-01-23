@@ -211,7 +211,7 @@ public class Attendance {
 		returnJson.put(Key.ATTENDANCEID, this.attendanceId);
 		returnJson.put(Key.ATTENDANCESTATUS, this.attendanceStatus);
 		returnJson.put(Key.SCHEDULEEVENT, this.scheduleEvent.toJsonSimple());
-		returnJson.put(Key.STUDENT, this.student.toJsonSimple());
+		returnJson.put(Key.STUDENT, this.student.toJsonParent());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

@@ -108,7 +108,6 @@ public class AttendanceCtrl {
 			Attendance attendance = AttendanceDAO.getAttendanceById((long) inputJson.get(Key.ATTENDANCEID));
 			if (attendance != null) {
 				Date actualStartDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALSTARTDATE));
-				Date actualEndDate = Config.SDF.parse((String) inputJson.get(Key.ACTUALENDDATE));
 				long attendanceStatus = (long) inputJson.get(Key.ATTENDANCESTATUS);
 //				Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 //				if(student != null){
@@ -122,7 +121,6 @@ public class AttendanceCtrl {
 //					returnJson.put(Key.MESSAGE, Message.SCHEDULEEVENTNOTEXIST);
 //				}
 				attendance.setActualStartDate(actualStartDate);
-				attendance.setActualEndDate(actualEndDate);
 				attendance.setAttendanceStatus(attendanceStatus);
 				AttendanceDAO.modifyAttendance(attendance);
 				

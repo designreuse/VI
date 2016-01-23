@@ -123,6 +123,7 @@ function getValue() {
 				console.log(data);
 				var status = data.status;
 				var message = data.message;
+				console.log(message);
 
 				if (status == 1) {
 					bootbox.alert("Update is successful!")

@@ -51,7 +51,7 @@ public class Config {
 	public static final String IP ="202.157.168.87";
 	public static final String PORTSMS = "80";
 //	public static final String PORTSMS = "443";
-	public static final String APPID = "";
-	public static final String APPSECRET = "";
+	public static final String APPID = "1408";
+	public static final String APPSECRET = "4c76978e-01c3-43b4-bc57-9d82681f1485";
 
 }

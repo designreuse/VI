@@ -62,8 +62,9 @@ public class SendSMSServlet extends HttpServlet {
 			System.out.println(inputJson.toJSONString() + " JSON");
 			
 			//receivers, content
-			String parentName = (String)inputJson.get(Key.PARENTNAME);
+			String studentName = (String)inputJson.get(Key.STUDENTNAME);
 			String to = (String) inputJson.get(Key.CONTACT);
+			String content = "[Explore And Learn] Attendance notification." + " Your child " + studentName + " has attended class.";
 			//responseFormat
 			
 		} catch (Exception e) {

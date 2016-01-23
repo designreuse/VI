@@ -78,6 +78,7 @@ function loginTeacher() {
 				for (var i = 0; i < message.schedules.length; i++) {
 					var obj = message.schedules[i];
 					//console.log(obj.course.courseId);
+					//courses .......
 					courses.push(obj.course);
 					//console.log(courses);
 					localStorage["courses"] = JSON.stringify(courses);

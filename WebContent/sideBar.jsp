@@ -38,8 +38,13 @@
           </ul>
         </li>
         
-        <li class="active"><a href="diagnosticTest.jsp"><i class="fa fa-link"></i> <span>Diagnostic Results</span></a></li>
+        <li class="treeview">
+        <a href="diagnosticTest.jsp"><i class="fa fa-link"></i> <span>Diagnostic Results</span></a>
+        </li>
         
+        <li class="treeview">
+        <a href="generateQR.jsp"><i class="fa fa-link"></i> <span>Generate QR Code</span></a>
+        </li>
         
       </ul>
       
