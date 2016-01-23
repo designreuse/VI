@@ -706,6 +706,22 @@
     <servlet-name>SendEmailServlet</servlet-name>
     <url-pattern>/system/SendEmailServlet</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>SendSMSServlet</servlet-name>
+    <servlet-class>service.system.SendSMSServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendSMSServlet</servlet-name>
+    <url-pattern>/system/SendSMSServlet</url-pattern>
+  </servlet-mapping>
+   <servlet>
+    <servlet-name>GenerateQRCodeServlet</servlet-name>
+    <servlet-class>service.system.GenerateQRCodeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GenerateQRCodeServlet</servlet-name>
+    <url-pattern>/system/GenerateQRCodeServlet</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>landingPage.html</welcome-file>
     <welcome-file>landingPage.htm</welcome-file>

@@ -65,8 +65,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<form class="form-validate form-horizontal myform"
-							id="register_form" method="post" action=".jsp"
-							onsubmit="submitDiagnostic();return false;">
+							id="generateQR_form" method="post" action=".jsp"
+							onsubmit="generateQR();return false;">
 
 							<div>
 								<font color="red" id="message"></font>
@@ -148,7 +148,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
 
-	<script src="./js/branchmanager/.js"></script>
+	<script src="./js/branchmanager/qr.js"></script>
 
 </body>
 </html>

@@ -30,7 +30,6 @@ import system.Value;
 /**
  * 
  */
-@WebServlet("/GenerateQRCode")
 public class GenerateQRCodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -74,8 +73,7 @@ public class GenerateQRCodeServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			//String qrCodeData, String filePath, String charset, Map hintMap, int qrCodeheight, int qrCodewidth
-			Student student = (Student)inputJson.get(Key.STUDENT);
-			String qrCodeData = (String) String.valueOf(student.getStudentId());
+			String qrCodeData = (String)inputJson.get(Key.STUDENTID);
 			String filePath = "";
 			String charset = "UTF-8"; // or "ISO-8859-1"
 			Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
