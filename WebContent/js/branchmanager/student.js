@@ -3,7 +3,12 @@ $(document).ready(function() {
 	if (branchManagerId == null) {
 		window.location.replace('adminLogin.jsp');
 	} else {
+		$('#birthDate').daterangepicker({
+			singleDatePicker: true,
+			format : 'DD/MM/YYYY'
+		});
 		getStudentsByBranch(localStorage.getItem('branchId'));
+
 	}
 });
 
@@ -23,9 +28,10 @@ function registerStudent() {
 	var studentNric = $("#studentNric").val();
 	var gender = $("#gender").val();
 	var birthDate = $("#birthDate").val();
+	console.log(birthDate);
 	var homeContact = $("#homeContact").val();
 	var emergencyContact = $("#emergencyContact").val();
-	console.log(emergencyContact);
+	//console.log(emergencyContact);
 	var studentAddress = $("#studentAddress").val();
 	var postalCode = $("#postalCode").val();
 
@@ -44,7 +50,7 @@ function registerStudent() {
 	input.name = studentName;
 	input.studentNric = studentNric;
 	input.gender = gender;
-	input.birthDate = birthDate;
+	input.birthDate = moment((birthDate), "DD/MM/YYYY");
 	input.homeContact = homeContact;
 	input.EmergencyContact = emergencyContact;
 	input.postalCode = postalCode;
@@ -404,3 +410,7 @@ function deleteStudent() {
 								});
 					});
 }
+
+
+
+

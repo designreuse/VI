@@ -29,6 +29,9 @@
 <link href="css/fullcalendar.min.css" rel="stylesheet">
 <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
 
+<!-- daterange picker -->
+<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+	
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -36,7 +39,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-	
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -151,11 +154,16 @@
 											Date <span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="birthDate" name="birthdate"
+											<!-- <input class="form-control" id="birthDate" name="birthdate"
 												type="date" pattern="/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/"
-												title="Birthdate in the format dd/mm/yyyy" required />
+											
+												place="Birthdate in the format dd/mm/yyyy" required /> -->
+											<input class="form-control pull-right input-sm"
+												id="birthDate" name="birthDate" type="text"
+												placeholder="dd/mm/yyyy" required />
 										</div>
 									</div>
+
 									<div class="form-group ">
 										<label for="homeContact" class="control-label col-lg-2">Home
 											Contact <span class="required">*</span>
@@ -220,21 +228,21 @@
 												name="schoolLevel" type="text" required /> -->
 										</div>
 										<select id="schoolLevel" name="schoolLevel" required>
-										<option value="Nursery">Nursery</option>
-										<option value="Kindergarten 1">Kindergarten 1</option>
-										<option value="Kindergarten 2">Kindergarten 2</option>
-										<option value="Primary 1">Primary 1</option>
-										<option value="Primary 2">Primary 2</option>
-										<option value="Primary 3">Primary 3</option>
-										<option value="Primary 4">Primary 4</option>
-										<option value="Primary 5">Primary 5</option>
-										<option value="Primary 6">Primary 6</option>
+											<option value="Nursery">Nursery</option>
+											<option value="Kindergarten 1">Kindergarten 1</option>
+											<option value="Kindergarten 2">Kindergarten 2</option>
+											<option value="Primary 1">Primary 1</option>
+											<option value="Primary 2">Primary 2</option>
+											<option value="Primary 3">Primary 3</option>
+											<option value="Primary 4">Primary 4</option>
+											<option value="Primary 5">Primary 5</option>
+											<option value="Primary 6">Primary 6</option>
 										</select>
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-lg-offset-2 col-lg-10">
-										<button class="btn btn-primary" type="submit">Register</button>
+										<button class="btn btn-primary" type="submit">Save</button>
 									</div>
 								</div>
 							</div>
@@ -269,7 +277,14 @@
 
 	<!-- jQuery UI 1.11.4 -->
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-
+	
+	<!-- fullCalender.io -->
+	<script src="./js/fullcalendar/lib/moment.min.js"></script>
+	<script src="./js/fullcalendar/fullcalendar.min.js"></script>
+	
+	<!-- date-range-picker -->
+	<script src="plugins/daterangepicker/daterangepicker.js"></script>
+	
 	<!-- Slimscroll -->
 	<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
@@ -281,8 +296,9 @@
 
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
-	
+
 	<script src=".js/form-validation-script.js"></script>
-		<script src="./js/branchmanager/student.js"></script>
+	
+	<script src="./js/branchmanager/student.js"></script>
 </body>
 </html>
