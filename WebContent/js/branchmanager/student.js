@@ -31,7 +31,7 @@ function registerStudent() {
 	console.log(birthDate);
 	var homeContact = $("#homeContact").val();
 	var emergencyContact = $("#emergencyContact").val();
-	//console.log(emergencyContact);
+	console.log(emergencyContact);
 	var studentAddress = $("#studentAddress").val();
 	var postalCode = $("#postalCode").val();
 
@@ -52,7 +52,7 @@ function registerStudent() {
 	input.gender = gender;
 	input.birthDate = moment((birthDate), "DD/MM/YYYY");
 	input.homeContact = homeContact;
-	input.EmergencyContact = emergencyContact;
+	input.emergencyContact = emergencyContact;
 	input.postalCode = postalCode;
 	input.address = studentAddress;
 
