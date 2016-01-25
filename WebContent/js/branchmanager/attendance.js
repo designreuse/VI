@@ -13,6 +13,9 @@ $(document).ready(function() {
 	}
 });
 
+var COURSES;
+var SCHEDULEEVENTS;
+
 function getStudents() {
 	$.fn.dataTable.ext.errMode = 'none';
 	var scheduleEventPlanStartDate = $("#selectScheduleEvent").val();
@@ -131,7 +134,7 @@ function getValue() {
 					
 					//call the send email servlet to send the email
 					sendEmail(message);
-					sendSMS(message);
+//					sendSMS(message);
 
 				} else {
 					$("#message").html("Something's wrong, please try again!");
@@ -416,7 +419,26 @@ function sendSMS(message){
 	var input = appId + "&" + appSecret + "&" + receivers + "&" + content;
 	var url = encodeURI(input);
 	console.log(url);
+	
+	var theUrl = "http://www.smsdome.com/api/http/sendsms.aspx?" + url;
 
+//	var xhr = new XMLHttpRequest();
+//	xhr.open("GET", theUrl, true);
+//	xhr.onload = function (e) {
+//	  if (xhr.readyState === 4) {
+//	    if (xhr.status === 200) {
+//	      console.log(xhr.responseText);
+//	    } else {
+//	      console.error(xhr.statusText);
+//	    }
+//	  }
+//	};
+//	xhr.onerror = function (e) {
+//	  console.error(xhr.statusText);
+//	};
+//	xhr.send(null);
+
+	
 //	$.ajax({
 //		url : 'http://www.smsdome.com/api/http/sendsms.aspx?' + url, 
 //		method : 'GET',

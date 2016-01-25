@@ -1,6 +1,10 @@
 package service.system;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -21,8 +25,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-import controller.TeacherCtrl;
-import model.Student;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -32,6 +34,7 @@ import system.Value;
  */
 public class GenerateQRCodeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	int BUFFER_LENGTH = 4096;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -64,7 +67,6 @@ public class GenerateQRCodeServlet extends HttpServlet {
 	protected void process(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
-		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		JSONObject returnJson = new JSONObject();
@@ -72,19 +74,35 @@ public class GenerateQRCodeServlet extends HttpServlet {
 			String inputStr = request.getParameter(Key.INPUT);
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
+			String qrCodeData = String.valueOf((long)inputJson.get(Key.STUDENTID));
+			System.out.println(qrCodeData);
+			
 			//String qrCodeData, String filePath, String charset, Map hintMap, int qrCodeheight, int qrCodewidth
-			String qrCodeData = (String)inputJson.get(Key.STUDENTID);
-			String filePath = "";
 			String charset = "UTF-8"; // or "ISO-8859-1"
 			Map<EncodeHintType, ErrorCorrectionLevel> hintMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
 			hintMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 			int qrCodeheight = 200;
 			int qrCodewidth = 200;
-
-			BitMatrix matrix = new MultiFormatWriter().encode(new String(qrCodeData.getBytes(charset), charset),
-					BarcodeFormat.QR_CODE, qrCodewidth, qrCodeheight, hintMap);
-			MatrixToImageWriter.writeToFile(matrix, filePath.substring(filePath.lastIndexOf('.') + 1),
-					new File(filePath));
+			
+			String format = "png";
+			String fileName = "QR" + qrCodeData;
+			FileOutputStream os = new FileOutputStream(System.getenv("OPENSHIFT_DATA_DIR") + fileName);
+			//+ uploadDirectory+"/"+folderName+File.separator+folderName+dateString+fileName;
+			
+			String qr = new String(qrCodeData.getBytes(charset));
+			BitMatrix matrix = new MultiFormatWriter().encode(qr, BarcodeFormat.QR_CODE, qrCodewidth, qrCodeheight, hintMap);
+			
+			MatrixToImageWriter.writeToStream(matrix, format, os);
+			
+//			 byte[] bytes = new byte[BUFFER_LENGTH];
+//		     int read = 0;
+//		     while ((read = is.read(bytes, 0, BUFFER_LENGTH)) != -1) {
+//		    	 os.write(bytes, 0, read);
+//		     }
+//		     os.flush();
+//		     os.close();
+		     out.println(fileName + " was uploaded to " + System.getenv("OPENSHIFT_DATA_DIR"));
+		     //<img src='/QR1.png'/>
 
 			// returnJson =
 		} catch (Exception e) {

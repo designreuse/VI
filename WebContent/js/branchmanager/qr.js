@@ -3,9 +3,11 @@ $(document).ready(function() {
 	if (branchManagerId == null) {
 		window.location.replace('adminLogin.jsp');
 	} else {
-		getStudentsByBranch(localStorage.getItem('branchId'));
+		
 	}
 });
+
+var STUDENT;
 
 function getStudent(){
 	var studentName = $("#studentName").val();
@@ -33,7 +35,9 @@ function getStudent(){
 			var message = data.message;
 			// if status == 1, it means that it is successful, else it will fail.
 			if (status == 1) {
-				generateQR(message);
+				STUDENT = message;
+				console.log(STUDENT + " pre");
+				generateQR();
 			} else {
 				$("#message").html(message);
 			}
@@ -41,7 +45,8 @@ function getStudent(){
 	});
 }
 
-function generateQR(message) {
+function generateQR() {
+	console.log(STUDENT + " post");
 	var studentId = message.studentId;
 	
 	var input = {};
@@ -52,7 +57,7 @@ function generateQR(message) {
 
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
-		url : '../VI/GenerateQRCodeServlet?input=' + inputStr,
+		url : '../VI/system/GenerateQRCodeServlet?input=' + inputStr,
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {

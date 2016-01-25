@@ -706,7 +706,7 @@
     <servlet-name>SendEmailServlet</servlet-name>
     <url-pattern>/system/SendEmailServlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>SendSMSServlet</servlet-name>
     <servlet-class>service.system.SendSMSServlet</servlet-class>
   </servlet>
@@ -714,7 +714,7 @@
     <servlet-name>SendSMSServlet</servlet-name>
     <url-pattern>/system/SendSMSServlet</url-pattern>
   </servlet-mapping>
-   <servlet>
+    <servlet>
     <servlet-name>GenerateQRCodeServlet</servlet-name>
     <servlet-class>service.system.GenerateQRCodeServlet</servlet-class>
   </servlet>
