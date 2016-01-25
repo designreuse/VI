@@ -74,11 +74,15 @@
 								<div class="box box-solid">
 									<div class="box-header with-border">
 										<h4 class="box-title">Schedule Details</h4>
-									</div>
+											<div class="box-tools pull-right">
+												<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+												</button>
+											</div>
+										</div>
 									<div class="box-body">
 										<div class="row">
 											<div class="col-md-12" id="details">
-												Select any schedule at the side to view details
+												Please select a schedule event on the calendar to view more details.
 											</div>
 										</div>
 									</div>
@@ -122,22 +126,34 @@
 																name="scheduleRange" type="text" placeholder="Start Date" required />
 														</div>
 														
+														<div class="form-group">
+															<label for="course">Select Classroom</label>
+															<select class="form-control input-sm" id="classroomDDL">
+															</select>
+														</div>
+														
 														
 														<div class="form-group">
-															<label for="teachercourse">Select Teacher</label>
+															<label for="teacher">Select Teacher</label>
 															<select class="form-control input-sm" id="teacherDDL" onChange="generateCourseOption(this);">
 															</select>
 														</div>
 														
 														<div class="form-group">
-															<label for="teachercourse">Select Course</label>
+															<label for="course">Select Course</label>
 															<select class="form-control input-sm" id="courseDDL" disabled="disabled">
 															</select>
 														</div>
 														
+														<div class="form-group">
+															<label for="scheduleFrequency">Frequency of class</label>
+															<input class="form-control input-sm" id="scheduleDuration"
+															name="scheduleDuration" type="text" placeholder="Duration of class" required />
+														</div>
+														
 														<input class="btn btn-primary btn-block submit"
 															type="button" value="Create Schedule"
-															onclick="testing();">	
+															onclick="createSchedule();">	
 												</form>
 												</div>
 											</div>
