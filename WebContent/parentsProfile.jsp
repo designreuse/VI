@@ -71,15 +71,14 @@
 									width="100%">
 									<thead>
 										<tr>
-											<th>Parent ID</th>
-											<th>Name</th>
-											<th>NRIC</th>
-											<th>Contact</th>
-											<th>Email</th>
+											<th>ID</th>
+											<th class="all">Name</th>
+											<th class="all">NRIC</th>
+											<th class="all">Contact</th>
+											<th class="all">Email</th>
 											<th>Relationship</th>
 											<th>Occupation</th>
-											<th>Create Date</th>
-											<th>Options</th>
+											<th class="all">Options</th>
 										</tr>
 									</thead>
 									<tbody id="parents">

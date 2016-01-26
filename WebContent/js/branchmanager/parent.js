@@ -84,102 +84,54 @@ function getParentsByBranch(branchId) {
 	input.branchId = Number(branchId);
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
-	$.ajax({
-		url: '../VI/GetParentsByBranchServlet?input=' + inputStr,
-		method : "GET",
-		dataType : "json",
-		error : function(err) {
-			console.log(err);
-		},
-		success : function(data) {
-			console.log(data);
-			var status = data.status;
-			var parents = data.message;
-			if(status == 1){
-				PARENTS = parents;
-				var html = '';
-				for ( var o in parents) {
-					var parent = parents[o];
-					var parentId = parent.parentId;
-					var date = parent.createDate;
-					html += '\
-					<tr id="parent-'+ parentId+ '">\
-						<td id="parentId-'+ parentId +'">'+ parentId +'</td>\
-						<td id="name-'+parentId+'">'+parent.name+'</td>\
-						<td id="parentNric-'+parentId+'">'+parent.parentNric+'</td>\
-						<td id="contact-'+parentId+'">'+parent.contact+'</td>\
-						<td id="email-'+parentId+'">'+parent.email+'</td>\
-						<td id="relationship-'+parentId+'">'+parent.relationship+'</td>\
-						<td id="occupation-'+parentId+'">'+parent.occupation+'</td>\
-						<td>'+date.replace("T", "  ")+'</td>\
-						<td>\
-							<button class="btn btn-sm btn-info btn-sm" onclick="launchEditParent('+parentId+')" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>\
-							<button class="btn btn-sm btn-warning btn-sm" onclick="launchChangeParentPassword('+parentId+')" title="Change password"><i class="glyphicon glyphicon-cog"></i></button>\
-							<button class="btn btn-sm btn-danger btn-sm" onclick="launchDeleteParent('+parentId+')" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>\
-						</td>\
-					</tr>';
-				}
-				$("#parents").html(html);
-				$("#parentTable").DataTable({
-					destroy : true,
-					searching : true,
-					responsive : true
-				});
-			} else {
-				console.log(message);
-			}
-		}
-	})
 	
-//	var table =  $('#parentTable').on( 'error.dt', function ( e, settings, techNote, message ) {
-//		console.log( 'An error has been reported by DataTables: ', message );
-//	}).DataTable({
-//		ajax:{
-//			url: '../VI/GetParentsByBranchServlet?input=' + inputStr,
-//			dataSrc: 'message'
-//		},
-//		columns: [
-//		          {"data": "parentId"},
-//		          {"data": 'name'},
-//		          {"data": 'parentNric'},
-//		          {"data": 'contact'},
-//		          {"data": 'email'},
-//		          {"data": 'relationship'},
-//		          {"data": 'occupation'},
-//		          {"data": 'createDate'},
-//		          {"data": null, "defaultContent":'<button class="btn btn-sm btn-warning fa" onclick="launchEditParent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteParent();" title="Delete"><i class="fa fa-trash-o"></i></button>'}
-//		          ],
-//		destroy : true,
-//		searching : true,
-//		responsive : true
-//	});
+	var table =  $('#parentTable').on( 'error.dt', function ( e, settings, techNote, message ) {
+		console.log( 'An error has been reported by DataTables: ', message );
+	}).DataTable({
+		ajax:{
+			url: '../VI/GetParentsByBranchServlet?input=' + inputStr,
+			dataSrc: 'message'
+		},
+		columns: [
+		          {"data": "parentId"},
+		          {"data": 'name'},
+		          {"data": 'parentNric'},
+		          {"data": 'contact'},
+		          {"data": 'email'},
+		          {"data": 'relationship'},
+		          {"data": 'occupation'},
+		          {"data": null, 
+		        	  "defaultContent":'<button class="btn btn-sm btn-info fa" onclick="launchEditParent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button>'+
+		        	  '<button class="btn btn-sm btn-warning fa" onclick="launchChangeParentPassword();" title="Delete"><i class="glyphicon glyphicon-cog"></i></button>' +
+		          	'<button class="btn btn-sm btn-danger fa" onclick="deleteParent();" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>'}
+		          ],
+		destroy : true,
+		searching : true,
+		responsive : true
+	});
 }
 
-function launchEditParent(id) {
+function launchEditParent() {
+	var table = $('#parentTable').DataTable();
 	$('#parentTable tbody').off('click').on( 'click', 'button', function () {
-		var parent = {};
-		for(var p in PARENTS){
-			var tempPar = PARENTS[p];
-			if(tempPar.parentId == id){
-				parent = tempPar;
-				break;
-			}
-		}
-		$("#editParentForm").attr('onsubmit','editParent(' + parent.parentId + '); return false;');
-		$("#nameEdit").val(parent.name);
-		$("#emailEdit").val(parent.email);
-		$("#contactEdit").val(parent.contact);
-		$("#parentNricEdit").val(parent.parentNric);
+		var tr = $(this).closest('tr');
+		var row = table.row( tr );
+		
+		$("#editParentForm").attr('onsubmit','editParent(' + row.data().parentId + '); return false;');
+		$("#nameEdit").val(row.data().name);
+		$("#emailEdit").val(row.data().email);
+		$("#contactEdit").val(row.data().contact);
+		$("#parentNricEdit").val(row.data().parentNric);
 //		$("#imageEditImg").attr('src', image);
-		$("#occupationEdit").val(parent.occupation);
-		$("#realtionshipEdit").val(parent.relationship);
+		$("#occupationEdit").val(row.data().occupation);
+		$("#realtionshipEdit").val(row.data().relationship);
 		
 		$("#editParent").modal("show");
 	});	
 }
 
 function editParent(id) {
-//	var table = $('#parentTable').DataTable();
+	var table = $('#parentTable').DataTable();
 	$("#messageEdit").html('');
 	$(".my-loading").removeClass('sr-only');
 
@@ -214,22 +166,9 @@ function editParent(id) {
 			var parent = data.message;
 			var parentId = parent.parentId;
 			if (status == 1) {
-				$("#name-"+parentId).html(parent.name);
-				$("#email"+parentId).html(parent.email);
-				$("#contact"+parentId).html(parent.contact);
-				$("#nric"+parentId).html(parent.parentNric);
-				$("#occupation"+parentId).html(parent.occupation);
-				$("#relationship"+parentId).html(parent.relationship);
-				for(var p in PARENTS){
-					var tempPar = PARENTS[p];
-					if(tempPar.parentId == id){
-						PARENTS[p] = parent;
-						break;
-					}
-				}
-				PARENT = parent;
+				bootbox.alert("Update Successful!");
 				//the next line does not work
-//				table.ajax.reload();
+				table.ajax.reload();
 				$('#editParent').modal("hide");
 			} else {
 				$("#messageEdit").html(message);
