@@ -63,7 +63,7 @@ public class CourseDAO {
 		ArrayList<Course> courses = new ArrayList<Course>();
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		session.beginTransaction();
-		List<Object> list = session.createQuery("select c from Course c join c.teacherStudentCourses tsc where tsc.teacher = :teacher")
+		List<Object> list = session.createQuery("select distinct c from Course c join c.teacherStudentCourses tsc where tsc.teacher = :teacher")
 				.setParameter("teacher", teacher).list();
 		session.getTransaction().commit();
 		session.close();

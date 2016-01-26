@@ -22,6 +22,15 @@ public class Diagnostic {
 	
 	public Diagnostic(){}
 
+	public Diagnostic(String subjectName, String resultValue, Student student) {
+		super();
+		this.subjectName = subjectName;
+		this.resultValue = resultValue;
+		this.student = student;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
+	}
+	
 	public Diagnostic(String subjectName, String resultValue, String feedback, Student student) {
 		super();
 		this.subjectName = subjectName;

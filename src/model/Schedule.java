@@ -32,7 +32,7 @@ public class Schedule {
 	public Schedule(){}
 
 	public Schedule(String name, String description, long dayOfWeek, Date scheduleStartDate,
-					Date scheduleEndDate,long recFrequency, long duration, Course course, Teacher teacher) {
+					Date scheduleEndDate, long duration, Course course, Teacher teacher) {
 		super();
 		this.setName(name);
 		this.setDescription(description);
@@ -41,7 +41,7 @@ public class Schedule {
 		this.setScheduleEndDate(scheduleEndDate);
 		this.setTeacher(teacher);
 		this.setCourse(course);
-		this.setRecFrequency(recFrequency);
+//		this.setRecFrequency(recFrequency);
 		this.setDuration(duration);
 	
 		this.setObjStatus(Value.ACTIVED);

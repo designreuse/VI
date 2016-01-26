@@ -18,13 +18,13 @@ import system.Value;
 /**
  * @author RaySong
  */
-public class CreateScheduleAndScheduleEventsServlet extends HttpServlet {
+public class CreateSchedulesAndScheduleEventsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CreateScheduleAndScheduleEventsServlet() {
+    public CreateSchedulesAndScheduleEventsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -58,7 +58,7 @@ public class CreateScheduleAndScheduleEventsServlet extends HttpServlet {
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
 			System.out.println(inputJson.toJSONString());
 			
-			returnJson = ScheduleCtrl.createScheduleAndScheduleEvents(inputJson);
+			returnJson = ScheduleCtrl.createSchedulesAndScheduleEvents(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

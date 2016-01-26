@@ -144,22 +144,20 @@ public class DiagnosticCtrl {
 		try {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 			if (student != null) {
-				JSONArray diagnosticArr = new JSONArray();
-				diagnosticArr = (JSONArray) inputJson.get(Key.DIAGNOSTICS);
+				JSONArray diagnosticArr = (JSONArray) inputJson.get(Key.DIAGNOSTICS);
 				for (Object o : diagnosticArr) {
-					//TODO finish the implementation after XY confirm the input array
+					JSONObject diagnosticObj = (JSONObject) o;
+					//TODO finish the implementation after HQ confirm the input array
+					String subjectName = (String) diagnosticObj.get(Key.SUBJECTNAME);
+					String resultValue = (String) diagnosticObj.get(Key.RESULTVALUE);
+
+					Diagnostic diagnostic = new Diagnostic(subjectName, resultValue, student);
+					DiagnosticDAO.addDiagnostic(diagnostic);
+
+					returnJson.put(Key.STATUS, Value.SUCCESS);
+					returnJson.put(Key.MESSAGE, diagnostic.toJson());
 				}
-					
 				
-				String subjectName = (String) inputJson.get(Key.SUBJECTNAME);
-				String resultValue = (String) inputJson.get(Key.RESULTVALUE);
-				String feedback = (String) inputJson.get(Key.FEEDBACK);
-
-				Diagnostic diagnostic = new Diagnostic(subjectName, resultValue, feedback, student);
-				DiagnosticDAO.addDiagnostic(diagnostic);
-
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, diagnostic.toJson());
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
