@@ -13,6 +13,7 @@ $(document).ready(function() {
 		generateTeacherOption();
 		generateClassroomOption();
 		populateNewSchedules();
+
 	}
 });
 
@@ -53,8 +54,8 @@ function generateTeacherOption(){
 }
 function generateClassroomOption(){
 	var branchId = Number(localStorage.getItem("branchId"));
-	var $teacherDDL = $('#teacherDDL');
-	$teacherDDL.html('');
+	var $classroomDDL = $('#classroomDDL');
+	$classroomDDL.html('');
 	var input = {};
 	input.branchId = branchId
 	var inputStr = JSON.stringify(input);
@@ -65,20 +66,19 @@ function generateClassroomOption(){
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {
-			$teacherDDL.html('<option id="-1">No teachers available</option>');
+			$classroomDDL.html('<option id="-1">No classrooms available</option>');
 		},
 		success : function(data) {
 			var status = data.status; 
 			var message = data.message;
 			
 			if (status == 1) {
-				$teacherDDL.html('<option id="0">Select Classroom</option>');
-				console.log(message);
+				$classroomDDL.html('<option id="0">Select Classroom</option>');
 				for (var t = 0; t < message.length; t++){
-					$teacherDDL.append('<option value=' + message[t].classroomId + '>' + message[t].name + '</option>' );
+					$classroomDDL.append('<option value=' + message[t].classroomId + '>' + message[t].name + '</option>' );
 				}
 			} else{
-				$teacherDDL.html('<option id="-1">No Classrooms available</option>');
+				$classroomDDL.html('<option id="-1">No Classrooms available</option>');
 			}
 		}
 	});
@@ -101,15 +101,13 @@ function generateCourseOption(elem){
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {
-			$courseDDL.html('<option id="-1">No Course available</option>');
+			$courseDDL.html('<option id="-1">No Course Available</option>');
 		},
 		success : function(data) {
 			var status = data.status; 
 			var message = data.message;
 			
 			if (status == 1) {
-				console.log(message);
-				$courseDDL.html('<option id="0">Select Teacher</option>');
 				for (var t = 0; t < message.length; t++){
 					$courseDDL.append('<option value=' + message[t].courseId + '>' + message[t].name + '</option>' );
 				}
@@ -137,14 +135,11 @@ function createSchedule(){
 	var scheduleName = $("#scheduleName").val();
 	var scheduleDesc = $("#scheduleDesc").val();
 	var scheduleRange = $("#scheduleRange").val();
-	var teacherDDL = document.getElementById("teacherDDL");
-	var courseDDL = document.getElementById("courseDDL");
-	var classroomDDL = document.getElementById("classroomDDL");
-	var teacherId = teacherDDL.options[teacherDDL.selectedIndex].value;
-	var courseId = courseDDL.options[courseDDL.selectedIndex].value;
-	var classroomId = classroomDDL.options[classroomDDL.selectedIndex].value;
+	var teacherId = $('#teacherDDL').val();
+	var courseId = $('#courseDDL').val();
+	var classroomId = $('#classroomDDL').val();
 	var scheduleDuration =  $("#scheduleDuration").val();
-	
+
 	var startDate = moment(new Date(scheduleRange.slice(0, 19)));
 	var endDate = moment(new Date(scheduleRange.slice(22, 41)));
 

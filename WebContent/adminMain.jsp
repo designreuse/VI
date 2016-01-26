@@ -27,6 +27,9 @@
   
 	<link href="css/fullcalendar.min.css" rel="stylesheet">
 	<link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
+	
+	  <!-- Select2 -->
+  <link rel="stylesheet" href="plugins/select2/select2.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -124,7 +127,7 @@
 															<label for="scheduleStartDate">Schedule Date Range</label>											
 															<input class="form-control pull-right input-sm" id="scheduleRange"
 																name="scheduleRange" type="text" placeholder="Start Date" required />
-														</div>
+														</div><br>
 														
 														<div class="form-group">
 															<label for="course">Select Classroom</label>
@@ -140,10 +143,10 @@
 														</div>
 														
 														<div class="form-group">
-															<label for="course">Select Course</label>
-															<select class="form-control input-sm" id="courseDDL" disabled="disabled">
-															</select>
-														</div>
+											                <label>Select Course</label>
+											                <select class="form-control input-sm" multiple="multiple" data-placeholder="Select a course" id="courseDDL">
+											                </select>
+											             </div>
 														
 														<div class="form-group">
 															<label for="scheduleFrequency">Frequency of class</label>
@@ -310,6 +313,9 @@
 
 <!-- date-range-picker -->
 <script src="plugins/daterangepicker/daterangepicker.js"></script>
+
+<!-- Select2 -->
+<script src="plugins/select2/select2.full.min.js"></script>
 
 <!-- Slimscroll -->
 <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
