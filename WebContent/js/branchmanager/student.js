@@ -12,6 +12,9 @@ $(document).ready(function() {
 	}
 });
 
+var STUDENTS = {};
+var STUDENT	= {};
+
 function registerStudent() {
 	// Parent's details
 	jQuery('#parentNric').on('input', function() {
@@ -124,193 +127,345 @@ function getStudentsByBranch(branchId) {
 	var inputStr = JSON.stringify(input);
 	console.log(inputStr);
 	inputStr = encodeURIComponent(inputStr);
-	var table = $('#studentTable')
-			.on(
-					'error.dt',
-					function(e, settings, techNote, message) {
-						console.log(
-								'An error has been reported by DataTables: ',
-								message);
-					})
-			.DataTable(
-					{
-						ajax : {
-							url : '../VI/GetStudentsByBranchServlet?input='
-									+ inputStr,
-							dataSrc : 'message'
-						},
-						columns : [
-								{
-									"data" : "studentId"
-								},
-								{
-									"data" : 'name'
-								},
-								{
-									"data" : 'gender'
-								},
-								{
-									"data" : 'studentNric'
-								},
-								{
-									"data" : 'birthDate'
-								},
-								{
-									"data" : 'homeContact'
-								},
-								{
-									"data" : 'EmergencyContact'
-								},
-								{
-									"data" : 'address'
-								},
-								{
-									"data" : 'postalCode'
-								},
-								{
-									"data" : 'schoolName'
-								},
-								{
-									"data" : 'schoolLevel'
-								},
-								{
-									"data" : 'takenDiagnostic'
-								},
-								{
-									"data" : 'points'
-								},
-								{
-									"data" : 'createDate'
-								},
-								{
-									"data" : null,
-									"defaultContent" : '<button class="btn btn-sm btn-warning fa" onclick="editStudent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteStudent();" title="Delete"><i class="fa fa-trash-o"></i></button>'
-								} ]
-					});
+	$.ajax({
+		url: '../VI/GetStudentsByBranchServlet?input=' + inputStr,
+		method : "GET",
+		dataType : "json",
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			console.log(data);
+			var status = data.status;
+			var students = data.message;
+			if(status == 1){
+				STUDENTS = students;
+				var html = '';
+				for ( var o in students) {
+					var student = students[o];
+					var studentId = student.studentId;
+					var date = student.createDate;
+					html += '\
+					<tr id="student-'+ studentId+ '">\
+						<td id="studentId-'+ studentId +'">'+ studentId +'</td>\
+						<td id="name-'+studentId+'">'+student.name+'</td>\
+						<td id="gender-'+studentId+'">'+student.gender+'</td>\
+						<td id="studentNric-'+studentId+'">'+student.studentNric+'</td>\
+						<td id="birthDate-'+studentId+'">'+student.birthDate+'</td>\
+						<td id="homeContact-'+studentId+'">'+student.homeContact+'</td>\
+						<td id="emergencyContact-'+studentId+'">'+student.emergencyContact+'</td>\
+						<td id="address-'+studentId+'">'+student.address+'</td>\
+						<td id="postalCode-'+studentId+'">'+student.postalCode+'</td>\
+						<td id="schoolName-'+studentId+'">'+student.schoolName+'</td>\
+						<td id="schoolLevel-'+studentId+'">'+student.schoolLevel+'</td>\
+						<td id="takenDiagnostic-'+studentId+'">'+student.takenDiagonstic+'</td>\
+						<td id="points-'+studentId+'">'+student.points+'</td>\
+						<td>'+date.replace("T", "  ")+'</td>\
+						<td>\
+							<button class="btn btn-sm btn-info btn-sm" onclick="launchEditStudent('+studentId+')" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>\
+							<button class="btn btn-sm btn-danger btn-sm" onclick="launchDeleteStudent('+studentId+')" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>\
+						</td>\
+					</tr>';
+				}
+				$("#students").html(html);
+				$("#studentTable").DataTable({
+					destroy : true,
+					searching : true,
+					responsive : true
+				});
+			} else {
+				console.log(message);
+			}
+		}
+	})
+	
+	
+//	var table = $('#studentTable')
+//			.on(
+//					'error.dt',
+//					function(e, settings, techNote, message) {
+//						console.log(
+//								'An error has been reported by DataTables: ',
+//								message);
+//					})
+//			.DataTable(
+//					{
+//						ajax : {
+//							url : '../VI/GetStudentsByBranchServlet?input='
+//									+ inputStr,
+//							dataSrc : 'message'
+//						},
+//						columns : [
+//								{
+//									"data" : "studentId"
+//								},
+//								{
+//									"data" : 'name'
+//								},
+//								{
+//									"data" : 'gender'
+//								},
+//								{
+//									"data" : 'studentNric'
+//								},
+//								{
+//									"data" : 'birthDate'
+//								},
+//								{
+//									"data" : 'homeContact'
+//								},
+//								{
+//									"data" : 'EmergencyContact'
+//								},
+//								{
+//									"data" : 'address'
+//								},
+//								{
+//									"data" : 'postalCode'
+//								},
+//								{
+//									"data" : 'schoolName'
+//								},
+//								{
+//									"data" : 'schoolLevel'
+//								},
+//								{
+//									"data" : 'takenDiagnostic'
+//								},
+//								{
+//									"data" : 'points'
+//								},
+//								{
+//									"data" : 'createDate'
+//								},
+//								{
+//									"data" : null,
+//									"defaultContent" : '<button class="btn btn-sm btn-warning fa" onclick="editStudent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteStudent();" title="Delete"><i class="fa fa-trash-o"></i></button>'
+//								} ]
+//					});
 }
-function editStudent() {
-	var table = $('#studentTable').DataTable();
-	$('#studentTable tbody')
-			.off('click')
-			.on(
-					'click',
-					'button',
-					function() {
-						var tr = $(this).closest('tr');
-						var row = table.row(tr);
 
-						bootbox
-								.dialog({
-									title : "Edit Details",
-									message : '<div class="row">  '
-											+ '<div class="col-md-12"> '
-											+ '<form class="form-horizontal" method="post"> '
-											+ '<div class="form-group"> '
-											+ '<div><font color="red" id="updatedMessage"></font></div>'
-											+ '<label class="col-md-2 control-label" for="name">Name</label> '
-											+ '<div class="col-md-10"> '
-											+ '<input id="name" name="name" type="text" class="form-control input-md" value= '
-											+ row.data().name
-											+ '> '
-											+ '</div> '
-											+ '<label class="col-md-2 control-label" for="nric">NRIC</label> '
-											+ '<div class="col-md-10"> '
-											+ '<input id="nric" name="nric" type="text" class="form-control input-md" value= '
-											+ row.data().studentNric
-											+ '> '
-											+ '</div> '
-											+ '<label class="col-md-2 control-label" for="contact">Contact</label> '
-											+ '<div class="col-md-10"> '
-											+ '<input id="contact" name="contact" type="text" class="form-control input-md" value= '
-											+ row.data().contact
-											+ '> '
-											+ '</div> '
-											+ '<label class="col-md-2 control-label" for="address">Address</label> '
-											+ '<div class="col-md-10"> '
-											+ '<input id="address" name="address" type="text" class="form-control input-md" value= '
-											+ row.data().address
-											+ '> '
-											+ '</div> '
-											+ '</div> '
-											+ '</form> ' + '</div> ' + '</div>',
-									onEscape : function() {
-									},
-									buttons : {
-										success : {
-											label : "Save!",
-											className : "btn-success",
 
-											callback : function() {
-												var studentId = row.data().studentId;
-												var updatedName = $("#name")
-														.val();
-												var updatedNric = $("#nric")
-														.val();
-												var updatedContact = $(
-														"#contact").val();
-												var updatedAddress = $(
-														"#address").val();
-												var updatedEmail = $("#email")
-														.val();
-
-												var input = {}
-												input.studentId = Number(studentId);
-												input.name = updatedName;
-												input.studentNric = updatedNric;
-												input.contact = updatedContact;
-												input.address = updatedAddress;
-												input.email = updatedEmail;
-												var inputStr = JSON
-														.stringify(input);
-
-												inputStr = encodeURIComponent(inputStr);
-												$
-														.ajax({
-															url : '../VI/UpdateStudentServlet?input='
-																	+ inputStr, // this
-																				// part
-																				// sends
-																				// to
-																				// the
-																				// servlet
-															method : 'POST',
-															dataType : 'json',
-															error : function(
-																	err) {
-																console
-																		.log(err);
-																$("#message")
-																		.html(
-																				"System has some error. Please try again.");
-															},
-															success : function(
-																	data) {
-																console
-																		.log(data);
-																var status = data.status;
-																var message = data.message;
-
-																if (status == 1) {
-																	bootbox
-																			.alert("Update is successful!")
-																	table.ajax
-																			.reload();
-
-																} else {
-																	$(
-																			"#message")
-																			.html(
-																					"Something's wrong, please try again!");
-																}
-															}
-														});
-											}
-
-										}
-									}
-								});
-					});
+function launchEditStudent(id) {
+	$('#studentTable tbody').off('click').on( 'click', 'button', function () {
+		var student = {};
+		for(var s in STUDENTS){
+			var tempStudent = STUDENTS[s];
+			if(tempStudent.studentId == id){
+				student = tempStudent;
+				break;
+			}
+		}
+		$("#editStudentForm").attr('onsubmit','editStudent(' + student.studentId + '); return false;');
+		$("#nameEdit").val(student.name);
+		$("#genderEdit").val(student.gender);
+		$("#studentNricEdit").val(student.studentNric);
+		$("#birthDateEdit").val(student.contact);
+		$("#homeContactEdit").val(student.homeContact);
+		$("#emergencyContactEdit").val(student.emergencyContact);
+		$("#addressEdit").val(student.address);
+		$("#postalCodeEdit").val(student.postalCode);
+		$("#schoolNameEdit").val(student.schoolName);
+		$("#schoolLevelEdit").val(student.schoolLevel);
+		$("#takenDiagnosticEdit").val(student.takenDiagnostic);
+		$("#pointsEdit").val(student.points);
+//		$("#imageEditImg").attr('src', image);
+		
+		$("#editStudent").modal("show");
+	});	
 }
+
+function editStudent(id) {
+//	var table = $('#studentTable').DataTable();
+	$("#messageEdit").html('');
+	$(".my-loading").removeClass('sr-only');
+	
+	var input = {}
+	input.studentId = Number(id);
+	input.name = $("#nameEdit").val();
+	input.gender = $("#genderEdit").val();
+	input.studentNric = $("#studentNricEdit").val();
+	input.birthDate = $("#birthDateEdit").val();
+	input.homeContact = $("#homeContactEdit").val();
+	input.emergencyContact = $("#emergencyContactEdit").val();
+	input.address = $("#addressEdit").val();
+	input.postalCode = $("#postalCodeEdit").val();
+	input.schoolName = $("#schoolNameEdit").val();
+	input.schoolLevel = $("#schoolLevelEdit").val();
+	input.takenDiagnostic = $("#takenDiagnosticEdit").val();
+	input.points = $("#pointsEdit").val();
+	
+//	console.log(input);
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	$.ajax({
+		url : "../VI/UpdateStudentServlet?input=" + inputStr,
+		method : "POST",
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			console.log(data);
+			var status = data.status;
+			var student = data.message;
+			var studentId = student.studentId;
+			if (status == 1) {
+				$("#name"+studentId).html(student.name);
+				$("#gender"+studentId).html(student.gender);
+				$("#studentNric"+studentId).html(student.studentNric);
+				$("#birthDate"+studentId).html(student.contact);
+				$("#homeContact"+studentId).html(student.homeContact);
+				$("#emergencyContact"+studentId).html(student.emergencyContact);
+				$("#address"+studentId).html(student.address);
+				$("#postalCode"+studentId).html(student.postalCode);
+				$("#schoolName"+studentId).html(student.schoolName);
+				$("#schoolLevel"+studentId).html(student.schoolLevel);
+				$("#takenDiagnostic"+studentId).html(student.takenDiagnostic);
+				$("#points"+studentId).html(student.points);
+				for(var s in STUDENTS){
+					var tempStudent = STUDENTS[s];
+					if(tempStudent.studentId == id){
+						STUDENTS[s] = student;
+						break;
+					}
+				}
+				STUDENT = student;
+				//the next line does not work
+//				table.ajax.reload();
+				$('#editStudent').modal("hide");
+			} else {
+				$("#messageEdit").html(message);
+			}
+			$(".my-loading").addClass('sr-only');
+		}
+	});
+}
+
+
+//function editStudent() {
+//	var table = $('#studentTable').DataTable();
+//	$('#studentTable tbody')
+//			.off('click')
+//			.on(
+//					'click',
+//					'button',
+//					function() {
+//						var tr = $(this).closest('tr');
+//						var row = table.row(tr);
+//
+//						bootbox
+//								.dialog({
+//									title : "Edit Details",
+//									message : '<div class="row">  '
+//											+ '<div class="col-md-12"> '
+//											+ '<form class="form-horizontal" method="post"> '
+//											+ '<div class="form-group"> '
+//											+ '<div><font color="red" id="updatedMessage"></font></div>'
+//											+ '<label class="col-md-2 control-label" for="name">Name</label> '
+//											+ '<div class="col-md-10"> '
+//											+ '<input id="name" name="name" type="text" class="form-control input-md" value= '
+//											+ row.data().name
+//											+ '> '
+//											+ '</div> '
+//											+ '<label class="col-md-2 control-label" for="nric">NRIC</label> '
+//											+ '<div class="col-md-10"> '
+//											+ '<input id="nric" name="nric" type="text" class="form-control input-md" value= '
+//											+ row.data().studentNric
+//											+ '> '
+//											+ '</div> '
+//											+ '<label class="col-md-2 control-label" for="contact">Contact</label> '
+//											+ '<div class="col-md-10"> '
+//											+ '<input id="contact" name="contact" type="text" class="form-control input-md" value= '
+//											+ row.data().contact
+//											+ '> '
+//											+ '</div> '
+//											+ '<label class="col-md-2 control-label" for="address">Address</label> '
+//											+ '<div class="col-md-10"> '
+//											+ '<input id="address" name="address" type="text" class="form-control input-md" value= '
+//											+ row.data().address
+//											+ '> '
+//											+ '</div> '
+//											+ '</div> '
+//											+ '</form> ' + '</div> ' + '</div>',
+//									onEscape : function() {
+//									},
+//									buttons : {
+//										success : {
+//											label : "Save!",
+//											className : "btn-success",
+//
+//											callback : function() {
+//												var studentId = row.data().studentId;
+//												var updatedName = $("#name")
+//														.val();
+//												var updatedNric = $("#nric")
+//														.val();
+//												var updatedContact = $(
+//														"#contact").val();
+//												var updatedAddress = $(
+//														"#address").val();
+//												var updatedEmail = $("#email")
+//														.val();
+//
+//												var input = {}
+//												input.studentId = Number(studentId);
+//												input.name = updatedName;
+//												input.studentNric = updatedNric;
+//												input.contact = updatedContact;
+//												input.address = updatedAddress;
+//												input.email = updatedEmail;
+//												var inputStr = JSON
+//														.stringify(input);
+//
+//												inputStr = encodeURIComponent(inputStr);
+//												$
+//														.ajax({
+//															url : '../VI/UpdateStudentServlet?input='
+//																	+ inputStr, // this
+//																				// part
+//																				// sends
+//																				// to
+//																				// the
+//																				// servlet
+//															method : 'POST',
+//															dataType : 'json',
+//															error : function(
+//																	err) {
+//																console
+//																		.log(err);
+//																$("#message")
+//																		.html(
+//																				"System has some error. Please try again.");
+//															},
+//															success : function(
+//																	data) {
+//																console
+//																		.log(data);
+//																var status = data.status;
+//																var message = data.message;
+//
+//																if (status == 1) {
+//																	bootbox
+//																			.alert("Update is successful!")
+//																	table.ajax
+//																			.reload();
+//
+//																} else {
+//																	$(
+//																			"#message")
+//																			.html(
+//																					"Something's wrong, please try again!");
+//																}
+//															}
+//														});
+//											}
+//
+//										}
+//									}
+//								});
+//					});
+//}
 
 function deleteStudent() {
 	var table = $('#studentTable').DataTable();

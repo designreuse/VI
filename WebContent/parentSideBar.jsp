@@ -18,7 +18,8 @@
         <li class="header"></li>
         <li class="active"><a href="parentMain.jsp"><i class="fa fa-link"></i> <span>Home</span></a></li>
         <li class="active"><a href="parentStudent.jsp"><i class="fa fa-link"></i> <span>Children</span></a></li>
-        <li class="active"><a href="parentFeedback.jsp"><i class="fa fa-link"></i> <span>Feedback</span></a></li>       
+        <li class="active"><a href="parentFeedback.jsp"><i class="fa fa-link"></i> <span>Feedback Version1</span></a></li>
+        <li class="active"><a href="parentFeedbackB.jsp"><i class="fa fa-link"></i> <span>Feedback Version2</span></a></li>
       </ul>
       
     </section>

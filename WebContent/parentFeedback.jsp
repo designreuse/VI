@@ -23,6 +23,9 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 
+<!-- Morris chart -->
+<link rel="stylesheet" href="plugins/morris/morris.css">
+
 <!-- Skin Designs-->
 <link rel="stylesheet" href="dist/css/skins/skin-yellow.min.css">
 
@@ -48,7 +51,9 @@
 		<div class="content-wrapper">
 			<!-- Content Header (Page header) -->
 			<section class="content-header">
-				<h1>Children Feedback</h1>
+				<h1>
+					Children Feedback<small>(Version A)</small>
+				</h1>
 			</section>
 
 			<!-- Main content -->
@@ -112,62 +117,23 @@
 										<!-- ./col -->
 									</div>
 									<!-- /.row -->
-					
-									<!-- solid sales graph -->
-									<div class="box box-solid bg-teal-gradient">
-										<div class="box-header">
-											<div>
-												<i class="fa fa-th"></i>
-												<h3 class="box-title">Results Graph</h3>
-												<span id="subjects">
-													<button type="button" onclick="#revenue-chart" data-toggle="tab" class="btn bg-teal">
-														Subject 1	
-													</button>
-													<button type="button" onclick="#sales-chart" data-toggle="tab" class="btn bg-teal">
-														Subject 2	
-													</button>
-												</span>
-											</div>
-											<div class="box-tools pull-right">
-												<button type="button" class="btn bg-teal btn-sm" data-widget="collapse">
-													<i class="fa fa-minus"></i>
-												</button>
-											</div>
-										</div>
-										<div class="box-body border-radius-none">
-											<div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 250px;"></div>
-											<div class="chart tab-pane" id="line-chart" style="position: relative; height: 250px;"></div>
-										</div>
-										<!-- /.box-body -->
-										<div class="box-footer no-border">
-											<div class="row">
-												<div class="col-xs-4 text-center"
-													style="border-right: 1px solid #f4f4f4">
-													<input type="text" class="knob" data-readonly="true" value="20"
-														data-width="60" data-height="60" data-fgColor="#39CCCC">
-					
-													<div class="knob-label">Excellent</div>
-												</div>
-												<!-- ./col -->
-												<div class="col-xs-4 text-center"
-													style="border-right: 1px solid #f4f4f4">
-													<input type="text" class="knob" data-readonly="true" value="50"
-														data-width="60" data-height="60" data-fgColor="#39CCCC">
-					
-													<div class="knob-label">Good</div>
-												</div>
-												<!-- ./col -->
-												<div class="col-xs-4 text-center">
-													<input type="text" class="knob" data-readonly="true" value="30"
-														data-width="60" data-height="60" data-fgColor="#39CCCC">
-					
-													<div class="knob-label">Moderate</div>
-												</div>
-												<!-- ./col -->
-											</div>
-											<!-- /.row -->
-										</div>
-										<!-- /.box-footer -->
+									<!-- LINE CHART -->
+							          <div class="box box-info">
+							            <div class="box-header with-border">
+							              <h3 class="box-title">Line Chart</h3>
+							
+							              <div class="box-tools pull-right">
+							                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+							                </button>
+							                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+							              </div>
+							            </div>
+							            <div class="box-body chart-responsive">
+							              <div class="chart" id="line-chart" style="height: 300px;"></div>
+							            </div>
+							            <!-- /.box-body -->
+							          </div>
+							          <!-- /.box -->
 									</div>
 									<!-- /.box -->
 									<!-- for the accordion -->
@@ -216,7 +182,11 @@
 
 	<!-- FastClick -->
 	<script src="plugins/fastclick/fastclick.js"></script>
-
+	
+	<!-- Morris.js charts -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+	<script src="plugins/morris/morris.min.js"></script>
+	
 	<!-- AdminLTE App -->
 	<script src="dist/js/app.min.js"></script>
 

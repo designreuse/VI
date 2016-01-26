@@ -1,7 +1,26 @@
 $(document).ready(function() {
-	getFeedback();
+//	getFeedback();
+	//Line chart
+	
+	// LINE CHART
+    var line = new Morris.Line({
+      element: 'line-chart',
+      resize: true,
+      data: [
+        {y: '2011 Q1', item1: 100},
+        {y: '2011 Q2', item1: 98},
+        {y: '2011 Q3', item1: 100},
+        {y: '2011 Q4', item1: 120},
+        {y: '2012 Q1', item1: 150}
+      ],
+      xkey: 'y',
+      ykeys: ['item1'],
+      labels: ['Item 1'],
+      lineColors: ['#3c8dbc'],
+      hideHover: 'auto'
+    });
+    
 });
-// }
 
 function getFeedback(){
 	

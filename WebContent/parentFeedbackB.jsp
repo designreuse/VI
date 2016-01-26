@@ -44,7 +44,7 @@
   <div class="content-wrapper">
 	<section class="content-header">
       <h1>
-        Parents Feedback
+        Children Feedback
         <small>(Version B)</small>
       </h1>
       <ol class="breadcrumb">

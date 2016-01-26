@@ -77,12 +77,12 @@
 								</div>
 							</div>
 							<div class='form-group'>
-								<label for='parentNricEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>NRIC
+								<label for='studentNricEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>NRIC
 									<span class="required">*</span>
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
 									<input type='text' class='form-control' id='nricEdit' pattern="^[SFTG]\d{7}[A-Z]$"
-									title="NRIC only" required placeholder='parent nric'>
+									title="NRIC only" required placeholder='student nric'>
 								</div>
 							</div>
 							<div class='form-group'>

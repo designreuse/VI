@@ -82,7 +82,7 @@
 											<th>Options</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id="parents">
 									</tbody>
 								</table>
 							</div>
@@ -90,7 +90,107 @@
 					</div>
 				</div>
 			</section>
-
+			
+			<!-- edit parent form -->
+			<div id='editParent' class='modal fade' tabindex="-1" role='dialog' aria-labelledby='myModalLabel' aria-hidden='true'>
+				<div class='modal-dialog'>
+					<div class='modal-content'>
+						<div class='modal-header'>
+							<button type='button' class='close' data-dismiss='modal'
+								aria-label='Close'>
+								<span aria-hidden='true'>&times;</span>
+							</button>
+							<h4 class='modal-title' id='myModalLabel'>Edit Parent</h4>
+						</div>
+						<div class='modal-body'>
+							<form id='editParentForm' class='form-validate form-horizontal'>
+								<div class='form-group'>
+									<label for='nameEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Name
+										<span class="required">*</span>
+									</label>
+									<div class='col-sm-8 col-md-8 col-lh-8'>
+										<input type='text' class='form-control' id='nameEdit'
+											pattern="^([a-zA-Z\s]{1,255})$" title="Letters only" 
+											required placeholder='parent name'>
+									</div>
+								</div>
+								<div class='form-group'>
+									<label for='emailEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Email
+										<span class="required">*</span>
+									</label>
+									<div class='col-sm-8 col-md-8 col-lh-8'>
+										<input type='email' class='form-control' id='emailEdit'
+											pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+											title="Invalid Email" required placeholder='parent email'>
+									</div>
+								</div>
+								<div class='form-group'>
+									<label for='contactEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Contact Number
+										<span class="required">*</span>
+									</label>
+									<div class='col-sm-8 col-md-8 col-lh-8'>
+										<input type='text' class='form-control' id='contactEdit' pattern="^[+]?\d*$"
+											title="Numbers only" required placeholder='parent contact'>
+									</div>
+								</div>
+								<div class='form-group'>
+									<label for='parentNricEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>NRIC
+										<span class="required">*</span>
+									</label>
+									<div class='col-sm-8 col-md-8 col-lh-8'>
+										<input type='text' class='form-control' id='parentNricEdit' pattern="^[SFTG]\d{7}[A-Z]$"
+										title="NRIC only" required placeholder='parent nric'>
+									</div>
+								</div>
+								<div class='form-group'>
+									<label for='occupationEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Occupation
+										<span class="required">*</span>
+									</label>
+									<div class='col-sm-8 col-md-8 col-lh-8'>
+										<input type='text' class='form-control' id='occupationEdit' pattern="^([a-zA-Z\s]{1,255})$"
+										title="Letters only" required placeholder='parent occupation'>
+									</div>
+								</div>
+								<div class='form-group'>
+									<label for='relationshipEdit' class='col-sm-3 col-md-3 col-lg-3 control-label'>Kinship
+										<span class="required">*</span>
+									</label>
+									<div class='col-sm-8 col-md-8 col-lh-8'>
+										<select class='form-control' name="relationship" id="relationshipEdit">
+											<option value="mother">Mother</option>
+											<option value="father">Father</option>
+											<option value="guardian">Guardian</option>
+											<option value="sibling">Sibling</option>
+										</select>
+									</div>
+								</div>
+							<!--  upload picture -->
+	<!-- 							<div class="form-group col-md-6"> -->
+	<!-- 								<label for="imageEdit" -->
+	<!-- 									class="col-sm-3 col-md-3 col-lg-3 control-label">dd -->
+	<!-- 									(Image)</label> -->
+	<!-- 								<div class="col-sm-6 col-md-6 col-lg-6"> -->
+	<!-- 									<label for="imageEditUpload"> <img id="imageEditImg" -->
+	<!-- 										class="img-responsive img-rounded clickable" alt="image" -->
+	<!-- 										src="/KP/assets/img/default.jpg"> -->
+	<!-- 									</label> -->
+	<!-- 									<div> -->
+	<!-- 										<small>dsds</small> <small>(Click picture to upload)</small> -->
+	<!-- 									</div> -->
+	<!-- 								</div> -->
+	<!-- 								<input type="hidden" id="imageEdit" -->
+	<!-- 									value="/KP/assets/img/default.jpg" class='form-control sr-only'> -->
+	<!-- 							</div> -->
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-warning">Save</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 		</div>
 
 		<!-- /.content-wrapper -->
