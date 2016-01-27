@@ -128,7 +128,9 @@ function getTeachersByBranch(branchId){
 				$("#teacherTable").DataTable({
 					destroy : true,
 					searching : true,
-					responsive : true
+					responsive : {
+						details: false
+					}
 				});
 			} else {
 				console.log(message);

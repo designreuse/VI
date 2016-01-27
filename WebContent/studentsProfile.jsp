@@ -69,21 +69,20 @@
 							<table id="studentTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%">
 								<thead>
 									<tr>
-										<th>Student ID</th>
-										<th>Name</th>
+										<th>ID</th>
+										<th class="all">Name</th>
 										<th>Gender</th>
-										<th>NRIC</th>
+										<th class="all">NRIC</th>
 										<th>DoB</th>
-										<th>Home Contact</th>
-										<th>Emergency Contact</th>
-										<th>Address</th>
-										<th>Postal Code</th>
-										<th>School Name</th>
-										<th>School Level</th>
+										<th class="all">Home Contact</th>
+										<th class="all">Emergency Contact</th>
+<!-- 										<th>Address</th> -->
+<!--  										<th>Postal Code</th> -->
+<!-- 										<th>School Name</th> -->
+<!-- 										<th>School Level</th> -->
 										<th>Taken Diagnostic</th>
 										<th>Points</th>
-										<th>Create Date</th>
-										<th>Options</th>
+										<th class="all">Options</th>
 									</tr>
 								</thead>
 		

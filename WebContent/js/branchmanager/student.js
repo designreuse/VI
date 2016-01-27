@@ -120,6 +120,58 @@ function registerStudent() {
 	});
 }
 
+//$.ajax({
+//	url: '../VI/GetStudentsByBranchServlet?input=' + inputStr,
+//	method : "GET",
+//	dataType : "json",
+//	error : function(err) {
+//		console.log(err);
+//	},
+//	success : function(data) {
+//		console.log(data);
+//		var status = data.status;
+//		var students = data.message;
+//		if(status == 1){
+//			STUDENTS = students;
+//			var html = '';
+//			for ( var o in students) {
+//				var student = students[o];
+//				var studentId = student.studentId;
+//				var date = student.createDate;
+//				html += '\
+//				<tr id="student-'+ studentId+ '">\
+//					<td id="studentId-'+ studentId +'">'+ studentId +'</td>\
+//					<td id="name-'+studentId+'">'+student.name+'</td>\
+//					<td id="gender-'+studentId+'">'+student.gender+'</td>\
+//					<td id="studentNric-'+studentId+'">'+student.studentNric+'</td>\
+//					<td id="birthDate-'+studentId+'">'+student.birthDate+'</td>\
+//					<td id="homeContact-'+studentId+'">'+student.homeContact+'</td>\
+//					<td id="emergencyContact-'+studentId+'">'+student.emergencyContact+'</td>\
+//					<td id="address-'+studentId+'">'+student.address+'</td>\
+//					<td id="postalCode-'+studentId+'">'+student.postalCode+'</td>\
+//					<td id="schoolName-'+studentId+'">'+student.schoolName+'</td>\
+//					<td id="schoolLevel-'+studentId+'">'+student.schoolLevel+'</td>\
+//					<td id="takenDiagnostic-'+studentId+'">'+student.takenDiagonstic+'</td>\
+//					<td id="points-'+studentId+'">'+student.points+'</td>\
+//					<td>'+date.replace("T", "  ")+'</td>\
+//					<td>\
+//						<button class="btn btn-sm btn-info btn-sm" onclick="launchEditStudent('+studentId+')" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>\
+//						<button class="btn btn-sm btn-danger btn-sm" onclick="launchDeleteStudent('+studentId+')" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>\
+//					</td>\
+//				</tr>';
+//			}
+//			$("#students").html(html);
+//			$("#studentTable").DataTable({
+//				destroy : true,
+//				searching : true,
+//				responsive : true
+//			});
+//		} else {
+//			console.log(message);
+//		}
+//	}
+//})
+
 function getStudentsByBranch(branchId) {
 	$.fn.dataTable.ext.errMode = 'none';
 	var input = {};
@@ -127,126 +179,42 @@ function getStudentsByBranch(branchId) {
 	var inputStr = JSON.stringify(input);
 	console.log(inputStr);
 	inputStr = encodeURIComponent(inputStr);
-	$.ajax({
-		url: '../VI/GetStudentsByBranchServlet?input=' + inputStr,
-		method : "GET",
-		dataType : "json",
-		error : function(err) {
-			console.log(err);
-		},
-		success : function(data) {
-			console.log(data);
-			var status = data.status;
-			var students = data.message;
-			if(status == 1){
-				STUDENTS = students;
-				var html = '';
-				for ( var o in students) {
-					var student = students[o];
-					var studentId = student.studentId;
-					var date = student.createDate;
-					html += '\
-					<tr id="student-'+ studentId+ '">\
-						<td id="studentId-'+ studentId +'">'+ studentId +'</td>\
-						<td id="name-'+studentId+'">'+student.name+'</td>\
-						<td id="gender-'+studentId+'">'+student.gender+'</td>\
-						<td id="studentNric-'+studentId+'">'+student.studentNric+'</td>\
-						<td id="birthDate-'+studentId+'">'+student.birthDate+'</td>\
-						<td id="homeContact-'+studentId+'">'+student.homeContact+'</td>\
-						<td id="emergencyContact-'+studentId+'">'+student.emergencyContact+'</td>\
-						<td id="address-'+studentId+'">'+student.address+'</td>\
-						<td id="postalCode-'+studentId+'">'+student.postalCode+'</td>\
-						<td id="schoolName-'+studentId+'">'+student.schoolName+'</td>\
-						<td id="schoolLevel-'+studentId+'">'+student.schoolLevel+'</td>\
-						<td id="takenDiagnostic-'+studentId+'">'+student.takenDiagonstic+'</td>\
-						<td id="points-'+studentId+'">'+student.points+'</td>\
-						<td>'+date.replace("T", "  ")+'</td>\
-						<td>\
-							<button class="btn btn-sm btn-info btn-sm" onclick="launchEditStudent('+studentId+')" title="Edit"><i class="glyphicon glyphicon-pencil"></i></button>\
-							<button class="btn btn-sm btn-danger btn-sm" onclick="launchDeleteStudent('+studentId+')" title="Delete"><i class="glyphicon glyphicon-trash"></i></button>\
-						</td>\
-					</tr>';
-				}
-				$("#students").html(html);
-				$("#studentTable").DataTable({
-					destroy : true,
-					searching : true,
-					responsive : true
-				});
-			} else {
-				console.log(message);
-			}
-		}
-	})
-	
-	
-//	var table = $('#studentTable')
-//			.on(
-//					'error.dt',
-//					function(e, settings, techNote, message) {
-//						console.log(
-//								'An error has been reported by DataTables: ',
-//								message);
-//					})
-//			.DataTable(
-//					{
-//						ajax : {
-//							url : '../VI/GetStudentsByBranchServlet?input='
-//									+ inputStr,
-//							dataSrc : 'message'
-//						},
-//						columns : [
-//								{
-//									"data" : "studentId"
-//								},
-//								{
-//									"data" : 'name'
-//								},
-//								{
-//									"data" : 'gender'
-//								},
-//								{
-//									"data" : 'studentNric'
-//								},
-//								{
-//									"data" : 'birthDate'
-//								},
-//								{
-//									"data" : 'homeContact'
-//								},
-//								{
-//									"data" : 'EmergencyContact'
-//								},
-//								{
-//									"data" : 'address'
-//								},
-//								{
-//									"data" : 'postalCode'
-//								},
-//								{
-//									"data" : 'schoolName'
-//								},
-//								{
-//									"data" : 'schoolLevel'
-//								},
-//								{
-//									"data" : 'takenDiagnostic'
-//								},
-//								{
-//									"data" : 'points'
-//								},
-//								{
-//									"data" : 'createDate'
-//								},
-//								{
-//									"data" : null,
-//									"defaultContent" : '<button class="btn btn-sm btn-warning fa" onclick="editStudent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteStudent();" title="Delete"><i class="fa fa-trash-o"></i></button>'
-//								} ]
-//					});
+
+	var table = $('#studentTable').on('error.dt',
+					function(e, settings, techNote, message) {
+						console.log('An error has been reported by DataTables: ', message);
+					}).DataTable(
+					{
+					ajax : {
+						url : '../VI/GetStudentsByBranchServlet?input=' + inputStr,
+							dataSrc : 'message'
+						},
+						columns : [
+								{"data" : "studentId"},
+								{"data" : 'name'},
+								{"data" : 'gender'},
+								{"data" : 'studentNric'},
+								{"data" : 'birthDate'},
+								{"data" : 'homeContact'},
+								{"data" : 'emergencyContact'},
+//								{"data" : 'address'},
+//								{"data" : 'postalCode'},
+//								{"data" : 'schoolName'},
+//								{"data" : 'schoolLevel'},
+								{"data" : 'takenDiagnostic'},
+								{"data" : 'points'},
+								{"data" : null, "defaultContent" : '<button class="btn btn-sm btn-warning fa" onclick="launchEditStudent();" title="Edit"><i class="fa fa-pencil-square-o"></i></button><button class="btn btn-sm btn-danger fa" onclick="deleteStudent();" title="Delete"><i class="fa fa-trash-o"></i></button>'} 
+								],
+						destroy : true,
+						searching : true,
+						responsive: {
+							details: false
+						}
+					});
 }
 
-
-function launchEditStudent(id) {
+//edited until here.
+function launchEditStudent() {
 	$('#studentTable tbody').off('click').on( 'click', 'button', function () {
 		var student = {};
 		for(var s in STUDENTS){

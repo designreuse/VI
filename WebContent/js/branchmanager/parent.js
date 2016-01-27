@@ -107,7 +107,9 @@ function getParentsByBranch(branchId) {
 		          ],
 		destroy : true,
 		searching : true,
-		responsive : true
+		responsive: {
+			details: false
+		}
 	});
 }
 

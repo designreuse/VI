@@ -1,4 +1,4 @@
-$(document).ready(function() {
+	$(document).ready(function() {
 	var branchManagerId = localStorage.getItem('branchManagerId');
 	if (branchManagerId == null) {
 		window.location.replace('adminLogin.jsp');
@@ -156,7 +156,7 @@ function createSchedule(){
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
-		url : '../VI/CreateScheduleAndScheduleEventsServlet?input=' + inputStr, //this part sends to the servlet
+		url : '../VI/CreateSchedulesAndScheduleEventsServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {

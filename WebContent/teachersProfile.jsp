@@ -77,7 +77,7 @@
 												<th>Address</th>
 												<th>Nric</th>
 												<th>Qualification</th>
-												<th>Options</th>
+												<th class="all">Options</th>
 											</tr>
 										</thead>
 										<tbody id="teachers">
