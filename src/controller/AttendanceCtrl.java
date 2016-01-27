@@ -302,7 +302,7 @@ public class AttendanceCtrl {
 					AttendanceDAO.modifyAttendance(attendance);
 					
 					if(attendance.getActualStartDate() != null){
-						attendanceObj = attendance.toJsonMark();
+						attendanceObj = attendance.toJson();
 					} else {
 						attendanceObj = attendance.toJson();
 					}

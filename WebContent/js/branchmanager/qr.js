@@ -36,7 +36,6 @@ function getStudent(){
 			// if status == 1, it means that it is successful, else it will fail.
 			if (status == 1) {
 				STUDENT = message;
-				console.log(STUDENT + " pre");
 				generateQR();
 			} else {
 				$("#message").html(message);
@@ -46,8 +45,8 @@ function getStudent(){
 }
 
 function generateQR() {
-	console.log(STUDENT + " post");
-	var studentId = message.studentId;
+	var studentId = STUDENT.studentId;
+	console.log(studentId + " here");
 	
 	var input = {};
 

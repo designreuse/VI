@@ -98,37 +98,16 @@ function updateQRAttendance(studentId){
 					console.log(message);
 					// if status == 1, it means that it is successful. else it will fail
 					if (status == 1) {
+						var status = data.status;
+						var message = data.message;
+						
 						bootbox.alert("Attendance taken! Welcome to class, " + message.student.name, function() {
 							});
 						//call the send email servlet to send the email
-						console.log("here!!!");
-						var studentName = message.student.name;
-						var parentName = message.parent.name;
-						var email = message.parent.email;
-						
-						var input = {};
-						input.studentName = studentName;
-						input.parentName = parentName;
-						input.email = email;
-						
-						var inputMsg = JSON.stringify(input);
-						console.log(inputMsg);
-						
-						$.ajax({
-							url : '../VI/system/SendEmailServlet?input=' + inputMsg, 
-							method : 'POST',
-							dataType : 'json',
-							error : function(err) {
-								console.log(err);
-								//$("#message").html(err);
-							},
-							success : function(data) {
-								console.log(data);
-								var status = data.status; //shows the  success/failure of the servlet request
-								var message = data.message;
-								console.log("email sent");
-							}
-						});
+//						console.log("here!!!");
+						sendEmail(message);
+						sendSMS(message);
+
 					} else {
 						$("#message").html("Something's wrong, please try again!");
 					}
@@ -270,4 +249,85 @@ function getScheduleEvents() {
 		}
 	});
 	}
+}
+
+function sendEmail(message){
+	var studentName = message.student.name;
+	var parentName = message.student.parent.name;
+	var email = message.student.parent.email;
+	
+	var input = {};
+	input.studentName = studentName;
+	input.parentName = parentName;
+	input.email = email;
+	
+	var inputMsg = JSON.stringify(input);
+	console.log(inputMsg);
+	$.ajax({
+		url : '../VI/system/SendEmailServlet?input=' + inputMsg, 
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+			//$("#message").html(err);
+		},
+		success : function(data) {
+			console.log(data);
+			var status = data.status; //shows the  success/failure of the servlet request
+			var message = data.message;
+			console.log("email sent");
+		}
+	});
+}
+
+function sendSMS(message){
+	//appid=123&appsecret=e0b637e3-e218-4e9e- a52f-3967d9d2cb81&receivers= 6511111111%2C6522222222&content=This%20is%20a%20test%20message.&responseformat =JSON
+	//http://www.smsdome.com/api/http/sendsms.aspx?appid=1408&appsecret=4c76978e-01c3-43b4-bc57-9d82681f1485&receivers=6591267284&content=%5BExplore%20And%20Learn%5D%20Attendance%20notification.%20Your%20child%20Amanda%20has%20attended%20class.&responseformat=JSON
+	var appId = "appid=1408";
+	var appSecret = "appsecret=4c76978e-01c3-43b4-bc57-9d82681f1485";
+	var receivers = "receivers=65" + message.student.parent.contact;
+	var studentName = message.student.name;
+	var content = "content=[Explore And Learn] Attendance notification." + " Your child " + studentName + " has attended class.&responseformat=JSON";	
+//	var content = "content=[Explore%20And%20Learn]%20Attendance%20notification." + "%20Your child%20" + studentName + "%20has attended class.";
+	
+	var input = appId + "&" + appSecret + "&" + receivers + "&" + content;
+	var url = encodeURI(input);
+//	console.log(url);
+	
+	var theUrl = "https://www.smsdome.com/api/http/sendsms.aspx?" + url;
+
+//	var xhr = new XMLHttpRequest();
+//	xhr.open("GET", theUrl, true);
+//	xhr.onload = function (e) {
+//	  if (xhr.readyState === 4) {
+//	    if (xhr.status === 200) {
+//	      console.log(xhr.responseText);
+//	    } else {
+//	      console.error(xhr.statusText);
+//	    }
+//	  }
+//	};
+//	xhr.onerror = function (e) {
+//	  console.error(xhr.statusText);
+//	};
+//	xhr.send(null);
+
+	
+	$.ajax({
+		url : 'https://www.smsdome.com/api/http/sendsms.aspx?' + url, 
+		method : 'GET',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			var result = data.result;
+			var content = data.content;
+			var credit = data.creadit;
+			var recivers = data.recivers;
+			
+			console.log(result.status);
+			console.log("sms sent");
+		}
+	});
 }

@@ -85,8 +85,8 @@ public class GenerateQRCodeServlet extends HttpServlet {
 			int qrCodewidth = 200;
 			
 			String format = "png";
-			String fileName = "QR" + qrCodeData;
-			FileOutputStream os = new FileOutputStream(System.getenv("OPENSHIFT_DATA_DIR") + fileName);
+			String fileName = "QR" + qrCodeData +".png";
+			FileOutputStream os = new FileOutputStream(new File(System.getenv("OPENSHIFT_DATA_DIR") + fileName));
 			//+ uploadDirectory+"/"+folderName+File.separator+folderName+dateString+fileName;
 			
 			String qr = new String(qrCodeData.getBytes(charset));
