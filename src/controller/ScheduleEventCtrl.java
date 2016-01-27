@@ -169,11 +169,12 @@ public class ScheduleEventCtrl {
 				while(compareDate.compareTo(scheduleEndDate)<=0){
 					ScheduleEvent scheduleEvent = new ScheduleEvent(compareDate, date, schedule, classroom);
 					ScheduleEventDAO.addScheduleEvent(scheduleEvent);
+					returnArray.add(scheduleEvent.toJsonSimple());
 					compareDate = Config.addDaysToDate(compareDate, schedule.getRecFrequency());
 					date = Config.addDaysToDate(date, schedule.getRecFrequency());
 				}
-				returnJson.put(Key.START, Value.SUCCESS);
-				returnJson.put(Key.ATTENDANCES, returnArray);
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.SCHEDULEEVENTS, returnArray);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.SCHEDULENOTEXIST);
