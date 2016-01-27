@@ -149,7 +149,7 @@
 											             </div>
 														
 														<div class="form-group">
-															<label for="scheduleFrequency">Frequency of class</label>
+															<label for="scheduleFrequency">Duration of class</label>
 															<input class="form-control input-sm" id="scheduleDuration"
 															name="scheduleDuration" type="text" placeholder="Duration of class" required />
 														</div>

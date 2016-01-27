@@ -4,7 +4,7 @@
 		window.location.replace('adminLogin.jsp');
 	} else {
 		getSchedules();
-		calendarInitiate();
+//		calendarInitiate();
 		$('#scheduleRange').daterangepicker({
 			timePicker : true,
 			timePickerIncrement : 30,
@@ -135,21 +135,21 @@ function createSchedule(){
 	var scheduleName = $("#scheduleName").val();
 	var scheduleDesc = $("#scheduleDesc").val();
 	var scheduleRange = $("#scheduleRange").val();
-	var teacherId = $('#teacherDDL').val();
+	var teacherId = Number($('#teacherDDL').val());
 	var courseId = $('#courseDDL').val();
-	var classroomId = $('#classroomDDL').val();
-	var scheduleDuration =  $("#scheduleDuration").val();
+	var classroomId = Number($('#classroomDDL').val());
+	var scheduleDuration =  Number($("#scheduleDuration").val());
 
-	var startDate = moment(new Date(scheduleRange.slice(0, 19)));
-	var endDate = moment(new Date(scheduleRange.slice(22, 41)));
+	var startDate = moment(new Date(scheduleRange.slice(0, 19))).format('YYYY-MM-DD[T]HH:mm:ss');
+	var endDate = moment(new Date(scheduleRange.slice(22, 41))).format('YYYY-MM-DD[T]HH:mm:ss');
 
 	var input = {};
 	input.name = scheduleName;
 	input.description = scheduleDesc;
-	input.planStartDate = startDate;
-	input.planEndDate = endDate;
+	input.scheduleStartDate = startDate;
+	input.scheduleEndDate = endDate;
 	input.teacherId = teacherId;
-	input.courseId = courseId;
+	input.courses = courseId;
 	input.classroomId = classroomId;
 	input.duration = scheduleDuration;
 	
@@ -169,6 +169,7 @@ function createSchedule(){
 			var message = data.message;
 			
 			if (status == 1){
+				bootbox.alert(scheduleName + " is successfully added!");
 				window.location.reload();
 			}
 		}
@@ -302,8 +303,8 @@ function getSchedules(){
 					 var scheduleEventId = message[e].scheduleEventId;
 					 var name = message[e].schedule.name;
 					 var description = message[e].schedule.description;
-					 var start = moment(message[e].planStartDate, "YYYY-MM-DD HH:mm:ss");
-					 var end = moment(message[e].planEndDate, "YYYY-MM-DD HH:mm:ss");
+					 var start = moment(message[e].planStartDate).format('YYYY-MM-DD[T]HH:mm:ss');
+					 var end = moment(message[e].planEndDate).format('YYYY-MM-DD[T]HH:mm:ss');
 					 
 					 var scheduleStr = {
 							 id: scheduleEventId,
@@ -317,6 +318,7 @@ function getSchedules(){
 				 }
 				localStorage.setItem("scheduleMsg", JSON.stringify(message));
 				localStorage.setItem("schedules", JSON.stringify(schedules));
+				calendarInitiate(schedules);
 				 
 			} else{
 				console.log(message);
@@ -325,8 +327,8 @@ function getSchedules(){
 	});
 }
 
-function calendarInitiate(){
-	var scheduleEvents = JSON.parse(localStorage.getItem("schedules"));
+function calendarInitiate(scheduleEvents){
+//	var scheduleEvents = JSON.parse(localStorage.getItem("schedules"));
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
@@ -339,7 +341,6 @@ function calendarInitiate(){
 		eventClick: function(calEvent, jsEvent, view) {
 			console.log(calEvent.id);
 			var id = calEvent.id;
-			console.log(id);
 			displayScheduleDetails(id);
 		 }
 	});

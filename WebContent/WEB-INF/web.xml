@@ -58,6 +58,14 @@
     <servlet-name>CreateScheduleAndScheduleEventsServlet</servlet-name>
     <url-pattern>/CreateScheduleAndScheduleEventsServlet</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>CreateSchedulesAndScheduleEventsServlet</servlet-name>
+    <servlet-class>service.CreateSchedulesAndScheduleEventsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateSchedulesAndScheduleEventsServlet</servlet-name>
+    <url-pattern>/CreateSchedulesAndScheduleEventsServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>CreateTeacherFeedbackServlet</servlet-name>
     <servlet-class>service.CreateTeacherFeedbackServlet</servlet-class>
