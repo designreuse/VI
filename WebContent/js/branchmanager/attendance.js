@@ -123,10 +123,10 @@ function getValue() {
 				$("#message").html("System has some error. Please try again.");
 			},
 			success : function(data) {
-				console.log(data);
+//				console.log(data);
 				var status = data.status;
 				var message = data.message;
-				console.log(message);
+//				console.log(message);
 
 				if (status == 1) {
 					bootbox.alert("Update is successful!")
@@ -134,7 +134,7 @@ function getValue() {
 					
 					//call the send email servlet to send the email
 					sendEmail(message);
-//					sendSMS(message);
+					sendSMS(message);
 
 				} else {
 					$("#message").html("Something's wrong, please try again!");
@@ -418,9 +418,9 @@ function sendSMS(message){
 	
 	var input = appId + "&" + appSecret + "&" + receivers + "&" + content;
 	var url = encodeURI(input);
-	console.log(url);
+//	console.log(url);
 	
-	var theUrl = "http://www.smsdome.com/api/http/sendsms.aspx?" + url;
+	var theUrl = "https://www.smsdome.com/api/http/sendsms.aspx?" + url;
 
 //	var xhr = new XMLHttpRequest();
 //	xhr.open("GET", theUrl, true);
@@ -439,20 +439,21 @@ function sendSMS(message){
 //	xhr.send(null);
 
 	
-//	$.ajax({
-//		url : 'http://www.smsdome.com/api/http/sendsms.aspx?' + url, 
-//		method : 'GET',
-//		dataType : 'json',
-//		error : function(err) {
-//			console.log(err);
-//		},
-//		success : function(data) {
-//			var result = data.result;
-//			var content = data.content;
-//			var credit = data.creadit;
-//			var recivers = data.recivers;
-//			
-//			console.log(result.status);
-//		}
-//	});
+	$.ajax({
+		url : 'https://www.smsdome.com/api/http/sendsms.aspx?' + url, 
+		method : 'GET',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			var result = data.result;
+			var content = data.content;
+			var credit = data.creadit;
+			var recivers = data.recivers;
+			
+			console.log(result.status);
+			console.log("sms sent");
+		}
+	});
 }
