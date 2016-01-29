@@ -66,15 +66,15 @@
 						                
 						                <div class="carousel-inner">
 						                  <div class="item active">
-						                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="First slide">
+						                    <img src="./img/Chinese-New-Year-2016-Greetings-3.jpg" alt="First slide">
 						                  </div>
 						                  
 						                  <div class="item">
-						                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Second slide">
+						                    <img src="./img/latest-happy-new-year-2016-photos.jpg" alt="Second slide">
 						                  </div>
 						                  
 						                  <div class="item">
-						                    <img src="http://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
+						                    <img src="./img/merry_christmas_new-wide.jpg" alt="Third slide">
 						                  </div>
 						                </div>
 						                
@@ -92,7 +92,7 @@
 						          	<div class="box box-warning box-solid">
 							          	<div class="box-header with-border"><h3 class="box-title">Happy New Year, 2016!</h3></div>
 							          		<div class="box-body">
-							          			Happy New Year to all parents! Thank you for the tremendous support from all parents. We will do our best!
+							          			Happy Chinese New Year to all parents! Thank you for the tremendous support from all parents. We will do our best!
 							          		</div>
 							          	</div>
 							          	
@@ -120,10 +120,10 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+    	Stay hungry. Stay foolish.
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2015 <a href="exploreandlearn.com">Explore And Learn</a>.</strong> All rights reserved.
   </footer>
 
 </div>
