@@ -46,7 +46,7 @@ function viewChildren(id) {
 								<div class="box-body">\
 									<div class="row">\
 										<div class="col-md-3 col-lg-3" align="center">\
-											<img alt="Student Pic" src="" class="img-circle img-responsive">\
+											<img alt="Student Pic" src="dist/img/avatar2.png" class="img-circle img-responsive">\
 										</div>\
 										<div class="col-md-6 col-lg-6">\
 											<table class="table table-user-information">\

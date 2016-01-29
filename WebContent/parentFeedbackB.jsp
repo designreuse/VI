@@ -60,7 +60,7 @@
 				<div class="col-md-3">
 					<div class="box box-warning">
 			            <div class="box-body box-profile">
-			              <img class="profile-user-img img-responsive img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
+			              <img class="profile-user-img img-responsive img-circle" src="dist/img/avatar3.png" alt="User profile picture">
 			
 			              <h3 class="profile-username text-center">Cindy</h3>
 			
@@ -155,7 +155,7 @@
 							                <dd>120</dd><br>
 							                
 							                <dt>Feedback</dt>
-							                <dd>Quiet and does her work promptly. Can be a little lost at times.
+							                <dd>Does her work promptly, but Cindy does not interact much with the teachers.
 							                </dd>
 							              </dl>
 									</div>
@@ -190,7 +190,7 @@
 							                <dd>100</dd><br>
 							                
 							                <dt>Feedback</dt>
-							                <dd>Quiet and does her work promptly. Can be a little lost at times.
+							                <dd>Cindy is strong in her concepts of mental summations. Good! Needs to speak up more.
 							                </dd>
 							              </dl>
 									</div>
@@ -215,10 +215,10 @@
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+    	<strong>Copyright &copy; 2015 <a href="exploreandlearn.com">Explore And Learn</a>.</strong> All rights reserved.
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+    Helping students help themselves.
   </footer>
 
 </div>
