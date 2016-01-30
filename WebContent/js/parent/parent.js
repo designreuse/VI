@@ -169,7 +169,13 @@ function editStudent(id){
 				$("#postalCode-" + id).html(student.postalCode);
 				$("#schoolName-" + id).html(student.schoolName);
 				$("#schoolLevel-" + id).html(student.schoolLevel);
-				
+				for(var s in STUDENTS){
+					var tempStudent = STUDENTS[s];
+					if(tempStudent.studentId == id){
+						STUDENTS[s] = student;
+						break;
+					}
+				}
 				$("#editStudent").modal("hide");
 			} else {
 				$("#message").html(data.message);
