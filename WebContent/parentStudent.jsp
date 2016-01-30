@@ -82,7 +82,7 @@
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
 									<input type='text' class='form-control' id='nricEdit' pattern="^[SFTG]\d{7}[A-Z]$"
-									title="NRIC only" required placeholder='student nric'>
+									title="Please insert NRIC into the following format: #0000000@ where # is either S,T,F,G" required placeholder='student nric'>
 								</div>
 							</div>
 							<div class='form-group'>
@@ -108,7 +108,7 @@
 									<span class="required">*</span>
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
-									<input type='text' class='form-control' id='addressEdit' pattern="^([1-zA-Z0-1@.\s]{1,255})$"
+									<input type='text' class='form-control' id='addressEdit'
 									title="Letters only" required placeholder='student address'>
 								</div>
 							</div>
@@ -118,7 +118,7 @@
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
 									<input type='text' class='form-control' id='postalCodeEdit' pattern="[0-9]{6}"
-									title="Letters only" required placeholder='address postal code'>
+									title="Numerical Values Only" required placeholder='address postal code'>
 								</div>
 							</div>
 							<div class='form-group'>

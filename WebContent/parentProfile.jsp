@@ -148,7 +148,7 @@
 								</label>
 								<div class='col-sm-8 col-md-8 col-lh-8'>
 									<input type='text' class='form-control' id='parentNricEdit' pattern="^[SFTG]\d{7}[A-Z]$"
-									title="NRIC only" required placeholder='parent nric'>
+									title="Please insert NRIC into the following format: #0000000@ where # is either S,T,F,G" required placeholder='parent nric'>
 								</div>
 							</div>
 							<div class='form-group'>
