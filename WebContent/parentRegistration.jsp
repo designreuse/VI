@@ -151,7 +151,7 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control" type="text" name="pOccupation"
-												id="occupation" />
+												id="occupation" required/>
 										</div>
 									</div>
 									<!-- added in occupation -->

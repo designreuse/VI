@@ -343,7 +343,7 @@ function getScheduleEvents() {
 	var input = {};
 	input.scheduleId = scheduleId;
 	var inputStr = JSON.stringify(input);
-	var i = encodeURIComponent(inputStr);
+	inputStr = encodeURIComponent(inputStr);
 
 	$.ajax({
 		url : '../VI/GetScheduleEventsByScheduleServlet?input=' + inputStr, // this part sends to

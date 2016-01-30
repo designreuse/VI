@@ -66,7 +66,7 @@
 					<div class="col-md-12">
 						<form class="form-validate form-horizontal myform"
 							id="register_form" method="post" action="diagnosticSuccess.jsp"
-							onsubmit="submitDiagnostic();return false;">
+							onsubmit="getStudentByNric();return false;">
 
 							<!-- Need to create submitDiagnostic() -->
 
@@ -95,46 +95,43 @@
 										</label>
 										<div class="col-lg-10">
 											<input class="form-control " id="studentNric" type="text"
-												name="sName" pattern="^[SFTG]\d{7}[A-Z]$"
-												title="NRIC only" required />
+												name="sName" pattern="^[SFTG]\d{7}[A-Z]$" title="NRIC only"
+												required />
 										</div>
 									</div>
 									<div class="form-group ">
-										<label for="coursesEnrolled" class="control-label col-lg-2">Courses
-											Enrolled<span class="required">*</span>
+										<label for="coursesEnrolled" class="control-label col-lg-2">Course
+											Taken<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
 											<div id="course_points">
-												<input type="checkbox" id="course" class="enable_cb"
-													name="course1" value="Math">Math
-
-												<div class="enter_text">
-													Starting Point: <input type='button' value='-'
-														class='qtyminus' field='math' /> <input type='number'
-														name='math' value='0' class='qty' /> <input type='button'
-														value='+' class='qtyplus' field='math' />
-												</div>
-
-												<input type="checkbox" id="course" class="enable_cb"
-													name="course2" value="English">English
-
-												<div class="enter_text">
-													Starting Point: <input type='button' value='-'
-														class='qtyminus' field='eng' /> <input type='number'
-														name='eng' value='0' class='qty' /> <input type='button'
-														value='+' class='qtyplus' field='eng' />
-												</div>
-
-												<input type="checkbox" id="course" class="enable_cb"
-													name="course3" value="Korean">Korean
-
-												<div class="enter_text">
-													Starting Point: <input type='button' value='-'
-														class='qtyminus' field='korean' /> <input type='number'
-														name='korean' value='0' class='qty' /> <input
-														type='button' value='+' class='qtyplus' field='korean' />
-												</div>
+												<input type="radio" id="math" class="enable_cb"
+													name="course" value="Math">Math <input type="radio"
+													id="english" class="enable_cb" name="course"
+													value="English">English <input type="radio"
+													id="korean" class="enable_cb" name="course" value="Korean">Korean
 											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="results" class="control-label col-lg-2">Results<span
+											class="required">*</span>
+										</label>
+										<div class="col-lg-10">
+											<input class="form-control " id="results" type="text"
+												name="sResults" pattern="^[0-9]+$" title="Numbers only"
+												required />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="courseLevel" class="control-label col-lg-2">Course Level<span
+											class="required">*</span>
+										</label>
+										<div class="col-lg-10">
+											<input class="form-control " id="courseLevel" type="text"
+												name="sCourseLevel" pattern="^[0-9]+$" title="Numbers only"
+												required />
 										</div>
 									</div>
 									<div class="form-group">

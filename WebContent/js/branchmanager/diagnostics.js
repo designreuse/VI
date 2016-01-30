@@ -3,30 +3,31 @@ $(document).ready(function() {
 	if (branchManagerId == null) {
 		window.location.replace('adminLogin.jsp');
 	} else {
-		checkbox();
-		qty();
+//		checkbox();
+//		qty();
 	}
 });
 
+var STUDENT;
 
 function submitDiagnostic(){
-	var studentName = $("studentName").val();
-	var studentNric = $("studentNric").val();
-	var coursesEnrolled = [];
-	$("#enable_cb input:checked").each(function(){
-		coursesEnrolled.push(this.name);
-	});
-	console.log(coursesEnrolled);
+	//studentId, subjectName, resultValue
+	var studentId = STUDENT.studentId;
+	var subjectName = document.querySelector('input[name="course"]:checked').value;
+	var resultValue = $("#results").val();
+	var courseLevel = $("#courseLevel").val();
 	
 	var input = {};
-	// need to find all the inputs needed 
-	// MISSING HERE
+	input.studentId = studentId;
+	input.subjectName = subjectName;
+	input.resultValue = resultValue;
+	input.courseLevel = courseLevel;
 	
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 	$.ajax({
 		// need to add in the servlet name 
-		url : '../VI/GetStudentById?input=' + inputStr, //this part sends to the servlet
+		url : '../VI/CreateDiagnosticsServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {
@@ -40,8 +41,6 @@ function submitDiagnostic(){
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
 				alert("Updated successfully");	
-				var diagnosticMessage = message;
-				localStorage.setItem("diagnosticMessage", diagnosticMessage);
 				window.location = "diagnosticSuccess.jsp";
 			} else {
 				$("#message").html(message);
@@ -95,4 +94,80 @@ function qty(){
 			$('input[name='+fieldName+']').val(0);
 		}
 	});
+}
+
+function getStudentByNric(){
+	var studentNric = $("#studentNric").val();
+	var input = {};
+	input.studentNric = studentNric;
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+
+	$.ajax({
+		url : '../VI/GetStudentByNric?input=' + inputStr, // this part sends to
+		// the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			;
+			var status = data.status; // shows the success/failure of the
+			// servlet request
+			if (status == 1) {
+				STUDENT = data.message;
+				submitDiagnostic();
+			} else {
+				console.log(message);
+			}
+		}
+	});
+	
+}
+
+
+function getSchedules() {
+	//TeacherStudentCourse
+	var courseName = $("#selectCourse").val();
+	for(var j = 0; j < COURSES.length; j++){
+		//console.log(COURSES[j].name);
+		if(courseName == COURSES[j].name){
+			var courseId = COURSES[j].courseId;
+			var input = {};
+			input.courseId = courseId;
+			input.teacherId = teacherId;
+			var inputStr = JSON.stringify(input);
+			inputStr = encodeURIComponent(inputStr);
+		
+			$.ajax({
+				url : '../VI/GetSchedulesByCourseServlet?input=' + inputStr, // this part sends to
+				// the servlet
+				method : 'POST',
+				dataType : 'json',
+				error : function(err) {
+					console.log(err);
+				},
+				success : function(data) {
+					;
+					var status = data.status; // shows the success/failure of the
+					// servlet request
+					if (status == 1) {
+						// store scheduleIds
+						var scheduleIds = [];
+						
+						for (var i = 0; i < data.message.length; i++) {
+							var obj = data.message[i];
+							
+							scheduleIds.push(obj.scheduleId);
+							//console.log(scheduleIds);
+							localStorage["scheduleIds"] = JSON.stringify(scheduleIds);
+						}
+					} else {
+						console.log(message);
+					}
+				}
+			});
+		}
+	}
 }

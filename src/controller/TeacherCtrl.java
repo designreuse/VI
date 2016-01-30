@@ -201,7 +201,7 @@ public class TeacherCtrl {
 	public static JSONObject getTeacherByNric(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
 		try {
-			String nric = (String) inputJson.get(Key.PARENTNRIC);
+			String nric = (String) inputJson.get(Key.TEACHERNRIC);
 			Teacher teacher = TeacherDAO.getTeacherByNric(nric);
 			if (teacher != null) {
 				returnJson.put(Key.STATUS, Value.SUCCESS);

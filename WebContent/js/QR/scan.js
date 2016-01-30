@@ -11,6 +11,7 @@ $(document).ready(function() {
 	}
 });
 
+//need to select before scanning
 var COURSES;
 var SCHEDULEEVENTS;
 
