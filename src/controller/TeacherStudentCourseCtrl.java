@@ -34,13 +34,15 @@ public class TeacherStudentCourseCtrl {
 					Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 					if(student != null){
 						long courseLevel = (long) inputJson.get(Key.COURSELEVEL);
-						long bookletLevel = (long) inputJson.get(Key.BOOKLETLEVEL);
-						
+						long bookletLevel = 0; 
+						if(inputJson.get(Key.BOOKLETLEVEL) != null){
+							bookletLevel = (long) inputJson.get(Key.BOOKLETLEVEL);
+						}
 						TeacherStudentCourse teacherStudentCourse = new TeacherStudentCourse(course, teacher, student, courseLevel, bookletLevel);
 						TeacherStudentCourseDAO.addTeacherStudentCourse(teacherStudentCourse);
 						
 						returnJson.put(Key.STATUS, Value.SUCCESS)  ;
-						returnJson.put(Key.MESSAGE, teacherStudentCourse.toJson());
+						returnJson.put(Key.MESSAGE, teacherStudentCourse.toJsonSimpleTSC());
 					} else {
 						returnJson.put(Key.STATUS, Value.FAIL);
 						returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);

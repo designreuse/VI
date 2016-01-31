@@ -7,6 +7,7 @@ import org.json.simple.JSONObject;
 
 import system.Config;
 import system.Key;
+import system.Value;
 
 public class TeacherStudentCourse {
 	private long teacherStudentCourseId;
@@ -34,6 +35,8 @@ public class TeacherStudentCourse {
 		this.student = student;
 		this.courseLevel = courseLevel;
 		this.bookletLevel = bookletLevel;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
 	}
 
 	/**
@@ -219,11 +222,28 @@ public class TeacherStudentCourse {
 		return returnJson;
 	}
 	
+	public JSONObject toJsonSimpleTSC() {
+		JSONObject returnJson = new JSONObject();
+
+		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
+		returnJson.put(Key.COURSE, this.course.toJson());
+		returnJson.put(Key.TEACHER, this.teacher.toJsonSimple());
+		returnJson.put(Key.STUDENT, this.student.toJsonSimple());
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
 	public JSONObject toJsonStudent() {
 		JSONObject returnJson = new JSONObject();
 
 		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.STUDENT, this.student.toJsonSimple());
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
 
@@ -238,7 +258,7 @@ public class TeacherStudentCourse {
 		JSONObject returnJson = new JSONObject();
 
 		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
-		returnJson.put(Key.TEACHER, this.teacher.toJson());
+		returnJson.put(Key.TEACHER, this.teacher.toJsonSimple());
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
 

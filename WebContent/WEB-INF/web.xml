@@ -58,7 +58,7 @@
     <servlet-name>CreateScheduleAndScheduleEventsServlet</servlet-name>
     <url-pattern>/CreateScheduleAndScheduleEventsServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>CreateSchedulesAndScheduleEventsServlet</servlet-name>
     <servlet-class>service.CreateSchedulesAndScheduleEventsServlet</servlet-class>
   </servlet>
@@ -74,6 +74,16 @@
     <servlet-name>CreateTeacherFeedbackServlet</servlet-name>
     <url-pattern>/CreateTeacherFeedbackServlet</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>CreateTeacherStudentCourseServlet</servlet-name>
+    <servlet-class>service.CreateTeacherStudentCourseServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateTeacherStudentCourseServlet</servlet-name>
+    <url-pattern>/CreateTeacherStudentCourseServlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>DeleteParentServlet</servlet-name>
     <servlet-class>service.DeleteParentServlet</servlet-class>
@@ -722,7 +732,7 @@
     <servlet-name>SendSMSServlet</servlet-name>
     <url-pattern>/system/SendSMSServlet</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>GenerateQRCodeServlet</servlet-name>
     <servlet-class>service.system.GenerateQRCodeServlet</servlet-class>
   </servlet>
