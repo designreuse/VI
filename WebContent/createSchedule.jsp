@@ -138,7 +138,7 @@
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
 
-	<script src="./js/branchmanager/diagnostics.js"></script>
+	<script src="./js/branchmanager/schedule.js"></script>
 
 </body>
 </html>
