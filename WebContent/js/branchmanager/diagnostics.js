@@ -9,6 +9,8 @@ $(document).ready(function() {
 });
 
 var STUDENT;
+var COURSE;
+var SCHEDULES;
 
 function submitDiagnostic(){
 	//studentId, subjectName, resultValue
@@ -40,8 +42,10 @@ function submitDiagnostic(){
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
-				alert("Updated successfully");	
-				window.location = "diagnosticSuccess.jsp";
+				//courseId???
+				COURSE = data.message;
+				getSchedulesByCourse();
+				window.location = "createSchedule.jsp";
 			} else {
 				$("#message").html(message);
 			}
@@ -104,7 +108,7 @@ function getStudentByNric(){
 	inputStr = encodeURIComponent(inputStr);
 
 	$.ajax({
-		url : '../VI/GetStudentByNric?input=' + inputStr, // this part sends to
+		url : '../VI/GetStudentByNricServlet?input=' + inputStr, // this part sends to
 		// the servlet
 		method : 'POST',
 		dataType : 'json',
@@ -126,22 +130,78 @@ function getStudentByNric(){
 	
 }
 
+function getSchedulesByCourse() {
+	//courseId
+	var courseId = COURSE.courseId;
+	var input = {};
+	input.courseId = courseId;
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
 
-function getSchedules() {
-	//TeacherStudentCourse
-	var courseName = $("#selectCourse").val();
-	for(var j = 0; j < COURSES.length; j++){
-		//console.log(COURSES[j].name);
-		if(courseName == COURSES[j].name){
-			var courseId = COURSES[j].courseId;
+	$.ajax({
+		url : '../VI/GetSchedulesByCourseServlet?input=' + inputStr, // this part sends to
+		// the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			;
+			var status = data.status; // shows the success/failure of the
+			// servlet request
+			if (status == 1) {
+				// store scheduleIds
+				var scheduleIds = [];
+				
+				for (var i = 0; i < data.message.length; i++) {
+					var obj = data.message[i];
+					
+					scheduleIds.push(obj);
+					localStorage["schedules"] = JSON.stringify(schedules);
+				}
+				displaySchedules();
+			} else {
+				console.log(message);
+			}
+		}
+	});
+}
+
+function displaySchedules() {
+	var select = document.getElementById("selectSchedule");
+	var storedEvents = JSON.parse(localStorage["schedules"]);
+	var options = [];
+	for(var j = 0; j < storedEvents.length; j++){
+		var schedule = storedEvents[j];
+		options.push(schedule);
+	}
+
+	SCHEDULES = storedEvents;
+	
+	for(var i = 0; i < options.length; i++) {
+	    var opt = options[i].scheduleStartDate;
+	    var el = document.createElement("option");
+	    el.textContent = opt;
+	    el.value = opt;
+	    select.appendChild(el);
+	}
+}
+
+function createAttendancesForStudentBySchedule(){
+	var scheduleName = $("#selectSchedule").val();
+	for(var j = 0; j < SCHEDULES.length; j++){
+		if(scheduleName == SCHEDULES[j].name){
+			var scheduleId = SCHEDULES[j].scheduleId;
+			var studentId = STUDENT.studentId;
 			var input = {};
-			input.courseId = courseId;
-			input.teacherId = teacherId;
+			input.studentId = studentId;
+			input.scheduleId = scheduleId;
 			var inputStr = JSON.stringify(input);
 			inputStr = encodeURIComponent(inputStr);
 		
 			$.ajax({
-				url : '../VI/GetSchedulesByCourseServlet?input=' + inputStr, // this part sends to
+				url : '../VI/CreateAttendancesForStudentByScheduleServlet?input=' + inputStr, // this part sends to
 				// the servlet
 				method : 'POST',
 				dataType : 'json',
@@ -153,16 +213,8 @@ function getSchedules() {
 					var status = data.status; // shows the success/failure of the
 					// servlet request
 					if (status == 1) {
-						// store scheduleIds
-						var scheduleIds = [];
+						alert("Assigned successfully");	
 						
-						for (var i = 0; i < data.message.length; i++) {
-							var obj = data.message[i];
-							
-							scheduleIds.push(obj.scheduleId);
-							//console.log(scheduleIds);
-							localStorage["scheduleIds"] = JSON.stringify(scheduleIds);
-						}
 					} else {
 						console.log(message);
 					}

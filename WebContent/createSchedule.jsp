@@ -65,8 +65,8 @@
 				<div class="row">
 					<div class="col-md-12">
 						<form class="form-validate form-horizontal myform"
-							id="register_form" method="post" action="createSchedule.jsp"
-							onsubmit="getStudentByNric();return false;">
+							id="register_form" method="post" action="diagnosticSuccess.jsp"
+							onsubmit="createAttendancesForStudentBySchedule();return false;">
 
 							<div>
 								<font color="red" id="message"></font>
@@ -74,67 +74,22 @@
 
 							<div class="box box-solid">
 								<div class="box-header with-border">
-									<h4 class="box-title">Add Diagnostic Test Results</h4>
+									<h4 class="box-title">Assign Schedule for Student</h4>
 								</div>
 								<div class="box-body">
 									<div class="form-group">
-										<label for="sName" class="control-label col-lg-2">Name<span
+										<label for="sName" class="control-label col-lg-2">Schedule<span
 											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control " id="studentName" type="text"
-												name="sName" pattern="^([a-zA-Z\s]{1,255})$"
-												title="Letters only" required />
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="sNric" class="control-label col-lg-2">NRIC<span
-											class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control " id="studentNric" type="text"
-												name="sName" pattern="^[SFTG]\d{7}[A-Z]$" title="NRIC only"
-												required />
-										</div>
-									</div>
-									<div class="form-group ">
-										<label for="coursesEnrolled" class="control-label col-lg-2">Course
-											Taken<span class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<div id="course_points">
-												<input type="radio" id="math" class="enable_cb"
-													name="course" value="Math">Math <input type="radio"
-													id="english" class="enable_cb" name="course"
-													value="English">English <input type="radio"
-													id="korean" class="enable_cb" name="course" value="Korean">Korean
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="results" class="control-label col-lg-2">Results<span
-											class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control " id="results" type="text"
-												name="sResults" pattern="^[0-9]+$" title="Numbers only"
-												required />
-										</div>
-									</div>
-
-									<div class="form-group">
-										<label for="courseLevel" class="control-label col-lg-2">Course Level<span
-											class="required">*</span>
-										</label>
-										<div class="col-lg-10">
-											<input class="form-control " id="courseLevel" type="text"
-												name="sCourseLevel" pattern="^[0-9]+$" title="Numbers only"
-												required />
+											<select id="selectSchedule">
+												<option>Choose a schedule</option>
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-lg-offset-2 col-lg-10">
-											<button class="btn btn-primary" type="submit">Register</button>
+											<button class="btn btn-primary" type="submit">Assign</button>
 										</div>
 									</div>
 
