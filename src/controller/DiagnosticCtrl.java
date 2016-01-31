@@ -2,12 +2,14 @@ package controller;
 
 import java.util.Date;
 
+import model.Course;
 import model.Diagnostic;
 import model.Student;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.CourseDAO;
 import dataManager.DiagnosticDAO;
 import dataManager.StudentDAO;
 import system.Config;
@@ -141,23 +143,31 @@ public class DiagnosticCtrl {
 	//Create multiple diagnostics for student
 	public static JSONObject createDiagnosticsForStudent(JSONObject inputJson) {
 		JSONObject returnJson = new JSONObject();
+		JSONArray returnArr = new JSONArray();
 		try {
 			Student student = StudentDAO.getStudentById((long) inputJson.get(Key.STUDENTID));
 			if (student != null) {
 				JSONArray diagnosticArr = (JSONArray) inputJson.get(Key.DIAGNOSTICS);
 				for (Object o : diagnosticArr) {
+					JSONObject messageJson = new JSONObject();
 					JSONObject diagnosticObj = (JSONObject) o;
-					//TODO finish the implementation after HQ confirm the input array
-					String subjectName = (String) diagnosticObj.get(Key.SUBJECTNAME);
-					String resultValue = (String) diagnosticObj.get(Key.RESULTVALUE);
+					Course course = CourseDAO.getCourseById((long) diagnosticObj.get(Key.COURSEID));
+					if (course != null) {
+						String resultValue = (String) diagnosticObj.get(Key.RESULTVALUE);
+						Diagnostic diagnostic = new Diagnostic(resultValue, student, course);
+						DiagnosticDAO.addDiagnostic(diagnostic);
 
-					Diagnostic diagnostic = new Diagnostic(subjectName, resultValue, student);
-					DiagnosticDAO.addDiagnostic(diagnostic);
-
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, diagnostic.toJson());
+						messageJson.put(Key.STATUS, Value.SUCCESS);
+						messageJson.put(Key.DIAGNOSTIC, diagnostic.toJsonSimple());
+						returnArr.add(messageJson);
+					} else {
+						messageJson.put(Key.STATUS, Value.FAIL);
+						messageJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+						returnArr.add(messageJson);
+					}
 				}
-				
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, returnArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);

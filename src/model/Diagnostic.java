@@ -15,6 +15,7 @@ public class Diagnostic {
 	private String feedback;
 	
 	private Student student;
+	private Course course;
 	
 	private long objStatus;
 	private Date createDate;
@@ -22,11 +23,21 @@ public class Diagnostic {
 	
 	public Diagnostic(){}
 
-	public Diagnostic(String subjectName, String resultValue, Student student) {
+	public Diagnostic(String resultValue, Student student, Course course) {
+		super();
+		this.resultValue = resultValue;
+		this.student = student;
+		this.course = course;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());
+	}
+	
+	public Diagnostic(String subjectName, String resultValue, Student student, Course course) {
 		super();
 		this.subjectName = subjectName;
 		this.resultValue = resultValue;
 		this.student = student;
+		this.course = course;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -110,7 +121,21 @@ public class Diagnostic {
 	public void setStudent(Student student) {
 		this.student = student;
 	}
+	
+	/**
+	 * @return the course
+	 */
+	public Course getCourse() {
+		return course;
+	}
 
+	/**
+	 * @param course the course to set
+	 */
+	public void setCourse(Course course) {
+		this.course = course;
+	}
+	
 	/**
 	 * @return the objStatus
 	 */
@@ -152,7 +177,21 @@ public class Diagnostic {
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
+	
+	public JSONObject toJsonSimple() {
+		JSONObject returnJson = new JSONObject();
+		
+		returnJson.put(Key.DIAGNOSTICID, this.diagnosticId);
+		returnJson.put(Key.RESULTVALUE, this.resultValue);
+		returnJson.put(Key.FEEDBACK	, this.feedback);
 
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+		
+		return returnJson;
+	}
+	
 	public JSONObject toJson() {
 		JSONObject returnJson = new JSONObject();
 		
@@ -161,7 +200,8 @@ public class Diagnostic {
 		returnJson.put(Key.RESULTVALUE, this.resultValue);
 		returnJson.put(Key.FEEDBACK	, this.feedback);
 
-		returnJson.put(Key.STUDENT, this.student.toJson());
+		returnJson.put(Key.STUDENT, this.student.toJsonSimple());
+		returnJson.put(Key.COURSE, this.course.toJson());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -169,4 +209,5 @@ public class Diagnostic {
 		
 		return returnJson;
 	}
+
 }

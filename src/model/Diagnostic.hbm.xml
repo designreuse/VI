@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 28, 2015 9:24:11 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Jan 31, 2016 9:54:54 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Diagnostic" table="DIAGNOSTIC">
         <id name="diagnosticId" type="long">
@@ -19,6 +19,9 @@
         </property>
         <many-to-one name="student" class="model.Student" fetch="join">
             <column name="STUDENTID" />
+        </many-to-one>
+        <many-to-one name="course" class="model.Course" fetch="join">
+            <column name="COURSEID" />
         </many-to-one>
         <property name="objStatus" type="long">
             <column name="OBJSTATUS" />
