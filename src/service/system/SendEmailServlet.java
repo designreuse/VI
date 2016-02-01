@@ -78,7 +78,7 @@ public class SendEmailServlet extends HttpServlet {
 			
 			// Recipient's email
 			String to = (String) inputJson.get(Key.EMAIL);
-			System.out.println(to + " here!!");
+			String teacherName = (String)inputJson.get(Key.TEACHERNAME);
 			
 			//email server configuration
 		   
@@ -124,6 +124,7 @@ public class SendEmailServlet extends HttpServlet {
 				// Set Subject: header field
 				message.setSubject("[Explore And Learn] Attendance notification.");
 				
+				//ADD IN TEACHER NAME
 				// Now set the actual message in html format
 				message.setText("Hello " + parentName + ", " +
 						"\n\nYour child " + studentName + " has attended class.\n\n\n" +

@@ -23,6 +23,8 @@
         <li class="active"><a href="teacherProfile.jsp"><i class="fa fa-link"></i> <span>Profile</span></a></li>
         
         <li class="active"><a href="QR.jsp"><i class="fa fa-link"></i> <span>Attendance Taking</span></a></li>
+        
+        <li class="active"><a href="studentGrading.jsp"><i class="fa fa-link"></i> <span>Student Grading</span></a></li>
 
         
       </ul>

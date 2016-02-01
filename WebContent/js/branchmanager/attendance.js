@@ -297,7 +297,7 @@ function getSchedules() {
 						
 						for (var i = 0; i < data.message.length; i++) {
 							var obj = data.message[i];
-							
+							localStorage.setItem("teacherName",obj.teacher.name);
 							scheduleIds.push(obj.scheduleId);
 							//console.log(scheduleIds);
 							localStorage["scheduleIds"] = JSON.stringify(scheduleIds);
@@ -381,11 +381,13 @@ function sendEmail(message){
 	var studentName = message.student.name;
 	var parentName = message.student.parent.name;
 	var email = message.student.parent.email;
-	
+	var teacherName = localStorage.getItem("teacherName");
+
 	var input = {};
 	input.studentName = studentName;
 	input.parentName = parentName;
 	input.email = email;
+	input.teacherName = teacherName;
 	
 	var inputMsg = JSON.stringify(input);
 	console.log(inputMsg);
@@ -413,6 +415,8 @@ function sendSMS(message){
 	var appSecret = "appsecret=4c76978e-01c3-43b4-bc57-9d82681f1485";
 	var receivers = "receivers=65" + message.student.parent.contact;
 	var studentName = message.student.name;
+	var teacherName = localStorage.getItem("teacherName");
+	//ADD IN TEACHER NAME
 	var content = "content=[Explore And Learn] Attendance notification." + " Your child " + studentName + " has attended class.&responseformat=JSON";	
 //	var content = "content=[Explore%20And%20Learn]%20Attendance%20notification." + "%20Your child%20" + studentName + "%20has attended class.";
 	
