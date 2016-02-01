@@ -386,6 +386,14 @@
     <servlet-name>GetStudentByNricServlet</servlet-name>
     <url-pattern>/GetStudentByNricServlet</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>GetStudentByIdServlet</servlet-name>
+    <servlet-class>service.GetStudentByIdServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetStudentByIdServlet</servlet-name>
+    <url-pattern>/GetStudentByIdServlet</url-pattern>
+  </servlet-mapping>
   <servlet>
     <servlet-name>GetStudentsByBranchServlet</servlet-name>
     <servlet-class>service.GetStudentsByBranchServlet</servlet-class>
