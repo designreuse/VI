@@ -4,8 +4,6 @@ $(document).ready(function() {
 		window.location.replace('adminLogin.jsp');
 	} else {
 		getAllCourses();
-//		checkbox();
-//		qty();
 	}
 });
 

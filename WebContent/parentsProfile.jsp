@@ -128,8 +128,8 @@
 										<span class="required">*</span>
 									</label>
 									<div class='col-sm-8 col-md-8 col-lh-8'>
-										<input type='text' class='form-control' id='contactEdit' pattern="^[+]?\d*$"
-											title="Numbers only" required placeholder='parent contact'>
+										<input type='text' class='form-control' id='contactEdit' pattern="[0-9]{8}"
+											title="Singapore local numbers only, eg.xxxx xxxx" required placeholder='parent contact'>
 									</div>
 								</div>
 								<div class='form-group'>

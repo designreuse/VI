@@ -161,11 +161,11 @@
 											Phone <span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input class="form-control" id="contactNumber" name="contact"
-												type="text" pattern="^[+]?\d*$" title="Numbers only"
-												required />
+											<input type='text' class='form-control' id="contactNumber" pattern="[0-9]{8}"
+												title="Singapore local numbers only, eg.xxxx xxxx" required placeholder='parent contact'>
 										</div>
 									</div>
+									
 									<!--  removed address -->
 									<div class="form-group">
 										<div class="col-lg-offset-2 col-lg-10">
