@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.json.simple.JSONObject;
 
@@ -17,6 +18,7 @@ public class Result {
 	private long pointAmount;
 
 	private TeacherStudentCourse teacherStudentCourse;
+	private Set<TeacherFeedback> teacherFeedbacks;
 
 	private long objStatus;
 	private Date createDate;
@@ -155,6 +157,20 @@ public class Result {
 	public void setTeacherStudentCourse(
 			TeacherStudentCourse teacherStudentCourse) {
 		this.teacherStudentCourse = teacherStudentCourse;
+	}
+	
+	/**
+	 * @return the teacherFeedbacks
+	 */
+	public Set<TeacherFeedback> getTeacherFeedbacks() {
+		return teacherFeedbacks;
+	}
+
+	/**
+	 * @param teacherFeedbacks the teacherFeedbacks to set
+	 */
+	public void setTeacherFeedbacks(Set<TeacherFeedback> teacherFeedbacks) {
+		this.teacherFeedbacks = teacherFeedbacks;
 	}
 
 	/**

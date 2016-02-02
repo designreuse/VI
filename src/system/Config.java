@@ -38,10 +38,10 @@ public class Config {
 	public static final String PASSWORD = "exploreAndLearn";
 	
 	//TODO change the inputs below
-	public static final String ACCESSKEY = "AKIAI4KNTFI3L5YLROAQ";
-	public static final String SECRETKEY = "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";
-	public static final String BUKETNAME = "symplhrm";
-	public static final String S3ROOT = "Sympl";
+	public static final String ACCESSKEY = "AKIAI6GCULTK6JA7XECA";
+	public static final String SECRETKEY = "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";
+	public static final String BUKETNAME = "explore-and-learn";
+	public static final String S3ROOT = "pic";
 	public static final String S3URL = "https://s3-ap-southeast-1.amazonaws.com/";
 	
 

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Course;
+import model.Result;
 import model.Student;
 import model.Teacher;
 import model.TeacherFeedback;
@@ -48,10 +49,10 @@ public class TeacherFeedbackDAO {
 	}
 	
 	//features
-	public static ArrayList<TeacherFeedback> getTeacherFeedbacksByTeacherStudentCourse(TeacherStudentCourse teacherStudentCourse) {
+	public static ArrayList<TeacherFeedback> getTeacherFeedbacksByResult(Result result) {
 		ArrayList<TeacherFeedback> teacherFeedbacks = new ArrayList<TeacherFeedback>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
-		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, teacherStudentCourse));
+		detachedCriteria.add(Restrictions.eq(Key.RESULT, result));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
 		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
 		for(Object o : list){
@@ -60,47 +61,60 @@ public class TeacherFeedbackDAO {
 		return teacherFeedbacks;
 	}
 	
-	public static TeacherFeedback getLatestTeacherFeedbackByTSC(TeacherStudentCourse tsc){
-		TeacherFeedback tf = null;
-		if(tsc != null){
-			DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
-			detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
-			detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
-			detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-			List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 1);
-			for(Object o : list){
-				tf = (TeacherFeedback)o;
-			}
-		}
-		return tf;
-	}
 	
-	public static ArrayList<TeacherFeedback> getLatesThreeTeacherFeedbacksByTSC(TeacherStudentCourse tsc){
-		ArrayList<TeacherFeedback> teacherFeedbacks = new ArrayList<TeacherFeedback>();
-		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
-		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
-		detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
-		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 3);
-		for(Object o : list){
-			teacherFeedbacks.add((TeacherFeedback) o);
-		}
-		return teacherFeedbacks;
-	}
-	
-	public static ArrayList<TeacherFeedback> getFeedbacksByStudent(Student student){
-		ArrayList<TeacherFeedback> feedbacks = new ArrayList<TeacherFeedback>();
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		session.beginTransaction();
-		List<Object> list = session.createQuery("select tf from TeacherFeedback tf join tf.teacherStudentCourses tsc join tsc.Student s where s.student = :student")
-				.setParameter("student", student).list();
-		session.getTransaction().commit();
-		session.close();
-		for(Object o : list){
-			feedbacks.add((TeacherFeedback) o);
-		}
-		return feedbacks;
-	}
+//	public static ArrayList<TeacherFeedback> getTeacherFeedbacksByTeacherStudentCourse(TeacherStudentCourse teacherStudentCourse) {
+//		ArrayList<TeacherFeedback> teacherFeedbacks = new ArrayList<TeacherFeedback>();
+//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
+//		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, teacherStudentCourse));
+//		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+//		List<Object> list = HibernateUtil.detachedCriteriaReturnList(detachedCriteria);
+//		for(Object o : list){
+//			teacherFeedbacks.add((TeacherFeedback) o);
+//		}
+//		return teacherFeedbacks;
+//	}
+//	
+//	public static TeacherFeedback getLatestTeacherFeedbackByTSC(TeacherStudentCourse tsc){
+//		TeacherFeedback tf = null;
+//		if(tsc != null){
+//			DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
+//			detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
+//			detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
+//			detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+//			List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 1);
+//			for(Object o : list){
+//				tf = (TeacherFeedback)o;
+//			}
+//		}
+//		return tf;
+//	}
+//	
+//	public static ArrayList<TeacherFeedback> getLatesThreeTeacherFeedbacksByTSC(TeacherStudentCourse tsc){
+//		ArrayList<TeacherFeedback> teacherFeedbacks = new ArrayList<TeacherFeedback>();
+//		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(TeacherFeedback.class);
+//		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
+//		detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
+//		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
+//		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 3);
+//		for(Object o : list){
+//			teacherFeedbacks.add((TeacherFeedback) o);
+//		}
+//		return teacherFeedbacks;
+//	}
+//	
+//	public static ArrayList<TeacherFeedback> getFeedbacksByStudent(Student student){
+//		ArrayList<TeacherFeedback> feedbacks = new ArrayList<TeacherFeedback>();
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		session.beginTransaction();
+//		List<Object> list = session.createQuery("select tf from TeacherFeedback tf join tf.teacherStudentCourses tsc join tsc.Student s where s.student = :student")
+//				.setParameter("student", student).list();
+//		session.getTransaction().commit();
+//		session.close();
+//		for(Object o : list){
+//			feedbacks.add((TeacherFeedback) o);
+//		}
+//		return feedbacks;
+//	}
 	
 	
 }

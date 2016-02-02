@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 14, 2016 2:31:44 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Feb 2, 2016 7:36:46 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.Student" table="STUDENT">
         <id name="studentId" type="long">
@@ -37,6 +37,9 @@
         </property>
         <property name="studentNric" type="java.lang.String">
             <column name="STUDENTNRIC" />
+        </property>
+        <property name="profilePic" type="java.lang.String">
+            <column name="PROFILEPIC" />
         </property>
         <property name="points" type="long">
             <column name="POINTS" />

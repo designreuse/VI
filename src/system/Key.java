@@ -83,6 +83,7 @@ public class Key {
 	public static final String SCHOOLNAME = "schoolName";
 	public static final String SCHOOLLEVEL = "schoolLevel";
 	public static final String TAKENDIAGNOSTIC = "takenDiagnostic";
+	public static final String PROFILEPIC = "profilePic";
 	
 	public static final String BILL = "bill";
 	public static final String BILLS = "bills";
@@ -94,6 +95,7 @@ public class Key {
 	public static final String RESULTID = "resultId";
 	public static final String RESULTVALUE = "resultValue";
 	public static final String RESULTDATE = "resultDate";
+	public static final String CONTENTS = "contents";
 	
 	public static final String COURSE = "course";
 	public static final String COURSES = "courses";
@@ -181,6 +183,8 @@ public class Key {
 	public static final String SCHEDULEEVENTS = "scheduleEvents";
 	public static final String SCHEDULEEVENTID = "scheduleEventId";
 	public static final String STUDENTAMOUNT = "studentAmount";
+	
+	
 	
 	
 	

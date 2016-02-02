@@ -227,10 +227,15 @@ public class ResultCtrl {
 					ResultDAO.addResult(result);
 					messageJson.put(Key.RESULT, result.toJsonSimple());
 					
-					String content = (String) feedback.get(Key.CONTENT);
-					TeacherFeedback fb = new TeacherFeedback(content, teacherStudentCourse);
-					TeacherFeedbackDAO.addTeacherFeedback(fb);
-					messageJson.put(Key.TEACHERFEEDBACK, fb.toJsonSimple());
+					JSONArray feedbackArr = (JSONArray) feedback.get(Key.CONTENTS);
+					JSONArray contentReturn = new JSONArray();
+					for (Object o : feedbackArr) {
+						String content = (String) o;
+						TeacherFeedback fb = new TeacherFeedback(content, result);
+						TeacherFeedbackDAO.addTeacherFeedback(fb);
+						contentReturn.add(fb.toJsonSimple());
+					}
+					messageJson.put(Key.TEACHERFEEDBACKS, contentReturn);
 					
 					//update student point
 					Student s = teacherStudentCourse.getStudent();

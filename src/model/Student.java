@@ -25,6 +25,7 @@ public class Student {
 	private String schoolName;
 	private String schoolLevel;
 	private String studentNric;
+	private String profilePic;
 	private long points;
 	private long takenDiagnostic;
 
@@ -44,9 +45,9 @@ public class Student {
 	public Student() {
 	}
 	
-	public Student(String name, String gender, Date birthDate, String homeContact, 
-			String emergencyContact, String address, String postalCode, String schoolName, 
-			String schoolLevel, String studentNric, long takenDiagnostic, Parent parent, Branch branch) {
+	public Student(String name, String gender, Date birthDate, String homeContact, String emergencyContact, 
+			String address, String postalCode, String schoolName, String schoolLevel, String studentNric, 
+			String profilePic, long takenDiagnostic, Parent parent, Branch branch) {
 		super();
 		this.name = name;
 		this.gender = gender;
@@ -58,6 +59,7 @@ public class Student {
 		this.schoolName = schoolName;
 		this.schoolLevel = schoolLevel;
 		this.studentNric = studentNric;
+		this.profilePic = profilePic;
 		this.points = 0L;
 		this.parent = parent;
 		this.branch = branch;
@@ -218,6 +220,20 @@ public class Student {
 	 */
 	public void setStudentNric(String studentNric) {
 		this.studentNric = studentNric;
+	}
+
+	/**
+	 * @return the profilePic
+	 */
+	public String getProfilePic() {
+		return profilePic;
+	}
+
+	/**
+	 * @param profilePic the profilePic to set
+	 */
+	public void setProfilePic(String profilePic) {
+		this.profilePic = profilePic;
 	}
 
 	/**
@@ -403,6 +419,7 @@ public class Student {
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
+		returnJson.put(Key.PROFILEPIC, this.profilePic);
 		returnJson.put(Key.POINTS, this.points);
 		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
 
@@ -427,6 +444,7 @@ public class Student {
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
+		returnJson.put(Key.PROFILEPIC, this.profilePic);
 		returnJson.put(Key.POINTS, this.points);
 		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
 
@@ -453,6 +471,7 @@ public class Student {
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
+		returnJson.put(Key.PROFILEPIC, this.profilePic);
 		returnJson.put(Key.POINTS, this.points);
 		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
 
@@ -480,6 +499,7 @@ public class Student {
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
+		returnJson.put(Key.PROFILEPIC, this.profilePic);
 		returnJson.put(Key.POINTS, this.points);
 		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
 

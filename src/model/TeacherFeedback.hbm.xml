@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Dec 28, 2015 5:06:57 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Feb 2, 2016 11:12:30 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.TeacherFeedback" table="TEACHERFEEDBACK">
         <id name="teacherFeedbackId" type="long">
@@ -11,8 +11,8 @@
         <property name="content" type="java.lang.String">
             <column name="CONTENT" />
         </property>
-        <many-to-one name="teacherStudentCourse" class="model.TeacherStudentCourse" fetch="join">
-            <column name="TEACHERSTUDENTCOURSEID" />
+        <many-to-one name="result" class="model.Result" fetch="join">
+            <column name="RESULTID" />
         </many-to-one>
         <property name="objStatus" type="long">
             <column name="OBJSTATUS" />

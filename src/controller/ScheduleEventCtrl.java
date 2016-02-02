@@ -11,6 +11,7 @@ import model.Course;
 import model.Schedule;
 import model.ScheduleEvent;
 import model.Student;
+import model.Teacher;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -22,6 +23,7 @@ import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.ScheduleEventDAO;
 import dataManager.StudentDAO;
+import dataManager.TeacherDAO;
 import system.Config;
 import system.Key;
 import system.Message;
@@ -291,31 +293,57 @@ public class ScheduleEventCtrl {
 		return returnJson;
 	}
 	
-	// Get schedule events by branch
-		public static JSONObject getScheduleEventsByCourse(JSONObject inputJson) {
-			JSONObject returnJson = new JSONObject();
-			try {
-				Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
-				if (course != null) {
-					JSONArray scheduleEventArr = new JSONArray();
-					for (Schedule schedule : ScheduleDAO.getSchedulesByCourse(course)) {
-						for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(schedule)){
-							scheduleEventArr.add(se.toJsonStrong());
-						}
+	// Get schedule events by teacher
+	public static JSONObject getScheduleEventsByTeacher(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
+			if (teacher != null) {
+				JSONArray scheduleEventArr = new JSONArray();
+				for (Schedule schedule : ScheduleDAO.getSchedulesByTeacher(teacher)) {
+					for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(schedule)){
+						scheduleEventArr.add(se.toJsonStrong());
 					}
-					returnJson.put(Key.STATUS, Value.SUCCESS);
-					returnJson.put(Key.MESSAGE, scheduleEventArr);
-				} else {
-					returnJson.put(Key.STATUS, Value.FAIL);
-					returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
-				} 
-			} catch (Exception e) {
-				e.printStackTrace();
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, scheduleEventArr);
+			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, e);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
 			}
-			return returnJson;
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
 		}
+		return returnJson;
+	}
+	
+	// Get schedule events by course
+	public static JSONObject getScheduleEventsByCourse(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Course course = CourseDAO.getCourseById((long) inputJson.get(Key.COURSEID));
+			if (course != null) {
+				JSONArray scheduleEventArr = new JSONArray();
+				for (Schedule schedule : ScheduleDAO.getSchedulesByCourse(course)) {
+					for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(schedule)){
+						scheduleEventArr.add(se.toJsonStrong());
+					}
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, scheduleEventArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.COURSENOTEXIST);
+			} 
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 	
 	// Get schedule events by student
 	public static JSONObject getScheduleEventsByStudent(JSONObject inputJson) {

@@ -12,7 +12,7 @@ public class TeacherFeedback {
 	private long teacherFeedbackId;
 	
 	private String content;
-	private TeacherStudentCourse teacherStudentCourse;
+	private Result result;
 	
 	private long objStatus;
 	private Date createDate;
@@ -20,11 +20,10 @@ public class TeacherFeedback {
 	
 	public TeacherFeedback(){}
 
-	public TeacherFeedback(String content,
-			TeacherStudentCourse teacherStudentCourse) {
+	public TeacherFeedback(String content, Result result) {
 		super();
 		this.content = content;
-		this.teacherStudentCourse = teacherStudentCourse;
+		this.result = result;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());
 	}
@@ -58,17 +57,17 @@ public class TeacherFeedback {
 	}
 
 	/**
-	 * @return the teacherStudentCourse
+	 * @return the result
 	 */
-	public TeacherStudentCourse getTeacherStudentCourse() {
-		return teacherStudentCourse;
+	public Result getResult() {
+		return result;
 	}
 
 	/**
-	 * @param teacherStudentCourse the teacherStudentCourse to set
+	 * @param result the result to set
 	 */
-	public void setTeacherStudentCourse(TeacherStudentCourse teacherStudentCourse) {
-		this.teacherStudentCourse = teacherStudentCourse;
+	public void setResult(Result result) {
+		this.result = result;
 	}
 
 	/**
@@ -125,25 +124,25 @@ public class TeacherFeedback {
 		return returnJson;
 	}
 	
-	public JSONObject toJsonShowStudentAndTeacher(){
-		JSONObject returnJson = new JSONObject();
-		returnJson.put(Key.TEACHERFEEDBACKID, this.teacherFeedbackId);
-		returnJson.put(Key.CONTENT, this.content);
-		returnJson.put(Key.TEACHERSTUDENTCOURSE, this.teacherStudentCourse.toJsonShowStudentAndTeacher());
-		
-		returnJson.put(Key.OBJSTATUS, this.objStatus);
-		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
-		returnJson.put(Key.REMARK, this.remark);
-		
-		return returnJson;
-	}
+//	public JSONObject toJsonShowStudentAndTeacher(){
+//		JSONObject returnJson = new JSONObject();
+//		returnJson.put(Key.TEACHERFEEDBACKID, this.teacherFeedbackId);
+//		returnJson.put(Key.CONTENT, this.content);
+//		returnJson.put(Key.TEACHERSTUDENTCOURSE, this.result.toJsonShowStudentAndTeacher());
+//		
+//		returnJson.put(Key.OBJSTATUS, this.objStatus);
+//		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+//		returnJson.put(Key.REMARK, this.remark);
+//		
+//		return returnJson;
+//	}
 	
 	public JSONObject toJson(){
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.TEACHERFEEDBACKID, this.teacherFeedbackId);
 		returnJson.put(Key.CONTENT, this.content);
 		
-		returnJson.put(Key.TEACHERSTUDENTCOURSE, this.teacherStudentCourse.toJson());
+		returnJson.put(Key.RESULT, this.result.toJson());
 		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));

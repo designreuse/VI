@@ -19,7 +19,6 @@ public class TeacherStudentCourse {
 	private long bookletLevel;
 	
 	private Set<Result> results;
-	private Set<TeacherFeedback> teacherFeedbacks;
 
 	private long objStatus;
 	private Date createDate;
@@ -135,20 +134,6 @@ public class TeacherStudentCourse {
 	 */
 	public void setResults(Set<Result> results) {
 		this.results = results;
-	}
-
-	/**
-	 * @return the teacherFeedbacks
-	 */
-	public Set<TeacherFeedback> getTeacherFeedbacks() {
-		return teacherFeedbacks;
-	}
-
-	/**
-	 * @param teacherFeedbacks the teacherFeedbacks to set
-	 */
-	public void setTeacherFeedbacks(Set<TeacherFeedback> teacherFeedbacks) {
-		this.teacherFeedbacks = teacherFeedbacks;
 	}
 
 	/**
