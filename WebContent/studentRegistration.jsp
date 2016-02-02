@@ -30,8 +30,9 @@
 <link href='css/fullcalendar.print.css' rel='stylesheet' media='print' />
 
 <!-- daterange picker -->
-<link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
-	
+<link rel="stylesheet"
+	href="plugins/daterangepicker/daterangepicker-bs3.css">
+
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -226,44 +227,46 @@
 										<div class="col-lg-10">
 											<!-- 											<input class="form-control" id="schoolLevel"
 												name="schoolLevel" type="text" required /> -->
+
+											<select class="form-control" id="schoolLevel"
+												name="schoolLevel" required>
+												<option value="Nursery">Nursery</option>
+												<option value="Kindergarten 1">Kindergarten 1</option>
+												<option value="Kindergarten 2">Kindergarten 2</option>
+												<option value="Primary 1">Primary 1</option>
+												<option value="Primary 2">Primary 2</option>
+												<option value="Primary 3">Primary 3</option>
+												<option value="Primary 4">Primary 4</option>
+												<option value="Primary 5">Primary 5</option>
+												<option value="Primary 6">Primary 6</option>
+											</select>
 										</div>
-										<select id="schoolLevel" name="schoolLevel" required>
-											<option value="Nursery">Nursery</option>
-											<option value="Kindergarten 1">Kindergarten 1</option>
-											<option value="Kindergarten 2">Kindergarten 2</option>
-											<option value="Primary 1">Primary 1</option>
-											<option value="Primary 2">Primary 2</option>
-											<option value="Primary 3">Primary 3</option>
-											<option value="Primary 4">Primary 4</option>
-											<option value="Primary 5">Primary 5</option>
-											<option value="Primary 6">Primary 6</option>
-										</select>
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-lg-offset-2 col-lg-10">
-										<button class="btn btn-primary" type="submit">Save</button>
+									<div class="form-group">
+										<div class="col-lg-offset-2 col-lg-10">
+											<button class="btn btn-primary" type="submit">Save</button>
+										</div>
 									</div>
+
 								</div>
 							</div>
+						</form>
 					</div>
-					</form>
 				</div>
+			</section>
+
 		</div>
-		</section>
 
-	</div>
+		<!-- /.content-wrapper -->
 
-	<!-- /.content-wrapper -->
-
-	<!-- Main Footer -->
-	<footer class="main-footer">
-		<!-- To the right -->
-		<div class="pull-right hidden-xs">Anything you want</div>
-		<!-- Default to the left -->
-		<strong>Copyright &copy; 2015 <a href="#">Company</a>.
-		</strong> All rights reserved.
-	</footer>
+		<!-- Main Footer -->
+		<footer class="main-footer">
+			<!-- To the right -->
+			<div class="pull-right hidden-xs">Anything you want</div>
+			<!-- Default to the left -->
+			<strong>Copyright &copy; 2015 <a href="#">Company</a>.
+			</strong> All rights reserved.
+		</footer>
 
 	</div>
 	<!-- ./wrapper -->
@@ -277,14 +280,14 @@
 
 	<!-- jQuery UI 1.11.4 -->
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-	
+
 	<!-- fullCalender.io -->
 	<script src="./js/fullcalendar/lib/moment.min.js"></script>
 	<script src="./js/fullcalendar/fullcalendar.min.js"></script>
-	
+
 	<!-- date-range-picker -->
 	<script src="plugins/daterangepicker/daterangepicker.js"></script>
-	
+
 	<!-- Slimscroll -->
 	<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
@@ -298,7 +301,7 @@
 	<script src="dist/js/demo.js"></script>
 
 	<script src=".js/form-validation-script.js"></script>
-	
+
 	<script src="./js/branchmanager/student.js"></script>
 </body>
 </html>

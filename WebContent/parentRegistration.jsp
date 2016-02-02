@@ -135,11 +135,11 @@
 											<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<select name="relationship" id="relationship">
-												<option value="mother">Mother</option>
-												<option value="father">Father</option>
-												<option value="guardian">Guardian</option>
-												<option value="sibling">Sibling</option>
+											<select class="form-control" name="relationship" id="relationship">
+												<option value="Mother">Mother</option>
+												<option value="Father">Father</option>
+												<option value="Guardian">Guardian</option>
+												<option value="Sibling">Sibling</option>
 											</select>
 										</div>
 									</div>

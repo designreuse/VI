@@ -61,12 +61,18 @@
 							</div>
 
 							<div class="box-body">
-
-								<select id="selectCourse">
-									<option>Choose a course</option>
-								</select> <select id="selectScheduleEvent">
-									<option>Choose a schedule</option>
-								</select>
+								<div class="row">
+									<div class="col-lg-6">
+										<select class="form-control" id="selectCourse">
+											<option>Choose a course</option>
+										</select>
+									</div>
+									<div class="col-lg-6">
+										<select class="form-control" id="selectScheduleEvent">
+											<option>Choose a schedule</option>
+										</select>
+									</div>
+								</div>
 
 								<div class="dataTable_wrapper">
 									<table id="attendanceTable"
@@ -80,11 +86,11 @@
 												<th>Attendance</th>
 											</tr>
 										</thead>
-
 										<tbody>
 										</tbody>
 									</table>
 								</div>
+
 							</div>
 
 						</div>

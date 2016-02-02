@@ -82,7 +82,7 @@
 											class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<select id="selectSchedule">
+											<select class="form-control" id="selectSchedule">
 												<option>Choose a schedule</option>
 											</select>
 										</div>

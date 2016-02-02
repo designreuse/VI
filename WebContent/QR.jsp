@@ -58,20 +58,26 @@
 						<div class="box">
 							<div class="box-header">QR Code Scanning</div>
 							<div class="box-body">
-
-								<form action="manualAttendance.jsp" method="get">
-									<input class="btn btn-default" type="submit"
-										value="Manual Attendance Taking">
-								</form>
-
-								<select id="selectCourse">
-									<option>Choose a course</option>
-								</select>
-								
-								<select id="selectScheduleEvent">
-									<option>Choose a schedule</option>
-								</select>
-
+								<div class="row">
+									<div class="col-lg-6">
+										<form action="manualAttendance.jsp" method="get">
+											<input class="btn btn-default" type="submit"
+												value="Manual Attendance Taking">
+										</form>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<select class="form-control" id="selectCourse">
+											<option>Choose a course</option>
+										</select>
+									</div>
+									<div class="col-lg-6">
+										<select class="form-control" id="selectScheduleEvent">
+											<option>Choose a schedule</option>
+										</select>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-lg-4"></div>
 									<div class="col-lg-4">
