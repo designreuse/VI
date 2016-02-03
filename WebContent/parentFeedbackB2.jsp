@@ -88,6 +88,8 @@
 				              <li class="active"><a href="#tab_1" data-toggle="tab">Latest Feedback</a></li>
 				              <li><a href="#tab_2" data-toggle="tab">Feedback on 15/01/2016</a></li>
 				              <li><a href="#tab_3" data-toggle="tab">Feedback on 10/01/2016</a></li>
+				              <li><a href="#tab_4" data-toggle="tab">Feedback on 10/01/2016</a></li>
+				              <li><a href="#tab_5" data-toggle="tab">Feedback on 10/01/2016</a></li>
 				            </ul>
 				            
 			            <div class="tab-content">
@@ -109,6 +111,10 @@
 									
 									<div class="col-md-7">
 										<dl class="dl">
+										
+											<dt>Teacher</dt>
+							                <dd>Richard</dd><br>
+										
 							                <dt>Date</dt>
 							                <dd>22/01/2016</dd><br>
 							                
@@ -145,6 +151,10 @@
 									
 									<div class="col-md-7">
 										<dl class="dl">
+										
+											<dt>Teacher</dt>
+							                <dd>Richard</dd><br>
+										
 							                <dt>Date</dt>
 							                <dd>15/01/2016</dd><br>
 							                
@@ -180,6 +190,10 @@
 									
 									<div class="col-md-7">
 										<dl class="dl">
+										
+											<dt>Teacher</dt>
+							                <dd>Richard</dd><br>
+											
 							                <dt>Date</dt>
 							                <dd>10/01/2016</dd><br>
 							                

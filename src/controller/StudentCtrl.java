@@ -287,7 +287,7 @@ public class StudentCtrl {
 			if (branch != null) {
 				JSONArray studentArr = new JSONArray();
 				for (Student s : StudentDAO.getStudentsByBranch(branch)) {
-					studentArr.add(s.toJson());
+					studentArr.add(s.toJsonSimple());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, studentArr);

@@ -417,14 +417,14 @@ function sendSMS(message){
 	var studentName = message.student.name;
 	var teacherName = localStorage.getItem("teacherName");
 	//ADD IN TEACHER NAME
-	var content = "content=[Explore And Learn] Attendance notification." + " Your child " + studentName + " has attended class.&responseformat=JSON";	
+	var content = "content=[Explore And Learn] Attendance notification." + " Your child " + studentName + " has attended class. Best regards," + teacherName + ".&responseformat=JSON";	
 //	var content = "content=[Explore%20And%20Learn]%20Attendance%20notification." + "%20Your child%20" + studentName + "%20has attended class.";
 	
 	var input = appId + "&" + appSecret + "&" + receivers + "&" + content;
 	var url = encodeURI(input);
 //	console.log(url);
 	
-	var theUrl = "https://www.smsdome.com/api/http/sendsms.aspx?" + url;
+//	var theUrl = "https://www.smsdome.com/api/http/sendsms.aspx?" + url;
 
 //	var xhr = new XMLHttpRequest();
 //	xhr.open("GET", theUrl, true);
@@ -442,7 +442,6 @@ function sendSMS(message){
 //	};
 //	xhr.send(null);
 
-	
 	$.ajax({
 		url : 'https://www.smsdome.com/api/http/sendsms.aspx?' + url, 
 		method : 'GET',
@@ -456,7 +455,7 @@ function sendSMS(message){
 			var credit = data.creadit;
 			var recivers = data.recivers;
 			
-			console.log(result.status);
+			console.log(data);
 			console.log("sms sent");
 		}
 	});

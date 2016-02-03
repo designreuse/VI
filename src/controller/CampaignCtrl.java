@@ -31,8 +31,8 @@ public class CampaignCtrl {
 				String campaignType = (String) inputJson.get(Key.CAMPAIGNTYPE);
 				String address = (String) inputJson.get(Key.ADDRESS);
 				String postalCode = (String) inputJson.get(Key.POSTALCODE);
-				double latitude = Double.valueOf((String) inputJson.get(Key.LATITUDE));
-				double longitude = Double.valueOf((String) inputJson.get(Key.LONGITUDE));
+				double latitude = (double) inputJson.get(Key.LATITUDE);
+				double longitude = (double) inputJson.get(Key.LONGITUDE);
 
 				Campaign campaign = new Campaign(name, startDate, endDate, campaignType,
 						address, postalCode, latitude, longitude, branch);

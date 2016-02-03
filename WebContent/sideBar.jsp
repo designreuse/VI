@@ -46,6 +46,10 @@
         <a href="generateQR.jsp"><i class="fa fa-link"></i> <span>Generate QR Code</span></a>
         </li>
         
+        <li class="treeview">
+        <a href="campaign.jsp"><i class="fa fa-link"></i> <span>Marketing Campaign</span></a>
+        </li>
+        
       </ul>
       
     </section>

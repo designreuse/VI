@@ -242,6 +242,25 @@
 											</select>
 										</div>
 									</div>
+								</div>
+							</div>
+
+							<div class="box box-solid">
+								<div class="box-header with-border">
+									<h4 class="box-title">Marketing Details</h4>
+								</div>
+								<div class="box-body">
+									<div class="form-group ">
+										<label for="level" class="control-label col-lg-2">Marketing Campaign
+										</label>
+										<div class="col-lg-10">
+
+											<select class="form-control" id="campaign"
+												name="campaign">
+												<option>Choose a marketing campaign</option>
+											</select>
+										</div>
+									</div>
 									<div class="form-group">
 										<div class="col-lg-offset-2 col-lg-10">
 											<button class="btn btn-primary" type="submit">Save</button>
@@ -250,6 +269,7 @@
 
 								</div>
 							</div>
+
 						</form>
 					</div>
 				</div>

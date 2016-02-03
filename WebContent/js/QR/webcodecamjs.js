@@ -44,8 +44,10 @@ var WebCodeCamJS = function(element) {
             decodeQRCodeRate: 5,
             decodeBarCodeRate: 5,
             frameRate: 15,
-            width: 320,
-            height: 240,
+//            width: 320,
+//            height: 240,
+            width: 520,
+            height: 440,
             constraints: {
                 video: {
                     mandatory: {

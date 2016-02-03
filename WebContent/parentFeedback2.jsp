@@ -123,6 +123,32 @@
 											</div>
 										</div>
 										
+										<div class="col-lg-4 col-xs-6">
+											<div class="small-box bg-yellow">
+												<div class="inner">
+													<h4><strong>Feedback on 15/01/2015</strong></h4>
+													<p>Course level: 10<br>Booklet lvl: 3</p>
+												</div>
+												<div class="icon">
+													<i class="ion ion-stats-bars"></i>
+												</div>
+												<a data-toggle="collapse" class="small-box-footer" href="#latest2">More info <i class="fa fa-arrow-circle-right"></i></a>
+											</div>
+										</div>
+										
+										<div class="col-lg-4 col-xs-6">
+											<div class="small-box bg-yellow">
+												<div class="inner">
+													<h4><strong>Feedback on 15/01/2015</strong></h4>
+													<p>Course level: 10<br>Booklet lvl: 3</p>
+												</div>
+												<div class="icon">
+													<i class="ion ion-stats-bars"></i>
+												</div>
+												<a data-toggle="collapse" class="small-box-footer" href="#latest2">More info <i class="fa fa-arrow-circle-right"></i></a>
+											</div>
+										</div>
+										
 									</div>
 								</div>
 							</div>
@@ -136,6 +162,10 @@
 										<div class="row">
 											<div class="col-lg-12">	
 										<dl class="dl">
+										
+											<dt>Teacher</dt>
+							                <dd>Richard</dd><br>
+										
 							                <dt>Date</dt>
 							                <dd>22/01/2016</dd><br>
 							                
@@ -166,6 +196,10 @@
 										<div class="row">
 											<div class="col-lg-12">	
 												<dl class="dl">
+												
+											<dt>Teacher</dt>
+							                <dd>Richard</dd><br>	
+												
 							                <dt>Date</dt>
 							                <dd>15/01/2016</dd><br>
 							                
@@ -196,6 +230,10 @@
 										<div class="row">
 											<div class="col-lg-12">	
 											<dl class="dl">
+											
+											<dt>Teacher</dt>
+							                <dd>Richard</dd><br>
+											
 							                <dt>Date</dt>
 							                <dd>10/01/2016</dd><br>
 							                

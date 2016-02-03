@@ -14,6 +14,7 @@ $(document).ready(function() {
 
 var STUDENTS = {};
 var STUDENT	= {};
+var CAMPAIGNS;
 
 function registerStudent() {
 	// Parent's details
@@ -42,82 +43,92 @@ function registerStudent() {
 	var schoolName = $("#schoolName").val();
 	var schoolLevel = $("#schoolLevel").val()
 
-	var branchId = localStorage.getItem("branchId");
-	console.log(branchId);
-	console.log(taken);
-
-	var input = {};
-
-	input.parentNric = parentNric;
-
-	input.name = studentName;
-	input.studentNric = studentNric;
-	input.gender = gender;
-	input.birthDate = moment((birthDate), "DD/MM/YYYY");
-	input.homeContact = homeContact;
-	input.emergencyContact = emergencyContact;
-	input.postalCode = postalCode;
-	input.address = studentAddress;
-
-	input.schoolName = schoolName;
-	input.schoolLevel = schoolLevel;
-
-	input.takenDiagnostic = Number(taken);
-	input.branchId = Number(branchId);
-
-	var inputStr = JSON.stringify(input);
-
-	inputStr = encodeURIComponent(inputStr);
-	$.ajax({
-		url : '../VI/RegisterStudentServlet?input=' + inputStr, // this part
-																// sends to the
-																// servlet
-		method : 'POST',
-		dataType : 'json',
-		error : function(err) {
-			console.log(err);
-			$("#message").html("System has some error. Please try again.");
-		},
-		success : function(data) {
-			console.log(data);
-			var status = data.status; // shows the success/failure of the
-										// servlet request
-			var message = data.message;
-			// if status == 1, it means that it is successful, else it will
-			// fail.
-			if (status == 1) {
-				alert("Created successfully");
-
-				var scheduleId = Number(1);
-				var studentId = Number(message.studentId);
-				var input = {};
-				input.scheduleId = scheduleId;
-				input.studentId = studentId;
-				var inputMsg = JSON.stringify(input);
-
-				$.ajax({
-					url : '../VI/CreateAttendanceServlet?input=' + inputMsg,
-					method : 'POST',
-					dataType : 'json',
-					error : function(err) {
-						console.log(err);
-						// $("#message").html(err);
-					},
-					success : function(data) {
-						console.log(data);
-						var status = data.status; // shows the success/failure
-													// of the servlet request
-						var message = data.message;
-						console.log("attendance created");
+	//marketing
+	var campaignName = $("#campaign").val();
+	for(var j = 0; j < CAMPAIGNS.length; j++){
+		if(campaignName == CAMPAIGNS[j].name){
+			var campaignId = CAMPAIGNS[j].campaignId;
+	
+			var branchId = localStorage.getItem("branchId");
+		//	console.log(branchId);
+		//	console.log(taken);
+		
+			var input = {};
+		
+			input.parentNric = parentNric;
+		
+			input.name = studentName;
+			input.studentNric = studentNric;
+			input.gender = gender;
+			input.birthDate = moment((birthDate), "DD/MM/YYYY");
+			input.homeContact = homeContact;
+			input.emergencyContact = emergencyContact;
+			input.postalCode = postalCode;
+			input.address = studentAddress;
+		
+			input.schoolName = schoolName;
+			input.schoolLevel = schoolLevel;
+		
+			input.takenDiagnostic = Number(taken);
+			input.branchId = Number(branchId);
+			
+			input.campaignId = Number(campaignId);
+		
+			var inputStr = JSON.stringify(input);
+		
+			inputStr = encodeURIComponent(inputStr);
+			$.ajax({
+				url : '../VI/RegisterStudentServlet?input=' + inputStr, // this part
+																		// sends to the
+																		// servlet
+				method : 'POST',
+				dataType : 'json',
+				error : function(err) {
+					console.log(err);
+					$("#message").html("System has some error. Please try again.");
+				},
+				success : function(data) {
+					console.log(data);
+					var status = data.status; // shows the success/failure of the
+												// servlet request
+					var message = data.message;
+					// if status == 1, it means that it is successful, else it will
+					// fail.
+					if (status == 1) {
+						alert("Created successfully");
+		
+						var scheduleId = Number(1);
+						var studentId = Number(message.studentId);
+						var input = {};
+						input.scheduleId = scheduleId;
+						input.studentId = studentId;
+						var inputMsg = JSON.stringify(input);
+		
+						$.ajax({
+							url : '../VI/CreateAttendanceServlet?input=' + inputMsg,
+							method : 'POST',
+							dataType : 'json',
+							error : function(err) {
+								console.log(err);
+								// $("#message").html(err);
+							},
+							success : function(data) {
+								console.log(data);
+								var status = data.status; // shows the success/failure
+															// of the servlet request
+								var message = data.message;
+								console.log("attendance created");
+							}
+						});
+		
+						window.location = "studentSuccess.jsp";
+					} else {
+						$("#message").html(message);
 					}
-				});
-
-				window.location = "studentSuccess.jsp";
-			} else {
-				$("#message").html(message);
-			}
+				}
+			});
 		}
-	});
+	}
 }
 
 //$.ajax({
@@ -534,6 +545,62 @@ function deleteStudent() {
 					});
 }
 
+function displayMarketingCampaigns() {
+	var select = document.getElementById("campaigns");
+	var storedEvents = JSON.parse(localStorage["campaigns"]);
+	var options = [];
+	for(var j = 0; j < storedEvents.length; j++){
+		//console.log(storedIds[j])
+		var campaign = storedEvents[j];
+		options.push(campaign);
+	}
+	
+	CAMPAIGNS = storedEvents;
 
+	for(var i = 0; i < options.length; i++) {
+	    var opt = options[i].name;
+	    var el = document.createElement("option");
+	    el.textContent = opt;
+	    el.value = opt;
+	    select.appendChild(el);
+	}
+}
 
+function getMarketingCampaigns() {
+	var branchId = localStorage.getItem('branchManagerId');
+	
+	var input = {};
+	input.branchId = branchId;
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
 
+	$.ajax({
+		url : '../VI/GetCampaignsByBranchServlet?input=' + inputStr, // this part sends to
+		// the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			;
+			var status = data.status; // shows the success/failure of the
+			// servlet request
+			if (status == 1) {
+				// store scheduleEventIds
+				var campaigns = [];
+				
+				for (var i = 0; i < data.message.length; i++) {
+					var obj = data.message[i];
+					
+					campaigns.push(obj);
+					localStorage["campaigns"] = JSON.stringify(campaigns);	
+				}
+				displayMarketingCampaigns();
+			} else {
+				console.log(message);
+			}
+		}
+	});
+	
+}
