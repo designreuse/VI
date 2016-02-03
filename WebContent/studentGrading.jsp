@@ -61,10 +61,7 @@
 							
 								<div class="row">
 									<div class="col-md-8">
-										<select class="form-control" id="coursesDDL"></select>
-									</div>
-									<div class="col-md-4">
-										<input class="btn btn-primary submit" type="button" value="Show List" onclick="populateStudents();">
+										<select class="form-control" id="coursesDDL" onChange="populateStudents()"></select>
 									</div>
 								</div>
 							</div>
