@@ -30,6 +30,8 @@ public class Branch {
 	private Set<BranchManager> branchManagers;
 	private Set<Classroom> classrooms;
 	private Set<BranchCourse> branchCourses;
+	private Set<Campaign> campaigns;
+	private Set<GiftInventory> giftInventories;
 
 	private long objStatus;
 	private Date createDate;
@@ -223,6 +225,34 @@ public class Branch {
 		this.branchCourses = branchCourses;
 	}
 	
+	/**
+	 * @return the campaigns
+	 */
+	public Set<Campaign> getCampaigns() {
+		return campaigns;
+	}
+
+	/**
+	 * @param campaigns the campaigns to set
+	 */
+	public void setCampaigns(Set<Campaign> campaigns) {
+		this.campaigns = campaigns;
+	}
+
+	/**
+	 * @return the giftInventories
+	 */
+	public Set<GiftInventory> getGiftInventories() {
+		return giftInventories;
+	}
+
+	/**
+	 * @param giftInventories the giftInventories to set
+	 */
+	public void setGiftInventories(Set<GiftInventory> giftInventories) {
+		this.giftInventories = giftInventories;
+	}
+
 	/**
 	 * @return the objStatus
 	 */

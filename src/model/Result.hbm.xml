@@ -20,7 +20,7 @@
         <property name="resultDate" type="java.util.Date">
             <column name="RESULTDATE" />
         </property>
-        <property name="pointAmount" type="long">
+        <property name="pointAmount" type="double">
             <column name="POINTAMOUNT" />
         </property>
         <many-to-one name="teacherStudentCourse" class="model.TeacherStudentCourse" fetch="join">

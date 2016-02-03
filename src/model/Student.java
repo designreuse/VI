@@ -26,7 +26,7 @@ public class Student {
 	private String schoolLevel;
 	private String studentNric;
 	private String profilePic;
-	private long points;
+	private double points;
 	private long takenDiagnostic;
 
 	private Parent parent;
@@ -37,6 +37,7 @@ public class Student {
 	private Set<PointEvent> pointEvents;
 	private Set<TeacherStudentCourse> teacherStudentCourses;
 	private Set<Diagnostic> diagnostics;
+	private Set<GiftTransaction> giftTransactions;
 
 	private long objStatus;
 	private Date createDate;
@@ -60,7 +61,7 @@ public class Student {
 		this.schoolLevel = schoolLevel;
 		this.studentNric = studentNric;
 		this.profilePic = profilePic;
-		this.points = 0L;
+		this.points = 0.0d;
 		this.parent = parent;
 		this.branch = branch;
 		this.takenDiagnostic = takenDiagnostic;
@@ -239,14 +240,14 @@ public class Student {
 	/**
 	 * @return the points
 	 */
-	public long getPoints() {
+	public double getPoints() {
 		return points;
 	}
 
 	/**
 	 * @param points the points to set
 	 */
-	public void setPoints(long points) {
+	public void setPoints(double points) {
 		this.points = points;
 	}
 
@@ -361,6 +362,20 @@ public class Student {
 	 */
 	public void setDiagnostics(Set<Diagnostic> diagnostics) {
 		this.diagnostics = diagnostics;
+	}
+
+	/**
+	 * @return the giftTransactions
+	 */
+	public Set<GiftTransaction> getGiftTransactions() {
+		return giftTransactions;
+	}
+
+	/**
+	 * @param giftTransactions the giftTransactions to set
+	 */
+	public void setGiftTransactions(Set<GiftTransaction> giftTransactions) {
+		this.giftTransactions = giftTransactions;
 	}
 
 	/**

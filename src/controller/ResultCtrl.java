@@ -38,7 +38,7 @@ public class ResultCtrl {
 				long bookletLevel = (long) inputJson.get(Key.BOOKLETLEVEL);
 				String resultValue = (String) inputJson.get(Key.RESULTVALUE);
 				Date resultDate = Config.SDF.parse((String) inputJson.get(Key.RESULTDATE));
-				long pointAmount = (long) inputJson.get(Key.POINTAMOUNT);
+				double pointAmount = Double.valueOf((String) inputJson.get(Key.POINTAMOUNT));
 				
 				Result result = new Result(courseLevel, bookletLevel,resultValue, resultDate, 
 											pointAmount, teacherStudentCourse);
@@ -220,7 +220,7 @@ public class ResultCtrl {
 					long courseLevel =  (long) feedback.get(Key.COURSELEVEL);
 					long bookletLevel = (long) feedback.get(Key.BOOKLETLEVEL);
 					String resultValue = (String) feedback.get(Key.RESULTVALUE);
-					long pointAmount = (long) feedback.get(Key.POINTAMOUNT);
+					double pointAmount = Double.valueOf((String) feedback.get(Key.POINTAMOUNT));
 					
 					Result result = new Result(courseLevel, bookletLevel,resultValue, 
 												pointAmount, teacherStudentCourse);
@@ -239,7 +239,7 @@ public class ResultCtrl {
 					
 					//update student point
 					Student s = teacherStudentCourse.getStudent();
-					long newPoint = s.getPoints() + pointAmount;
+					double newPoint = s.getPoints() + pointAmount;
 					s.setPoints(newPoint);
 					StudentDAO.modifyStudent(s);
 					messageJson.put(Key.STUDENT, s.toJsonSimple());

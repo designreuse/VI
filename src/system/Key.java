@@ -184,7 +184,34 @@ public class Key {
 	public static final String SCHEDULEEVENTID = "scheduleEventId";
 	public static final String STUDENTAMOUNT = "studentAmount";
 	
+	public static final String CAMPAIGN = "campaign";
+	public static final String CAMPAIGNS = "campaigns";
+	public static final String CAMPAIGNID = "campaignId";
+	public static final String STARTDATE = "startDate";
+	public static final String ENDDATE = "endDate";
+	public static final String CAMPAIGNTYPE = "campaignType";
+	public static final String LATITUDE = "latitude";
+	public static final String LONGITUDE = "longitude";
 	
+	public static final String ANNOUNCEMENT = "announcement";
+	public static final String ANNOUNCEMENTS = "announcements";
+	public static final String ANNOUNCEMENTID = "announcementId";
+	public static final String ANNOUNCEMENTTYPE = "announcementType";
+	
+	public static final String GIFTINVENTORY = "giftInventory";
+	public static final String GIFTINVENTORYS = "giftInventorys";
+	public static final String GIFTINVENTORYID = "giftInventoryId";
+	
+	public static final String GIFTTRANSACTION = "giftTransaction";
+	public static final String GIFTTRANSACTIONS = "giftTransactions";
+	public static final String GIFTTRANSACTIONID = "giftTransactionId";
+	public static final String GIFTNAME = "giftName";
+	public static final String GIFTIMAGE = "giftImage";
+	public static final String STOCKQUANTITY = "stockQuantity";
+	public static final String GIFTTIER = "giftTier";
+	public static final String GIFTPOINTS = "giftPoints";
+	public static final String GIFTQUANTITY = "giftQuantity";
+	public static final String STUDENTPOINTS = "studentPoints";
 	
 	
 	

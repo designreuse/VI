@@ -15,7 +15,7 @@ public class Result {
 	private long bookletLevel;
 	private String resultValue;
 	private Date resultDate;
-	private long pointAmount;
+	private double pointAmount;
 
 	private TeacherStudentCourse teacherStudentCourse;
 	private Set<TeacherFeedback> teacherFeedbacks;
@@ -28,7 +28,7 @@ public class Result {
 	}
 
 	public Result(long courseLevel, long bookletLevel, String resultValue,
-			long pointAmount, TeacherStudentCourse teacherStudentCourse) {
+			double pointAmount, TeacherStudentCourse teacherStudentCourse) {
 		super();
 		this.courseLevel = courseLevel;
 		this.bookletLevel = bookletLevel;
@@ -40,7 +40,7 @@ public class Result {
 	}
 	
 	public Result(long courseLevel, long bookletLevel, String resultValue,
-			Date resultDate, long pointAmount,
+			Date resultDate, double pointAmount,
 			TeacherStudentCourse teacherStudentCourse) {
 		super();
 		this.courseLevel = courseLevel;
@@ -131,7 +131,7 @@ public class Result {
 	/**
 	 * @return the pointAmount
 	 */
-	public long getPointAmount() {
+	public double getPointAmount() {
 		return pointAmount;
 	}
 
@@ -139,7 +139,7 @@ public class Result {
 	 * @param pointAmount
 	 *            the pointAmount to set
 	 */
-	public void setPointAmount(long pointAmount) {
+	public void setPointAmount(double pointAmount) {
 		this.pointAmount = pointAmount;
 	}
 

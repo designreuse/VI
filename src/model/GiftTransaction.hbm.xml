@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 3, 2016 5:19:23 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="model.GiftTransaction" table="GIFTTRANSACTION">
+        <id name="GiftTransaction" type="long">
+            <column name="GIFTTRANSACTION" />
+            <generator class="increment" />
+        </id>
+        <property name="giftQuantity" type="long">
+            <column name="GIFTQUANTITY" />
+        </property>
+        <property name="studentPoints" type="double">
+            <column name="STUDENTPOINTS" />
+        </property>
+        <many-to-one name="giftInventory" class="model.GiftInventory" fetch="join">
+            <column name="GIFTINVENTORYID" />
+        </many-to-one>
+        <many-to-one name="student" class="model.Student" fetch="join">
+            <column name="STUDENTID" />
+        </many-to-one>
+        <property name="objStatus" type="long">
+            <column name="OBJSTATUS" />
+        </property>
+        <property name="createDate" type="java.util.Date">
+            <column name="CREATEDATE" />
+        </property>
+        <property name="remark" type="java.lang.String">
+            <column name="REMARK" />
+        </property>
+    </class>
+</hibernate-mapping>
