@@ -22,6 +22,8 @@ public class Student {
 	private String emergencyContact;
 	private String address;
 	private String postalCode;
+	private double latitude;
+	private double longitude;
 	private String schoolName;
 	private String schoolLevel;
 	private String studentNric;
@@ -49,7 +51,7 @@ public class Student {
 	
 	//without campaign
 	public Student(String name, String gender, Date birthDate, String homeContact, String emergencyContact, 
-			String address, String postalCode, String schoolName, String schoolLevel, String studentNric, 
+			String address, String postalCode, double latitude, double longitude, String schoolName, String schoolLevel, String studentNric, 
 			String profilePic, long takenDiagnostic, Parent parent, Branch branch) {
 		super();
 		this.name = name;
@@ -59,6 +61,8 @@ public class Student {
 		this.emergencyContact = emergencyContact;
 		this.address = address;
 		this.postalCode = postalCode;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.schoolName = schoolName;
 		this.schoolLevel = schoolLevel;
 		this.studentNric = studentNric;
@@ -73,7 +77,7 @@ public class Student {
 	
 	//full creation
 	public Student(String name, String gender, Date birthDate, String homeContact, String emergencyContact, 
-			String address, String postalCode, String schoolName, String schoolLevel, String studentNric, 
+			String address, String postalCode, double latitude, double longitude,String schoolName, String schoolLevel, String studentNric, 
 			String profilePic, long takenDiagnostic, Parent parent, Branch branch, Campaign campaign) {
 		super();
 		this.name = name;
@@ -83,6 +87,8 @@ public class Student {
 		this.emergencyContact = emergencyContact;
 		this.address = address;
 		this.postalCode = postalCode;
+		this.latitude = latitude;
+		this.longitude = longitude;
 		this.schoolName = schoolName;
 		this.schoolLevel = schoolLevel;
 		this.studentNric = studentNric;
@@ -472,6 +478,8 @@ public class Student {
 		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.LATITUDE, this.latitude);
+		returnJson.put(Key.LONGITUDE, this.longitude);
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
@@ -497,6 +505,8 @@ public class Student {
 		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.LATITUDE, this.latitude);
+		returnJson.put(Key.LONGITUDE, this.longitude);
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
@@ -524,6 +534,8 @@ public class Student {
 		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.LATITUDE, this.latitude);
+		returnJson.put(Key.LONGITUDE, this.longitude);
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);
@@ -553,6 +565,8 @@ public class Student {
 		returnJson.put(Key.EMERGENCYCONTACT, this.emergencyContact);
 		returnJson.put(Key.ADDRESS, this.address);
 		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.LATITUDE, this.latitude);
+		returnJson.put(Key.LONGITUDE, this.longitude);
 		returnJson.put(Key.SCHOOLNAME, this.schoolName);
 		returnJson.put(Key.SCHOOLLEVEL, this.schoolLevel);
 		returnJson.put(Key.STUDENTNRIC, this.studentNric);

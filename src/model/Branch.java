@@ -21,6 +21,8 @@ public class Branch {
 	private String name;
 	private String location;
 	private String postalCode;
+	private double latitude;
+	private double longitude;
 	private String contact;
 	
 	private Admin admin;
@@ -46,11 +48,13 @@ public class Branch {
 	 * @param contact
 	 * @param admin
 	 */
-	public Branch(String name, String location, String postalCode, String contact, Admin admin) {
+	public Branch(String name, String location, String postalCode, double latitude, double longitude, String contact, Admin admin) {
 		super();
 		this.name = name;
 		this.location = location;
 		this.postalCode = postalCode;
+		this.setLatitude(latitude);
+		this.setLongitude(longitude);
 		this.contact = contact;
 		this.admin = admin;
 		this.setCreateDate(new Date());
@@ -111,6 +115,34 @@ public class Branch {
 	 */
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+
+	/**
+	 * @return the latitude
+	 */
+	public double getLatitude() {
+		return latitude;
+	}
+
+	/**
+	 * @param latitude the latitude to set
+	 */
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	/**
+	 * @return the longitude
+	 */
+	public double getLongitude() {
+		return longitude;
+	}
+
+	/**
+	 * @param longitude the longitude to set
+	 */
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 
 	/**
@@ -302,6 +334,8 @@ public class Branch {
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.LOCATION, this.location);
 		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.LATITUDE, this.latitude);
+		returnJson.put(Key.LONGITUDE, this.longitude);
 		returnJson.put(Key.CONTACT, this.contact);
 		
 		returnJson.put(Key.ADMIN, this.admin.toJson());
@@ -320,6 +354,8 @@ public class Branch {
 		returnJson.put(Key.NAME, this.name);
 		returnJson.put(Key.LOCATION, this.location);
 		returnJson.put(Key.POSTALCODE, this.postalCode);
+		returnJson.put(Key.LATITUDE, this.latitude);
+		returnJson.put(Key.LONGITUDE, this.longitude);
 		returnJson.put(Key.CONTACT, this.contact);
 		
 		returnJson.put(Key.ADMIN, this.admin.toJson());

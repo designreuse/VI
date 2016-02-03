@@ -57,6 +57,8 @@ public class StudentCtrl {
 					String emergencyContact = (String) inputJson.get(Key.EMERGENCYCONTACT);
 					String address = (String) inputJson.get(Key.ADDRESS);
 					String postalCode = (String) inputJson.get(Key.POSTALCODE);
+					double latitude = Double.valueOf((String) inputJson.get(Key.LATITUDE));
+					double longitude = Double.valueOf((String) inputJson.get(Key.LONGITUDE));
 					String schoolName = (String) inputJson.get(Key.SCHOOLNAME);
 					String schoolLevel = (String) inputJson.get(Key.SCHOOLLEVEL);
 					String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
@@ -65,11 +67,11 @@ public class StudentCtrl {
 					
 					Student student = null;
 					if (campaign != null){
-						student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, 
-								schoolName, schoolLevel, studentNric, profilePic, takenDiagnostic, parent, branch, campaign);
+						student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, latitude,
+								longitude, schoolName, schoolLevel, studentNric, profilePic, takenDiagnostic, parent, branch, campaign);
 					} else {
-						student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, 
-								schoolName, schoolLevel, studentNric, profilePic, takenDiagnostic, parent, branch);
+						student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, latitude,
+								longitude, schoolName, schoolLevel, studentNric, profilePic, takenDiagnostic, parent, branch);
 					}
 					
 					StudentDAO.addStudent(student);

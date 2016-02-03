@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 3, 2016 5:19:23 PM by Hibernate Tools 3.4.0.CR1 -->
+<!-- Generated Feb 3, 2016 7:40:50 PM by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
     <class name="model.GiftTransaction" table="GIFTTRANSACTION">
-        <id name="GiftTransaction" type="long">
-            <column name="GIFTTRANSACTION" />
+        <id name="giftTransactionId" type="long">
+            <column name="GIFTTRANSACTIONID" />
             <generator class="increment" />
         </id>
         <property name="giftQuantity" type="long">
