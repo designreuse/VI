@@ -3,8 +3,11 @@ package model;
 import java.util.Date;
 import java.util.Set;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.ResultDAO;
+import dataManager.TeacherFeedbackDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -279,6 +282,26 @@ public class TeacherStudentCourse {
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
 
+		returnJson.put(Key.OBJSTATUS, this.objStatus);
+		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
+		returnJson.put(Key.REMARK, this.remark);
+
+		return returnJson;
+	}
+	
+	public JSONObject toJsonCourseAndResults() {
+		JSONObject returnJson = new JSONObject();
+		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
+		returnJson.put(Key.COURSE, this.course.toJson());
+		returnJson.put(Key.COURSELEVEL, this.courseLevel);
+		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
+		
+		JSONArray resultArr = new JSONArray();
+		for (Result r : ResultDAO.getLatesFiveResultsByTSC(this)) {
+			resultArr.add(r.toJsonWithFeedbacks());
+		}
+		returnJson.put(Key.RESULTS, resultArr);
+		
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);

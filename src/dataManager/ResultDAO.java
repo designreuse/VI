@@ -71,13 +71,13 @@ public class ResultDAO {
 		return result;
 	}
 	
-	public static ArrayList<Result> getLatesThreeResultsByTSC(TeacherStudentCourse tsc){
+	public static ArrayList<Result> getLatesFiveResultsByTSC(TeacherStudentCourse tsc){
 		ArrayList<Result> results = new ArrayList<Result>();
 		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Result.class);
 		detachedCriteria.add(Restrictions.eq(Key.TEACHERSTUDENTCOURSE, tsc));
 		detachedCriteria.addOrder(Order.desc(Key.CREATEDATE));
 		detachedCriteria.add(Restrictions.eq(Key.OBJSTATUS, Value.ACTIVED));
-		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 3);
+		List<Object> list = HibernateUtil.detachedCriteriaReturnLimitedList(detachedCriteria, 5);
 		for(Object o : list){
 			results.add((Result) o);
 		}

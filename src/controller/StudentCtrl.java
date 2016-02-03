@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Date;
 
+import model.Campaign;
 import model.Course;
 import model.Schedule;
 import model.Bill;
@@ -15,6 +16,7 @@ import model.Teacher;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.CampaignDAO;
 import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
 import dataManager.BillDAO;
@@ -41,6 +43,7 @@ public class StudentCtrl {
 		try {
 			Branch branch = BranchDAO.getBranchById((long) inputJson.get(Key.BRANCHID));
 			Parent parent = ParentDAO.getParentByNric((String) inputJson.get(Key.PARENTNRIC));
+			Campaign campaign = CampaignDAO.getCampaignById((long) inputJson.get(Key.CAMPAIGNID));
 			if (branch != null) {
 				if (parent != null) {
 					String name = (String) inputJson.get(Key.NAME);
@@ -59,9 +62,16 @@ public class StudentCtrl {
 					String studentNric = (String) inputJson.get(Key.STUDENTNRIC);
 					String profilePic = (String) inputJson.get(Key.PROFILEPIC);
 					long takenDiagnostic = (long) inputJson.get(Key.TAKENDIAGNOSTIC);
-
-					Student student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, 
-							schoolName, schoolLevel, studentNric, profilePic, takenDiagnostic, parent, branch);
+					
+					Student student = null;
+					if (campaign != null){
+						student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, 
+								schoolName, schoolLevel, studentNric, profilePic, takenDiagnostic, parent, branch, campaign);
+					} else {
+						student = new Student(name, gender, birthDate, homeContact, emergencyContact, address, postalCode, 
+								schoolName, schoolLevel, studentNric, profilePic, takenDiagnostic, parent, branch);
+					}
+					
 					StudentDAO.addStudent(student);
 
 					returnJson.put(Key.STATUS, Value.SUCCESS);

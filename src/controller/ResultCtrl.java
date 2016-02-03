@@ -1,6 +1,7 @@
 package controller;
 
 import model.Course;
+import model.Parent;
 import model.Result;
 import model.Student;
 import model.Teacher;
@@ -14,6 +15,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import dataManager.CourseDAO;
+import dataManager.ParentDAO;
 import dataManager.ResultDAO;
 import dataManager.StudentDAO;
 import dataManager.TeacherDAO;
@@ -185,7 +187,7 @@ public class ResultCtrl {
 				JSONArray resultArr = new JSONArray();
 				ArrayList<TeacherStudentCourse> tscs = TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(student);
 				for(TeacherStudentCourse tsc : tscs){
-					for (Result r : ResultDAO.getLatesThreeResultsByTSC(tsc)) {
+					for (Result r : ResultDAO.getLatesFiveResultsByTSC(tsc)) {
 						resultArr.add(r.toJsonShowStudentAndTeacher());
 					}
 				}
@@ -194,6 +196,40 @@ public class ResultCtrl {
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL);
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
+	
+	//Get results by parent
+	public static JSONObject getResultsByParent(JSONObject inputJson) {
+		JSONObject returnJson = new JSONObject();
+		try {
+			Parent parent = ParentDAO.getParentById((long) inputJson.get(Key.PARENTID));
+			if (parent != null) {
+				JSONArray studentArr = new JSONArray();
+				ArrayList<Student> students = StudentDAO.getStudentsByParent(parent);
+				for(Student s : students){
+					JSONObject studentObj = new JSONObject();
+					if(s != null){
+						studentObj.put(Key.STATUS, Value.SUCCESS);
+						studentObj.put(Key.STUDENT, s.toJsonCourses());
+						studentArr.add(studentObj);
+					} else {
+						studentObj.put(Key.STATUS, Value.FAIL);
+						studentObj.put(Key.MESSAGE, Message.STUDENTNOTEXIST);
+						studentArr.add(studentObj);
+					}
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, studentArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -260,5 +296,7 @@ public class ResultCtrl {
 		}
 		return returnJson;
 	}
+	
+	
 	
 }

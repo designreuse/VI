@@ -31,6 +31,7 @@ public class Student {
 
 	private Parent parent;
 	private Branch branch;
+	private Campaign campaign;
 	
 	private Set<Bill> bills;
 	private Set<Attendance> attendances;
@@ -46,6 +47,7 @@ public class Student {
 	public Student() {
 	}
 	
+	//without campaign
 	public Student(String name, String gender, Date birthDate, String homeContact, String emergencyContact, 
 			String address, String postalCode, String schoolName, String schoolLevel, String studentNric, 
 			String profilePic, long takenDiagnostic, Parent parent, Branch branch) {
@@ -64,6 +66,31 @@ public class Student {
 		this.points = 0.0d;
 		this.parent = parent;
 		this.branch = branch;
+		this.takenDiagnostic = takenDiagnostic;
+		this.setObjStatus(Value.ACTIVED);
+		this.setCreateDate(new Date());	
+	}
+	
+	//full creation
+	public Student(String name, String gender, Date birthDate, String homeContact, String emergencyContact, 
+			String address, String postalCode, String schoolName, String schoolLevel, String studentNric, 
+			String profilePic, long takenDiagnostic, Parent parent, Branch branch, Campaign campaign) {
+		super();
+		this.name = name;
+		this.gender = gender;
+		this.birthDate = birthDate;
+		this.homeContact = homeContact;
+		this.emergencyContact = emergencyContact;
+		this.address = address;
+		this.postalCode = postalCode;
+		this.schoolName = schoolName;
+		this.schoolLevel = schoolLevel;
+		this.studentNric = studentNric;
+		this.profilePic = profilePic;
+		this.points = 0.0d;
+		this.parent = parent;
+		this.branch = branch;
+		this.campaign = campaign;
 		this.takenDiagnostic = takenDiagnostic;
 		this.setObjStatus(Value.ACTIVED);
 		this.setCreateDate(new Date());	
@@ -294,6 +321,20 @@ public class Student {
 	}
 
 	/**
+	 * @return the campaign
+	 */
+	public Campaign getCampaign() {
+		return campaign;
+	}
+
+	/**
+	 * @param campaign the campaign to set
+	 */
+	public void setCampaign(Campaign campaign) {
+		this.campaign = campaign;
+	}
+
+	/**
 	 * @return the bills
 	 */
 	public Set<Bill> getBills() {
@@ -492,6 +533,7 @@ public class Student {
 
 		returnJson.put(Key.PARENT, this.parent.toJson());
 		returnJson.put(Key.BRANCH, this.branch.toJson());
+		returnJson.put(Key.CAMPAIGN, this.campaign.toJsonSimple());
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
@@ -499,8 +541,8 @@ public class Student {
 
 		return returnJson;
 	}
-
-	public JSONObject toJsonStrong() {
+	
+	public JSONObject toJsonCourses() {
 		JSONObject returnJson = new JSONObject();
 
 		returnJson.put(Key.STUDENTID, this.studentId);
@@ -518,24 +560,16 @@ public class Student {
 		returnJson.put(Key.POINTS, this.points);
 		returnJson.put(Key.TAKENDIAGNOSTIC, this.takenDiagnostic);
 
-		returnJson.put(Key.PARENT, this.parent.toJson());
-		returnJson.put(Key.BRANCH, this.branch.toJson());
-
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 
-		JSONArray billArr = new JSONArray();
-		for (Bill k : this.bills) {
-			billArr.add(k.toJson());
+		JSONArray TeacherStudentCourseArr = new JSONArray();
+		for (TeacherStudentCourse tsc : this.teacherStudentCourses) {
+			TeacherStudentCourseArr.add(tsc.toJsonCourseAndResults());
 		}
-		returnJson.put(Key.BILLS, billArr);
+		returnJson.put(Key.COURSES, TeacherStudentCourseArr);
 		
-		JSONArray pointEventArr = new JSONArray();
-		for (PointEvent pe : this.pointEvents) {
-			pointEventArr.add(pe.toJson());
-		}
-		returnJson.put(Key.POINTEVENTS, pointEventArr);
 		
 		return returnJson;
 	}
