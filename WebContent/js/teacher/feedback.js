@@ -1,15 +1,16 @@
 $(document).ready(function() {
-//	var teacherId = localStorage.getItem('teacherId');
-//	if (teacherId == null) {
-//		window.location.replace('adminLogin.jsp');
-//	} else {
+	var teacherId = localStorage.getItem('teacherId');
+	if (teacherId == null) {
+		window.location.replace('adminLogin.jsp');
+	} else {
 		populateScheduleEvents();
 		 localStorage.removeItem("studentList");
-//	}
+	}
 });
  
 function populateScheduleEvents(){
-	var teacherId = 2;
+//	var teacherId = 2; -- for local testing only--
+	input.teacherId = Number(localStorage.getItem("teacherId"));
 	var $coursesDDL = $('#coursesDDL');
 	$coursesDDL.html('');
 	var input = {};
@@ -50,12 +51,11 @@ function populateStudents(){
 	$(".collapse").show();
 	var courseDDL = document.getElementById("coursesDDL");
 	var id = Number(courseDDL.options[courseDDL.selectedIndex].value);
+	var description = courseDDL.options[courseDDL.selectedIndex].text
 	var scheduleEvents = JSON.parse(localStorage.getItem("scheduleEvents"));
 	localStorage.setItem("courseId", JSON.stringify(scheduleEvents[id].schedule.course.courseId));
+	localStorage.setItem("description", description);
 	var attendance = scheduleEvents[id].attendances;
-	
-	console.log(JSON.parse(localStorage.getItem("courseId")));
-
 	
 	
 	$('#dynamicStudentList').html("");
@@ -89,7 +89,7 @@ function populateStudents(){
 			$("#colResult" + i ).append("<div class='box box-success' id='boxResult" + i + "'>");
 			$("#boxResult" + i ).append("<div class='box-body' id='bodyResult" + i + "'>");
 			$("#bodyResult" + i ).append("<p align='center'>Result for this booklet");
-			$("#bodyResult" + i ).append("<input class='form-control input-sm' id='result" + i + "' placeholder='Input Result' required />");
+			$("#bodyResult" + i ).append("<input class='form-control input-sm' id='result" + i + "' placeholder='Input Result. If not completed, put N/A' required />");
 			
 			$("#grading" + i ).append("<div class='col-md-4' id='colPointAmt" + i + "'>");
 			$("#colPointAmt" + i ).append("<div class='box box-success' id='boxPointAmt" + i + "'>");
@@ -98,13 +98,13 @@ function populateStudents(){
 			$("#bodyPointAmt" + i ).append("<input class='form-control input-sm' id='pointAmt" + i + "' placeholder='Input Point Amount' required />");
 			
 			$("#feedback" + i ).append("<div class='col-md-12' id='colFeedback" + i + "'>");
-			$("#colFeedback" + i ).append("<div class='box' id='boxFeedback" + i + "'>");
+			$("#colFeedback" + i ).append("<div class='' id='boxFeedback" + i + "'>");
 			$("#boxFeedback" + i ).append("<div class='box-body' id='bodyFeedback" + i + "'>");
-			$("#bodyFeedback" + i ).append("<p align='center'>Input Feedback");
-			$("#bodyFeedback" + i ).append("<p>Question 1:");
-			$("#bodyFeedback" + i ).append("<input class='form-control input-sm' id='feedbackOne" + i + "' placeholder='Input Feedback' required />");
-			$("#bodyFeedback" + i ).append("<p>Question 2:");
-			$("#bodyFeedback" + i ).append("<input class='form-control input-sm' id='feedbackTwo" + i + "' placeholder='Input Feedback' required />");
+			$("#bodyFeedback" + i ).append("<p>How was the performance of the child today?</p>");
+			$("#bodyFeedback" + i ).append("<input class='form-control' id='feedbackOne" + i + "' placeholder='Input Feedback' required />");
+			$("#bodyFeedback" + i ).append("<br>");
+			$("#bodyFeedback" + i ).append("<p>How was their behavior today?</p>");
+			$("#bodyFeedback" + i ).append("<input class='form-control' id='feedbackTwo" + i + "' placeholder='Input Feedback' required />");
 		}
 	} else {
 		$("#dynamicStudentList").append("<h4>No students available</h4>");
@@ -114,9 +114,8 @@ function populateStudents(){
 
 function submitFeedback(){
 	var studentList = JSON.parse(localStorage.getItem("studentList"));
-	console.log(studentList);
+	var description = localStorage.getItem("description");
 	var feedbacks = [];
-	var contents = [];
 	var input = {}; 
 	
 	for (var sId = 0; sId < studentList.length; sId++){
@@ -128,17 +127,14 @@ function submitFeedback(){
 		var feedbackOne = $("#feedbackOne" + id).val();
 		var feedbackTwo = $("#feedbackTwo" + id).val();
 		
-		contents.push(feedbackTwo);
-		contents.push(feedbackOne);
-		
 		var result = {
 			"studentId": Number(id),
 			"content": $("#feedback" + id).val(),
 			"courseLevel": Number($("#courseLevel" + id).val()),
 			"bookletLevel": Number($("#bookLevel" + id).val()),
-			"pointAmount": Number($("#pointAmt" + id).val()),
+			"pointAmount": $("#pointAmt" + id).val(),
 			"resultValue": $("#result" + id).val(),
-			"contents": contents
+			"contents": [feedbackOne, feedbackTwo]
 		};
 		
 		feedbacks.push(result);
@@ -146,29 +142,43 @@ function submitFeedback(){
 	}
 	
 	input.feedbacks = feedbacks;
-	input.teacherId = Number(localStorage.getItem("teacherId"));
+//	input.teacherId = 2; //-- for local testing only--
+	input.teacherId = Number(localStorage.getItem("teacherId")); 
 	input.courseId = Number(localStorage.getItem("courseId"));
 	var inputStr = JSON.stringify(input);
 	console.log(input);
 	inputStr = encodeURIComponent(inputStr);
 	
-//	$.ajax({
-//		url : '../VI/GenerateResultServlet?input=' + inputStr, //this part sends to the servlet
-//		method : 'POST',
-//		dataType : 'json',
-//		error : function(err) {
-//			console.log(err);
-//		},
-//		success : function(data) {
-//			var status = data.status; 
-//			var message = data.message;
-//			
+	$.ajax({
+		url : '../VI/GenerateResultServlet?input=' + inputStr, //this part sends to the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			var status = data.status; 
+			var message = data.message;
+			
+//			console.log(message);
 //			if (status == 1) {	
-//				alert("Created successfully");	
+				bootbox.dialog({
+					message: "Feedback submitted for " + description + "!",
+					title: "Feedback submission",
+					buttons: {
+						 main: {
+						      label: "Ok",
+						      className: "btn-primary",
+						      callback: function() {
+						    	  window.location = "teacherProfile.jsp";
+						      }
+						 }
+					 }	
+				});	
 //			} else{
 //				console.log(message);
 //			}
-//		}
-//	});	
+		}
+	});	
 }
 
