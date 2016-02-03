@@ -8,7 +8,7 @@ import system.Config;
 import system.Key;
 
 public class GiftTransaction {
-	private long GiftTransaction;
+	private long giftTransactionId;
 	private long giftQuantity;
 	private double studentPoints;
 	
@@ -31,17 +31,17 @@ public class GiftTransaction {
 	}
 
 	/**
-	 * @return the giftTransaction
+	 * @return the giftTransactionId
 	 */
-	public long getGiftTransaction() {
-		return GiftTransaction;
+	public long getGiftTransactionId() {
+		return giftTransactionId;
 	}
 
 	/**
-	 * @param giftTransaction the giftTransaction to set
+	 * @param giftTransactionId the giftTransactionId to set
 	 */
-	public void setGiftTransaction(long giftTransaction) {
-		GiftTransaction = giftTransaction;
+	public void setGiftTransactionId(long giftTransactionId) {
+		this.giftTransactionId = giftTransactionId;
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class GiftTransaction {
 
 	public JSONObject toJsonSimple() {
 		JSONObject returnJson = new JSONObject();
-		returnJson.put(Key.GIFTTRANSACTIONID, this.GiftTransaction);
+		returnJson.put(Key.GIFTTRANSACTIONID, this.giftTransactionId);
 		returnJson.put(Key.GIFTQUANTITY, this.giftQuantity);
 		returnJson.put(Key.STUDENTPOINTS, this.studentPoints);
 

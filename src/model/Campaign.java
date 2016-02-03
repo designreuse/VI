@@ -11,7 +11,6 @@ import system.Value;
 
 public class Campaign {
 	private long campaignId;
-	
 	private String name;
 	private Date startDate;
 	private Date endDate;
