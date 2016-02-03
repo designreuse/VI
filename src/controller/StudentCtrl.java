@@ -57,8 +57,8 @@ public class StudentCtrl {
 					String emergencyContact = (String) inputJson.get(Key.EMERGENCYCONTACT);
 					String address = (String) inputJson.get(Key.ADDRESS);
 					String postalCode = (String) inputJson.get(Key.POSTALCODE);
-					double latitude = Double.valueOf((String) inputJson.get(Key.LATITUDE));
-					double longitude = Double.valueOf((String) inputJson.get(Key.LONGITUDE));
+					double latitude = (double) inputJson.get(Key.LATITUDE);
+					double longitude = (double) inputJson.get(Key.LONGITUDE);
 					String schoolName = (String) inputJson.get(Key.SCHOOLNAME);
 					String schoolLevel = (String) inputJson.get(Key.SCHOOLLEVEL);
 					String studentNric = (String) inputJson.get(Key.STUDENTNRIC);

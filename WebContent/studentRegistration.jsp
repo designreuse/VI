@@ -61,7 +61,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<form class="form-validate form-horizontal" id="register_form"
-							method="post" onsubmit="registerStudent();return false;">
+							method="post" onsubmit="getLatLong(registerStudent);return false;">
 							<div>
 								<font color="red" id="message"></font>
 							</div>

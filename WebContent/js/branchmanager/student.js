@@ -7,7 +7,9 @@ $(document).ready(function() {
 			singleDatePicker: true,
 			format : 'DD/MM/YYYY'
 		});
+		getMarketingCampaigns();
 		getStudentsByBranch(localStorage.getItem('branchId'));
+		
 
 	}
 });
@@ -16,7 +18,7 @@ var STUDENTS = {};
 var STUDENT	= {};
 var CAMPAIGNS;
 
-function registerStudent() {
+function registerStudent(lat,long) {
 	// Parent's details
 	jQuery('#parentNric').on('input', function() {
 		var pNric = $("#parentNric").val();
@@ -32,10 +34,10 @@ function registerStudent() {
 	var studentNric = $("#studentNric").val();
 	var gender = $("#gender").val();
 	var birthDate = $("#birthDate").val();
-	console.log(birthDate);
+//	console.log(birthDate);
 	var homeContact = $("#homeContact").val();
 	var emergencyContact = $("#emergencyContact").val();
-	console.log(emergencyContact);
+//	console.log(emergencyContact);
 	var studentAddress = $("#studentAddress").val();
 	var postalCode = $("#postalCode").val();
 
@@ -73,6 +75,9 @@ function registerStudent() {
 			input.branchId = Number(branchId);
 			
 			input.campaignId = Number(campaignId);
+			
+			input.latitude = lat;
+			input.longitude = long;
 		
 			var inputStr = JSON.stringify(input);
 		
@@ -546,7 +551,7 @@ function deleteStudent() {
 }
 
 function displayMarketingCampaigns() {
-	var select = document.getElementById("campaigns");
+	var select = document.getElementById("campaign");
 	var storedEvents = JSON.parse(localStorage["campaigns"]);
 	var options = [];
 	for(var j = 0; j < storedEvents.length; j++){
@@ -570,7 +575,7 @@ function getMarketingCampaigns() {
 	var branchId = localStorage.getItem('branchManagerId');
 	
 	var input = {};
-	input.branchId = branchId;
+	input.branchId = Number(branchId);
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 
@@ -587,14 +592,13 @@ function getMarketingCampaigns() {
 			var status = data.status; // shows the success/failure of the
 			// servlet request
 			if (status == 1) {
-				// store scheduleEventIds
 				var campaigns = [];
 				
 				for (var i = 0; i < data.message.length; i++) {
 					var obj = data.message[i];
-					
 					campaigns.push(obj);
 					localStorage["campaigns"] = JSON.stringify(campaigns);	
+					
 				}
 				displayMarketingCampaigns();
 			} else {
@@ -603,4 +607,36 @@ function getMarketingCampaigns() {
 		}
 	});
 	
+}
+
+function getLatLong(callback){
+	var address = $("#studentAddress").val();
+	var replaced = address.split(' ').join('+');
+	var geoAddress = "address=" + replaced;
+	var key = "key=AIzaSyDPiRJIGTN8vggsL2yJErTwHrw6DcLM0kI";
+	
+	var input = geoAddress + "&" + key;
+	
+//	var inputStr = JSON.stringify(input);
+//	inputStr = encodeURIComponent(inputStr);
+	console.log(input);
+
+	$.ajax({
+		url : 'https://maps.googleapis.com/maps/api/geocode/json?' + input, // this part sends to
+		// the servlet
+		method : 'POST',
+		dataType : 'json',
+		error : function(err) {
+			console.log(err);
+		},
+		success : function(data) {
+			//lat, long
+			for (var i = 0; i < data.results.length; i++) {
+				var lat = data.results[i].geometry.location.lat;
+				var long = data.results[i].geometry.location.lng;
+				console.log(data);
+				callback(lat,long);
+			}
+		}
+	});
 }
