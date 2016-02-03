@@ -1,3 +1,4 @@
+
 <!-- Left side column. contains the logo and sidebar -->
  <aside class="main-sidebar">
     <section class="sidebar">
@@ -5,7 +6,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user5-128x128.jpg" class="img-circle" alt="User Image">
+          <img src="dist/img/user.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p id="sidebarName"></p>
