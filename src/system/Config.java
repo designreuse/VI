@@ -36,13 +36,4 @@ public class Config {
 	public static final String PORT = "465";
 	public static final String USERNAME = "exploreandlearnvi@gmail.com";
 	public static final String PASSWORD = "exploreAndLearn";
-	
-	//TODO change the inputs below
-	public static final String ACCESSKEY = "AKIAI6GCULTK6JA7XECA";
-	public static final String SECRETKEY = "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";
-	public static final String BUKETNAME = "explore-and-learn";
-	public static final String S3ROOT = "pic";
-	public static final String S3URL = "https://s3-ap-southeast-1.amazonaws.com/";
-	
-
 }
