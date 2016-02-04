@@ -9,6 +9,7 @@ import org.json.simple.JSONObject;
 import dataManager.ScheduleDAO;
 import dataManager.PointEventDAO;
 import dataManager.BillDAO;
+import dataManager.TeacherStudentCourseDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -579,7 +580,7 @@ public class Student {
 		returnJson.put(Key.REMARK, this.remark);
 
 		JSONArray TeacherStudentCourseArr = new JSONArray();
-		for (TeacherStudentCourse tsc : this.teacherStudentCourses) {
+		for (TeacherStudentCourse tsc : TeacherStudentCourseDAO.getTeacherStudentCoursesByStudent(this)) {
 			TeacherStudentCourseArr.add(tsc.toJsonCourseAndResults());
 		}
 		returnJson.put(Key.COURSES, TeacherStudentCourseArr);

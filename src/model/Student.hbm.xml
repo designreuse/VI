@@ -1,111 +1,113 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <!-- Generated Feb 3, 2016 7:40:50 PM by Hibernate Tools 3.4.0.CR1 -->
-<hibernate-mapping>
-    <class name="model.Student" table="STUDENT">
-        <id name="studentId" type="long">
-            <column name="STUDENTID" />
-            <generator class="increment" />
-        </id>
-        <property name="name" type="java.lang.String">
-            <column name="NAME" />
-        </property>
-        <property name="gender" type="java.lang.String">
-            <column name="GENDER" />
-        </property>
-        <property name="birthDate" type="java.util.Date">
-            <column name="BIRTHDATE" />
-        </property>
-        <property name="homeContact" type="java.lang.String">
-            <column name="HOMECONTACT" />
-        </property>
-        <property name="emergencyContact" type="java.lang.String">
-            <column name="EMERGENCYCONTACT" />
-        </property>
-        <property name="address" type="java.lang.String">
-            <column name="ADDRESS" />
-        </property>
-        <property name="postalCode" type="java.lang.String">
-            <column name="POSTALCODE" />
-        </property>
-        <property name="latitude" type="double" access="field">
-            <column name="LATITUDE" />
-        </property>
-        <property name="longitude" type="double" access="field">
-            <column name="LONGITUDE" />
-        </property>
-        <property name="schoolName" type="java.lang.String">
-            <column name="SCHOOLNAME" />
-        </property>
-        <property name="schoolLevel" type="java.lang.String">
-            <column name="SCHOOLLEVEL" />
-        </property>
-        <property name="studentNric" type="java.lang.String">
-            <column name="STUDENTNRIC" />
-        </property>
-        <property name="profilePic" type="java.lang.String">
-            <column name="PROFILEPIC" />
-        </property>
-        <property name="points" type="double">
-            <column name="POINTS" />
-        </property>
-        <property name="takenDiagnostic" type="long">
-            <column name="TAKENDIAGNOSTIC" />
-        </property>
-        <many-to-one name="parent" class="model.Parent" fetch="join">
-            <column name="PARENTID" />
-        </many-to-one>
-        <many-to-one name="branch" class="model.Branch" fetch="join">
-            <column name="BRANCHID" />
-        </many-to-one>
-        <many-to-one name="campaign" class="model.Campaign" fetch="join">
-            <column name="CAMPAIGNID" />
-        </many-to-one>
-        <set name="bills" table="BILL" inverse="false" lazy="true">
-            <key>
-                <column name="STUDENTID" />
-            </key>
-            <one-to-many class="model.Bill" />
-        </set>
-        <set name="attendances" table="ATTENDANCE" inverse="false" lazy="true">
-            <key>
-                <column name="STUDENTID" />
-            </key>
-            <one-to-many class="model.Attendance" />
-        </set>
-        <set name="pointEvents" table="POINTEVENT" inverse="false" lazy="true">
-            <key>
-                <column name="STUDENTID" />
-            </key>
-            <one-to-many class="model.PointEvent" />
-        </set>
-        <set name="teacherStudentCourses" table="TEACHERSTUDENTCOURSE" inverse="false" lazy="true">
-            <key>
-                <column name="STUDENTID" />
-            </key>
-            <one-to-many class="model.TeacherStudentCourse" />
-        </set>
-        <set name="diagnostics" table="DIAGNOSTIC" inverse="false" lazy="true">
-            <key>
-                <column name="STUDENTID" />
-            </key>
-            <one-to-many class="model.Diagnostic" />
-        </set>
-        <set name="giftTransactions" table="GIFTTRANSACTION" inverse="false" lazy="true">
-            <key>
-                <column name="STUDENTID" />
-            </key>
-            <one-to-many class="model.GiftTransaction" />
-        </set>
-        <property name="objStatus" type="long">
-            <column name="OBJSTATUS" />
-        </property>
-        <property name="createDate" type="java.util.Date">
-            <column name="CREATEDATE" />
-        </property>
-        <property name="remark" type="java.lang.String">
-            <column name="REMARK" />
-        </property>
-    </class>
+<hibernate-mapping default-lazy="false">
+ <class name="model.Student" table="STUDENT">
+  <id name="studentId" type="long">
+   <column name="STUDENTID"/>
+   <generator class="increment"/>
+  </id>
+  <property generated="never" lazy="false" name="name" type="java.lang.String">
+   <column name="NAME"/>
+  </property>
+  <property generated="never" lazy="false" name="gender" type="java.lang.String">
+   <column name="GENDER"/>
+  </property>
+  <property generated="never" lazy="false" name="birthDate" type="java.util.Date">
+   <column name="BIRTHDATE"/>
+  </property>
+  <property generated="never" lazy="false" name="homeContact" type="java.lang.String">
+   <column name="HOMECONTACT"/>
+  </property>
+  <property generated="never" lazy="false" name="emergencyContact" type="java.lang.String">
+   <column name="EMERGENCYCONTACT"/>
+  </property>
+  <property generated="never" lazy="false" name="address" type="java.lang.String">
+   <column name="ADDRESS"/>
+  </property>
+  <property generated="never" lazy="false" name="postalCode" type="java.lang.String">
+   <column name="POSTALCODE"/>
+  </property>
+  <property access="field" generated="never" lazy="false"
+   name="latitude" type="double">
+   <column name="LATITUDE"/>
+  </property>
+  <property access="field" generated="never" lazy="false"
+   name="longitude" type="double">
+   <column name="LONGITUDE"/>
+  </property>
+  <property generated="never" lazy="false" name="schoolName" type="java.lang.String">
+   <column name="SCHOOLNAME"/>
+  </property>
+  <property generated="never" lazy="false" name="schoolLevel" type="java.lang.String">
+   <column name="SCHOOLLEVEL"/>
+  </property>
+  <property generated="never" lazy="false" name="studentNric" type="java.lang.String">
+   <column name="STUDENTNRIC"/>
+  </property>
+  <property generated="never" lazy="false" name="profilePic" type="java.lang.String">
+   <column name="PROFILEPIC"/>
+  </property>
+  <property generated="never" lazy="false" name="points" type="double">
+   <column name="POINTS"/>
+  </property>
+  <property generated="never" lazy="false" name="takenDiagnostic" type="long">
+   <column name="TAKENDIAGNOSTIC"/>
+  </property>
+  <many-to-one class="model.Parent" fetch="join" name="parent">
+   <column name="PARENTID"/>
+  </many-to-one>
+  <many-to-one class="model.Branch" fetch="join" name="branch">
+   <column name="BRANCHID"/>
+  </many-to-one>
+  <many-to-one class="model.Campaign" fetch="join" name="campaign">
+   <column name="CAMPAIGNID"/>
+  </many-to-one>
+  <set lazy="true" name="bills" sort="unsorted" table="BILL">
+   <key>
+    <column name="STUDENTID"/>
+   </key>
+   <one-to-many class="model.Bill"/>
+  </set>
+  <set lazy="true" name="attendances" sort="unsorted" table="ATTENDANCE">
+   <key>
+    <column name="STUDENTID"/>
+   </key>
+   <one-to-many class="model.Attendance"/>
+  </set>
+  <set lazy="true" name="pointEvents" sort="unsorted" table="POINTEVENT">
+   <key>
+    <column name="STUDENTID"/>
+   </key>
+   <one-to-many class="model.PointEvent"/>
+  </set>
+  <set lazy="true" name="teacherStudentCourses" sort="unsorted" table="TEACHERSTUDENTCOURSE">
+   <key>
+    <column name="STUDENTID"/>
+   </key>
+   <one-to-many class="model.TeacherStudentCourse"/>
+  </set>
+  <set lazy="true" name="diagnostics" sort="unsorted" table="DIAGNOSTIC">
+   <key>
+    <column name="STUDENTID"/>
+   </key>
+   <one-to-many class="model.Diagnostic"/>
+  </set>
+  <set lazy="true" name="giftTransactions" sort="unsorted" table="GIFTTRANSACTION">
+   <key>
+    <column name="STUDENTID"/>
+   </key>
+   <one-to-many class="model.GiftTransaction"/>
+  </set>
+  <property generated="never" lazy="false" name="objStatus" type="long">
+   <column name="OBJSTATUS"/>
+  </property>
+  <property generated="never" lazy="false" name="createDate" type="java.util.Date">
+   <column name="CREATEDATE"/>
+  </property>
+  <property generated="never" lazy="false" name="remark" type="java.lang.String">
+   <column name="REMARK"/>
+  </property>
+ </class>
 </hibernate-mapping>
