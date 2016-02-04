@@ -289,6 +289,7 @@ public class ResultCtrl {
 				messageArray.add(messageJson);
 			}
 			returnJson.put(Key.MESSAGE, messageArray);
+			returnJson.put(Key.STATUS, Value.SUCCESS);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL)  ;
