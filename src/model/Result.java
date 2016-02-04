@@ -286,7 +286,7 @@ public class Result {
 		for (TeacherFeedback fb : TeacherFeedbackDAO.getTeacherFeedbacksByResult(this)) {
 			feedbackArr.add(fb.toJsonSimple());
 		}
-		returnJson.put(Key.BRANCHS, feedbackArr);
+		returnJson.put(Key.TEACHERFEEDBACKS, feedbackArr);
 
 		returnJson.put(Key.OBJSTATUS, this.objStatus);
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
