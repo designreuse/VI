@@ -32,6 +32,7 @@ public class Teacher {
 	private Set<Salary> salaries;
 	private Set<Schedule> schedules;
 	private Set<PointEvent> pointEvents;
+	private Set<TeacherCourse> teacherCourses;
 	private Set<TeacherStudentCourse> teacherStudentCoursess;
 
 	public Teacher() {}
@@ -275,6 +276,20 @@ public class Teacher {
 	 */
 	public void setPointEvents(Set<PointEvent> pointEvents) {
 		this.pointEvents = pointEvents;
+	}
+
+	/**
+	 * @return the teacherCourses
+	 */
+	public Set<TeacherCourse> getTeacherCourses() {
+		return teacherCourses;
+	}
+
+	/**
+	 * @param teacherCourses the teacherCourses to set
+	 */
+	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
+		this.teacherCourses = teacherCourses;
 	}
 
 	/**

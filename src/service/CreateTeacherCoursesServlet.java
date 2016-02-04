@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONObject;
 
+import controller.TeacherCourseCtrl;
 import system.Config;
 import system.Key;
 import system.Value;
-import controller.TeacherCourseCtrl;
 
 /**
  * @author RaySong
  */
-public class GetCoursesByTeacherServlet extends HttpServlet {
+public class CreateTeacherCoursesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetCoursesByTeacherServlet() {
+    public CreateTeacherCoursesServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -46,6 +46,7 @@ public class GetCoursesByTeacherServlet extends HttpServlet {
 	}
 	
 	protected void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		response.setCharacterEncoding("UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
@@ -55,9 +56,8 @@ public class GetCoursesByTeacherServlet extends HttpServlet {
 		try{
 			String inputStr = request.getParameter(Key.INPUT);
 			JSONObject inputJson = (JSONObject) Config.JPARSER.parse(inputStr);
-			System.out.println(inputJson.toJSONString());
-			
-			returnJson = TeacherCourseCtrl.getTeacherCoursesByTeacher(inputJson);
+			System.out.println(this.getServletName() + " input: " + inputJson.toJSONString());
+			returnJson = TeacherCourseCtrl.createTeacherCourses(inputJson);
 		}catch(Exception e){
 			e.printStackTrace();
 			returnJson.put(Key.STATUS, Value.FAIL);

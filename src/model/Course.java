@@ -23,6 +23,7 @@ public class Course {
 	
 	private Set<Schedule> schedules;
 	private Set<BranchCourse> branchCourses;
+	private Set<TeacherCourse> teacherCourses;
 	private Set<TeacherStudentCourse> teacherStudentCourses;
 	private Set<Diagnostic> diagnostics;
 	
@@ -138,6 +139,20 @@ public class Course {
 	 */
 	public void setBranchCourses(Set<BranchCourse> branchCourses) {
 		this.branchCourses = branchCourses;
+	}
+
+	/**
+	 * @return the teacherCourses
+	 */
+	public Set<TeacherCourse> getTeacherCourses() {
+		return teacherCourses;
+	}
+
+	/**
+	 * @param teacherCourses the teacherCourses to set
+	 */
+	public void setTeacherCourses(Set<TeacherCourse> teacherCourses) {
+		this.teacherCourses = teacherCourses;
 	}
 
 	/**

@@ -35,6 +35,7 @@ public class Message {
 	public static final String ANNOUNCEMENTNOTEXIST = "The announcement does not exist.";
 	public static final String GIFTINVENTORYNOTEXIST = "The gift inventory does not exist.";
 	public static final String GIFTTRANSACTIONNOTEXIST = "The gift transaction does not exist.";
+	public static final String TEACHERCOURSENOTEXIST = "The teacher course does not exist";
 	
 	public static final String TEACHERCOURSEDELETED = "The teacher course has been successfully deleted.";
 	public static final String BRANCHCOURSEDELETED = "The branch course has been successfully deleted.";
