@@ -201,15 +201,15 @@
 											<!-- 										<input type="checkbox" id="course" class="enable_cb" -->
 											<!-- 													name="course3" >Korean -->
 
-											<input type="checkbox" name="course" value="Math">
-											Math <input type="checkbox" name="course" value="English">
-											English <input type="checkbox" name="course" value="Korean">
+											<input type="checkbox" name="course" value="2" id="course">
+											Math <input type="checkbox" name="course" value="1" id="course">
+											English <input type="checkbox" name="course" value="3" id="course">
 											Korean<br>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col-lg-offset-2 col-lg-10">
-											<button class="btn btn-primary" type="submit">Register</button>
+											<button class="btn btn-primary" type="submit" id="submit">Register</button>
 										</div>
 									</div>
 								</div>

@@ -3,6 +3,15 @@ $(document).ready(function() {
 	if (branchManagerId == null) {
 		window.location.replace('adminLogin.jsp');
 	} else {
+		$('#submit').click(function() {
+		      checked = $("input[type=checkbox]:checked").length;
+
+		      if(!checked) {
+		        alert("You must check at least one checkbox.");
+		        return false;
+		      }
+
+		    });
 		getTeachersByBranch(localStorage.getItem('branchId'));
 		// checkbox();
 	}
@@ -39,10 +48,20 @@ function registerTeacher() {
 	
 	var qualification = teacherSchool.concat(teacherQualification, year);
 	
+	//courseIds
+	var arrCB = $("input[name='course']:checked").map(function(){
+		 return $(this).val();
+	}).get();
+
+	var courseId = JSON.stringify(arrCB);
+	console.log(courseId);
+	//var courseId = $("#course").val();
+	
+	
 	var branchId = localStorage.getItem("branchId");
 	var numBranchId = Number(branchId);
-	console.log(branchId);
-	console.log(numBranchId);
+//	console.log(branchId);
+//	console.log(numBranchId);
 	
 	var input = {};
 	input.email = teacherEmail;
@@ -55,11 +74,13 @@ function registerTeacher() {
 	
 	input.branchId = numBranchId;
 	
+	input.courseId = courseId;
+	
 	var inputStr = JSON.stringify(input);
 	//console.log(inputStr);
 	
 	inputStr = encodeURIComponent(inputStr);
-	
+	//await servlet update
 	$.ajax({
 		url : '../VI/RegisterTeacherServlet?input=' + inputStr, //this part sends to the servlet
 		method : 'POST',
@@ -406,3 +427,4 @@ function deleteTeacher(){
 //		}
 //	}).change();
 //}
+
