@@ -50,28 +50,23 @@
 			<section class="content">
 				<div class="row">
 					<div class="col-md-1"></div>
-					<div class="col-md-10" id=>
-						<button type="button" class="btn bg-orange" onclick="">English</button>
+					<div class="col-md-10" id="courses">
+						<button type="button" class="btn bg-orange" onclick="loadCourseResult()">Subject 1</button>
+						<button type="button" class="btn bg-orange" onclick="loadCourseResult()">Subject 2</button>
 					</div>
 					
 				</div>
+				<br>
 				<div class="row">
 					<div class="col-md-1"></div>			
-					<div class="col-md-10" id="populateFeedback">
+					<div class="col-md-10">
 						<div class="nav-tabs-custom">
-							<ul class="nav nav-tabs">
-				              <li class="active"><a href="#tab_0" data-toggle="tab" id="latest">Latest Feedback</a></li>
-				              <li><a href="#tab_1" data-toggle="tab" id="second">Feedback on 15/01/2016</a></li>
-				              <li><a href="#tab_2" data-toggle="tab" id="third">Feedback on 10/01/2016</a></li>
-				              <li><a href="#tab_3" data-toggle="tab" id="forth">Feedback on 10/01/2016</a></li>
+							<ul class="nav nav-tabs" id="feedbackHeaders">
 				            </ul>
 				            
-			            <div class="tab-content">
-			              <div class="tab-pane active" id="tab_0">
-
-							</div>
-			              
-
+			            <div class="tab-content" id="feedbackContents">
+			              <div class="tab-pane active" id="tab_0"></div>
+			            
 			              <div class="tab-pane" id="tab_1">
 			                <div class="row">
 									<div class="col-md-5">
@@ -111,83 +106,83 @@
 								</div>
 			              </div>
 
-			              <div class="tab-pane" id="tab_2">
-			                <div class="row" id = "feedbackThree">
-									<div class="col-md-5">
-											<div class="small-box bg-green">
-												<div class="inner">
-													<h4>Results for</h4>
-													<p>Course Level: 13<br>
-														Booklet Level: 18</p>
-												</div>
-												<div class="icon">
-													<i class="ion ion-stats-bars"></i>
-												</div>
-												<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div>
-											</div>
-									</div>
+<!-- 			              <div class="tab-pane" id="tab_2"> -->
+<!-- 			                <div class="row" id = "feedbackThree"> -->
+<!-- 									<div class="col-md-5"> -->
+<!-- 											<div class="small-box bg-green"> -->
+<!-- 												<div class="inner"> -->
+<!-- 													<h4>Results for</h4> -->
+<!-- 													<p>Course Level: 13<br> -->
+<!-- 														Booklet Level: 18</p> -->
+<!-- 												</div> -->
+<!-- 												<div class="icon"> -->
+<!-- 													<i class="ion ion-stats-bars"></i> -->
+<!-- 												</div> -->
+<!-- 												<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div> -->
+<!-- 											</div> -->
+<!-- 									</div> -->
 									
-									<div class="col-md-7">
-										<dl class="dl">
+<!-- 									<div class="col-md-7"> -->
+<!-- 										<dl class="dl"> -->
 										
-											<dt>Teacher</dt>
-							                <dd>Richard</dd><br>
+<!-- 											<dt>Teacher</dt> -->
+<!-- 							                <dd>Richard</dd><br> -->
 											
-							                <dt>Date</dt>
-							                <dd>10/01/2016</dd><br>
+<!-- 							                <dt>Date</dt> -->
+<!-- 							                <dd>10/01/2016</dd><br> -->
 							                
-							                <dt>Total booklet score</dt>
-							                <dd>25 out of 40</dd><br>
+<!-- 							                <dt>Total booklet score</dt> -->
+<!-- 							                <dd>25 out of 40</dd><br> -->
 							                
-							                <dt>Total points</dt>
-							                <dd>220</dd><br>
+<!-- 							                <dt>Total points</dt> -->
+<!-- 							                <dd>220</dd><br> -->
 							                
-							                <dt>Feedback</dt>
-							                <dd>Talkative and distracted easily. Needs stronger concepts in fractions!
-							                </dd>
-							              </dl>
-									</div>
-								</div>
-			              </div>
+<!-- 							                <dt>Feedback</dt> -->
+<!-- 							                <dd>Talkative and distracted easily. Needs stronger concepts in fractions! -->
+<!-- 							                </dd> -->
+<!-- 							              </dl> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 			              </div> -->
 			              
-			              <div class="tab-pane" id="tab_3">
-			                <div class="row" id="feedbackFour">
-									<div class="col-md-5">
-											<div class="small-box bg-green">
-												<div class="inner">
-													<h4>Results for</h4>
-													<p>Course Level: 13<br>
-														Booklet Level: 19</p>
-												</div>
-												<div class="icon">
-													<i class="ion ion-stats-bars"></i>
-												</div>
-												<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div>
-											</div>
-									</div>
+<!-- 			              <div class="tab-pane" id="tab_3"> -->
+<!-- 			                <div class="row" id="feedbackFour"> -->
+<!-- 									<div class="col-md-5"> -->
+<!-- 											<div class="small-box bg-green"> -->
+<!-- 												<div class="inner"> -->
+<!-- 													<h4>Results for</h4> -->
+<!-- 													<p>Course Level: 13<br> -->
+<!-- 														Booklet Level: 19</p> -->
+<!-- 												</div> -->
+<!-- 												<div class="icon"> -->
+<!-- 													<i class="ion ion-stats-bars"></i> -->
+<!-- 												</div> -->
+<!-- 												<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div> -->
+<!-- 											</div> -->
+<!-- 									</div> -->
 									
-									<div class="col-md-7">
-										<dl class="dl">
+<!-- 									<div class="col-md-7"> -->
+<!-- 										<dl class="dl"> -->
 										
-											<dt>Teacher</dt>
-							                <dd>Richard</dd><br>
+<!-- 											<dt>Teacher</dt> -->
+<!-- 							                <dd>Richard</dd><br> -->
 										
-							                <dt>Date</dt>
-							                <dd>15/01/2016</dd><br>
+<!-- 							                <dt>Date</dt> -->
+<!-- 							                <dd>15/01/2016</dd><br> -->
 							                
-							                <dt>Total booklet score</dt>
-							                <dd>25 out of 40</dd><br>
+<!-- 							                <dt>Total booklet score</dt> -->
+<!-- 							                <dd>25 out of 40</dd><br> -->
 							                
-							                <dt>Total points</dt>
-							                <dd>225</dd><br>
+<!-- 							                <dt>Total points</dt> -->
+<!-- 							                <dd>225</dd><br> -->
 							                
-							                <dt>Feedback</dt>
-							                <dd>Talkative and distracted easily. Needs more focus, Carrie! 
-							                </dd>
-							              </dl>
-									</div>
-								</div>
-			              </div>
+<!-- 							                <dt>Feedback</dt> -->
+<!-- 							                <dd>Talkative and distracted easily. Needs more focus, Carrie!  -->
+<!-- 							                </dd> -->
+<!-- 							              </dl> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 			              </div> -->
 			              
 			            </div>
 					</div>
@@ -231,6 +226,9 @@
 
 <!-- FastClick -->
 <script src="plugins/fastclick/fastclick.js"></script>
+
+<!-- Moment -->
+<script src="./js/fullcalendar/lib/moment.min.js"></script>
 
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>

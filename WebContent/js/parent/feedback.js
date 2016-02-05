@@ -3,6 +3,8 @@ $(document).ready(function() {
 	viewFeedback();
 });
 
+var COURSES;
+
 function getChildren(){
 	var parent = JSON.parse(localStorage.getItem("parent"));
 	var parentId = Number(parent.parentId);
@@ -56,10 +58,11 @@ function redirectFeedback(studentId){
 function viewFeedback(){
 	var childrenList = JSON.parse(localStorage.getItem("childrenResults"));
 	var selectedId = Number(localStorage.getItem("selectedFeedback"));
-	console.log(childrenList)
+//	console.log(childrenList)
 	var selectedChild = childrenList[selectedId].student;
 	var selectedCourses = selectedChild.courses;
-	
+	COURSES = selectedCourses;
+	console.log(COURSES);
 	$("#childrenName").append("View All Feedbacks of " + selectedChild.name);
 
 //	for (var tabs = 0; tabs < 4; tabs++){
@@ -67,26 +70,85 @@ function viewFeedback(){
 //		$("#subrow" + tabs).append("<div class='col-md-12' id='subcol" + tabs + "'>");
 //	}
 //	
+	var courseHtml = '';
+	for (var c = 0; c < selectedCourses.length; c++){
+		var courseName = selectedCourses[c].course.name;
+		var courseId = selectedCourses[c].course.courseId;
+		courseHtml += '<button type="button" class="btn bg-orange" onclick="loadCourseResult('+courseId+')">'+courseName+'</button>';
+	}
+	
+	$("#courses").html(courseHtml);
+}
 
-	for (var tabs = 0; tabs < 4; tabs++){
-		for (var c = 0; c < selectedCourses.length; c++){
-			var courseName = selectedCourses[c].course.name;
-			var result = selectedCourses[c].results;
-			var stringHtml = "";
-			$("#tab_" + tabs).html("<div class='row'><div class='col-md-12' id='display"+ tabs +"'>");
-			stringHtml  += "<p>" + courseName + "</p>";
-			
-			if (result.length != 0){
-				for (var r = 0; r < result.length; r++){
-					stringHtml += "<p>----- result-------</p>"
+function loadCourseResult(id){
+	var course = {};
+	for(var tsc in COURSES){
+		var tempTsc = COURSES[tsc];
+		if(tempTsc.course.courseId == id){
+			course = tempTsc;
+//			console.log(course);
+			break;
+		}
+	}
+	
+	var results = course.results;
+	var feedbackContents = '';
+	var feedBackHeader = '';
+	if(results.length != 0){
+		for(var r = 0; r < results.length; r++){
+			var feedbacks = results[r].teacherFeedbacks;
+			var teacherFeedbacks = '';
+			if(feedbacks.length != 0){
+				for(var fb in feedbacks){
+//					console.log(feedbacks[fb].content);
+					teacherFeedbacks += '<dd>'+feedbacks[fb].content+'</dd>';
 				}
 			}
 			
+			feedBackHeader += '<li><a href="#tab_'+r+'" data-toggle="tab" id="tab'+r+'">Feedback on '+results[r].createDate+'</a></li>'
+			feedbackContents += '<div class="tab-pane" id="tab_'+r+'">\
+						            <div class="row">\
+										<div class="col-md-5">\
+											<div class="small-box bg-green">\
+												<div class="inner">\
+													<h4>Results for</h4>\
+													<p>Course Level: '+results[r].courseLevel+'<br>\
+														Booklet Level: '+results[r].bookletLevel+'</p>\
+												</div>\
+												<div class="icon">\
+													<i class="ion ion-stats-bars"></i>\
+												</div>\
+												<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div>\
+											</div>\
+										</div>\
+										<div class="col-md-7">\
+											<dl class="dl">\
+												<dt>Teacher</dt>\
+								                <dd>'+course.teacher.name+'</dd><br>\
+								                <dt>Date</dt>\
+								                <dd>'+results[r].createDate+'</dd><br>\
+								                <dt>Total booklet score</dt>\
+								                <dd>'+results[r].resultValue+'</dd><br>\
+								                <dt>Total points</dt>\
+								                <dd>'+results[r].pointamount+'</dd><br>\
+								                <dt>Feedbacks</dt>\
+								                '+ teacherFeedbacks +'\
+								              </dl>\
+										</div>\
+									</div>\
+							  </div>';
+			
 		}
-		
-		$("#display" + tabs).html(stringHtml);
+	} else {
+		feedBackHeader = '<li class="active"><a href="#tab_0" data-toggle="tab" id="tab0">Latest Feedback</a></li>';
+		feedbackContents = '<div class="tab-pane active" id="tab_0">Sorry, there is no result been given yet.</div>';
 	}
+	
+	$("#feedbackHeaders").html(feedBackHeader);
+	$("#feedbackContents").html(feedbackContents);
 }
+
+
 //function getFeedback(){
 //	
 //	var storedIds = JSON.parse(localStorage["studentIds"]);
