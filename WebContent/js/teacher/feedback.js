@@ -10,7 +10,7 @@ $(document).ready(function() {
  
 function populateScheduleEvents(){
 //	var teacherId = 2; -- for local testing only--
-	input.teacherId = Number(localStorage.getItem("teacherId"));
+	var teacherId = Number(localStorage.getItem("teacherId"));
 	var $coursesDDL = $('#coursesDDL');
 	$coursesDDL.html('');
 	var input = {};

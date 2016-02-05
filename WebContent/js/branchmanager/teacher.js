@@ -48,14 +48,6 @@ function registerTeacher() {
 	
 	var qualification = teacherSchool.concat(teacherQualification, year);
 	
-	//courseIds
-	var arrCB = $("input[name='course']:checked").map(function(){
-		 return $(this).val();
-	}).get();
-
-	var courseId = JSON.stringify(arrCB);
-	console.log(courseId);
-	//var courseId = $("#course").val();
 	
 	
 	var branchId = localStorage.getItem("branchId");
@@ -73,8 +65,6 @@ function registerTeacher() {
 	input.qualification = qualification;
 	
 	input.branchId = numBranchId;
-	
-	input.courseId = courseId;
 	
 	var inputStr = JSON.stringify(input);
 	//console.log(inputStr);
@@ -95,6 +85,36 @@ function registerTeacher() {
 			var message = data.message;
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
+				
+				//courseIds
+				var arrCB = $("input[name='course']:checked").map(function(){
+					 return $(this).val();
+				}).get();
+
+				var courses = JSON.stringify(arrCB);
+				console.log(courseId);
+				
+				$.ajax({
+					url : '../VI/CreateTeacherCoursesServlet?input=' + inputStr, //this part sends to the servlet
+					method : 'POST',
+					dataType : 'json',
+					error : function(err) {
+						console.log(err);
+						$("#message").html("System has some error. Please try again.");
+					},
+					success : function(data) {
+						console.log(data);
+						var status = data.status; //shows the  success/failure of the servlet request
+						var message = data.message;
+						// if status == 1, it means that it is successful. else it will fail
+						if (status == 1) {
+							console.log("teacherCourse created");
+						} else {
+							$("#message").html(message);
+						}
+					}
+				});
+				
 				alert("Created successfully");	
 				window.location = "teacherSuccess.jsp";
 			} else {
