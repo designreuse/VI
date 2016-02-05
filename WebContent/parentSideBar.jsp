@@ -19,21 +19,7 @@
         <li class="header"></li>
         <li class="treeview"><a href="parentMain.jsp"><i class="fa fa-link"></i> <span>Home</span></a></li>
         <li class="treeview"><a href="parentStudent.jsp"><i class="fa fa-link"></i> <span>Children</span></a></li>
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Feedback Version 1</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a href="parentFeedback.jsp">Cindy</a></li>
-            <li><a href="parentFeedback2.jsp">Carrie</a></li>
-          </ul>
-        </li>
-        
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Feedback Version 2</span> <i class="fa fa-angle-left pull-right"></i></a>
-          <ul class="treeview-menu">
-            <li><a href="parentFeedbackB.jsp">Cindy</a></li>
-            <li><a href="parentFeedbackB2.jsp">Carrie</a></li>
-          </ul>
-        </li>
+        <li class="treeview"><a href="parentFeedbackB.jsp"><i class="fa fa-link"></i> <span>Report Cards</span></a></li>
       </ul>
       
     </section>

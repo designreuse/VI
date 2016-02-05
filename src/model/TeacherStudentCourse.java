@@ -293,6 +293,7 @@ public class TeacherStudentCourse {
 		JSONObject returnJson = new JSONObject();
 		returnJson.put(Key.TEACHERSTUDENTCOURSEID, this.teacherStudentCourseId);
 		returnJson.put(Key.COURSE, this.course.toJson());
+		returnJson.put(Key.TEACHER, this.teacher.toJsonSimple());
 		returnJson.put(Key.COURSELEVEL, this.courseLevel);
 		returnJson.put(Key.BOOKLETLEVEL, this.bookletLevel);
 		

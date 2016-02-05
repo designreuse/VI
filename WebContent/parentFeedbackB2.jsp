@@ -43,97 +43,36 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 	<section class="content-header">
-      <h1>
-        Children Feedback
-        <small>(Version B)</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="parentFeedback"><i class="fa fa-dashboard"></i> Return to Version A</a></li>
-      </ol>
+      <h1 id="childrenName"></h1>
+      <small>Monthly Feedback</small>
     </section>
     <!-- Main content -->
 			<section class="content">
-				<br>
-				<br>
 				<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-3">
-					<div class="box box-warning">
-			            <div class="box-body box-profile">
-			              <img class="profile-user-img img-responsive img-circle" src="dist/img/avatar2.png" alt="User profile picture">
-			
-			              <h3 class="profile-username text-center">Carrie</h3>
-			
-			              <p class="text-muted text-center">Current Points: 250</p>
-			
-			              <ul class="list-group list-group-unbordered">
-			                <li class="list-group-item">
-			                  <b>Subject</b> <a class="pull-right">Mathematics</a>
-			                </li>
-			                <li class="list-group-item">
-			                  <b>Current Course Level</b> <a class="pull-right">13</a>
-			                </li>
-			                <li class="list-group-item">
-			                  <b>Current Booklet Level</b> <a class="pull-right">20</a>
-			                </li>
-			              </ul>
-			            </div>
-			         </div>
-			         </div>
-				
-				
-					<div class="col-md-7">
+					<div class="col-md-1"></div>
+					<div class="col-md-10" id=>
+						<button type="button" class="btn bg-orange" onclick="">English</button>
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="col-md-1"></div>			
+					<div class="col-md-10" id="populateFeedback">
 						<div class="nav-tabs-custom">
 							<ul class="nav nav-tabs">
-				              <li class="active"><a href="#tab_1" data-toggle="tab">Latest Feedback</a></li>
-				              <li><a href="#tab_2" data-toggle="tab">Feedback on 15/01/2016</a></li>
-				              <li><a href="#tab_3" data-toggle="tab">Feedback on 10/01/2016</a></li>
-				              <li><a href="#tab_4" data-toggle="tab">Feedback on 10/01/2016</a></li>
-				              <li><a href="#tab_5" data-toggle="tab">Feedback on 10/01/2016</a></li>
+				              <li class="active"><a href="#tab_0" data-toggle="tab" id="latest">Latest Feedback</a></li>
+				              <li><a href="#tab_1" data-toggle="tab" id="second">Feedback on 15/01/2016</a></li>
+				              <li><a href="#tab_2" data-toggle="tab" id="third">Feedback on 10/01/2016</a></li>
+				              <li><a href="#tab_3" data-toggle="tab" id="forth">Feedback on 10/01/2016</a></li>
 				            </ul>
 				            
 			            <div class="tab-content">
-			              <div class="tab-pane active" id="tab_1">
-			                <div class="row">
-									<div class="col-md-5">
-											<div class="small-box bg-green">
-												<div class="inner">
-													<h4>Results for</h4>
-													<p>Course Level: 13<br>
-														Booklet Level: 20</p>
-												</div>
-												<div class="icon">
-													<i class="ion ion-stats-bars"></i>
-												</div>
-												<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div>
-											</div>
-									</div>
-									
-									<div class="col-md-7">
-										<dl class="dl">
-										
-											<dt>Teacher</dt>
-							                <dd>Richard</dd><br>
-										
-							                <dt>Date</dt>
-							                <dd>22/01/2016</dd><br>
-							                
-							                <dt>Total booklet score</dt>
-							                <dd>39 out of 40</dd><br>
-							                
-							                <dt>Total points</dt>
-							                <dd>250</dd><br>
-							                
-							                <dt>Feedback</dt>
-							                <dd>A great improvement of what she has done for her work today! 
-							                </dd>
-							              </dl>
-									</div>
-								</div>
+			              <div class="tab-pane active" id="tab_0">
+
 							</div>
 			              
 
-			              <div class="tab-pane" id="tab_2">
+			              <div class="tab-pane" id="tab_1">
 			                <div class="row">
 									<div class="col-md-5">
 											<div class="small-box bg-green">
@@ -172,8 +111,8 @@
 								</div>
 			              </div>
 
-			              <div class="tab-pane" id="tab_3">
-			                <div class="row">
+			              <div class="tab-pane" id="tab_2">
+			                <div class="row" id = "feedbackThree">
 									<div class="col-md-5">
 											<div class="small-box bg-green">
 												<div class="inner">
@@ -205,6 +144,45 @@
 							                
 							                <dt>Feedback</dt>
 							                <dd>Talkative and distracted easily. Needs stronger concepts in fractions!
+							                </dd>
+							              </dl>
+									</div>
+								</div>
+			              </div>
+			              
+			              <div class="tab-pane" id="tab_3">
+			                <div class="row" id="feedbackFour">
+									<div class="col-md-5">
+											<div class="small-box bg-green">
+												<div class="inner">
+													<h4>Results for</h4>
+													<p>Course Level: 13<br>
+														Booklet Level: 19</p>
+												</div>
+												<div class="icon">
+													<i class="ion ion-stats-bars"></i>
+												</div>
+												<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div>
+											</div>
+									</div>
+									
+									<div class="col-md-7">
+										<dl class="dl">
+										
+											<dt>Teacher</dt>
+							                <dd>Richard</dd><br>
+										
+							                <dt>Date</dt>
+							                <dd>15/01/2016</dd><br>
+							                
+							                <dt>Total booklet score</dt>
+							                <dd>25 out of 40</dd><br>
+							                
+							                <dt>Total points</dt>
+							                <dd>225</dd><br>
+							                
+							                <dt>Feedback</dt>
+							                <dd>Talkative and distracted easily. Needs more focus, Carrie! 
 							                </dd>
 							              </dl>
 									</div>
@@ -262,6 +240,6 @@
 
 <script src="./js/bootbox.min.js"></script>
 
-<script src="./js/parent/parent.js"></script>
+<script src="./js/parent/feedback.js"></script>
 </body>
 </html>

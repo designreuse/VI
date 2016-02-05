@@ -28,6 +28,7 @@ function viewChildren(id) {
 		success : function(data) {
 			var status = data.status; 
 			var students = data.message;
+
 			if(status == 1){
 				STUDENTS = students;
 				var html = '';
