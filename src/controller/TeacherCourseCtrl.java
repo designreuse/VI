@@ -149,10 +149,9 @@ public class TeacherCourseCtrl {
 			JSONArray coursesArr = (JSONArray) inputJson.get(Key.COURSES);
 			Teacher teacher = TeacherDAO.getTeacherById((long) inputJson.get(Key.TEACHERID));
 			if (teacher != null){
-				for (Object o : coursesArr) {
+				for (Object cId : coursesArr) {
 					JSONObject messageJson = new JSONObject();
-					JSONObject teacherCourseObj = (JSONObject) o;
-					Course course = CourseDAO.getCourseById((long) teacherCourseObj.get(Key.COURSEID));
+					Course course = CourseDAO.getCourseById((long) cId);
 					if (course != null) {
 						TeacherCourse teacherCourse = new TeacherCourse(teacher, course);
 						TeacherCourseDAO.addTeacherCourse(teacherCourse);

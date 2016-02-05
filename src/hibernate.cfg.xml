@@ -41,6 +41,7 @@
 		<mapping resource="model/ScheduleEvent.hbm.xml" />
 		<mapping resource="model/Student.hbm.xml" />
 		<mapping resource="model/Teacher.hbm.xml" />
+		<mapping resource="model/TeacherCourse.hbm.xml" />
 		<mapping resource="model/TeacherFeedback.hbm.xml" />
 		<mapping resource="model/TeacherStudentCourse.hbm.xml" />
 	</session-factory>
