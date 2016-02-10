@@ -73,17 +73,7 @@ function loginTeacher() {
 			// if status == 1, it means that it is successful. else it will fail
 			if (status == 1) {
 				//store teacherId and courseIds 
-				localStorage.setItem("teacherId", message.teacherId);
-				var courses = [];
-				for (var i = 0; i < message.schedules.length; i++) {
-					var obj = message.schedules[i];
-					//console.log(obj.course.courseId);
-					//courses .......
-					courses.push(obj.course);
-					//console.log(courses);
-					localStorage["courses"] = JSON.stringify(courses);
-				}
-				
+				localStorage.setItem("teacherId", message.teacherId);				
 				window.location = "teacherProfile.jsp";
 			} else {
 				$("#message").html("Invalid Email/Password, Account does not exist.");

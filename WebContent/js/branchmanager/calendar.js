@@ -40,6 +40,7 @@ function generateTeacherOption(){
 			var message = data.message;
 			
 			if (status == 1) {
+				console.log(message);
 				$teacherDDL.html('<option id="0">Select Teacher</option>');
 				for (var t = 0; t < message.length; t++){
 					var teacherId = message[t].teacherId;
@@ -109,7 +110,8 @@ function generateCourseOption(elem){
 			
 			if (status == 1) {
 				for (var t = 0; t < message.length; t++){
-					$courseDDL.append('<option value=' + message[t].courseId + '>' + message[t].name + '</option>' );
+					
+					$courseDDL.append('<option value=' + message[t].course.courseId + '>' + message[t].course.name + '</option>' );
 				}
 			} else{
 				$teacherDDL.html('<option id="-1">No Course available</option>');
