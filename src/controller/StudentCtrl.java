@@ -311,55 +311,13 @@ public class StudentCtrl {
 			if (parent != null) {
 				JSONArray studentArr = new JSONArray();
 				for (Student s : StudentDAO.getStudentsByParent(parent)) {
-					studentArr.add(s.toJson());
+					studentArr.add(s.toJsonSimple());
 				}
 				returnJson.put(Key.STATUS, Value.SUCCESS);
 				returnJson.put(Key.MESSAGE, studentArr);
 			} else {
 				returnJson.put(Key.STATUS, Value.FAIL);
 				returnJson.put(Key.MESSAGE, Message.PARENTNOTEXIST);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL);
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
-
-	// Get student by bill, may not be useful as the student is already in the bill object.
-	public static JSONObject getStudentByBill(JSONObject inputJson) {
-		JSONObject returnJson = new JSONObject();
-		try {
-			Bill bill = BillDAO.getBillById((long) inputJson.get(Key.BILLID));
-			if (bill != null) {
-				Student student = bill.getStudent();
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, student.toJson());
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.BILLNOTEXIST);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			returnJson.put(Key.STATUS, Value.FAIL);
-			returnJson.put(Key.MESSAGE, e);
-		}
-		return returnJson;
-	}
-
-	// Get student by pointEvent
-	public static JSONObject getStudentByPointEvent(JSONObject inputJson) {
-		JSONObject returnJson = new JSONObject();
-		try {
-			PointEvent pointEvent = PointEventDAO.getPointEventById((long) inputJson.get(Key.POINTEVENTID));
-			if (pointEvent != null) {
-				Student student = pointEvent.getStudent();
-				returnJson.put(Key.STATUS, Value.SUCCESS);
-				returnJson.put(Key.MESSAGE, student.toJson());
-			} else {
-				returnJson.put(Key.STATUS, Value.FAIL);
-				returnJson.put(Key.MESSAGE, Message.POINTEVENTNOTEXIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

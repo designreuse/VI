@@ -23,24 +23,36 @@ function getChildren(){
 		success : function(data) {
 			var status = data.status; 
 			var message = data.message;
-			
+//			console.log(message);
 			if(status == 1){
 				localStorage.setItem("childrenResults", JSON.stringify(message));
 				for (var s = 0; s < message.length; s++){
 					var name = message[s].student.name;
-					html = '<div class="col-md-5">'	 +
-						'<div class="box box-warning">'+
-						'<div class="box-body box-profile">' +
-						'<img class="profile-user-img img-responsive img-circle" src="dist/img/avatar3.png" alt="User profile picture">' + 
-							'<h3 class="profile-username text-center">'+ message[s].student.name + '</h3>' + 
-							'<p class="text-muted text-center"><b>Subjects taking</b>: English & Mathematics </p>' +
-							'<ul class="list-group list-group-unbordered">' +
-							'<li class="list-group-item">'+
-							'<button type="button" class="btn btn-block bg-orange" onclick="redirectFeedback('+ s +')">View All Feedbacks of '+ message[s].student.name +'</button> '+
-							' </li>'+
-							'</ui>'+
-							'</div>'+
-							'</div>';
+					var courses = message[s].student.courses;
+//					console.log(courses);
+					var coursesName = "";
+					if (courses.length != 0) {
+						coursesName = courses[0].course.name;
+						for (var c = 1; c < courses.length; c++){
+							coursesName += " & " + courses[c].course.name;
+						}
+					} else {
+						coursesName = "No course assign yet.";
+					}
+					html = '<li class="col-md-6" style="list-style-type: none">'+
+								'<div class="box box-warning">'+
+									'<div class="box-body box-profile">' +
+										'<img class="profile-user-img img-responsive img-circle" src="dist/img/avatar3.png" alt="User profile picture">' + 
+										'<h3 class="profile-username text-center">'+ message[s].student.name + '</h3>' + 
+										'<p class="text-muted text-center"><b>Subjects taking</b>: '+ coursesName +' </p>' +
+										'<ul class="list-group list-group-unbordered">' +
+											'<li class="list-group-item">'+
+												'<button type="button" class="btn btn-block bg-orange" onclick="redirectFeedback('+ s +')">View All Feedbacks of '+ message[s].student.name +'</button> '+
+											' </li>'+
+										'</ui>'+
+									'</div>'+
+								'</div>'+
+							'</li>';
 					$("#children").append(html);
 				}
 			} else {
@@ -95,7 +107,47 @@ function loadCourseResult(id){
 	var feedbackContents = '';
 	var feedBackHeader = '';
 	if(results.length != 0){
-		for(var r = 0; r < results.length; r++){
+		var feedbacks = results[0].teacherFeedbacks;
+		var teacherFeedbacks = '';
+		if(feedbacks.length != 0){
+			for(var fb in feedbacks){
+//				console.log(feedbacks[fb].content);
+				teacherFeedbacks += '<dd>'+feedbacks[fb].content+'</dd>';
+			}
+		}
+		feedBackHeader = '<li><a href="#tab_'+0+'" data-toggle="tab" id="tab'+0+'">Feedback on '+results[0].createDate.replace("T", " ")+'</a></li>'
+		feedbackContents = '<div class="tab-pane" id="tab_'+0+'">\
+					            <div class="row">\
+									<div class="col-md-5">\
+										<div class="small-box bg-green">\
+											<div class="inner">\
+												<h4>Results for</h4>\
+												<p>Course Level: '+results[0].courseLevel+'<br>\
+													Booklet Level: '+results[0].bookletLevel+'</p>\
+											</div>\
+											<div class="icon">\
+												<i class="ion ion-stats-bars"></i>\
+											</div>\
+											<div class="small-box-footer"> <i class="fa fa-arrow-circle-right"></i></div>\
+										</div>\
+									</div>\
+									<div class="col-md-7">\
+										<dl class="dl">\
+											<dt>Teacher</dt>\
+							                <dd>'+course.teacher.name+'</dd><br>\
+							                <dt>Date</dt>\
+							                <dd>'+results[0].createDate.replace("T", " ")+'</dd><br>\
+							                <dt>Total booklet score</dt>\
+							                <dd>'+results[0].resultValue+'</dd><br>\
+							                <dt>Total points</dt>\
+							                <dd>'+results[0].pointAmount+'</dd><br>\
+							                <dt>Feedbacks</dt>\
+							                '+ teacherFeedbacks +'\
+							              </dl>\
+									</div>\
+								</div>\
+						  </div>';
+		for(var r = 1; r < results.length; r++){
 			var feedbacks = results[r].teacherFeedbacks;
 			var teacherFeedbacks = '';
 			if(feedbacks.length != 0){
@@ -104,8 +156,7 @@ function loadCourseResult(id){
 					teacherFeedbacks += '<dd>'+feedbacks[fb].content+'</dd>';
 				}
 			}
-			
-			feedBackHeader += '<li><a href="#tab_'+r+'" data-toggle="tab" id="tab'+r+'">Feedback on '+results[r].createDate+'</a></li>'
+			feedBackHeader += '<li><a href="#tab_'+r+'" data-toggle="tab" id="tab'+r+'">Feedback on '+results[r].createDate.replace("T", " ")+'</a></li>'
 			feedbackContents += '<div class="tab-pane" id="tab_'+r+'">\
 						            <div class="row">\
 										<div class="col-md-5">\
@@ -126,11 +177,11 @@ function loadCourseResult(id){
 												<dt>Teacher</dt>\
 								                <dd>'+course.teacher.name+'</dd><br>\
 								                <dt>Date</dt>\
-								                <dd>'+results[r].createDate+'</dd><br>\
+								                <dd>'+results[r].createDate.replace("T", " ")+'</dd><br>\
 								                <dt>Total booklet score</dt>\
 								                <dd>'+results[r].resultValue+'</dd><br>\
 								                <dt>Total points</dt>\
-								                <dd>'+results[r].pointamount+'</dd><br>\
+								                <dd>'+results[r].pointAmount+'</dd><br>\
 								                <dt>Feedbacks</dt>\
 								                '+ teacherFeedbacks +'\
 								              </dl>\

@@ -6,6 +6,7 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.ScheduleEventDAO;
 import system.Config;
 import system.Key;
 import system.Value;
@@ -363,17 +364,12 @@ public class Schedule {
 		returnJson.put(Key.CREATEDATE, Config.SDF.format(this.createDate));
 		returnJson.put(Key.REMARK, this.remark);
 		
-//		JSONArray scheduleEventArr = new JSONArray();
-//		for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(this)) {
-//			if(a.getActualStartDate() != null){
-//				scheduleEventArr.add(se.toScheduleJsonMark());
-//			} else {
-//				scheduleEventArr.add(se.toScheduleJson());
-//			}
-////			scheduleEventArr.add(a.toJson());
-//		}
-//		returnJson.put(Key.ATTENDANCES, scheduleEventArr);
-//		
+		JSONArray scheduleEventArr = new JSONArray();
+		for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(this)) {
+			scheduleEventArr.add(se.toScheduleJson());
+		}
+		returnJson.put(Key.ATTENDANCES, scheduleEventArr);
+		
 		return returnJson;
 	}
 }

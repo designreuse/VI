@@ -56,7 +56,6 @@
 				<br>
 				<br>
 				<div class="row" id="children">
-					<div class="col-md-1"></div>
 				</div>
 
 
