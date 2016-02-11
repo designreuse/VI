@@ -61,7 +61,7 @@
 				<div class="row">
 					<div class="col-md-12">
 						<form class="form-validate form-horizontal" id="register_form"
-							method="post" onsubmit="getLatLong(registerStudent);return false;">
+							method="post" onsubmit="registerStudent();return false;">
 							<div>
 								<font color="red" id="message"></font>
 							</div>
@@ -255,9 +255,7 @@
 										</label>
 										<div class="col-lg-10">
 
-											<select class="form-control" id="campaign"
-												name="campaign">
-												<option>Choose a marketing campaign</option>
+											<select class="form-control" id="campaign" name="campaign">
 											</select>
 										</div>
 									</div>
@@ -319,7 +317,9 @@
 
 	<!-- AdminLTE for demo purposes -->
 	<script src="dist/js/demo.js"></script>
-
+	
+	<script src="./js/bootbox.min.js"></script>	
+	
 	<script src=".js/form-validation-script.js"></script>
 
 	<script src="./js/branchmanager/student.js"></script>

@@ -9,7 +9,6 @@ $(document).ready(function() {
 		});
 		getMarketingCampaigns();
 		getStudentsByBranch(localStorage.getItem('branchId'));
-		
 
 	}
 });
@@ -18,7 +17,8 @@ var STUDENTS = {};
 var STUDENT	= {};
 var CAMPAIGNS;
 
-function registerStudent(lat,long) {
+// removing lat and long for preparation for UAT
+function registerStudent() {
 	// Parent's details
 	jQuery('#parentNric').on('input', function() {
 		var pNric = $("#parentNric").val();
@@ -34,10 +34,8 @@ function registerStudent(lat,long) {
 	var studentNric = $("#studentNric").val();
 	var gender = $("#gender").val();
 	var birthDate = $("#birthDate").val();
-//	console.log(birthDate);
 	var homeContact = $("#homeContact").val();
 	var emergencyContact = $("#emergencyContact").val();
-//	console.log(emergencyContact);
 	var studentAddress = $("#studentAddress").val();
 	var postalCode = $("#postalCode").val();
 
@@ -45,71 +43,134 @@ function registerStudent(lat,long) {
 	var schoolName = $("#schoolName").val();
 	var schoolLevel = $("#schoolLevel").val()
 
-	//marketing
-	var campaignName = $("#campaign").val();
-	for(var j = 0; j < CAMPAIGNS.length; j++){
-		if(campaignName == CAMPAIGNS[j].name){
-			var campaignId = CAMPAIGNS[j].campaignId;
+
+	var campaignId = $("#campaign").val();
 	
-			var branchId = localStorage.getItem("branchId");
-		//	console.log(branchId);
-		//	console.log(taken);
+	var branchId = localStorage.getItem("branchId");
+
+	var input = {};
+	
+	input.parentNric = parentNric;
+	
+	input.name = studentName;
+	input.studentNric = studentNric;
+	input.gender = gender;
+	input.birthDate = moment((birthDate), "DD/MM/YYYY");
+	input.homeContact = homeContact;
+	input.emergencyContact = emergencyContact;
+	input.postalCode = postalCode;
+	input.address = studentAddress;
+	
+	input.schoolName = schoolName;
+	input.schoolLevel = schoolLevel;
+	
+	input.takenDiagnostic = Number(taken);
+	input.branchId = Number(branchId);
 		
-			var input = {};
+	input.campaignId = Number(campaignId);
 		
-			input.parentNric = parentNric;
-		
-			input.name = studentName;
-			input.studentNric = studentNric;
-			input.gender = gender;
-			input.birthDate = moment((birthDate), "DD/MM/YYYY");
-			input.homeContact = homeContact;
-			input.emergencyContact = emergencyContact;
-			input.postalCode = postalCode;
-			input.address = studentAddress;
-		
-			input.schoolName = schoolName;
-			input.schoolLevel = schoolLevel;
-		
-			input.takenDiagnostic = Number(taken);
-			input.branchId = Number(branchId);
-			
-			input.campaignId = Number(campaignId);
-			
-			input.latitude = lat;
-			input.longitude = long;
-		
-			var inputStr = JSON.stringify(input);
-		
-			inputStr = encodeURIComponent(inputStr);
-			$.ajax({
-				url : '../VI/RegisterStudentServlet?input=' + inputStr, // this part
-																		// sends to the
-																		// servlet
-				method : 'POST',
-				dataType : 'json',
-				error : function(err) {
-					console.log(err);
-					$("#message").html("System has some error. Please try again.");
-				},
-				success : function(data) {
-					console.log(data);
-					var status = data.status; // shows the success/failure of the
-												// servlet request
-					var message = data.message;
-					// if status == 1, it means that it is successful, else it will
-					// fail.
-					if (status == 1) {
-						alert("Created successfully");
-						window.location = "studentSuccess.jsp";
-					} else {
-						$("#message").html(message);
-					}
+	input.latitude = 1.01;
+	input.longitude = 1.01;
+	
+	var inputStr = JSON.stringify(input);
+	inputStr = encodeURIComponent(inputStr);
+	$.ajax({
+			url : '../VI/RegisterStudentServlet?input=' + inputStr, 
+			method : 'POST',
+			dataType : 'json',
+			error : function(err) {
+				console.log(err);
+				$("#message").html("System has some error. Please try again.");
+			},
+			success : function(data) {
+				console.log(data);
+				var status = data.status; 
+				var message = data.message;
+				
+				if (status == 1) {
+					bootbox.dialog({
+						title: "Student Registration",
+    					message: "Student " + studentName + " is updated into the student database.",
+    					buttons: {
+    					    success: {
+    					      label: "Ok",
+    					      className: "btn-success",
+    					      
+    					      callback: function() {
+    					    	  window.location = "studentsProfile.jsp";
+    					      }
+    					    }
+    					}
+					});
+				} else {
+					$("#message").html(message);
 				}
-			});
-		}
-	}
+			}
+		});
 }
+	
+//	for(var j = 0; j < CAMPAIGNS.length; j++){
+//		if(campaignName == CAMPAIGNS[j].name){
+//			var campaignId = CAMPAIGNS[j].campaignId;
+//	
+//			var branchId = localStorage.getItem("branchId");
+//		//	console.log(branchId);
+//		//	console.log(taken);
+//		
+//			var input = {};
+//		
+//			input.parentNric = parentNric;
+//		
+//			input.name = studentName;
+//			input.studentNric = studentNric;
+//			input.gender = gender;
+//			input.birthDate = moment((birthDate), "DD/MM/YYYY");
+//			input.homeContact = homeContact;
+//			input.emergencyContact = emergencyContact;
+//			input.postalCode = postalCode;
+//			input.address = studentAddress;
+//		
+//			input.schoolName = schoolName;
+//			input.schoolLevel = schoolLevel;
+//		
+//			input.takenDiagnostic = Number(taken);
+//			input.branchId = Number(branchId);
+//			
+//			input.campaignId = Number(campaignId);
+//			
+//			input.latitude = lat;
+//			input.longitude = long;
+//		
+//			var inputStr = JSON.stringify(input);
+//		
+//			inputStr = encodeURIComponent(inputStr);
+//			$.ajax({
+//				url : '../VI/RegisterStudentServlet?input=' + inputStr, // this part
+//																		// sends to the
+//																		// servlet
+//				method : 'POST',
+//				dataType : 'json',
+//				error : function(err) {
+//					console.log(err);
+//					$("#message").html("System has some error. Please try again.");
+//				},
+//				success : function(data) {
+//					console.log(data);
+//					var status = data.status; // shows the success/failure of the
+//												// servlet request
+//					var message = data.message;
+//					// if status == 1, it means that it is successful, else it will
+//					// fail.
+//					if (status == 1) {
+//						alert("Created successfully");
+//						window.location = "studentSuccess.jsp";
+//					} else {
+//						$("#message").html(message);
+//					}
+//				}
+//			});
+//		}
+//	}
 
 //$.ajax({
 //	url: '../VI/GetStudentsByBranchServlet?input=' + inputStr,
@@ -525,58 +586,55 @@ function deleteStudent() {
 					});
 }
 
-function displayMarketingCampaigns() {
-	var select = document.getElementById("campaign");
-	var storedEvents = JSON.parse(localStorage["campaigns"]);
-	var options = [];
-	for(var j = 0; j < storedEvents.length; j++){
-		//console.log(storedIds[j])
-		var campaign = storedEvents[j];
-		options.push(campaign);
-	}
-	
-	CAMPAIGNS = storedEvents;
-
-	for(var i = 0; i < options.length; i++) {
-	    var opt = options[i].name;
-	    var el = document.createElement("option");
-	    el.textContent = opt;
-	    el.value = opt;
-	    select.appendChild(el);
-	}
-}
+//function displayMarketingCampaigns() {
+//	var select = document.getElementById("campaign");
+//	var storedEvents = JSON.parse(localStorage["campaigns"]);
+//	var options = [];
+//	for(var j = 0; j < storedEvents.length; j++){
+//		//console.log(storedIds[j])
+//		var campaign = storedEvents[j];
+//		options.push(campaign);
+//	}
+//	
+//	CAMPAIGNS = storedEvents;
+//
+//	for(var i = 0; i < options.length; i++) {
+//	    var opt = options[i].name;
+//	    var el = document.createElement("option");
+//	    el.textContent = opt;
+//	    el.value = opt;
+//	    select.appendChild(el);
+//	}
+//}
 
 function getMarketingCampaigns() {
 	var branchId = localStorage.getItem('branchManagerId');
-	
+	var $campaignDDL = $('#campaign');
+	$campaignDDL.html('');
 	var input = {};
 	input.branchId = Number(branchId);
 	var inputStr = JSON.stringify(input);
 	inputStr = encodeURIComponent(inputStr);
 
 	$.ajax({
-		url : '../VI/GetCampaignsByBranchServlet?input=' + inputStr, // this part sends to
-		// the servlet
+		url : '../VI/GetCampaignsByBranchServlet?input=' + inputStr, 
 		method : 'POST',
 		dataType : 'json',
 		error : function(err) {
-			console.log(err);
+			$campaignDDL.html('<option id="-1">No campaigns available</option>');
 		},
 		success : function(data) {
-			;
-			var status = data.status; // shows the success/failure of the
-			// servlet request
+			var status = data.status;
 			if (status == 1) {
-				var campaigns = [];
-				
+				$campaignDDL.html('<option id="-1">Select Marketing Campaign</option>');
 				for (var i = 0; i < data.message.length; i++) {
-					var obj = data.message[i];
-					campaigns.push(obj);
-					localStorage["campaigns"] = JSON.stringify(campaigns);	
-					
+					$campaignDDL.append('<option value=' + data.message[i].campaignId + '>' + data.message[i].name + '</option>' );
 				}
-				displayMarketingCampaigns();
+//				localStorage.setItem("campaigns", JSON.stringify(campaigns));
+//				localStorage["campaigns"] = JSON.stringify(campaigns);	
+//				displayMarketingCampaigns();
 			} else {
+				$campaignDDL.html('<option id="-1">No campaigns available</option>');
 				console.log(message);
 			}
 		}
@@ -584,34 +642,34 @@ function getMarketingCampaigns() {
 	
 }
 
-function getLatLong(callback){
-	var address = $("#studentAddress").val();
-	var replaced = address.split(' ').join('+');
-	var geoAddress = "address=" + replaced;
-	var key = "key=AIzaSyDPiRJIGTN8vggsL2yJErTwHrw6DcLM0kI";
-	
-	var input = geoAddress + "&" + key;
-	
-//	var inputStr = JSON.stringify(input);
-//	inputStr = encodeURIComponent(inputStr);
-	console.log(input);
-
-	$.ajax({
-		url : 'https://maps.googleapis.com/maps/api/geocode/json?' + input, // this part sends to
-		// the servlet
-		method : 'POST',
-		dataType : 'json',
-		error : function(err) {
-			console.log(err);
-		},
-		success : function(data) {
-			//lat, long
-			for (var i = 0; i < data.results.length; i++) {
-				var lat = data.results[i].geometry.location.lat;
-				var long = data.results[i].geometry.location.lng;
-				console.log(data);
-				callback(lat,long);
-			}
-		}
-	});
-}
+//function getLatLong(callback){
+//	var address = $("#studentAddress").val();
+//	var replaced = address.split(' ').join('+');
+//	var geoAddress = "address=" + replaced;
+//	var key = "key=AIzaSyDPiRJIGTN8vggsL2yJErTwHrw6DcLM0kI";
+//	
+//	var input = geoAddress + "&" + key;
+//	
+////	var inputStr = JSON.stringify(input);
+////	inputStr = encodeURIComponent(inputStr);
+//	console.log(input);
+//
+//	$.ajax({
+//		url : 'https://maps.googleapis.com/maps/api/geocode/json?' + input, // this part sends to
+//		// the servlet
+//		method : 'POST',
+//		dataType : 'json',
+//		error : function(err) {
+//			console.log(err);
+//		},
+//		success : function(data) {
+//			var lat
+//			for (var i = 0; i < data.results.length; i++) {
+//				var lat = data.results[i].geometry.location.lat;
+//				var long = data.results[i].geometry.location.lng;
+//				console.log(data);
+//				callback(lat,long);
+//			}
+//		}
+//	});
+//}

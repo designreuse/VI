@@ -301,6 +301,7 @@ function getSchedules(){
 			var message = data.message;
 			
 			if (status == 1) {
+				console.log(message);
 				 for (var e = 0; e < message.length; e++){
 					 var scheduleEventId = message[e].scheduleEventId;
 					 var name = message[e].schedule.name;
@@ -330,7 +331,6 @@ function getSchedules(){
 }
 
 function calendarInitiate(scheduleEvents){
-//	var scheduleEvents = JSON.parse(localStorage.getItem("schedules"));
 	$('#calendar').fullCalendar({
 		header: {
 			left: 'prev,next today',
