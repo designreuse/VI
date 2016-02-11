@@ -489,7 +489,7 @@ function populateCourseDDL(sId){
 		dataType : 'json',
 		error : function(err) {
 			console.log(err);
-			$studentCourseDDl.html('<option id="-1">No dates available</option>');
+			$studentCourseDDl.html('<option id="-1">No course available</option>');
 		},
 		success : function(data) {
 			var status = data.status; 
@@ -497,16 +497,16 @@ function populateCourseDDL(sId){
 			
 			if (status == 1) {
 				document.getElementById('studentCourseDDl').disabled = !sId;
-				$studentCourseDDl.html('<option id="0">Select Date to change</option>');
-				
+				$studentCourseDDl.html('<option id="0">Select Course</option>');
+				console.log(message);
 				for (var c = 0; c < message.length; c++){
 					var courseName = message[c].name;
 					var courseId = message[c].courseId;
 					$studentCourseDDl.append('<option value=' + courseId + '>' + courseName + '</option>' );
 				}
 				
-			} else{s
-				$studentCourseDDl.html('<option id="-1">No dates available</option>');
+			} else{
+				$studentCourseDDl.html('<option id="-1">No course available</option>');
 			}
 						
 		}
@@ -557,7 +557,7 @@ function retrieveAttendances(courseId){
 					
 					if (id === courseId && Number(message[a].attendanceStatus) === 0){
 						var attendanceId = message[a].attendanceId;
-						$attendanceDDL.append('<option value=' + attendanceId + '>' + planStartDate + '</option>' );
+						$attendanceDDL.append('<option value=' + attendanceId + '>' + moment(planStartDate).format("dddd, MMMM Do YYYY, h:mm a") + '</option>' );
 					}
 				}
 				
@@ -597,9 +597,9 @@ function populateNewSchedules(){
 	document.getElementById("studentName").innerHTML = localStorage.getItem("studentReschedName");
 	document.getElementById("studentNRIC").innerHTML = localStorage.getItem("studentNRICResched");
 	document.getElementById("courseSelected").innerHTML = localStorage.getItem("rescheduleCourseName");
-	var selectedDate =  moment(localStorage.getItem("reschedAttendanceDate"));
+	var selectedDate =  moment(localStorage.getItem("reschedAttendanceDate"), "dddd, MMMM Do YYYY, h:mm a");
 	document.getElementById("dateSelected").innerHTML = selectedDate;
-	
+		
 	$.fn.dataTable.ext.errMode = 'none';
 	var courseId = Number(localStorage.getItem("rescheduleCourseId"));
 	var input = {};

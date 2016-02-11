@@ -102,10 +102,9 @@
 											Enrolled<span class="required">*</span>
 										</label>
 										<div class="col-lg-10">
-											<input type="checkbox" id="course" name="course" value="Math"
-												required>Math <input type="checkbox" id="course"
-												name="course" value="English">English <input
-												type="checkbox" id="course" name="course" value="Korean">Korean
+											<input type="checkbox" id="course" name="course" value="Math" required>Math 
+											<input type="checkbox" id="course" name="course" value="English">English 
+											<input type="checkbox" id="course" name="course" value="Korean">Korean
 										</div>
 									</div>
 									<div class="form-group ">
