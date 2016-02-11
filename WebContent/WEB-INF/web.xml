@@ -443,6 +443,14 @@
     <url-pattern>/GetStudentsByTeacherAndCourseServlet</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>GetSchedulesByBranchServlet</servlet-name>
+    <servlet-class>service.GetSchedulesByBranchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetSchedulesByBranchServlet</servlet-name>
+    <url-pattern>/GetSchedulesByBranchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>GetScheduleEventByIdServlet</servlet-name>
     <servlet-class>service.GetScheduleEventByIdServlet</servlet-class>
   </servlet>

@@ -366,7 +366,7 @@ public class Schedule {
 		
 		JSONArray scheduleEventArr = new JSONArray();
 		for (ScheduleEvent se : ScheduleEventDAO.getScheduleEventsBySchedule(this)) {
-			scheduleEventArr.add(se.toScheduleJson());
+			scheduleEventArr.add(se.toJsonSimple());
 		}
 		returnJson.put(Key.ATTENDANCES, scheduleEventArr);
 		

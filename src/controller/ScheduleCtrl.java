@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Date;
 
+import model.Branch;
 import model.Classroom;
 import model.Course;
 import model.Schedule;
@@ -10,6 +11,7 @@ import model.Teacher;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import dataManager.BranchDAO;
 import dataManager.ClassroomDAO;
 import dataManager.CourseDAO;
 import dataManager.ScheduleDAO;
@@ -161,6 +163,31 @@ public class ScheduleCtrl {
 	}
 	
 	//features
+	//Get schedules by branch
+	public static JSONObject getSchedulesByBranch (JSONObject inputJson){
+		JSONObject returnJson = new JSONObject();
+		try{
+			Branch branch = BranchDAO.getBranchById((long)inputJson.get(Key.BRANCHID));
+			if(branch != null){
+				JSONArray salaryArr = new JSONArray();
+				for (Teacher t : TeacherDAO.getTeachersByBranch(branch)){
+					for (Schedule s : ScheduleDAO.getSchedulesByTeacher(t)) {
+						salaryArr.add(s.toJsonSimple());
+					}	
+				}
+				returnJson.put(Key.STATUS, Value.SUCCESS);
+				returnJson.put(Key.MESSAGE, salaryArr);
+			} else {
+				returnJson.put(Key.STATUS, Value.FAIL);
+				returnJson.put(Key.MESSAGE, Message.BRANCHNOTEXIST);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			returnJson.put(Key.STATUS, Value.FAIL)  ;
+			returnJson.put(Key.MESSAGE, e);
+		}
+		return returnJson;
+	}
 	
 	//Get schedule by teacher id
 	public static JSONObject getSchedulesByTeacher (JSONObject inputJson){
